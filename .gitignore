@@ -1,0 +1,24 @@
+# General
+.DS_Store
+Thumbs.db
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+**/build/
+
+# Maven
+**/target/
+
+# Visual Studio / .NET
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+
+# Rider
+*.sln.iml
