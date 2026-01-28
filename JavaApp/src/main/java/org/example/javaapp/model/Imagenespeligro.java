@@ -10,13 +10,15 @@ public class Imagenespeligro {
     @Column(name = "idimagenespeligro", nullable = false)
     private Integer id;
 
-    @Lob
     @Column(name = "url", nullable = false)
     private String url;
 
-    @Lob
     @Column(name = "descripcion")
     private String descripcion;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "puntospeligro_idPuntospeligro", nullable = false)
+    private Puntospeligro puntospeligro;
 
     public Integer getId() {
         return id;

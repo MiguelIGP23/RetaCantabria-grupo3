@@ -13,6 +13,10 @@ public class Actividad {
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "rutas_idRuta", nullable = false)
+    private Ruta ruta;
+
     public Integer getId() {
         return id;
     }

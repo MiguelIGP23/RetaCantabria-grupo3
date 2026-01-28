@@ -1,7 +1,6 @@
 package org.example.javaapp.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "usuario", schema = "retadb")
@@ -23,10 +22,9 @@ public class Usuario {
     @Column(name = "password", nullable = false, length = 32)
     private String password;
 
-    @ColumnDefault("'alumno'")
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "rol")
-    private String rol;
+    private Rol rol;
 
     public Integer getId() {
         return id;
@@ -68,11 +66,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
