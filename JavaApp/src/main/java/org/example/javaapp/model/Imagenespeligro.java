@@ -1,13 +1,13 @@
-package org.example.javaapp;
+package org.example.javaapp.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "imagenesinteres", schema = "retadb")
-public class Imagenesintere {
+@Table(name = "imagenespeligro", schema = "retadb")
+public class Imagenespeligro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idimagenesinteres", nullable = false)
+    @Column(name = "idimagenespeligro", nullable = false)
     private Integer id;
 
     @Lob
