@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CSharpApp
 {
-    public partial class Form1 : Form
+    public partial class Rutas : Form
     {
-        public Form1()
+        public Rutas()
         {
             InitializeComponent();
         }
