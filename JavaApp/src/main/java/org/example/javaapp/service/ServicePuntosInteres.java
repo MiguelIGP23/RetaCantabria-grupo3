@@ -1,9 +1,7 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Puntosintere;
-import org.example.javaapp.model.Usuario;
-import org.example.javaapp.persistence.PuntosInteresRepository;
-import org.example.javaapp.persistence.UsuarioRepository;
+import org.example.javaapp.model.PuntosInteres;
+import org.example.javaapp.repository.PuntosInteresRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,20 +9,20 @@ import java.util.List;
 @Service
 public class ServicePuntosInteres implements IServicePuntosInteres{
 
-    private PuntosInteresRepository  repo;
+    private final PuntosInteresRepository repo;
 
     public ServicePuntosInteres(PuntosInteresRepository repo) {
         this.repo = repo;
     }
 
     @Override
-    public Puntosintere insert(Puntosintere puntosintere) {
-        return repo.save(puntosintere);
+    public PuntosInteres insert(PuntosInteres puntosInteres) {
+        return repo.save(puntosInteres);
     }
 
     @Override
-    public Puntosintere update(int id, Puntosintere nuevo) {
-        Puntosintere buscado = findById(id);
+    public PuntosInteres update(int id, PuntosInteres nuevo) {
+        PuntosInteres buscado = findById(id);
         if(buscado!=null){
             buscado.setNombre(nuevo.getNombre());
             buscado.setLatitud(nuevo.getLatitud());
@@ -33,6 +31,7 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
             buscado.setTipo(nuevo.getTipo());
             buscado.setCaracteristicas(nuevo.getCaracteristicas());
             buscado.setTimestamp(nuevo.getTimestamp());
+            buscado.setRuta(nuevo.getRuta());
             buscado = repo.save(buscado);
         }
         return buscado;
@@ -44,12 +43,12 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
     }
 
     @Override
-    public Puntosintere findById(int id) {
+    public PuntosInteres findById(int id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public List<Puntosintere> findAll(){
+    public List<PuntosInteres> findAll(){
         return repo.findAll();
     }
 }

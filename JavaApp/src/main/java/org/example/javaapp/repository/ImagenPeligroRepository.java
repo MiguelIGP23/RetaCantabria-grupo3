@@ -1,7 +1,7 @@
 package org.example.javaapp.repository;
 
-import org.example.javaapp.model.Imagenespeligro;
+import org.example.javaapp.model.ImagenesPeligro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ImagenPeligroRepository extends JpaRepository<Imagenespeligro,Integer> {
+public interface ImagenPeligroRepository extends JpaRepository<ImagenesPeligro,Integer> {
 }

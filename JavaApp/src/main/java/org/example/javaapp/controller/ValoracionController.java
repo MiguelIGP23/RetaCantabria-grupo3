@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/reta3/valora")
+@RequestMapping("api/reta3/valoraciones")
 public class ValoracionController {
 
-    private ServiceValoracion service;
+    private final ServiceValoracion service;
+
     public ValoracionController(ServiceValoracion service) {
         this.service = service;
     }
@@ -24,6 +25,7 @@ public class ValoracionController {
     public void delete(@RequestBody int id) {
         service.delete(id);
     }
+
     @PutMapping("/{id}")
     public Valora update(@PathVariable int id, @RequestBody Valora valora) {
         return service.update(id,valora);
@@ -33,4 +35,5 @@ public class ValoracionController {
     public List<Valora> findAll() {
         return service.findAll();
     }
+
 }

@@ -97,11 +97,11 @@ public class Valora {
         this.valoracionTecnica = valoracionTecnica;
     }
 
-    public String getReseña() {
+    public String getResena() {
         return reseña;
     }
 
-    public void setReseña(String reseña) {
+    public void setResena(String reseña) {
         this.reseña = reseña;
     }
 

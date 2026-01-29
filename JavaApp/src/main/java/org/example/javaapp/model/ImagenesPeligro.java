@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "imagenespeligro", schema = "retadb")
-public class Imagenespeligro {
+public class ImagenesPeligro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idimagenespeligro", nullable = false)
@@ -18,7 +18,7 @@ public class Imagenespeligro {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "puntospeligro_idPuntospeligro", nullable = false)
-    private Puntospeligro puntospeligro;
+    private PuntosPeligro puntospeligro;
 
     public Integer getId() {
         return id;
@@ -44,4 +44,11 @@ public class Imagenespeligro {
         this.descripcion = descripcion;
     }
 
+    public void setPuntospeligro(PuntosPeligro puntospeligro) {
+        this.puntospeligro = puntospeligro;
+    }
+
+    public PuntosPeligro getPuntospeligro() {
+        return puntospeligro;
+    }
 }

@@ -1,6 +1,6 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Puntosintere;
+import org.example.javaapp.model.PuntosInteres;
 
-public interface IServicePuntosInteres extends IService<Puntosintere, Integer> {
+public interface IServicePuntosInteres extends IService<PuntosInteres, Integer> {
 }
