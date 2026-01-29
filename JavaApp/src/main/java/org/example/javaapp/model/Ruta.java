@@ -52,10 +52,9 @@ public class Ruta {
     @Column(name = "altitudMin")
     private Double altitudMin;
 
-    @ColumnDefault("'LINEAL'")
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "clasificacion")
-    private String clasificacion;
+    private Clasificacion clasificacion;
 
     @Column(name = "nivelEsfuerzo")
     private Byte nivelEsfuerzo;
@@ -73,7 +72,6 @@ public class Ruta {
     @Column(name = "indicaciones")
     private Byte indicaciones;
 
-    @Lob
     @Column(name = "temporadas")
     private String temporadas;
 
@@ -83,11 +81,9 @@ public class Ruta {
     @Column(name = "rutaFamiliar")
     private Byte rutaFamiliar;
 
-    @Lob
     @Column(name = "archivoGPX")
     private String archivoGPX;
 
-    @Lob
     @Column(name = "recomendacionesEquipo")
     private String recomendacionesEquipo;
 
@@ -97,6 +93,10 @@ public class Ruta {
     @Column(name = "mediaEstrellas")
     private Double mediaEstrellas;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "usuario_idUsuario", nullable = false)
+    private Usuario usuario;
+
     public Integer getId() {
         return id;
     }
@@ -104,6 +104,10 @@ public class Ruta {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public void setUsuario(Usuario usuario) {this.usuario = usuario;}
+
+    public Usuario getUsuario() {return usuario;}
 
     public String getNombre() {
         return nombre;
@@ -209,11 +213,11 @@ public class Ruta {
         this.altitudMin = altitudMin;
     }
 
-    public String getClasificacion() {
+    public Clasificacion getClasificacion() {
         return clasificacion;
     }
 
-    public void setClasificacion(String clasificacion) {
+    public void setClasificacion(Clasificacion clasificacion) {
         this.clasificacion = clasificacion;
     }
 

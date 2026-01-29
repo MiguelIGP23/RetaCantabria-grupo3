@@ -23,21 +23,22 @@ public class Puntosintere {
     @Column(name = "elevacion", nullable = false)
     private Double elevacion;
 
-    @Lob
     @Column(name = "caracteristicas")
     private String caracteristicas;
 
-    @ColumnDefault("'mirador'")
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
-    private String tipo;
+    private TipoPunto tipo;
 
-    @Lob
     @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "timestamp")
     private Integer timestamp;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "rutas_idRuta", nullable = false)
+    private Ruta ruta;
 
     public Integer getId() {
         return id;
@@ -87,11 +88,11 @@ public class Puntosintere {
         this.caracteristicas = caracteristicas;
     }
 
-    public String getTipo() {
+    public TipoPunto getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoPunto tipo) {
         this.tipo = tipo;
     }
 

@@ -27,11 +27,9 @@ public class Valora {
     @Column(name = "belleza", nullable = false)
     private Byte belleza;
 
-    @Lob
     @Column(name = "valoracionTecnica")
     private String valoracionTecnica;
 
-    @Lob
     @Column(name = "`reseña`")
     private String reseña;
 
