@@ -1,8 +1,10 @@
 package org.example.javaapp.service;
 
 import org.example.javaapp.model.Valora;
-import org.example.javaapp.persistence.ValoracionRepository;
+import org.example.javaapp.repository.ValoracionRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ServiceValoracion implements IServiceValoracion{
@@ -41,5 +43,10 @@ public class ServiceValoracion implements IServiceValoracion{
     @Override
     public Valora findById(int id) {
         return repo.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Valora> findAll(){
+        return repo.findAll();
     }
 }

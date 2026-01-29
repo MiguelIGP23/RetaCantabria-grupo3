@@ -4,6 +4,8 @@ import org.example.javaapp.model.Valora;
 import org.example.javaapp.service.ServiceValoracion;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/reta3/valora")
 public class ValoracionController {
@@ -27,5 +29,8 @@ public class ValoracionController {
         return service.update(id,valora);
     }
 
-    @Get
+    @GetMapping
+    public List<Valora> findAll() {
+        return service.findAll();
+    }
 }
