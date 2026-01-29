@@ -1,256 +1,301 @@
 package com.example.kotlinapp
 
+import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat
-import android.Manifest
-import android.R.attr.title
-import android.content.Context.MODE_PRIVATE
-import android.os.Looper
-import android.util.Log
-import androidx.compose.foundation.gestures.snapping.SnapPosition.Center.position
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
+import androidx.preference.PreferenceManager
+import com.google.android.gms.location.*
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-
+import java.io.File
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-            MainScreen()
-        }
-    }
-}
-@Composable
-fun MainScreen() {
-    RequestLocationPermission {
-        LocationScreen()
-    }
-}
-
-@Composable
-fun LocationScreen() {
-    val context = LocalContext.current
-    //cliente que se usa para acceder a la ubicación del dispositivo
-    val fusedLocationClient = remember {
-        LocationServices.getFusedLocationProviderClient(context) }
-    //estado que obtiene el ciclo de vida de la Activity
-    // que lanzo el composable (mainactivity)
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val textLatitud = remember { mutableStateOf("Latitud: --") }
-    val textLongitud = remember { mutableStateOf("Longitud: --") }
-    // Estado para saber si está obteniendo la ubicación
-    val isTracking = remember { mutableStateOf(false) }
-
-    val ctx = LocalContext.current.applicationContext
-    Configuration.getInstance().load(
-        ctx,
-        ctx.getSharedPreferences("osmdroid", MODE_PRIVATE)
-    )
-
-
-    val savedLocations = remember { mutableStateListOf<Pair<Double, Double>>() }
-
-    Configuration.getInstance().load(context, androidx.preference.PreferenceManager.getDefaultSharedPreferences(context))
-
-    val mapView = remember { MapView(context).apply {
-        setTileSource(TileSourceFactory.MAPNIK)
-        setMultiTouchControls(true)
-        controller.setZoom(15.0)
-    } }
-
-    val locationRequest = remember {
-        // Cada 1 segundos
-        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100)
-            .build()
-    }
-    //objeto que recibirá las actualizaciones de ubicación
-    val locationCallback = remember {
-        //El objeto implementa el interface LocationCallback
-        object : LocationCallback() {
-            // Cuando se recibe una actualización de ubicación se hace esto
-            override fun onLocationResult(locationResult: LocationResult) {
-                // si se recibió una actualización se actualiza la latitud y la longitud
-                locationResult.lastLocation?.let { location ->
-                    Log.d("Location", "Latitud: ${location.latitude}, Longitud: ${location.longitude}")
-                    textLatitud.value = "Latitud: ${location.latitude}"
-                    textLongitud.value = "Longitud: ${location.longitude}"
-                }
-            }
-        }
-    }
-    //Función para iniciar la actualización de ubicación
-    fun startLocationUpdates() {
-        Log.d("Location", "Iniciando actualizaciones de ubicación")
-        //Verificamos si el usuario ha dado permisos
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
-            PackageManager.PERMISSION_GRANTED) {
-            // Si ha dado permisos se inicia la actualización de ubicación
-            //se pasa la solicitud y el callback
-            //y se pasa el Looper para que se ejecute en el hilo principal
-            fusedLocationClient.requestLocationUpdates(locationRequest,
-                locationCallback,
-                Looper.getMainLooper())
-            //se cambia el estado a true (para que se use en el Button)
-            isTracking.value = true
-        }
-    }
-    //detiene la actualización de ubicación
-    fun stopLocationUpdates() {
-        fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
-    //se ejecuta cuando el composable se crea y se destruye
-    // cuando se sale de la pantalla
-    DisposableEffect(lifecycleOwner) {
-        //observador que escucha los cambios en el ciclo de vida del owner
-        // (de la mainactivity)
-        // _ es el LifecycleOwner (no lo usamos, lo ignoramos)
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                // Detener ubicación al salir de la app
-                Lifecycle.Event.ON_DESTROY -> stopLocationUpdates()
-                else -> {}
-            }
-        }
-        //añadir el observador al ciclo de vida del owner
-        lifecycleOwner.lifecycle.addObserver(observer)
-        //cuando se sale de la pantalla se elimina el observador
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = textLatitud.value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = textLongitud.value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = { startLocationUpdates() },
-            enabled = !isTracking.value
-        ) {
-            Text("Iniciar")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = {
-                val lat = textLatitud.value.removePrefix("Latitud: ").toDoubleOrNull()
-                val lon = textLongitud.value.removePrefix("Longitud: ").toDoubleOrNull()
-                if (lat != null && lon != null) {
-                    savedLocations.add(Pair(lat, lon))
-                    val marker = Marker(mapView).apply {
-                        position = GeoPoint(lat, lon)
-                        title = "Ubicación ${savedLocations.size}"
-                    }
-                    mapView.overlays.add(marker)
-                    mapView.invalidate()
-                }
-
-            },
-            enabled = textLatitud.value != "Latitud: --"
-        ) {
-            Text("Guardar ubicación")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        AndroidView(
-            factory = { mapView },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(600.dp) // <-- altura fija evita que se superponga
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-        LazyColumn {
-            items(savedLocations.size){
-                index->val (lat, lon) = savedLocations[index]
-                Text("${index + 1}. Lat: $lat, Lon: $lon", fontSize = 16.sp)
+            Scaffold { padding ->
+                MainScreen(modifier = Modifier.padding(padding))
             }
         }
     }
 }
 
 @Composable
-fun RequestLocationPermission(onGranted: @Composable () -> Unit) {
+fun MainScreen(modifier: Modifier) {
+    RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
+        LocationScreen(modifier)
+    }
+}
+
+// --------------------------- PERMISOS REUTILIZABLE ---------------------------
+
+@Composable
+fun RequestPermission(permission: String, message: String, onGranted: @Composable () -> Unit) {
     val context = LocalContext.current
     var hasPermission by remember {
         mutableStateOf(
-            ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
         )
     }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        hasPermission = isGranted
+    ) { isGranted -> hasPermission = isGranted }
+
+    LaunchedEffect(Unit) { if (!hasPermission) permissionLauncher.launch(permission) }
+
+    if (hasPermission) onGranted() else Text(message)
+}
+
+// --------------------------- LOCATION SCREEN ---------------------------
+
+@Composable
+fun LocationScreen(modifier: Modifier) {
+
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+    val textLat = remember { mutableStateOf("Latitud: --") }
+    val textLon = remember { mutableStateOf("Longitud: --") }
+    val isTracking = remember { mutableStateOf(false) }
+    val savedLocations = remember { mutableStateListOf<Pair<Double, Double>>() }
+
+    // Configuración osmdroid
+    val ctx = LocalContext.current.applicationContext
+    Configuration.getInstance().load(ctx, ctx.getSharedPreferences("osmdroid", Context.MODE_PRIVATE))
+    Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
+
+    // --------------------------- MAPA ---------------------------
+    val mapView = remember { createMapView(context) }
+    val currentMarker = remember { createCurrentLocationMarker(
+        mapView, context
+    ) }
+    LaunchedEffect(Unit) { mapView.overlays.add(currentMarker) }
+
+    val locationRequest = remember { LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100).build() }
+    val locationCallback = remember { createLocationCallback(mapView, currentMarker, textLat, textLon) }
+
+    val locationManager = remember {
+        LocationManager(
+            fusedLocationClient,
+            locationRequest,
+            locationCallback,
+            isTracking
+        )
     }
 
-    // Lanzar solicitud solo si no hay permiso
-    LaunchedEffect(Unit) {
-        if (!hasPermission) {
-            permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_DESTROY) locationManager.stop()
         }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 
-    if (hasPermission) {
-        onGranted()
-    } else {
-        // Opcional: mostrar mensaje mientras se espera el permiso
-        Text("Permiso de ubicación requerido")
+    // --------------------------- UI ---------------------------
+    Box(modifier = Modifier.fillMaxSize()) {
+        AndroidView(factory = { mapView }, modifier = Modifier.fillMaxWidth().height(300.dp))
+
+        IconButton(
+            onClick = {},
+            modifier = Modifier.align(Alignment.TopStart).padding(16.dp)
+        ) { Icon(Icons.Default.ArrowBack, contentDescription = "Volver") }
+
+        Column(modifier = Modifier.fillMaxSize()) {
+            Spacer(modifier = Modifier.weight(1f))
+            LocationControls(
+                textLat = textLat,
+                textLon = textLon,
+                isTracking = isTracking,
+                savedLocations = savedLocations,
+                mapView = mapView,
+                locationManager = locationManager,
+                context = context
+            )
+        }
     }
 }
 
+// --------------------------- FUNCIONES AUXILIARES ---------------------------
+
+fun createMapView(context: Context): MapView = MapView(context).apply {
+    setTileSource(TileSourceFactory.MAPNIK)
+    setMultiTouchControls(true)
+    controller.setZoom(15.0)
+}
+
+fun createCurrentLocationMarker(mapView: MapView, context: Context): Marker =
+    Marker(mapView).apply {
+        title = "Estás aquí"
+        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
+        val drawable = ContextCompat.getDrawable(context, R.drawable.currentlocation)
+        drawable?.setBounds(0, 0, 80, 80) // 👈 TAMAÑO OBLIGATORIO
+        icon = drawable
+    }
+
+
+fun createWaypointMarker(mapView: MapView, context: Context, title: String): Marker =
+    Marker(mapView).apply {
+        this.title = title
+        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
+        val drawable = ContextCompat.getDrawable(context, R.drawable.locationicon)
+        drawable?.setBounds(0, 0, 60, 60) // 👈 TAMAÑO OBLIGATORIO
+        icon = drawable
+    }
+
+
+
+fun createLocationCallback(
+    mapView: MapView,
+    marker: Marker,
+    textLat: MutableState<String>,
+    textLon: MutableState<String>
+) = object : LocationCallback() {
+    override fun onLocationResult(locationResult: LocationResult) {
+        locationResult.lastLocation?.let { location ->
+            val lat = location.latitude
+            val lon = location.longitude
+            textLat.value = "Latitud: $lat"
+            textLon.value = "Longitud: $lon"
+
+            val geoPoint = GeoPoint(lat, lon)
+            marker.position = geoPoint
+            mapView.controller.setCenter(geoPoint)
+            mapView.invalidate()
+        }
+    }
+}
+
+@Composable
+fun LocationControls(
+    textLat: MutableState<String>,
+    textLon: MutableState<String>,
+    isTracking: MutableState<Boolean>,
+    savedLocations: MutableList<Pair<Double, Double>>,
+    mapView: MapView,
+    locationManager: LocationManager,
+    context: Context
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth().background(Color.White).padding(16.dp)
+    ) {
+
+        // SAF: selector para guardar archivo
+        val createFileLauncher = rememberLauncherForActivityResult(
+            ActivityResultContracts.CreateDocument("application/gpx+xml")
+        ) { uri ->
+            if (uri != null) {
+                try {
+                    context.contentResolver.openOutputStream(uri)?.use { output ->
+                        output.write(generateGpx(savedLocations).toByteArray())
+                    }
+                    Log.d("GPX", "GPX guardado correctamente")
+                } catch (e: Exception) {
+                    Log.e("GPX", "Error guardando GPX", e)
+                }
+            }
+        }
+
+        Text(textLat.value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(8.dp))
+        Text(textLon.value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(16.dp))
+
+        Button(onClick = { locationManager.start(context) }, enabled = !isTracking.value) { Text("Iniciar") }
+        Spacer(Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull()
+                val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull()
+                if (lat != null && lon != null) {
+                    savedLocations.add(Pair(lat, lon))
+                    val marker = createWaypointMarker(
+                        mapView,
+                        context,
+                        "Ubicación ${savedLocations.size}"
+                    )
+
+                    marker.position = GeoPoint(lat, lon) // 👈 ESTO FALTABA
+                    mapView.overlays.add(marker)
+                    mapView.invalidate()
+
+                }
+            },
+            enabled = textLat.value != "Latitud: --"
+        ) { Text("Guardar ubicación") }
+
+        Spacer(Modifier.height(16.dp))
+
+        Button( onClick = { createFileLauncher.launch("mis_puntos.gpx") }, enabled = savedLocations.isNotEmpty() ) { Text("Exportar GPX") }
+
+        Spacer(Modifier.height(16.dp))
+        LazyColumn {
+            items(savedLocations.size) { index ->
+                val (lat, lon) = savedLocations[index]
+                //Text("${index + 1}. Lat: $lat, Lon: $lon", fontSize = 16.sp)
+            }
+        }
+    }
+}
+
+// --------------------------- FUNCIONES GPX ---------------------------
+
+fun generateGpx(savedLocations: List<Pair<Double, Double>>): String {
+    val sb = StringBuilder()
+    sb.append("""<?xml version="1.0" encoding="UTF-8"?>""")
+    sb.append("\n<gpx version=\"1.1\" creator=\"KotlinApp\">\n")
+    savedLocations.forEachIndexed { index, (lat, lon) ->
+        sb.append("    <wpt lat=\"$lat\" lon=\"$lon\">\n")
+        sb.append("        <name>Punto ${index + 1}</name>\n")
+        sb.append("    </wpt>\n")
+    }
+    sb.append("</gpx>")
+    return sb.toString()
+}
+
+fun saveGpx(context: Context, savedLocations: List<Pair<Double, Double>>, fileName: String = "mis_puntos.gpx") {
+    try {
+        val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        if (!downloadsDir.exists()) downloadsDir.mkdirs()
+        val file = File(downloadsDir, fileName)
+        file.writeText(generateGpx(savedLocations))
+        Log.d("GPX", "Archivo guardado en Descargas: ${file.absolutePath}")
+    } catch (e: Exception) {
+        Log.e("GPX", "Error guardando GPX en Descargas", e)
+    }
+}
