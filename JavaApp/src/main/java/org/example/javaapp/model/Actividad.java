@@ -33,4 +33,7 @@ public class Actividad {
         this.nombre = nombre;
     }
 
+    public void setRuta(Ruta ruta) {this.ruta = ruta;}
+
+    public Ruta getRuta() {return ruta;}
 }
