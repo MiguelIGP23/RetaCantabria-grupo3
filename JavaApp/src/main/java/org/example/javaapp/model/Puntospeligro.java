@@ -31,12 +31,15 @@ public class Puntospeligro {
     @Column(name = "posicion")
     private Integer posicion;
 
-    @Lob
     @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "timestamp")
     private Integer timestamp;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "rutas_idRuta", nullable = false)
+    private Ruta ruta;
 
     public Integer getId() {
         return id;
