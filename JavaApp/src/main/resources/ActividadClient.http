@@ -1,0 +1,30 @@
+GET http://localhost:8080/api/reta3/actividades
+
+###
+POST  http://localhost:8080/api/reta3/actividades
+Content-Type: application/json
+
+{
+  "nombre": "Ciclismo",
+  "ruta": {
+    "id": 1
+  }
+}
+
+
+
+###
+PUT http://localhost:8080/api/reta3/actividades/3
+Content-Type: application/json
+
+{
+  "nombre": "Senderismo",
+  "ruta": {
+    "id": 1
+  }
+}
+
+
+###
+DELETE http://localhost:8080/api/reta3/actividades/3
+
