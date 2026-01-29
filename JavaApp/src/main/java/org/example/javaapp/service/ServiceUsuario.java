@@ -2,9 +2,11 @@ package org.example.javaapp.service;
 
 import org.example.javaapp.model.Usuario;
 import org.example.javaapp.persistence.UsuarioRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ServiceUsuario implements IServiceUsuario{
 
     private UsuarioRepository repo;
@@ -42,6 +44,7 @@ public class ServiceUsuario implements IServiceUsuario{
         return repo.findById(id).orElse(null);
     }
 
+    @Override
     public List<Usuario> findAll(){
         return repo.findAll();
     }
