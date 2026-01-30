@@ -21,7 +21,7 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
     }
 
     @Override
-    public PuntosInteres update(int id, PuntosInteres nuevo) {
+    public PuntosInteres update(Integer id, PuntosInteres nuevo) {
         PuntosInteres buscado = findById(id);
         if(buscado!=null){
             buscado.setNombre(nuevo.getNombre());
@@ -29,21 +29,22 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
             buscado.setLongitud(nuevo.getLongitud());
             buscado.setElevacion(nuevo.getElevacion());
             buscado.setTipo(nuevo.getTipo());
+            buscado.setDescripcion(nuevo.getDescripcion());
             buscado.setCaracteristicas(nuevo.getCaracteristicas());
             buscado.setTimestamp(nuevo.getTimestamp());
             buscado.setRuta(nuevo.getRuta());
-            buscado = repo.save(buscado);
+            repo.save(buscado);
         }
         return buscado;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public PuntosInteres findById(int id) {
+    public PuntosInteres findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 

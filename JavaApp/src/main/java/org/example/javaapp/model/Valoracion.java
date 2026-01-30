@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "valora", schema = "retadb")
-public class Valora {
+public class Valoracion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idValora", nullable = false)
