@@ -1,15 +1,14 @@
 package com.example.kotlinapp.model
 
-import com.example.kotlinapp.model.enums.TipoPunto
-
-data class PuntosInteres(
-    val idPuntosinteres: Int?,
+data class PuntoPeligro(
+    val idPuntospeligro: Int?,
     val nombre: String,
     val latitud: Double,
     val longitud: Double,
     val elevacion: Double,
-    val caracteristicas: String?,
-    val tipo: TipoPunto?,
+    val kilometros: Double?,
+    val gravedad: Byte?,
+    val posicion: Int?,
     val descripcion: String?,
     val timestamp: Int?,
     val rutas_idRuta: Ruta

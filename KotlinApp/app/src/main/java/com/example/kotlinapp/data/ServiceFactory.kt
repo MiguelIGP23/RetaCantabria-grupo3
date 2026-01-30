@@ -1,6 +1,5 @@
 package com.example.kotlinapp.data
 
-import com.example.kotlinapp.model.Usuario
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,20 +10,20 @@ object ServiceFactory {
         //usar convertidor de JSON
         .addConverterFactory(GsonConverterFactory.create())
 
-    fun imagenesInteres(): ImagenesInteresService {
-        return DEFAULT_BUILDER.build().create(ImagenesInteresService::class.java)
+    fun imagenesInteres(): ImagenInteresService {
+        return DEFAULT_BUILDER.build().create(ImagenInteresService::class.java)
     }
-    fun imagenesPeligro(): ImagenesPeligroService {
-        return DEFAULT_BUILDER.build().create(ImagenesPeligroService::class.java)
+    fun imagenesPeligro(): ImagenPeligroService {
+        return DEFAULT_BUILDER.build().create(ImagenPeligroService::class.java)
     }
-    fun puntosInteres(): PuntosInteresService {
-        return DEFAULT_BUILDER.build().create(PuntosInteresService::class.java)
+    fun puntosInteres(): PuntoInteresService {
+        return DEFAULT_BUILDER.build().create(PuntoInteresService::class.java)
     }
-    fun puntosPeligro(): PuntosPeligroService {
-        return DEFAULT_BUILDER.build().create(PuntosPeligroService::class.java)
+    fun puntosPeligro(): PuntoPeligroService {
+        return DEFAULT_BUILDER.build().create(PuntoPeligroService::class.java)
     }
-    fun ruta(): ImagenesInteresService {
-        return DEFAULT_BUILDER.build().create(ImagenesInteresService::class.java)
+    fun ruta(): ImagenInteresService {
+        return DEFAULT_BUILDER.build().create(ImagenInteresService::class.java)
     }
     fun trackpoint(): TrackpointService {
         return DEFAULT_BUILDER.build().create(TrackpointService::class.java)
