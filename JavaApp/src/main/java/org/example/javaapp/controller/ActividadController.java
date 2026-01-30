@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/reta3/actividades")
 public class ActividadController {
 
-    private ServiceActividad service;
+    private final ServiceActividad service;
 
     public ActividadController(ServiceActividad service){
         this.service=service;

@@ -3,11 +3,11 @@ package org.example.javaapp.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "puntospeligro", schema = "retadb")
-public class Puntospeligro {
+@Table(name = "puntosinteres", schema = "retadb")
+public class PuntosInteres {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idPuntospeligro", nullable = false)
+    @Column(name = "idPuntosinteres", nullable = false)
     private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 40)
@@ -22,14 +22,12 @@ public class Puntospeligro {
     @Column(name = "elevacion", nullable = false)
     private Double elevacion;
 
-    @Column(name = "kilometros")
-    private Double kilometros;
+    @Column(name = "caracteristicas")
+    private String caracteristicas;
 
-    @Column(name = "gravedad")
-    private Byte gravedad;
-
-    @Column(name = "posicion")
-    private Integer posicion;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
+    private TipoPunto tipo;
 
     @Column(name = "descripcion")
     private String descripcion;
@@ -81,28 +79,20 @@ public class Puntospeligro {
         this.elevacion = elevacion;
     }
 
-    public Double getKilometros() {
-        return kilometros;
+    public String getCaracteristicas() {
+        return caracteristicas;
     }
 
-    public void setKilometros(Double kilometros) {
-        this.kilometros = kilometros;
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
 
-    public Byte getGravedad() {
-        return gravedad;
+    public TipoPunto getTipo() {
+        return tipo;
     }
 
-    public void setGravedad(Byte gravedad) {
-        this.gravedad = gravedad;
-    }
-
-    public Integer getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(Integer posicion) {
-        this.posicion = posicion;
+    public void setTipo(TipoPunto tipo) {
+        this.tipo = tipo;
     }
 
     public String getDescripcion() {
@@ -121,4 +111,11 @@ public class Puntospeligro {
         this.timestamp = timestamp;
     }
 
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
 }

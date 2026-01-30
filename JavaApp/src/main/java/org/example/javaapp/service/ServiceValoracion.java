@@ -8,7 +8,8 @@ import java.util.List;
 
 @Service
 public class ServiceValoracion implements IServiceValoracion{
-    private ValoracionRepository repo;
+
+    private final ValoracionRepository repo;
 
     public ServiceValoracion(ValoracionRepository repo){this.repo=repo;}
 
@@ -25,7 +26,7 @@ public class ServiceValoracion implements IServiceValoracion{
             aModificar.setDificultad(valora.getDificultad());
             aModificar.setEstrellas(valora.getEstrellas());
             aModificar.setFecha(valora.getFecha());
-            aModificar.setReseña(valora.getReseña());
+            aModificar.setResena(valora.getResena());
             aModificar.setInteresCultural(valora.getInteresCultural());
             aModificar.setRutasIdruta(valora.getRutasIdruta());
             aModificar.setUsuarioIdusuario(valora.getUsuarioIdusuario());

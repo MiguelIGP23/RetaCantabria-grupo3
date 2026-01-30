@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ServiceActividad implements IServiceActividad {
 
-    private ActividadRepository repo;
+    private final ActividadRepository repo;
 
     public ServiceActividad(ActividadRepository repo){
         this.repo=repo;

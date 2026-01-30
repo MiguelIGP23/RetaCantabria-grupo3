@@ -1,26 +1,33 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Imagenespeligro;
+import org.example.javaapp.model.ImagenesPeligro;
 import org.example.javaapp.repository.ImagenPeligroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ServiceImagenPeligro implements IService<Imagenespeligro,Integer> {
+public class ServiceImagenPeligro implements IService<ImagenesPeligro,Integer> {
 
     ImagenPeligroRepository repo;
+
+    public ServiceImagenPeligro(ImagenPeligroRepository repo){
+        this.repo=repo;
+    }
+
     @Override
-    public Imagenespeligro insert(Imagenespeligro imagenespeligro) {
+    public ImagenesPeligro insert(ImagenesPeligro imagenespeligro) {
         return repo.save(imagenespeligro);
     }
 
     @Override
-    public Imagenespeligro update(int id, Imagenespeligro imagenespeligro) {
-        Imagenespeligro imagen = imagenespeligro;
+    public ImagenesPeligro update(int id, ImagenesPeligro imagenespeligro) {
+        ImagenesPeligro imagen = imagenespeligro;
         if (imagen!=null){
             imagen.setDescripcion(imagenespeligro.getDescripcion());
             imagen.setUrl(imagenespeligro.getUrl());
+            imagen.setPuntospeligro(imagenespeligro.getPuntospeligro());
+            repo.save(imagen);
         }
         return imagen;
     }
@@ -31,12 +38,12 @@ public class ServiceImagenPeligro implements IService<Imagenespeligro,Integer> {
     }
 
     @Override
-    public Imagenespeligro findById(int id) {
+    public ImagenesPeligro findById(int id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public List<Imagenespeligro> findAll() {
+    public List<ImagenesPeligro> findAll() {
         return repo.findAll();
     }
 }

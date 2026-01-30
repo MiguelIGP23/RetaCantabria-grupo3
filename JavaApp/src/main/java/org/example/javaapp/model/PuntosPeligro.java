@@ -1,14 +1,13 @@
 package org.example.javaapp.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name = "puntosinteres", schema = "retadb")
-public class Puntosintere {
+@Table(name = "puntospeligro", schema = "retadb")
+public class PuntosPeligro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idPuntosinteres", nullable = false)
+    @Column(name = "idPuntospeligro", nullable = false)
     private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 40)
@@ -23,12 +22,14 @@ public class Puntosintere {
     @Column(name = "elevacion", nullable = false)
     private Double elevacion;
 
-    @Column(name = "caracteristicas")
-    private String caracteristicas;
+    @Column(name = "kilometros")
+    private Double kilometros;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo")
-    private TipoPunto tipo;
+    @Column(name = "gravedad")
+    private Byte gravedad;
+
+    @Column(name = "posicion")
+    private Integer posicion;
 
     @Column(name = "descripcion")
     private String descripcion;
@@ -80,20 +81,28 @@ public class Puntosintere {
         this.elevacion = elevacion;
     }
 
-    public String getCaracteristicas() {
-        return caracteristicas;
+    public Double getKilometros() {
+        return kilometros;
     }
 
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
+    public void setKilometros(Double kilometros) {
+        this.kilometros = kilometros;
     }
 
-    public TipoPunto getTipo() {
-        return tipo;
+    public Byte getGravedad() {
+        return gravedad;
     }
 
-    public void setTipo(TipoPunto tipo) {
-        this.tipo = tipo;
+    public void setGravedad(Byte gravedad) {
+        this.gravedad = gravedad;
+    }
+
+    public Integer getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Integer posicion) {
+        this.posicion = posicion;
     }
 
     public String getDescripcion() {
@@ -112,4 +121,11 @@ public class Puntosintere {
         this.timestamp = timestamp;
     }
 
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
 }

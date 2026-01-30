@@ -2,7 +2,7 @@ package org.example.javaapp.controller;
 
 
 import org.example.javaapp.model.Ruta;
-import org.example.javaapp.service.RutaService;
+import org.example.javaapp.service.ServiceRuta;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/reta3/rutas")
 public class RutaController {
 
-    private RutaService service;
+    private final ServiceRuta service;
 
-    public RutaController(RutaService service){
+    public RutaController(ServiceRuta service){
         this.service=service;
     }
 

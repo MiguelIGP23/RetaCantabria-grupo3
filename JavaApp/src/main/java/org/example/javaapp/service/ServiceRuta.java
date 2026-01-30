@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RutaService implements IRutaService {
+public class ServiceRuta implements IServiceRuta {
 
     private RutaRepository repo;
 
-    public RutaService(RutaRepository repo) {
+    public ServiceRuta(RutaRepository repo) {
         this.repo = repo;
     }
 

@@ -1,9 +1,7 @@
 package org.example.javaapp.controller;
 
-import org.example.javaapp.model.Puntosintere;
-import org.example.javaapp.model.Usuario;
+import org.example.javaapp.model.PuntosInteres;
 import org.example.javaapp.service.ServicePuntosInteres;
-import org.example.javaapp.service.ServiceUsuario;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,14 +10,14 @@ import java.util.List;
 @RequestMapping("/api/reta3/puntosinteres")
 public class PuntosInteresController {
 
-    private ServicePuntosInteres service;
+    private final ServicePuntosInteres service;
 
     public PuntosInteresController(ServicePuntosInteres service){
         this.service=service;
     }
 
     @PostMapping
-    public Puntosintere insert(@RequestBody Puntosintere puntosInteres){
+    public PuntosInteres insert(@RequestBody PuntosInteres puntosInteres){
         return service.insert(puntosInteres);
     }
 
@@ -29,17 +27,17 @@ public class PuntosInteresController {
     }
 
     @PutMapping("/{id}")
-    public Puntosintere update(@PathVariable int id, @RequestBody Puntosintere puntosintere){
-        return service.update(id, puntosintere);
+    public PuntosInteres update(@PathVariable int id, @RequestBody PuntosInteres puntosInteres){
+        return service.update(id, puntosInteres);
     }
 
     @GetMapping("/{id}")
-    public Puntosintere findById(@PathVariable int id){
+    public PuntosInteres findById(@PathVariable int id){
         return service.findById(id);
     }
 
     @GetMapping
-    public List<Puntosintere> findAll(){
+    public List<PuntosInteres> findAll(){
         return service.findAll();
     }
 }
