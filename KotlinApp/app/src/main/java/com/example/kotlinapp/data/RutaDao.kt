@@ -8,15 +8,25 @@ import androidx.room.Query
 @Dao
 interface RutaDao {
 
-    //@Query("SELECT * FROM Ruta")
-    //suspend fun obtenerRutas(): List<Ruta>
+    // --- Catálogo ---
+    // @Query("SELECT * FROM Ruta")
+    // suspend fun obtenerCatalogo(): List<Ruta>
 
-    //@Query("SELECT * FROM Ruta WHERE idRuta = :id")
-    //suspend fun obtenerRutaPorId(id: Int): Ruta?
+    // @Insert(onConflict = OnConflictStrategy.REPLACE)
+    // suspend fun insertarCatalogo(rutas: List<Ruta>)
 
-    //@Insert(onConflict = OnConflictStrategy.REPLACE)
-    //suspend fun insertarRutas(rutas: List<Ruta>)
+    // --- Seguimiento ---
+    // @Query("SELECT * FROM Ruta WHERE idRuta = :id")
+    // suspend fun obtenerRuta(id: Int): Ruta?
 
-    //@Insert
-    //suspend fun insertarRuta(ruta: Ruta): Long
+    // --- Grabación de rutas (modo tracking) ---
+    // @Insert(onConflict = OnConflictStrategy.REPLACE)
+    // suspend fun insertarRutaGrabada(ruta: Ruta): Long
+
+    // --- Sincronización ---
+    // @Query("SELECT * FROM Ruta WHERE sincronizada = 0")
+    // suspend fun obtenerRutasPendientes(): List<Ruta>
+
+    // @Query("UPDATE Ruta SET sincronizada = 1 WHERE idRuta = :id")
+    // suspend fun marcarComoSincronizada(id: Int)
 }

@@ -9,10 +9,19 @@ import androidx.room.Query
 @Dao
 interface UsuarioDao {
 
-    //@Query("SELECT * FROM Usuario WHERE idUsuario = :id")
-    //suspend fun obtenerUsuario(id: Long): Usuario?
+    // --- Login ---
+    // @Query("SELECT * FROM Usuario WHERE email = :email AND password = :password")
+    //suspend fun login(email: String, password: String): Usuario?
 
-    //@Insert(onConflict = OnConflictStrategy.REPLACE)
-    //suspend fun insertarUsuario(usuario: Usuario): Long
+    // --- Obtener usuario por ID ---
+    // @Query("SELECT * FROM Usuario WHERE idUsuario = :id")
+    // suspend fun obtenerUsuario(id: Int): Usuario?
+
+    // --- Guardar usuario autenticado ---
+    // @Insert(onConflict = OnConflictStrategy.REPLACE)
+    // suspend fun guardarUsuario(usuario: Usuario): Long
+
+    // --- Roles --- @Query("SELECT rol FROM Usuario WHERE idUsuario = :id")
+    // suspend fun obtenerRol(id: Int): Rol?
 
 }
