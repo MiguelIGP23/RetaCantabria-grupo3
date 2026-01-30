@@ -12,8 +12,9 @@ namespace Repository
         public ApiReta(string http)
         {
             _http = new HttpClient { BaseAddress= new System.Uri(http)};
-            _jsonOptions.Converters.Add(new JsonStringEnumConverter());  //Evita errores al serializar enums
-            _jsonOptions.Converters.Add(new DateOnlyJsonConverter());           //Evita errores al serializar DateOnly
+            _jsonOptions.Converters.Add(new JsonStringEnumConverter());                     //Evita errores al serializar enums
+            _jsonOptions.Converters.Add(new DateOnlyJsonConverter());                       //Evita errores al serializar DateOnly
+            _jsonOptions = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};  //IgnoreCase para los nombres de propiedades al serializar
         }
 
         public async Task<List<T>> GetAllAsync<T>(string ruta)
@@ -22,31 +23,29 @@ namespace Repository
             return lista ?? new List<T>();
         }
 
-        public async Task<T> GetByIdAsync<T>(string ruta, int id)
+        public async Task<T?> GetByIdAsync<T>(string ruta, string idPath)
         {
-            var objeto = await _http.GetFromJsonAsync<T>($"{ruta}/{id}", _jsonOptions);
-            return objeto;
+            return await _http.GetFromJsonAsync<T>($"{ruta}/{idPath}", _jsonOptions);
+            
         }
 
-        public async Task<T?> Create<T>(string ruta, string id)
+        public async Task<T?> Create<T>(string ruta, T objeto)
         {
-            var response = await _http.PostAsJsonAsync(ruta, _jsonOptions);
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(json);
-            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-        }
-
-        public async Task<T> Update<T>(string ruta, int id, T objeto)
-        {
-            var response = await _http.PutAsJsonAsync<T>($"{ruta}/{id}", objeto, _jsonOptions);
+            var response = await _http.PostAsJsonAsync(ruta, objeto, _jsonOptions);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
         }
 
-        public async Task Delete(string ruta, int id)
+        public async Task<T?> Update<T>(string ruta, string idPath, T objeto)
         {
-            var response = await _http.DeleteAsync($"{ruta}/{id}");
+            var response = await _http.PutAsJsonAsync<T>($"{ruta}/{idPath}", objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+        }
+
+        public async Task Delete(string ruta, string idPath)
+        {
+            var response = await _http.DeleteAsync($"{ruta}/{idPath}");
             response.EnsureSuccessStatusCode();
         }
     }
