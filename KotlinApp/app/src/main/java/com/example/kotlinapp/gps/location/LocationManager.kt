@@ -1,14 +1,14 @@
-package com.example.kotlinapp
-
+package com.example.kotlinapp.gps.location
 
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Looper
-import androidx.compose.runtime.*
+import androidx.compose.runtime.MutableState
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.*
-
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 
 class LocationManager(
     private val client: FusedLocationProviderClient,
