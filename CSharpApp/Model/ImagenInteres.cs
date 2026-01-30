@@ -16,7 +16,7 @@ namespace Model
         public string Url { get; set; }
 
         [JsonPropertyName("descripcion")]
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
         [JsonPropertyName("puntosinteres_idPuntosinteres")]
         public int Puntosinteres_idPuntosinteres { get; set; }

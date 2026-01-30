@@ -1,4 +1,4 @@
-﻿namespace CSharpApp
+﻿namespace Forms
 {
     partial class Login
     {
@@ -28,79 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_usuario = new System.Windows.Forms.Label();
-            this.lbl_password = new System.Windows.Forms.Label();
-            this.txt_usuario = new System.Windows.Forms.TextBox();
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.btn_login = new System.Windows.Forms.Button();
-            this.btn_registro = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lbl_usuario = new Label();
+            lbl_password = new Label();
+            txt_usuario = new TextBox();
+            txt_password = new TextBox();
+            btn_login = new Button();
+            btn_registro = new Button();
+            SuspendLayout();
             // 
             // lbl_usuario
             // 
-            this.lbl_usuario.AutoSize = true;
-            this.lbl_usuario.Location = new System.Drawing.Point(248, 221);
-            this.lbl_usuario.Name = "lbl_usuario";
-            this.lbl_usuario.Size = new System.Drawing.Size(43, 13);
-            this.lbl_usuario.TabIndex = 0;
-            this.lbl_usuario.Text = "Usuario";
+            lbl_usuario.AutoSize = true;
+            lbl_usuario.Location = new Point(331, 340);
+            lbl_usuario.Margin = new Padding(4, 0, 4, 0);
+            lbl_usuario.Name = "lbl_usuario";
+            lbl_usuario.Size = new Size(59, 20);
+            lbl_usuario.TabIndex = 0;
+            lbl_usuario.Text = "Usuario";
             // 
             // lbl_password
             // 
-            this.lbl_password.AutoSize = true;
-            this.lbl_password.Location = new System.Drawing.Point(248, 274);
-            this.lbl_password.Name = "lbl_password";
-            this.lbl_password.Size = new System.Drawing.Size(61, 13);
-            this.lbl_password.TabIndex = 1;
-            this.lbl_password.Text = "Contraseña";
+            lbl_password.AutoSize = true;
+            lbl_password.Location = new Point(331, 422);
+            lbl_password.Margin = new Padding(4, 0, 4, 0);
+            lbl_password.Name = "lbl_password";
+            lbl_password.Size = new Size(83, 20);
+            lbl_password.TabIndex = 1;
+            lbl_password.Text = "Contraseña";
             // 
             // txt_usuario
             // 
-            this.txt_usuario.Location = new System.Drawing.Point(342, 218);
-            this.txt_usuario.Name = "txt_usuario";
-            this.txt_usuario.Size = new System.Drawing.Size(100, 20);
-            this.txt_usuario.TabIndex = 2;
+            txt_usuario.Location = new Point(456, 335);
+            txt_usuario.Margin = new Padding(4, 5, 4, 5);
+            txt_usuario.Name = "txt_usuario";
+            txt_usuario.Size = new Size(132, 27);
+            txt_usuario.TabIndex = 2;
             // 
             // txt_password
             // 
-            this.txt_password.Location = new System.Drawing.Point(342, 271);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(100, 20);
-            this.txt_password.TabIndex = 3;
+            txt_password.Location = new Point(456, 417);
+            txt_password.Margin = new Padding(4, 5, 4, 5);
+            txt_password.Name = "txt_password";
+            txt_password.Size = new Size(132, 27);
+            txt_password.TabIndex = 3;
             // 
             // btn_login
             // 
-            this.btn_login.Location = new System.Drawing.Point(251, 348);
-            this.btn_login.Name = "btn_login";
-            this.btn_login.Size = new System.Drawing.Size(75, 23);
-            this.btn_login.TabIndex = 4;
-            this.btn_login.Text = "Login";
-            this.btn_login.UseVisualStyleBackColor = true;
+            btn_login.Location = new Point(335, 535);
+            btn_login.Margin = new Padding(4, 5, 4, 5);
+            btn_login.Name = "btn_login";
+            btn_login.Size = new Size(100, 35);
+            btn_login.TabIndex = 4;
+            btn_login.Text = "Login";
+            btn_login.UseVisualStyleBackColor = true;
+            btn_login.Click += btn_login_Click;
             // 
             // btn_registro
             // 
-            this.btn_registro.Location = new System.Drawing.Point(342, 348);
-            this.btn_registro.Name = "btn_registro";
-            this.btn_registro.Size = new System.Drawing.Size(75, 23);
-            this.btn_registro.TabIndex = 5;
-            this.btn_registro.Text = "Registro";
-            this.btn_registro.UseVisualStyleBackColor = true;
+            btn_registro.Location = new Point(456, 535);
+            btn_registro.Margin = new Padding(4, 5, 4, 5);
+            btn_registro.Name = "btn_registro";
+            btn_registro.Size = new Size(100, 35);
+            btn_registro.TabIndex = 5;
+            btn_registro.Text = "Registro";
+            btn_registro.UseVisualStyleBackColor = true;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_registro);
-            this.Controls.Add(this.btn_login);
-            this.Controls.Add(this.txt_password);
-            this.Controls.Add(this.txt_usuario);
-            this.Controls.Add(this.lbl_password);
-            this.Controls.Add(this.lbl_usuario);
-            this.Name = "Login";
-            this.Text = "Login";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1067, 692);
+            Controls.Add(btn_registro);
+            Controls.Add(btn_login);
+            Controls.Add(txt_password);
+            Controls.Add(txt_usuario);
+            Controls.Add(lbl_password);
+            Controls.Add(lbl_usuario);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "Login";
+            Text = "Login";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

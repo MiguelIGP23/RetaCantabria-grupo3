@@ -25,23 +25,23 @@ namespace Model
         public double Elevacion { get; set; }
 
         [JsonPropertyName("caracteristicas")]
-        public string Caracteristicas { get; set; }
+        public string? Caracteristicas { get; set; }
 
         [JsonPropertyName("tipo")]
-        public string Tipo { get; set; }
+        public EnumTiposPuntoInteres? Tipo { get; set; }
 
         [JsonPropertyName("descripcion")]
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
         [JsonPropertyName("timestamp")]
-        public int Timestamp { get; set; }
+        public int? Timestamp { get; set; }
 
         [JsonPropertyName("rutas_idRuta")]
         public int Rutas_idRuta { get; set; }
 
         public PuntoInteres() { }
 
-        public PuntoInteres(int idPuntosinteres, string nombre, double latitud, double longitud, double elevacion, string caracteristicas, string tipo, string descripcion, int timestamp, int rutas_idRuta)
+        public PuntoInteres(int idPuntosinteres, string nombre, double latitud, double longitud, double elevacion, string caracteristicas, EnumTiposPuntoInteres tipo, string descripcion, int timestamp, int rutas_idRuta)
         {
             IdPuntosinteres = idPuntosinteres;
             Nombre = nombre;

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CSharpApp
+namespace Forms
 {
     public partial class Registro : Form
     {

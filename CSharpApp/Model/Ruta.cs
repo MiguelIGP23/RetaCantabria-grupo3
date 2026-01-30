@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace Model
 {
     public class Ruta
     {
-        [JsonPropertyName("idRuta")]
+        [JsonPropertyName("id")]
         public int IdRuta { get; set; }
 
         [JsonPropertyName("nombre")]
@@ -33,68 +34,68 @@ namespace Model
         public double Distancia { get; set; }
 
         [JsonPropertyName("duracion")]
-        public TimeSpan Duracion { get; set; }
+        public string Duracion { get; set; }
 
         [JsonPropertyName("desnivelPositivo")]
-        public int DesnivelPositivo { get; set; }
+        public int? DesnivelPositivo { get; set; }
 
         [JsonPropertyName("desnivelNegativo")]
-        public int DesnivelNegativo { get; set; }
+        public int? DesnivelNegativo { get; set; }
 
         [JsonPropertyName("altitudMax")]
-        public double AltitudMax { get; set; }
+        public double? AltitudMax { get; set; }
 
         [JsonPropertyName("altitudMin")]
-        public double AltitudMin { get; set; }
+        public double? AltitudMin { get; set; }
 
         [JsonPropertyName("clasificacion")]
-        public EnumClasificaciones Clasificacion { get; set; }
+        public EnumClasificaciones? Clasificacion { get; set; }
 
         [JsonPropertyName("nivelEsfuerzo")]
-        public int NivelEsfuerzo { get; set; }
+        public int? NivelEsfuerzo { get; set; }
 
         [JsonPropertyName("nivelRiesgo")]
-        public int NivelRiesgo { get; set; }
+        public int? NivelRiesgo { get; set; }
 
         [JsonPropertyName("estadoRuta")]
-        public int EstadoRuta { get; set; }
+        public int? EstadoRuta { get; set; }
 
         [JsonPropertyName("tipoTerreno")]
-        public int TipoTerreno { get; set; }
+        public int? TipoTerreno { get; set; }
 
         [JsonPropertyName("indicaciones")]
-        public int Indicaciones { get; set; }
+        public int? Indicaciones { get; set; }
 
         [JsonPropertyName("temporadas")]
-        public string Temporadas { get; set; }
+        public string? Temporadas { get; set; }
 
         [JsonPropertyName("accesibilidad")]
-        public bool Accesibilidad { get; set; }
+        public int? Accesibilidad { get; set; }
 
         [JsonPropertyName("rutaFamiliar")]
-        public bool RutaFamiliar { get; set; }
+        public int? RutaFamiliar { get; set; }
 
         [JsonPropertyName("archivoGPX")]
-        public string ArchivoGPX { get; set; }
+        public string? ArchivoGPX { get; set; }
 
         [JsonPropertyName("recomendacionesEquipo")]
-        public string RecomendacionesEquipo { get; set; }
+        public string? RecomendacionesEquipo { get; set; }
 
         [JsonPropertyName("zonaGeografica")]
-        public string ZonaGeografica { get; set; }
+        public string? ZonaGeografica { get; set; }
 
         [JsonPropertyName("mediaEstrellas")]
-        public double MediaEstrellas { get; set; }
+        public double? MediaEstrellas { get; set; }
 
-        [JsonPropertyName("usuario_idUsuario")]
-        public int Usuario_idUsuario { get; set; }
+        [JsonPropertyName("usuario")]
+        public Usuario Usuario { get; set; }
 
 
         public Ruta() { 
 
         }
 
-        public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, TimeSpan duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, bool accesibilidad, bool rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, int usuario_idUsuario)
+        public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, string duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, int accesibilidad, int rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, Usuario usuario_idUsuario)
         {
             IdRuta = idRuta;
             Nombre = nombre;
@@ -120,7 +121,7 @@ namespace Model
             ArchivoGPX = archivoGPX;
             RecomendacionesEquipo = recomendacionesEquipo;
             ZonaGeografica = zonaGeografica;
-            Usuario_idUsuario = usuario_idUsuario;
+            Usuario = usuario_idUsuario;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace CSharpApp
+﻿namespace Forms
 {
     partial class Rutas
     {
@@ -28,79 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_rutas = new System.Windows.Forms.DataGridView();
-            this.txt_buscar_ruta = new System.Windows.Forms.TextBox();
-            this.btn_buscar = new System.Windows.Forms.Button();
-            this.btn_borrar = new System.Windows.Forms.Button();
-            this.btn_detalles = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_rutas)).BeginInit();
-            this.SuspendLayout();
+            dgv_rutas = new DataGridView();
+            txt_buscar_ruta = new TextBox();
+            btn_buscar = new Button();
+            btn_borrar = new Button();
+            btn_detalles = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgv_rutas).BeginInit();
+            SuspendLayout();
             // 
             // dgv_rutas
             // 
-            this.dgv_rutas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_rutas.Location = new System.Drawing.Point(69, 94);
-            this.dgv_rutas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgv_rutas.Name = "dgv_rutas";
-            this.dgv_rutas.RowHeadersWidth = 51;
-            this.dgv_rutas.Size = new System.Drawing.Size(903, 322);
-            this.dgv_rutas.TabIndex = 0;
+            dgv_rutas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_rutas.Location = new Point(69, 118);
+            dgv_rutas.Margin = new Padding(4, 5, 4, 5);
+            dgv_rutas.Name = "dgv_rutas";
+            dgv_rutas.RowHeadersWidth = 51;
+            dgv_rutas.Size = new Size(903, 402);
+            dgv_rutas.TabIndex = 0;
             // 
             // txt_buscar_ruta
             // 
-            this.txt_buscar_ruta.Location = new System.Drawing.Point(96, 42);
-            this.txt_buscar_ruta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txt_buscar_ruta.Name = "txt_buscar_ruta";
-            this.txt_buscar_ruta.Size = new System.Drawing.Size(539, 22);
-            this.txt_buscar_ruta.TabIndex = 1;
+            txt_buscar_ruta.Location = new Point(96, 52);
+            txt_buscar_ruta.Margin = new Padding(4, 5, 4, 5);
+            txt_buscar_ruta.Name = "txt_buscar_ruta";
+            txt_buscar_ruta.Size = new Size(539, 27);
+            txt_buscar_ruta.TabIndex = 1;
             // 
             // btn_buscar
             // 
-            this.btn_buscar.Location = new System.Drawing.Point(696, 42);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(100, 28);
-            this.btn_buscar.TabIndex = 2;
-            this.btn_buscar.Text = "Buscar";
-            this.btn_buscar.UseVisualStyleBackColor = true;
+            btn_buscar.Location = new Point(696, 52);
+            btn_buscar.Margin = new Padding(4, 5, 4, 5);
+            btn_buscar.Name = "btn_buscar";
+            btn_buscar.Size = new Size(100, 35);
+            btn_buscar.TabIndex = 2;
+            btn_buscar.Text = "Buscar";
+            btn_buscar.UseVisualStyleBackColor = true;
             // 
             // btn_borrar
             // 
-            this.btn_borrar.Location = new System.Drawing.Point(696, 444);
-            this.btn_borrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btn_borrar.Name = "btn_borrar";
-            this.btn_borrar.Size = new System.Drawing.Size(100, 28);
-            this.btn_borrar.TabIndex = 3;
-            this.btn_borrar.Text = "Borrar";
-            this.btn_borrar.UseVisualStyleBackColor = true;
+            btn_borrar.Location = new Point(696, 555);
+            btn_borrar.Margin = new Padding(4, 5, 4, 5);
+            btn_borrar.Name = "btn_borrar";
+            btn_borrar.Size = new Size(100, 35);
+            btn_borrar.TabIndex = 3;
+            btn_borrar.Text = "Borrar";
+            btn_borrar.UseVisualStyleBackColor = true;
             // 
             // btn_detalles
             // 
-            this.btn_detalles.Location = new System.Drawing.Point(124, 444);
-            this.btn_detalles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btn_detalles.Name = "btn_detalles";
-            this.btn_detalles.Size = new System.Drawing.Size(100, 28);
-            this.btn_detalles.TabIndex = 4;
-            this.btn_detalles.Text = "Ver Detalles";
-            this.btn_detalles.UseVisualStyleBackColor = true;
+            btn_detalles.Location = new Point(124, 555);
+            btn_detalles.Margin = new Padding(4, 5, 4, 5);
+            btn_detalles.Name = "btn_detalles";
+            btn_detalles.Size = new Size(100, 35);
+            btn_detalles.TabIndex = 4;
+            btn_detalles.Text = "Ver Detalles";
+            btn_detalles.UseVisualStyleBackColor = true;
             // 
             // Rutas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.btn_detalles);
-            this.Controls.Add(this.btn_borrar);
-            this.Controls.Add(this.btn_buscar);
-            this.Controls.Add(this.txt_buscar_ruta);
-            this.Controls.Add(this.dgv_rutas);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Rutas";
-            this.Text = "Rutas";
-            this.Load += new System.EventHandler(this.Rutas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_rutas)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1067, 692);
+            Controls.Add(btn_detalles);
+            Controls.Add(btn_borrar);
+            Controls.Add(btn_buscar);
+            Controls.Add(txt_buscar_ruta);
+            Controls.Add(dgv_rutas);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "Rutas";
+            Text = "Rutas";
+            Load += Rutas_Load;
+            ((System.ComponentModel.ISupportInitialize)dgv_rutas).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

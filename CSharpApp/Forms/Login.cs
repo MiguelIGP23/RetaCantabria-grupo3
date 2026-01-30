@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CSharpApp
+namespace Forms
 {
     public partial class Login : Form
     {
@@ -17,6 +17,9 @@ namespace CSharpApp
             InitializeComponent();
         }
 
-
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            new Rutas().Show();
+        }
     }
 }

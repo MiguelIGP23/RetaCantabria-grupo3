@@ -22,7 +22,7 @@ namespace Model
         public string Password { get; set; }
 
         [JsonPropertyName("rol")]
-        public EnumRoles Rol { get; set; }
+        public EnumRoles? Rol { get; set; }
 
 
         public Usuario()

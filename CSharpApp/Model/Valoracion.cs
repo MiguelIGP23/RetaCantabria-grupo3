@@ -28,10 +28,10 @@ namespace Model
         public bool Belleza { get; set; }
 
         [JsonPropertyName("valoracionTecnica")]
-        public string ValoracionTecnica { get; set; }
+        public string? ValoracionTecnica { get; set; }
 
         [JsonPropertyName("resena")]
-        public string Resena { get; set; }
+        public string? Resena { get; set; }
 
         [JsonPropertyName("usuario_idUsuario")]
         public int Usuario_idUsuario { get; set; }

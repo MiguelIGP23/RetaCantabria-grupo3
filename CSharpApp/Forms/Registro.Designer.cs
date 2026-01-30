@@ -1,4 +1,4 @@
-﻿namespace CSharpApp
+﻿namespace Forms
 {
     partial class Registro
     {
