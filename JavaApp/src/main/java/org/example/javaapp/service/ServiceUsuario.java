@@ -21,7 +21,7 @@ public class ServiceUsuario implements IServiceUsuario{
     }
 
     @Override
-    public Usuario update(int id, Usuario nuevo) {
+    public Usuario update(Integer id, Usuario nuevo) {
         Usuario buscado = findById(id);
         if(buscado!=null){
             buscado.setNombre(nuevo.getNombre());
@@ -29,18 +29,18 @@ public class ServiceUsuario implements IServiceUsuario{
             buscado.setEmail(nuevo.getEmail());
             buscado.setPassword(nuevo.getPassword());
             buscado.setRol(nuevo.getRol());
-            buscado = repo.save(buscado);
+            repo.save(buscado);
         }
         return buscado;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public Usuario findById(int id) {
+    public Usuario findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 

@@ -1,6 +1,6 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Imagenesintere;
+import org.example.javaapp.model.ImagenesInteres;
 import org.example.javaapp.repository.ImagenInteresRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,32 +15,34 @@ public class ServiceImagenInteres implements IServiceImagenInteres {
     }
 
     @Override
-    public Imagenesintere insert(Imagenesintere imagenesintere) {
-        return repo.save(imagenesintere);
+    public ImagenesInteres insert(ImagenesInteres imagenesInteres) {
+        return repo.save(imagenesInteres);
     }
 
     @Override
-    public Imagenesintere update(int id, Imagenesintere imagenesintere) {
-        Imagenesintere imagen = findById(id);
+    public ImagenesInteres update(Integer id, ImagenesInteres imagenesInteres) {
+        ImagenesInteres imagen = findById(id);
         if (imagen != null) {
-            imagen.setDescripcion(imagenesintere.getDescripcion());
-            imagen.setUrl(imagenesintere.getUrl());
+            imagen.setDescripcion(imagenesInteres.getDescripcion());
+            imagen.setUrl(imagenesInteres.getUrl());
+            imagen.setPuntosInteres(imagen.getPuntosInteres());
+            repo.save(imagen);
         }
         return imagen;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public Imagenesintere findById(int id) {
+    public ImagenesInteres findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public List<Imagenesintere> findAll() {
+    public List<ImagenesInteres> findAll() {
         return repo.findAll();
     }
 }

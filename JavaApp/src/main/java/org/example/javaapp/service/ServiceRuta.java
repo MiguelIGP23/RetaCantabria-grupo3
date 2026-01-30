@@ -21,7 +21,7 @@ public class ServiceRuta implements IServiceRuta {
     }
 
     @Override
-    public Ruta update(int id, Ruta ruta) {
+    public Ruta update(Integer id, Ruta ruta) {
         Ruta buscada = findById(id);
         if (buscada != null) {
             buscada.setNombre(ruta.getNombre());
@@ -54,12 +54,12 @@ public class ServiceRuta implements IServiceRuta {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public Ruta findById(int id) {
+    public Ruta findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 

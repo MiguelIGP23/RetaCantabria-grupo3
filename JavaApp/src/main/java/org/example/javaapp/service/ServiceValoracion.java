@@ -1,6 +1,6 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Valora;
+import org.example.javaapp.model.Valoracion;
 import org.example.javaapp.repository.ValoracionRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,40 +14,40 @@ public class ServiceValoracion implements IServiceValoracion{
     public ServiceValoracion(ValoracionRepository repo){this.repo=repo;}
 
     @Override
-    public Valora insert(Valora valora) {
-        return repo.save(valora);
+    public Valoracion insert(Valoracion valoracion) {
+        return repo.save(valoracion);
     }
 
     @Override
-    public Valora update(int id, Valora valora) {
-        Valora aModificar = repo.findById(id).orElse(null);
+    public Valoracion update(Integer id, Valoracion valoracion) {
+        Valoracion aModificar = repo.findById(id).orElse(null);
         if (aModificar != null) {
-            aModificar.setBelleza(valora.getBelleza());
-            aModificar.setDificultad(valora.getDificultad());
-            aModificar.setEstrellas(valora.getEstrellas());
-            aModificar.setFecha(valora.getFecha());
-            aModificar.setResena(valora.getResena());
-            aModificar.setInteresCultural(valora.getInteresCultural());
-            aModificar.setRutasIdruta(valora.getRutasIdruta());
-            aModificar.setUsuarioIdusuario(valora.getUsuarioIdusuario());
-            aModificar.setValoracionTecnica(valora.getValoracionTecnica());
-            repo.save(valora);
+            aModificar.setBelleza(valoracion.getBelleza());
+            aModificar.setDificultad(valoracion.getDificultad());
+            aModificar.setEstrellas(valoracion.getEstrellas());
+            aModificar.setFecha(valoracion.getFecha());
+            aModificar.setResena(valoracion.getResena());
+            aModificar.setInteresCultural(valoracion.getInteresCultural());
+            aModificar.setRutasIdruta(valoracion.getRutasIdruta());
+            aModificar.setUsuarioIdusuario(valoracion.getUsuarioIdusuario());
+            aModificar.setValoracionTecnica(valoracion.getValoracionTecnica());
+            repo.save(valoracion);
         }
         return aModificar;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public Valora findById(int id) {
+    public Valoracion findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public List<Valora> findAll(){
+    public List<Valoracion> findAll(){
         return repo.findAll();
     }
 }

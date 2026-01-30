@@ -1,7 +1,6 @@
-package org.example.javaapp;
+package org.example.javaapp.model;
 
 import jakarta.persistence.*;
-import org.example.javaapp.model.Ruta;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -31,7 +30,7 @@ public class Trackpoint {
         this.id = id;
     }
 
-    public Ruta getIdRuta() {
+    public Ruta getRuta() {
         return idRuta;
     }
 

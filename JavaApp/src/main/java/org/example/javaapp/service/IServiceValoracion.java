@@ -1,7 +1,7 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Valora;
+import org.example.javaapp.model.Valoracion;
 
-public interface IServiceValoracion extends IService<Valora, Integer>{
+public interface IServiceValoracion extends IService<Valoracion, Integer>{
 
 }

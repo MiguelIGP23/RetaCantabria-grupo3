@@ -1,6 +1,6 @@
 package org.example.javaapp.controller;
 
-import org.example.javaapp.model.Valora;
+import org.example.javaapp.model.Valoracion;
 import org.example.javaapp.service.ServiceValoracion;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,22 +17,27 @@ public class ValoracionController {
     }
 
     @PostMapping
-    public Valora insert(@RequestBody Valora valora) {
-        return service.insert(valora);
+    public Valoracion insert(@RequestBody Valoracion valoracion) {
+        return service.insert(valoracion);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody int id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
         service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public Valora update(@PathVariable int id, @RequestBody Valora valora) {
-        return service.update(id,valora);
+    public Valoracion update(@PathVariable int id, @RequestBody Valoracion valoracion) {
+        return service.update(id, valoracion);
+    }
+
+    @GetMapping("/{id}")
+    public Valoracion findById(@PathVariable int id){
+        return service.findById(id);
     }
 
     @GetMapping
-    public List<Valora> findAll() {
+    public List<Valoracion> findAll() {
         return service.findAll();
     }
 

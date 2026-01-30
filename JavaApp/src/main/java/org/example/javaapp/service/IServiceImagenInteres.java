@@ -1,7 +1,6 @@
 package org.example.javaapp.service;
 
-import org.example.javaapp.model.Imagenesintere;
-import org.example.javaapp.repository.ImagenInteresRepository;
+import org.example.javaapp.model.ImagenesInteres;
 
-public interface IServiceImagenInteres extends IService<Imagenesintere,Integer> {
+public interface IServiceImagenInteres extends IService<ImagenesInteres,Integer> {
 }

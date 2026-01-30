@@ -21,8 +21,8 @@ public class ServiceImagenPeligro implements IService<ImagenesPeligro,Integer> {
     }
 
     @Override
-    public ImagenesPeligro update(int id, ImagenesPeligro imagenespeligro) {
-        ImagenesPeligro imagen = imagenespeligro;
+    public ImagenesPeligro update(Integer id, ImagenesPeligro imagenespeligro) {
+        ImagenesPeligro imagen = findById(id);
         if (imagen!=null){
             imagen.setDescripcion(imagenespeligro.getDescripcion());
             imagen.setUrl(imagenespeligro.getUrl());
@@ -33,12 +33,12 @@ public class ServiceImagenPeligro implements IService<ImagenesPeligro,Integer> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public ImagenesPeligro findById(int id) {
+    public ImagenesPeligro findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 

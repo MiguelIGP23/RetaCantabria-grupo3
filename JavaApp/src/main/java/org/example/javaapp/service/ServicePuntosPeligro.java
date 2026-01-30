@@ -21,7 +21,7 @@ public class ServicePuntosPeligro implements IServicePuntosPeligro{
     }
 
     @Override
-    public PuntosPeligro update(int id, PuntosPeligro puntospeligro) {
+    public PuntosPeligro update(Integer id, PuntosPeligro puntospeligro) {
         PuntosPeligro buscado = findById(id);
         if(buscado!=null){
             buscado.setNombre(puntospeligro.getNombre());
@@ -40,12 +40,12 @@ public class ServicePuntosPeligro implements IServicePuntosPeligro{
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public PuntosPeligro findById(int id) {
+    public PuntosPeligro findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 

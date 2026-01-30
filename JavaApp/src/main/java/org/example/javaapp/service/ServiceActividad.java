@@ -21,7 +21,7 @@ public class ServiceActividad implements IServiceActividad {
     }
 
     @Override
-    public Actividad update(int id, Actividad actividad) {
+    public Actividad update(Integer id, Actividad actividad) {
         Actividad buscada = findById(id);
         if(buscada!=null){
             buscada.setNombre(actividad.getNombre());
@@ -32,12 +32,12 @@ public class ServiceActividad implements IServiceActividad {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public Actividad findById(int id) {
+    public Actividad findById(Integer id) {
         return repo.getReferenceById(id);
     }
 

@@ -1,7 +1,6 @@
 package org.example.javaapp.controller;
 
-import org.example.javaapp.model.Imagenesintere;
-import org.example.javaapp.model.Imagenespeligro;
+import org.example.javaapp.model.ImagenesInteres;
 import org.example.javaapp.service.ServiceImagenInteres;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +16,17 @@ public class ImagenInteresController {
     }
 
     @PostMapping()
-    public Imagenesintere insert(@RequestBody Imagenesintere imagenesintere) {
-        return service.insert(imagenesintere);
+    public ImagenesInteres insert(@RequestBody ImagenesInteres imagenesInteres) {
+        return service.insert(imagenesInteres);
     }
 
     @GetMapping()
-    public List<Imagenesintere> getAll() {
+    public List<ImagenesInteres> getAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Imagenesintere getById(@PathVariable int id) {
+    public ImagenesInteres getById(@PathVariable int id) {
         return service.findById(id);
     }
 
@@ -37,8 +36,8 @@ public class ImagenInteresController {
     }
 
     @PutMapping("/{id}")
-    public Imagenesintere update(@PathVariable int id, @RequestBody Imagenesintere imagenesintere) {
-        return service.update(id, imagenesintere);
+    public ImagenesInteres update(@PathVariable int id, @RequestBody ImagenesInteres imagenesInteres) {
+        return service.update(id, imagenesInteres);
     }
 
 }

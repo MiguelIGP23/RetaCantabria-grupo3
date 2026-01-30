@@ -44,4 +44,11 @@ public class ImagenesInteres {
         this.descripcion = descripcion;
     }
 
+    public PuntosInteres getPuntosInteres() {
+        return puntosInteres;
+    }
+
+    public void setPuntosInteres(PuntosInteres puntosInteres) {
+        this.puntosInteres = puntosInteres;
+    }
 }
