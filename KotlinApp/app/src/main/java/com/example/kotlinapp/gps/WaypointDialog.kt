@@ -1,6 +1,6 @@
 package com.example.kotlinapp.gps
 
-import android.content.Context
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
@@ -19,9 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
+import com.example.kotlinapp.gps.permissions.RequestPermission
 import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.model.WaypointDialogData
 import java.io.File
+import android.Manifest
+import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.LaunchedEffect
+
 
 @Composable
 fun WaypointDialog(
@@ -29,25 +36,39 @@ fun WaypointDialog(
     onDismiss: () -> Unit,
     onSave: (Waypoint) -> Unit
 ) {
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var photoUri by remember { mutableStateOf<String?>(null) } // ruta o URL futura
-
     val context = LocalContext.current
 
-    // Launcher para tomar foto (preparado, sin guardar aún en servidor)
-    fun createTempImageFile(context: Context): File {
-        val dir = context.cacheDir
-        return File.createTempFile("waypoint_${System.currentTimeMillis()}", ".jpg", dir)
+    var title by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var photoUri by remember { mutableStateOf<String?>(null) }
+    var pendingUri by remember { mutableStateOf<Uri?>(null) }
+    var requestCamera by remember { mutableStateOf(false) }
+    var cameraGranted by remember { mutableStateOf(false) }
+
+    // Función para crear archivo temporal para la foto
+    fun createTempImageFile(): File {
+        return File.createTempFile(
+            "waypoint_${System.currentTimeMillis()}",
+            ".jpg",
+            context.cacheDir
+        )
     }
 
+    // Launcher para tomar la foto
     val takePictureLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture()
     ) { success ->
         if (success) {
-            photoUri?.let { uri ->
-                // la foto fue guardada en uri, listo para usar
-            }
+            // Foto tomada correctamente
+        }
+    }
+
+    // Lanzar la cámara cuando se conceda el permiso
+    LaunchedEffect(cameraGranted, pendingUri) {
+        if (cameraGranted && pendingUri != null) {
+            takePictureLauncher.launch(pendingUri!!)
+            requestCamera = false
+            cameraGranted = false
         }
     }
 
@@ -55,7 +76,18 @@ fun WaypointDialog(
         onDismissRequest = onDismiss,
         title = { Text("Nuevo Waypoint (${dialogData.type})") },
         text = {
+            // Solicitar permiso si el usuario presionó "Tomar foto"
+            if (requestCamera) {
+                RequestPermission(
+                    permission = Manifest.permission.CAMERA,
+                    message = "Permiso de cámara requerido para tomar fotos"
+                ) {
+                    cameraGranted = true
+                }
+            }
+
             Column {
+                // Campos de texto
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
@@ -67,24 +99,44 @@ fun WaypointDialog(
                     label = { Text("Descripción") }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = {
-                    val file = createTempImageFile(context)
-                    val uri = FileProvider.getUriForFile(
-                        context,
-                        "${context.packageName}.provider",
-                        file
-                    )
-                    photoUri = uri.toString()
-                    takePictureLauncher.launch(uri)
-                }) {
-                    Text(if (photoUri == null) "Tomar foto" else "Foto lista")
+
+                // Fila de botones: Tomar foto y Ver foto
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    // Botón tomar foto
+                    Button(onClick = {
+                        val file = createTempImageFile()
+                        val authority = "${context.applicationContext.packageName}.provider"
+                        val uri = FileProvider.getUriForFile(context, authority, file)
+
+                        pendingUri = uri
+                        photoUri = uri.toString()
+                        requestCamera = true
+                    }) {
+                        Text(if (photoUri == null) "Tomar foto" else "Foto lista")
+                    }
+
+                    // Botón ver foto
+                    Button(
+                        enabled = photoUri != null,
+                        onClick = {
+                            photoUri?.let { uriStr ->
+                                val fileUri = Uri.parse(uriStr)
+                                val intent = Intent(Intent.ACTION_VIEW).apply {
+                                    setDataAndType(fileUri, "image/*")
+                                    flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                }
+                                context.startActivity(intent)
+                            }
+                        }
+                    ) {
+                        Text("Ver foto")
+                    }
                 }
             }
         },
         confirmButton = {
             Button(
                 onClick = {
-                    // Guardamos la "fotoUri" en el waypoint (aunque ahora sea solo un placeholder)
                     onSave(
                         Waypoint(
                             lat = dialogData.lat,
@@ -92,13 +144,11 @@ fun WaypointDialog(
                             type = dialogData.type,
                             title = title,
                             description = description,
-                            photoPath = photoUri // aquí estará la URL futura
+                            photoPath = photoUri
                         )
                     )
                 }
-            ) {
-                Text("Guardar")
-            }
+            ) { Text("Guardar") }
         },
         dismissButton = {
             Button(onClick = onDismiss) { Text("Cancelar") }
