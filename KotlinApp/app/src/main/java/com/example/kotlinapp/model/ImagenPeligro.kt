@@ -1,8 +1,10 @@
 package com.example.kotlinapp.model
 
+import com.example.kotlinapp.data.IdRef
+
 data class ImagenPeligro(
-    val idimagenespeligro: Int?,
+    val id: Int?,
     val url: String,
     val descripcion: String?,
-    val puntospeligro_idPuntospeligro: PuntoPeligro
+    val puntospeligro: IdRef
 )
