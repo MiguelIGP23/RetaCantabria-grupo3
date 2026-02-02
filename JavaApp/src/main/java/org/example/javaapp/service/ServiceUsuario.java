@@ -1,7 +1,9 @@
 package org.example.javaapp.service;
 
+import org.example.javaapp.model.Rol;
 import org.example.javaapp.model.Usuario;
 import org.example.javaapp.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,14 +11,20 @@ import java.util.List;
 @Service
 public class ServiceUsuario implements IServiceUsuario{
 
-    private UsuarioRepository repo;
+    private final UsuarioRepository repo;
+    private final PasswordEncoder encoder;
 
-    public ServiceUsuario(UsuarioRepository repo) {
+    public ServiceUsuario(UsuarioRepository repo, PasswordEncoder encoder) {
         this.repo = repo;
+        this.encoder = encoder;
     }
 
     @Override
     public Usuario insert(Usuario usuario) {
+        Usuario nuevo= new Usuario();
+        nuevo.setEmail(usuario.getEmail());
+        nuevo.setRol(usuario.getRol());
+        nuevo.setPassword(encoder.encode(usuario.getPassword()));  //Cifrado por BCrypt
         return repo.save(usuario);
     }
 
@@ -48,4 +56,5 @@ public class ServiceUsuario implements IServiceUsuario{
     public List<Usuario> findAll(){
         return repo.findAll();
     }
+
 }
