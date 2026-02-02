@@ -101,7 +101,7 @@
             Controls.Add(lblApellido);
             Controls.Add(lblId);
             Name = "UCUsuarioLista";
-            Size = new Size(489, 63);
+            Size = new Size(500, 63);
             ResumeLayout(false);
             PerformLayout();
         }
