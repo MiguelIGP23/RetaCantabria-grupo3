@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Forms
+namespace UserControls
 {
-    public partial class Form1 : Form
+    public partial class UCUsuarioLista : UserControl
     {
-        public Form1()
+        public UCUsuarioLista()
         {
             InitializeComponent();
         }
