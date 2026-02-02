@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityBeans {
 
+    // Encoder BCrypt para cifrar las contraseñas
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
