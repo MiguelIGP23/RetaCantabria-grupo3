@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase;
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    // abstract fun usuarioDao(): UsuarioDao
-    // abstract fun puntosInteresDao(): PuntosInteresDao
-    // abstract fun rutaDao(): RutaDao
+     abstract fun usuarioDao(): UsuarioDao
+     abstract fun puntosInteresDao(): PuntosInteresDao
+     abstract fun rutaDao(): RutaDao
 }

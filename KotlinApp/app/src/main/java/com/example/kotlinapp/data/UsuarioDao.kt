@@ -21,7 +21,7 @@ interface UsuarioDao {
     // @Insert(onConflict = OnConflictStrategy.REPLACE)
     // suspend fun guardarUsuario(usuario: Usuario): Long
 
-    // --- Roles --- @Query("SELECT rol FROM Usuario WHERE idUsuario = :id")
+    // --- Roles ---
+    // @Query("SELECT rol FROM Usuario WHERE idUsuario = :id")
     // suspend fun obtenerRol(id: Int): Rol?
-
 }
