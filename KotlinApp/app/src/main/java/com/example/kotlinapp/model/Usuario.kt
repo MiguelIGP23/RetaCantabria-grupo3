@@ -2,7 +2,7 @@ package com.example.kotlinapp.model
 
 import com.example.kotlinapp.model.enums.Rol
 data class Usuario(
-    val idUsuario: Int?,
+    val id: Int?,
     val nombre: String,
     val apellido: String,
     val email: String,

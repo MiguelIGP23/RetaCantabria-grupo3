@@ -1,20 +1,20 @@
 package com.example.kotlinapp.model
 
+import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.model.enums.Clasificacion
 
-import java.time.LocalTime
 
 data class Ruta(
-    val idRuta: Int?,
+    val id: Int?,
     val nombre: String,
-    val nombre_inicioruta: String,
-    val nombre_finalruta: String,
+    val nombreInicioruta: String,
+    val nombreFinalruta: String,
     val latitudInicial: Double,
     val latitudFinal: Double,
     val longitudInicial: Double,
     val longitudFinal: Double,
     val distancia: Double,
-    val duracion: LocalTime,
+    val duracion: String,
     val desnivelPositivo: Int?,
     val desnivelNegativo: Int?,
     val altitudMax: Double?,
@@ -32,5 +32,5 @@ data class Ruta(
     val recomendacionesEquipo: String?,
     val zonaGeografica: String?,
     val mediaEstrellas: Double?,
-    val usuario_idUsuario: Usuario
+    val usuario: IdRef
 )
