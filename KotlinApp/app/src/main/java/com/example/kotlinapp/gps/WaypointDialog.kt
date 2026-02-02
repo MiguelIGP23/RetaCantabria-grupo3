@@ -144,7 +144,8 @@ fun WaypointDialog(
                             type = dialogData.type,
                             title = title,
                             description = description,
-                            photoPath = photoUri
+                            photoPath = photoUri,
+                            elevation = dialogData.elevation ?: 0.0
                         )
                     )
                 }

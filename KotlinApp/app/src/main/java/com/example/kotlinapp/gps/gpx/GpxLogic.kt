@@ -7,19 +7,24 @@ import com.example.kotlinapp.model.Waypoint
 import java.io.File
 import kotlin.collections.forEach
 
-fun generateGpx(trackpoints: List<Pair<Double, Double>>, waypoints: List<Waypoint>): String {
+fun generateGpx(
+    trackpoints: List<Triple<Double, Double, Double>>, // ahora con altitud
+    waypoints: List<Waypoint>
+): String {
     val sb = StringBuilder()
     sb.append("""<?xml version="1.0" encoding="UTF-8"?>""")
     sb.append("\n<gpx version=\"1.1\" creator=\"KotlinApp\">\n")
 
-    trackpoints.forEachIndexed { index, (lat, lon) ->
+    trackpoints.forEachIndexed { index, (lat, lon, ele) ->
         sb.append("    <trkpt lat=\"$lat\" lon=\"$lon\">\n")
+        sb.append("        <ele>$ele</ele>\n") // elevación
         sb.append("        <name>Trackpoint ${index + 1}</name>\n")
         sb.append("    </trkpt>\n")
     }
 
     waypoints.forEach { wp ->
         sb.append("    <wpt lat=\"${wp.lat}\" lon=\"${wp.lon}\">\n")
+        sb.append("        <ele>${wp.elevation ?: 0.0}</ele>\n") // opcional si tus waypoints tienen elevación
         sb.append("        <name>${wp.title}</name>\n")
         sb.append("        <desc>${wp.description} (${wp.type})</desc>\n")
         wp.photoPath?.let { sb.append("        <link href=\"$it\" />\n") }
@@ -30,7 +35,7 @@ fun generateGpx(trackpoints: List<Pair<Double, Double>>, waypoints: List<Waypoin
     return sb.toString()
 }
 
-fun saveGpx(context: Context, trackpoints: List<Pair<Double, Double>>, waypoints: List<Waypoint>, fileName: String = "mis_puntos.gpx") {
+fun saveGpx(context: Context, trackpoints: List<Triple<Double, Double, Double>>, waypoints: List<Waypoint>, fileName: String = "mis_puntos.gpx") {
     try {
         val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         if (!downloadsDir.exists()) downloadsDir.mkdirs()
