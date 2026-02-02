@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CSharpApp
+namespace UserControls
 {
-    public partial class Form1 : Form
+    public partial class UCImagenPeligroLista : UserControl
     {
-        public Form1()
+        public UCImagenPeligroLista()
         {
             InitializeComponent();
         }
