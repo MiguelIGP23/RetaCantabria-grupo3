@@ -25,19 +25,19 @@ namespace Model
         public double Elevacion { get; set; }
 
         [JsonPropertyName("kilometros")]
-        public double Kilometros { get; set; }
+        public double? Kilometros { get; set; }
 
         [JsonPropertyName("gravedad")]
-        public int Gravedad { get; set; }
+        public int? Gravedad { get; set; }
 
         [JsonPropertyName("posicion")]
-        public int Posicion { get; set; }
+        public int? Posicion { get; set; }
 
         [JsonPropertyName("descripcion")]
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
         [JsonPropertyName("timestamp")]
-        public int Timestamp { get; set; }
+        public int? Timestamp { get; set; }
 
         [JsonPropertyName("rutas_idRuta")]
         public int Rutas_idRuta { get; set; }
