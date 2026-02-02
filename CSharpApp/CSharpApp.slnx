@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="CSharpApp/CSharpApp.csproj" />
+  <Project Path="CSharpApp/CSharpApp.csproj" Id="93b4bfa3-5b0b-4ebf-8c48-ccd2c4e8660f" />
+  <Project Path="Models/Model.csproj" Id="21857d50-38b8-4d00-835c-c081252b9d73" />
+  <Project Path="Repository3/Repository.csproj" Id="4fffc4f8-41b5-4cb5-afe0-904f47836a2b" />
 </Solution>
