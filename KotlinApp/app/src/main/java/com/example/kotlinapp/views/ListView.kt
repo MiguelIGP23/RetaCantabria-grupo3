@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.kotlinapp.R
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Usuario
@@ -30,7 +31,7 @@ import com.example.kotlinapp.ui.theme.fondoPrincipal
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView() {
+fun ListView(navController: NavController) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
