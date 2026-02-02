@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UserControls
 {
-    public partial class UCRutaCompleto : UserControl
+    public partial class UCPuntoPeligroCompleto : UserControl
     {
-        public UCRutaCompleto()
+        public UCPuntoPeligroCompleto()
         {
             InitializeComponent();
         }

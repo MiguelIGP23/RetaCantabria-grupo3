@@ -1,6 +1,6 @@
 ﻿namespace UserControls
 {
-    partial class UCRutaCompleto
+    partial class UCRutaCompletoLista
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
