@@ -1,6 +1,5 @@
 package com.example.kotlinapp
 
-import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import com.example.kotlinapp.views.ListView
@@ -11,8 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import com.example.kotlinapp.gps.permissions.RequestPermission
-import com.example.kotlinapp.views.LocationMapView
+import com.example.kotlinapp.navigation.NavManager
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -32,6 +30,7 @@ fun MainScreen(modifier: Modifier) {
     /*RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
         LocationMapView(modifier)
     }*/
-    ListView()
+    NavManager()
+    //ListView()
     //RouteCreationView()
 }

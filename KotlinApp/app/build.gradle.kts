@@ -53,6 +53,8 @@ dependencies {
     implementation ("org.osmdroid:osmdroid-android:6.1.14")
     implementation ("org.osmdroid:osmdroid-mapsforge:6.1.14")
     implementation ("androidx.preference:preference-ktx:1.2.0")
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.navigation.compose.jvmstubs)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
