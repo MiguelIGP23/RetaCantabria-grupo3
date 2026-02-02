@@ -27,10 +27,5 @@ class MainActivity : ComponentActivity() {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen(modifier: Modifier) {
-    /*RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
-        LocationMapView(modifier)
-    }*/
     NavManager()
-    //ListView()
-    //RouteCreationView()
 }
