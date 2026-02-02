@@ -1,4 +1,6 @@
-package com.example.kotlinapp.gps.location
+package com.example.kotlinapp.views
+
+import com.example.kotlinapp.gps.location.LocationManager
 
 import android.content.Context
 import android.location.Location
@@ -72,7 +74,7 @@ private const val MIN_DISTANCE_METERS = 15f
 private const val MIN_TIME_MS = 5000L
 
 @Composable
-fun LocationScreen(modifier: Modifier) {
+fun LocationMapView(modifier: Modifier) {
     val autoTrackpointEnabled = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -81,7 +83,7 @@ fun LocationScreen(modifier: Modifier) {
     val textLat = remember { mutableStateOf("Latitud: --") }
     val textLon = remember { mutableStateOf("Longitud: --") }
     val isTracking = remember { mutableStateOf(false) }
-    val savedTrackpoints = remember { mutableStateListOf<Pair<Double, Double>>() }
+    val savedTrackpoints = remember { mutableStateListOf<Triple<Double, Double, Double>>() }
     val savedWaypoints = remember { mutableStateListOf<Waypoint>() }
 
     // Configuración osmdroid
@@ -185,7 +187,7 @@ fun createLocationCallback(
     marker: Marker,
     isTracking: MutableState<Boolean>,
     autoTrackpointEnabled: MutableState<Boolean>,
-    savedLocations: MutableList<Pair<Double, Double>>,
+    savedLocations: MutableList<Triple<Double, Double, Double>>, // <-- corregido
     context: Context,
     canSaveTrackpoint: (Location) -> Boolean,
     textLat: MutableState<String>,
@@ -204,6 +206,7 @@ fun createLocationCallback(
 
             var lat = location.latitude
             var lon = location.longitude
+            val alt = location.altitude
 
             val lastGeoPoint = lastLat?.let { GeoPoint(it, lastLon!!) }
             if (lastGeoPoint != null) {
@@ -218,7 +221,7 @@ fun createLocationCallback(
             lastLat = lat
             lastLon = lon
 
-            val geoPoint = GeoPoint(lat, lon)
+            val geoPoint = GeoPoint(lat, lon, alt)
             marker.position = geoPoint
             mapView.controller.setCenter(geoPoint)
             mapView.invalidate()
@@ -227,9 +230,10 @@ fun createLocationCallback(
             textLon.value = "Longitud: $lon"
 
             if (autoTrackpointEnabled.value && canSaveTrackpoint(location)) {
-                savedLocations.add(lat to lon)
+                // Guardar lat, lon y altitud
+                savedLocations.add(Triple(lat, lon, alt))
                 val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedLocations.size}")
-                wpMarker.position = geoPoint
+                wpMarker.position = GeoPoint(lat, lon, alt)
                 mapView.overlays.add(wpMarker)
                 mapView.invalidate()
             }
@@ -237,13 +241,14 @@ fun createLocationCallback(
     }
 }
 
+
 @Composable
 fun LocationControls(
     textLat: MutableState<String>,
     textLon: MutableState<String>,
     isTracking: MutableState<Boolean>,
     autoTrackpointEnabled: MutableState<Boolean>,
-    savedTrackpoints: SnapshotStateList<Pair<Double, Double>>,
+    savedTrackpoints: SnapshotStateList<Triple<Double, Double, Double>>,
     savedWaypoints: SnapshotStateList<Waypoint>,
     mapView: MapView,
     locationManager: LocationManager,
@@ -294,9 +299,10 @@ fun LocationControls(
                 onClick = {
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
-                    savedTrackpoints.add(lat to lon)
+                    val alt = 0.0
+                    savedTrackpoints.add(Triple(lat, lon, alt))
                     val marker = createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
-                    marker.position = GeoPoint(lat, lon)
+                    marker.position = GeoPoint(lat, lon, alt)
                     mapView.overlays.add(marker)
                     mapView.invalidate()
                 },
@@ -348,7 +354,8 @@ fun LocationControls(
                 onClick = {
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
-                    waypointDialog = WaypointDialogData(lat, lon, WaypointType.INTERES)
+                    val alt = 0.0
+                    waypointDialog = WaypointDialogData(lat, lon,alt, WaypointType.INTERES)
                 },
                 enabled = isTracking.value
             ) { Text("Punto Interés") }
@@ -363,7 +370,8 @@ fun LocationControls(
                 onClick = {
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
-                    waypointDialog = WaypointDialogData(lat, lon, WaypointType.PELIGRO)
+                    val alt = 0.0
+                    waypointDialog = WaypointDialogData(lat, lon,alt, WaypointType.PELIGRO)
                 },
                 enabled = isTracking.value
             ) { Text("Punto Peligro") }
