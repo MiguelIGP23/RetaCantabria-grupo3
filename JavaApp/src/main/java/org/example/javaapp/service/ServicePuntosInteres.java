@@ -1,6 +1,7 @@
 package org.example.javaapp.service;
 
 import org.example.javaapp.model.PuntosInteres;
+import org.example.javaapp.model.PuntosPeligro;
 import org.example.javaapp.repository.PuntosInteresRepository;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,9 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
     @Override
     public List<PuntosInteres> findAll(){
         return repo.findAll();
+    }
+
+    public List<PuntosInteres> findByIdRuta(Integer id){
+        return repo.findByIdRuta(id);
     }
 }
