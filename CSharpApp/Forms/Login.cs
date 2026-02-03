@@ -21,7 +21,7 @@ namespace Forms
         public Login()
         {
             InitializeComponent();
-            _api = new ApiReta("http://localhost:8080/");
+            _api = new ApiReta("http://192.168.6.1:8080/");
         }
 
         private async void btn_login_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace Forms
                 Session.Set(resp.Token, rol);
 
                 // Abrir form principal, si se cierra volvemos a login
-                var main = new Rutas();
+                var main = new Rutas(_api);
                 main.FormClosed += (_, __) =>
                 {
                     txt_password.Text = "";
@@ -74,7 +74,11 @@ namespace Forms
 
         private void btn_registro_Click(object sender, EventArgs e)
         {
-
+           
         }
+
+
+        
+
     }
 }
