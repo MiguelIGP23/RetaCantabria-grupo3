@@ -58,6 +58,7 @@ fun ListView(navController: NavHostController) {
             FloatingActionButton(
                 onClick = {
                     // Por ahora no hace nada
+                    navController.navigate("Create")
                 },
                 containerColor = Color(0xFF4CAF50), // verde
                 contentColor = Color.White
