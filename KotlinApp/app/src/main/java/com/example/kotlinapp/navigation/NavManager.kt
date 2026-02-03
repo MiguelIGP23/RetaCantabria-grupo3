@@ -11,14 +11,14 @@ import com.example.kotlinapp.views.CreateRutaView
 import com.example.kotlinapp.views.ListView
 import android.Manifest
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Composable
 fun NavManager() {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "Login"
+        startDestination = "List"
     ) {
         composable("Login") {
             //LoginView(navController)

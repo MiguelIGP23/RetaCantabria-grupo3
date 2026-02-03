@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import com.example.kotlinapp.navigation.NavManager
 
 class MainActivity : ComponentActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,7 +23,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Composable
 fun MainScreen(modifier: Modifier) {
     NavManager()
