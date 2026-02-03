@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.kotlinapp"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -56,6 +56,7 @@ dependencies {
     implementation ("org.osmdroid:osmdroid-mapsforge:6.1.14")
     implementation ("androidx.preference:preference-ktx:1.2.0")
     implementation(libs.play.services.location)
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

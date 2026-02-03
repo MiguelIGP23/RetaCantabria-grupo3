@@ -1,36 +1,52 @@
 package com.example.kotlinapp.data
 
-import com.example.kotlinapp.model.Ruta
+import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceFactory {
     //private const val URL = "https://api.raspiremote.org/api/reta3"
     private const val URL = "http://10.0.2.2:8080/api/reta3/"
-    private val DEFAULT_BUILDER = Retrofit.Builder()
-        .baseUrl(URL)
-        //usar convertidor de JSON
-        .addConverterFactory(GsonConverterFactory.create())
+    fun createLoginRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl(URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
-    fun imagenesInteres(): ImagenInteresService {
-        return DEFAULT_BUILDER.build().create(ImagenInteresService::class.java)
+    fun createAuthenticatedRetrofit(tokenProvider: () -> String?): Retrofit {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(tokenProvider))
+            .build()
+        return Retrofit.Builder()
+            .baseUrl(URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
-    fun imagenesPeligro(): ImagenPeligroService {
-        return DEFAULT_BUILDER.build().create(ImagenPeligroService::class.java)
+
+    fun auth(): AuthService {
+        return createLoginRetrofit().create(AuthService::class.java)
     }
-    fun puntosInteres(): PuntoInteresService {
-        return DEFAULT_BUILDER.build().create(PuntoInteresService::class.java)
-    }
-    fun puntosPeligro(): PuntoPeligroService {
-        return DEFAULT_BUILDER.build().create(PuntoPeligroService::class.java)
-    }
-    fun ruta(): RutaService {
-        return DEFAULT_BUILDER.build().create(RutaService::class.java)
-    }
-    fun trackpoint(): TrackpointService {
-        return DEFAULT_BUILDER.build().create(TrackpointService::class.java)
-    }
-    fun usuario(): UsuarioService {
-        return DEFAULT_BUILDER.build().create(UsuarioService::class.java)
-    }
+
+    fun imagenesInteres(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(ImagenInteresService::class.java)
+
+    fun imagenesPeligro(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(ImagenPeligroService::class.java)
+
+    fun puntosInteres(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(PuntoInteresService::class.java)
+
+    fun puntosPeligro(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(PuntoPeligroService::class.java)
+
+    fun ruta(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(RutaService::class.java)
+
+    fun trackpoint(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(TrackpointService::class.java)
+
+    fun usuario(tokenProvider: () -> String?) =
+        createAuthenticatedRetrofit(tokenProvider).create(UsuarioService::class.java)
 }
