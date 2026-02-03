@@ -53,4 +53,8 @@ public class ServicePuntosPeligro implements IServicePuntosPeligro{
     public List<PuntosPeligro> findAll() {
         return repo.findAll();
     }
+
+    public List<PuntosPeligro> findByIdruta(Integer id){
+        return repo.findByIdRuta(id);
+    }
 }

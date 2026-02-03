@@ -40,4 +40,6 @@ public class PuntosPeligroController {
     public List<PuntosPeligro> findAll(){
         return service.findAll();
     }
+
+
 }

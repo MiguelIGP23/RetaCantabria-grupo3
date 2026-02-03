@@ -2,7 +2,10 @@ package org.example.javaapp.controller;
 
 
 import org.example.javaapp.export.FichaOrganizacionGenerator;
+import org.example.javaapp.export.FichaSeguridadGenerator;
+import org.example.javaapp.model.PuntosPeligro;
 import org.example.javaapp.model.Ruta;
+import org.example.javaapp.service.ServicePuntosPeligro;
 import org.example.javaapp.service.ServiceRuta;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,9 +20,11 @@ import java.util.List;
 public class RutaController {
 
     private final ServiceRuta service;
+    private final ServicePuntosPeligro servicePuntoPeligro;
 
-    public RutaController(ServiceRuta service){
+    public RutaController(ServiceRuta service, ServicePuntosPeligro servicePuntoPeligro){
         this.service=service;
+        this.servicePuntoPeligro = servicePuntoPeligro;
     }
 
     // Endpoints comunes
@@ -72,6 +77,23 @@ public class RutaController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + nombre+ "\"")
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(datos);
+    }
+
+    @GetMapping("/{id}/fichas/seguridad")
+    public ResponseEntity<byte[]> descargarFichaSeguridad(@PathVariable int id) {
+        Ruta ruta = service.findById(id);
+        if (ruta == null) return ResponseEntity.notFound().build();
+
+        List<PuntosPeligro> puntos = servicePuntoPeligro.findByIdruta(id);
+
+        FichaSeguridadGenerator gen = new FichaSeguridadGenerator();
+        byte[] bytes = gen.generar(ruta, puntos);
+        String filename = gen.nombreArchivo(ruta);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+                .contentType(MediaType.TEXT_PLAIN)
+                .body(bytes);
     }
 }
 
