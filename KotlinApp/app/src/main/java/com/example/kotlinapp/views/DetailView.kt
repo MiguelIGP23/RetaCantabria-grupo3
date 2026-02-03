@@ -1,5 +1,8 @@
 package com.example.kotlinapp.views
 
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,14 +15,17 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.kotlinapp.gps.gpx.createGpxLauncher
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.ui.theme.fondoPrincipal
@@ -28,6 +34,11 @@ import com.example.kotlinapp.ui.theme.fondoPrincipal
 @Composable
 fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
     val rutaSeleccionada = getRutaById(rutas, id) ?: return
+    val context = LocalContext.current
+    val createFileLauncher = createGpxLauncher(
+        context = context,
+        gpxContent = rutaSeleccionada.archivoGPX ?: ""
+    )
     Scaffold(
         // TopBar con logo, título y botones
         topBar = { DetailTopBar(navController, rutaSeleccionada) },
@@ -62,6 +73,24 @@ fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
                     Icon(
                         Icons.Default.Delete,
                         contentDescription = "Eliminar Ruta",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
+                FloatingActionButton(
+                    onClick = {
+                        rutaSeleccionada.archivoGPX?.let { gpxContent ->
+                            // Aquí puedes lanzar un Intent para guardar o compartir el GPX
+                            // Por ejemplo, crear un archivo temporal y usar ACTION_CREATE_DOCUMENT
+                            createFileLauncher.launch("${rutaSeleccionada.nombre}.gpx")
+                        }
+                    },
+                    containerColor = Color(0xFF4CAF50), // verde
+                    contentColor = Color.White
+                ) {
+                    Icon(
+                        Icons.Default.Share, // puedes usar otro icono si quieres
+                        contentDescription = "Exportar GPX",
                         modifier = Modifier.size(24.dp)
                     )
                 }
