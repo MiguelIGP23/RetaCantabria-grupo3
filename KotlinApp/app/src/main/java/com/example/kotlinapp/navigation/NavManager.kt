@@ -10,13 +10,15 @@ import com.example.kotlinapp.views.ListView
 import android.Manifest
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.example.kotlinapp.data.AuthRepository
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.views.DetailView
+import com.example.kotlinapp.views.LoginView
 import com.example.kotlinapp.views.cargarRutasDummy
 
 
 @Composable
-fun NavManager() {
+fun NavManager(authRepository: AuthRepository) {
     val navController = rememberNavController()
     val rutas = cargarRutasDummy()
     NavHost(
@@ -24,7 +26,7 @@ fun NavManager() {
         startDestination = "List"
     ) {
         composable("Login") {
-            //LoginView(navController)
+            LoginView(navController, authRepository)
         }
         composable("Home") {
             //HomeView(navController)
