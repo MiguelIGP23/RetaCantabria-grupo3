@@ -55,8 +55,8 @@ import androidx.navigation.NavHostController
 import androidx.preference.PreferenceManager
 import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.gps.WaypointDialog
-import com.example.kotlinapp.gps.gpx.createGpxLauncher
 import com.example.kotlinapp.gps.gpx.generateGpx
+import com.example.kotlinapp.gps.gpx.rememberGpxLauncher
 import com.example.kotlinapp.gps.map.createCurrentLocationMarker
 import com.example.kotlinapp.gps.map.createMapView
 import com.example.kotlinapp.gps.map.createTrackpointMarker
@@ -465,6 +465,9 @@ fun LocationControls(
     usuarioId: Int
 ) {
     var waypointDialog by remember { mutableStateOf<WaypointDialogData?>(null) }
+    val currentGPX = remember { mutableStateOf("") }
+// Pasamos una lambda que devuelve el valor actual de currentGPX
+    val createFileLauncher = rememberGpxLauncher(context) { currentGPX.value }
 
     Column(
         modifier = Modifier
@@ -472,11 +475,9 @@ fun LocationControls(
             .background(Color.White)
             .padding(16.dp)
     ) {
-        val currentGPX = remember { mutableStateOf("") }
-        var finishRouteDialog by remember { mutableStateOf(false) }
-        var rutaNombre by remember { mutableStateOf("") }
-        var rutaDescripcion by remember { mutableStateOf("") }
-        val createFileLauncher = createGpxLauncher(context,currentGPX.value)
+        val finishRouteDialog = remember { mutableStateOf(false) }
+        val rutaNombreState = remember { mutableStateOf("") }
+        val rutaDescripcionState = remember { mutableStateOf("") }
 
         Spacer(Modifier.height(16.dp))
 
@@ -490,7 +491,7 @@ fun LocationControls(
                     if (isTracking.value) {
                         // Se estaba trackeando → lo detenemos y abrimos el diálogo
                         isTracking.value = false
-                        finishRouteDialog = true
+                        finishRouteDialog.value = true
                     } else {
                         // Iniciar tracking
                         isTracking.value = true
@@ -603,15 +604,15 @@ fun LocationControls(
 
         // --- Diálogo Finalizar Ruta ---
         FinishRouteDialog(
-            showDialog = finishRouteDialog.let { mutableStateOf(it) },
-            rutaNombre = rutaNombre.let { mutableStateOf(it) },
-            rutaDescripcion = rutaDescripcion.let { mutableStateOf(it) },
+            showDialog = finishRouteDialog,
+            rutaNombre = rutaNombreState,
+            rutaDescripcion = rutaDescripcionState,
             savedTrackpoints = savedTrackpoints,
             savedWaypoints = savedWaypoints,
             usuarioId = usuarioId,
             currentGPX = currentGPX,
             createFileLauncher = createFileLauncher,
-            onRouteSaved = { finishRouteDialog = false }
+            onRouteSaved = { finishRouteDialog.value = false }
         )
     }
 }

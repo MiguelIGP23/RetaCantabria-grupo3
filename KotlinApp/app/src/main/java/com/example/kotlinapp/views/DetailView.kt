@@ -22,10 +22,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.kotlinapp.gps.gpx.createGpxLauncher
+import com.example.kotlinapp.gps.gpx.rememberGpxLauncher
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.ui.theme.fondoPrincipal
@@ -35,9 +36,9 @@ import com.example.kotlinapp.ui.theme.fondoPrincipal
 fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
     val rutaSeleccionada = getRutaById(rutas, id) ?: return
     val context = LocalContext.current
-    val createFileLauncher = createGpxLauncher(
+    val createFileLauncher = rememberGpxLauncher(
         context = context,
-        gpxContent = rutaSeleccionada.archivoGPX ?: ""
+        getGpxContent = { rutaSeleccionada.archivoGPX ?: "" }
     )
     Scaffold(
         // TopBar con logo, título y botones
@@ -199,13 +200,13 @@ fun InfoRow(label: String, value: String) {
     Column(modifier = Modifier.padding(vertical = 4.dp)) {
         Text(
             text = label,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+            fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
             color = Color.Black.copy(alpha = 0.7f)
         )
         Text(
             text = value,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
+            fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             color = Color.Black
         )

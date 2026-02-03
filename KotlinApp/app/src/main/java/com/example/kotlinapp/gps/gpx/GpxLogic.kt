@@ -3,6 +3,7 @@ package com.example.kotlinapp.gps.gpx
 import android.content.Context
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -73,20 +74,23 @@ fun epochToIso(time: Long): String {
 }
 
 @Composable
-fun createGpxLauncher(
+fun rememberGpxLauncher(
     context: Context,
-    gpxContent: String
-) = rememberLauncherForActivityResult(
-    contract = ActivityResultContracts.CreateDocument("application/gpx+xml")
-) { uri ->
-    if (uri != null) {
-        try {
-            context.contentResolver.openOutputStream(uri)?.use { output ->
-                output.write(gpxContent.toByteArray())
+    getGpxContent: () -> String // <-- pasamos una función que obtiene siempre el valor actual
+): ActivityResultLauncher<String> {
+    return rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("application/gpx+xml")
+    ) { uri ->
+        if (uri != null) {
+            try {
+                context.contentResolver.openOutputStream(uri)?.use { output ->
+                    output.write(getGpxContent().toByteArray())
+                }
+                Log.d("GPX", "GPX guardado correctamente")
+            } catch (e: Exception) {
+                Log.e("GPX", "Error guardando GPX", e)
             }
-            Log.d("GPX", "GPX guardado correctamente")
-        } catch (e: Exception) {
-            Log.e("GPX", "Error guardando GPX", e)
         }
     }
 }
+
