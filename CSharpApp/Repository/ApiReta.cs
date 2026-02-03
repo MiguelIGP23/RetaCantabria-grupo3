@@ -103,5 +103,44 @@ namespace Repository
 
             return await response.Content.ReadFromJsonAsync<LoginResponse>(_jsonOptions);
         }
+
+
+        // Metodos para descarga de ficheros
+        public async Task DescargarFichaOrganizacionAsync(int idRuta, string rutaDestino)
+        {
+            ApplyAuthHeader();
+            var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/organizacion");
+            
+            response.EnsureSuccessStatusCode();
+
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+
+            File.WriteAllBytes(rutaDestino, bytes);
+        }
+
+        public async Task DescargarFichaUsuarioAsync(int idRuta, string rutaDestino)
+        {
+            ApplyAuthHeader();
+            var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/usuario");
+
+            response.EnsureSuccessStatusCode();
+
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+
+            File.WriteAllBytes(rutaDestino, bytes);
+        }
+
+        public async Task DescargarFichaSeguridadAsync(int idRuta, string rutaDestino)
+        {
+            ApplyAuthHeader();
+            var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/seguridad");
+
+            response.EnsureSuccessStatusCode();
+
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+
+            File.WriteAllBytes(rutaDestino, bytes);
+        }
+
     }
 }
