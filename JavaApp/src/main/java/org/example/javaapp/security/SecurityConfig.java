@@ -29,51 +29,48 @@ public class SecurityConfig {
                 .csrf(csfr -> csfr.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-
-                        // Público
+                        // ===== AUTH =====
                         .requestMatchers(HttpMethod.POST, "/api/reta3/auth/login").permitAll()
 
-                        // ===== RUTAS =====
-                        // Ver rutas: todos los roles
-                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/**").permitAll()
+                        // ===== RUTAS (PUBLICO) =====
+                        // Catálogo público: SOLO validadas
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas/*").permitAll()
 
-                        // Crear rutas: disenador, profesor, admin
+                        // ===== RUTAS (INTERNAS) =====
+                        // Ver NO validadas  -> registrados
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/pendientes")
+                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+
+                        // Descargar listado/archivo de validadas -> registrados
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas/descargar")
+                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+
+                        // Fichas -> registrados
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/fichas/**")
+                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+
+                        // Crear rutas -> registrados
                         .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/**")
                         .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
 
-                        // Modificar rutas: admin
+                        // Modificar / Borrar / Validar -> SOLO admin
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/**")
                         .hasRole("ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.PATCH, "/api/reta3/rutas/**")
-                        .hasRole("ADMINISTRADOR")
-
-                        // Borrar rutas: admin
                         .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/**")
                         .hasRole("ADMINISTRADOR")
-
-                        // Validar rutas: admin (endpoint específico recomendado)
                         .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/validar")
                         .hasRole("ADMINISTRADOR")
-
-                        // Descargar fichero rutas validadas: disenador/profesor/admin
-                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas/descargar")
-                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
 
                         // ===== VALORACIONES =====
                         .requestMatchers("/api/reta3/valoraciones/**")
                         .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
 
-
-                        // Eliminar reseñas: admin
+                        // Eliminar reseñas -> admin
                         .requestMatchers(HttpMethod.DELETE, "/api/reta3/resenas/**")
                         .hasRole("ADMINISTRADOR")
 
-//                        // ===== CALENDARIO =====
-//                        // cuando exista:
-//                        .requestMatchers("/api/reta3/calendario/**")
-//                        .hasRole("PROFESOR")
-
-                        // Resto: autenticado
+                        // Resto de peticiones autenticadas
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth -> oauth

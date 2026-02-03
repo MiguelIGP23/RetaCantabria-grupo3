@@ -67,4 +67,16 @@ public class ServiceRuta implements IServiceRuta {
     public List<Ruta> findAll() {
         return repo.findAll();
     }
+
+
+    public List<Ruta> findValidadas(){
+        return repo.findByEstadoRuta((byte) 1);
+    }
+
+    public Ruta validar(Integer id){
+        Ruta ruta = findById(id);
+        if(ruta == null) return null;
+        ruta.setEstadoRuta((byte) 1);
+        return repo.save(ruta);
+    }
 }
