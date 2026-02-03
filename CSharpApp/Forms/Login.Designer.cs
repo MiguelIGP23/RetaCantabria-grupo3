@@ -69,8 +69,10 @@
             txt_password.Location = new Point(238, 143);
             txt_password.Margin = new Padding(4, 5, 4, 5);
             txt_password.Name = "txt_password";
+            txt_password.PasswordChar = '*';
             txt_password.Size = new Size(183, 27);
             txt_password.TabIndex = 3;
+            txt_password.UseSystemPasswordChar = true;
             // 
             // btn_login
             // 
@@ -92,6 +94,7 @@
             btn_registro.TabIndex = 5;
             btn_registro.Text = "Registro";
             btn_registro.UseVisualStyleBackColor = true;
+            btn_registro.Click += btn_registro_Click;
             // 
             // Login
             // 

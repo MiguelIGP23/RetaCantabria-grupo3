@@ -14,7 +14,7 @@ namespace Model
         public static bool IsLogged => !string.IsNullOrWhiteSpace(Token);
 
         // Para login
-        public static void Set(string token, string rol)
+        public static void Set(string token, EnumRoles rol)
         {
             Token = token;
             Rol = rol;

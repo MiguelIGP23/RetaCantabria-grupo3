@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Dto;
+using Model;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -89,6 +90,18 @@ namespace Repository
             ApplyAuthHeader();
             var response = await _http.DeleteAsync($"{ruta}/{idPath}");
             response.EnsureSuccessStatusCode();
+        }
+
+
+        // Usado para la peticion de login
+        public async Task<LoginResponse?> LoginAsync(LoginRequest req)
+        {
+            var response = await _http.PostAsJsonAsync("/api/reta3/auth/login", req, _jsonOptions);
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            return await response.Content.ReadFromJsonAsync<LoginResponse>(_jsonOptions);
         }
     }
 }
