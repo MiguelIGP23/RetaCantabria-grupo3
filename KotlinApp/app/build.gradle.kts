@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.room.common.jvm)
+    implementation(libs.androidx.room.runtime.android)
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation ("org.osmdroid:osmdroid-android:6.1.14")
     implementation ("org.osmdroid:osmdroid-mapsforge:6.1.14")
