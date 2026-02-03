@@ -1,5 +1,6 @@
 package com.example.kotlinapp.views
 
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -20,17 +21,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.kotlinapp.R
+import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Usuario
 import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView() {
+fun ListView(navController: NavHostController) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
@@ -70,7 +74,10 @@ fun ListView() {
             Spacer(modifier = Modifier.height(8.dp))
             SearchBar(searchText) { searchText = it }
             Spacer(modifier = Modifier.height(8.dp))
-            RutaList(rutasFiltradas)
+            RutaList(
+                rutasFiltradas,
+                navController
+            )
         }
     }
 }
@@ -79,7 +86,7 @@ fun ListView() {
 // TopBar de la lista con logo y botón de recarga
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaTopBar(context: android.content.Context /*, api: ApiModel*/) {
+fun ListaTopBar(context: Context /*, api: ApiModel*/) {
     TopAppBar(
         title = { ListaTopBarTitle() },
         actions = {
@@ -125,7 +132,7 @@ fun SearchBar(value: String, onValueChange: (String) -> Unit) {
 
 // Lista de rutas en LazyColumn
 @Composable
-fun RutaList(rutas: List<Ruta> /*, navController: NavHostController*/) {
+fun RutaList(rutas: List<Ruta> , navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp),
@@ -134,7 +141,7 @@ fun RutaList(rutas: List<Ruta> /*, navController: NavHostController*/) {
         items(rutas) { ruta ->
             RutaItem(ruta) {
                 // onClick: navegar al detalle de la ruta
-                // navController.navigate("detail/${ruta.idRuta}")
+                navController.navigate("detail/${ruta.id}")
             }
         }
     }
@@ -164,21 +171,22 @@ fun RutaItem(ruta: Ruta, onClick: () -> Unit) {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 fun cargarRutasDummy(): List<Ruta> {
-    val usuarioDummy = Usuario(1, "Oriol", "Fernandez", "", "", Rol.ADMINISTRADOR) // reemplaza con tu clase Usuario
+    val usuarioDummy = Usuario(1, "Oriol", "Fernandez", "", "", Rol.ADMINISTRADOR)
+    val usuarioRef = IdRef(usuarioDummy.id ?: 0)
     return listOf(
         Ruta(
-            idRuta = 1,
+            id = 1,
             nombre = "Ruta Circular Montaña",
-            nombre_inicioruta = "Inicio A",
-            nombre_finalruta = "Final A",
+            nombreInicioruta = "Inicio A",
+            nombreFinalruta = "Final A",
             latitudInicial = 40.0,
             latitudFinal = 40.5,
             longitudInicial = -3.0,
             longitudFinal = -3.5,
             distancia = 10.0,
-            duracion = java.time.LocalTime.of(1, 45),
+            duracion = "",
             desnivelPositivo = 300,
             desnivelNegativo = 300,
             altitudMax = 1200.0,
@@ -196,19 +204,19 @@ fun cargarRutasDummy(): List<Ruta> {
             recomendacionesEquipo = "Agua y calzado adecuado",
             zonaGeografica = "Sierra",
             mediaEstrellas = 4.5,
-            usuario_idUsuario = usuarioDummy
+            usuario = usuarioRef
         ),
         Ruta(
-            idRuta = 2,
+            id = 2,
             nombre = "Ruta Lineal Río",
-            nombre_inicioruta = "Inicio B",
-            nombre_finalruta = "Final B",
+            nombreInicioruta = "Inicio B",
+            nombreFinalruta = "Final B",
             latitudInicial = 41.0,
             latitudFinal = 41.5,
             longitudInicial = -2.0,
             longitudFinal = -2.5,
             distancia = 8.0,
-            duracion = java.time.LocalTime.of(1, 45),
+            duracion = "",
             desnivelPositivo = 100,
             desnivelNegativo = 120,
             altitudMax = 600.0,
@@ -226,19 +234,19 @@ fun cargarRutasDummy(): List<Ruta> {
             recomendacionesEquipo = "Calzado cómodo",
             zonaGeografica = "Valle",
             mediaEstrellas = 4.0,
-            usuario_idUsuario = usuarioDummy
+            usuario = usuarioRef
         ),
         Ruta(
-            idRuta = 3,
+            id = 3,
             nombre = "Ruta Circular Bosque",
-            nombre_inicioruta = "Inicio C",
-            nombre_finalruta = "Final C",
+            nombreInicioruta = "Inicio C",
+            nombreFinalruta = "Final C",
             latitudInicial = 42.0,
             latitudFinal = 42.3,
             longitudInicial = -1.0,
             longitudFinal = -1.4,
             distancia = 6.5,
-            duracion = java.time.LocalTime.of(1, 45),
+            duracion = "",
             desnivelPositivo = 150,
             desnivelNegativo = 150,
             altitudMax = 800.0,
@@ -256,19 +264,19 @@ fun cargarRutasDummy(): List<Ruta> {
             recomendacionesEquipo = "Ropa de abrigo ligera",
             zonaGeografica = "Bosque",
             mediaEstrellas = 4.7,
-            usuario_idUsuario = usuarioDummy
+            usuario = usuarioRef
         ),
         Ruta(
-            idRuta = 4,
+            id = 4,
             nombre = "Ruta Lineal Costa",
-            nombre_inicioruta = "Inicio D",
-            nombre_finalruta = "Final D",
+            nombreInicioruta = "Inicio D",
+            nombreFinalruta = "Final D",
             latitudInicial = 43.0,
             latitudFinal = 43.5,
             longitudInicial = 0.0,
             longitudFinal = 0.5,
             distancia = 9.0,
-            duracion = java.time.LocalTime.of(1, 45),
+            duracion = "",
             desnivelPositivo = 50,
             desnivelNegativo = 50,
             altitudMax = 50.0,
@@ -286,19 +294,19 @@ fun cargarRutasDummy(): List<Ruta> {
             recomendacionesEquipo = "Protector solar",
             zonaGeografica = "Costa",
             mediaEstrellas = 4.3,
-            usuario_idUsuario = usuarioDummy
+            usuario = usuarioRef
         ),
         Ruta(
-            idRuta = 5,
+            id = 5,
             nombre = "Ruta Circular Lago",
-            nombre_inicioruta = "Inicio E",
-            nombre_finalruta = "Final E",
+            nombreInicioruta = "Inicio E",
+            nombreFinalruta = "Final E",
             latitudInicial = 44.0,
             latitudFinal = 44.5,
             longitudInicial = 1.0,
             longitudFinal = 1.5,
             distancia = 7.0,
-            duracion = java.time.LocalTime.of(1, 45),
+            duracion = "",
             desnivelPositivo = 200,
             desnivelNegativo = 200,
             altitudMax = 700.0,
@@ -316,7 +324,7 @@ fun cargarRutasDummy(): List<Ruta> {
             recomendacionesEquipo = "Ropa de abrigo",
             zonaGeografica = "Lago",
             mediaEstrellas = 4.6,
-            usuario_idUsuario = usuarioDummy
+            usuario = usuarioRef
         )
     )
 }

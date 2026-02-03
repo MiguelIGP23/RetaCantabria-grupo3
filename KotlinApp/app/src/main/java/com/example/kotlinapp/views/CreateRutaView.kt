@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.navigation.NavController
 import androidx.preference.PreferenceManager
 import com.example.kotlinapp.gps.WaypointDialog
 import com.example.kotlinapp.gps.gpx.generateGpx
@@ -74,7 +75,7 @@ private const val MIN_DISTANCE_METERS = 15f
 private const val MIN_TIME_MS = 5000L
 
 @Composable
-fun LocationMapView(modifier: Modifier) {
+fun CreateRutaView(navController: NavController) {
     val autoTrackpointEnabled = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current

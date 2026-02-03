@@ -1,6 +1,5 @@
 package com.example.kotlinapp
 
-import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import com.example.kotlinapp.views.ListView
@@ -11,11 +10,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import com.example.kotlinapp.gps.permissions.RequestPermission
-import com.example.kotlinapp.views.LocationMapView
+import com.example.kotlinapp.navigation.NavManager
 
 class MainActivity : ComponentActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,12 +23,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Composable
 fun MainScreen(modifier: Modifier) {
-    /*RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
-        LocationMapView(modifier)
-    }*/
-    ListView()
-    //RouteCreationView()
+    NavManager()
 }
