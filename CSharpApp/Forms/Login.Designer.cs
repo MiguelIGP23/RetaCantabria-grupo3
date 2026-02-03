@@ -39,7 +39,7 @@
             // lbl_usuario
             // 
             lbl_usuario.AutoSize = true;
-            lbl_usuario.Location = new Point(331, 340);
+            lbl_usuario.Location = new Point(113, 66);
             lbl_usuario.Margin = new Padding(4, 0, 4, 0);
             lbl_usuario.Name = "lbl_usuario";
             lbl_usuario.Size = new Size(59, 20);
@@ -49,7 +49,7 @@
             // lbl_password
             // 
             lbl_password.AutoSize = true;
-            lbl_password.Location = new Point(331, 422);
+            lbl_password.Location = new Point(113, 148);
             lbl_password.Margin = new Padding(4, 0, 4, 0);
             lbl_password.Name = "lbl_password";
             lbl_password.Size = new Size(83, 20);
@@ -58,23 +58,23 @@
             // 
             // txt_usuario
             // 
-            txt_usuario.Location = new Point(456, 335);
+            txt_usuario.Location = new Point(238, 61);
             txt_usuario.Margin = new Padding(4, 5, 4, 5);
             txt_usuario.Name = "txt_usuario";
-            txt_usuario.Size = new Size(132, 27);
+            txt_usuario.Size = new Size(183, 27);
             txt_usuario.TabIndex = 2;
             // 
             // txt_password
             // 
-            txt_password.Location = new Point(456, 417);
+            txt_password.Location = new Point(238, 143);
             txt_password.Margin = new Padding(4, 5, 4, 5);
             txt_password.Name = "txt_password";
-            txt_password.Size = new Size(132, 27);
+            txt_password.Size = new Size(183, 27);
             txt_password.TabIndex = 3;
             // 
             // btn_login
             // 
-            btn_login.Location = new Point(335, 535);
+            btn_login.Location = new Point(140, 257);
             btn_login.Margin = new Padding(4, 5, 4, 5);
             btn_login.Name = "btn_login";
             btn_login.Size = new Size(100, 35);
@@ -85,7 +85,7 @@
             // 
             // btn_registro
             // 
-            btn_registro.Location = new Point(456, 535);
+            btn_registro.Location = new Point(293, 257);
             btn_registro.Margin = new Padding(4, 5, 4, 5);
             btn_registro.Name = "btn_registro";
             btn_registro.Size = new Size(100, 35);
@@ -97,7 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1067, 692);
+            ClientSize = new Size(558, 350);
             Controls.Add(btn_registro);
             Controls.Add(btn_login);
             Controls.Add(txt_password);

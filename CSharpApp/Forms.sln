@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms", "Forms\Forms.csproj", "{F18E09F0-6627-4DD6-9B32-00CC3DB21DEA}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{E8C0016A-7780-4113-A11B-BF6C00BF3971}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControls", "UserControls\UserControls.csproj", "{0BE13D7F-B165-41D6-A498-268E99DA750C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dto", "Dto\Dto.csproj", "{44377BE7-A1B1-4275-A151-92048F4FD2DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0BE13D7F-B165-41D6-A498-268E99DA750C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BE13D7F-B165-41D6-A498-268E99DA750C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BE13D7F-B165-41D6-A498-268E99DA750C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44377BE7-A1B1-4275-A151-92048F4FD2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44377BE7-A1B1-4275-A151-92048F4FD2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44377BE7-A1B1-4275-A151-92048F4FD2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44377BE7-A1B1-4275-A151-92048F4FD2DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

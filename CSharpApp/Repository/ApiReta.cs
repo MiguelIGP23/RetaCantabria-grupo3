@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -25,14 +26,31 @@ namespace Repository
         }
 
 
+        // ---------------------------
+        // Aplica header con token de autorizacion
+        // ---------------------------
+        private void ApplyAuthHeader()
+        {
+            if (!string.IsNullOrWhiteSpace(Session.Token))
+                _http.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", Session.Token);
+            else
+                _http.DefaultRequestHeaders.Authorization = null;
+        }
+
+
+
+        // ---------------------------
+        // Operaciones CRUD genericas
+        // ---------------------------
 
         public async Task<List<T>> GetAllAsync<T>(string ruta)
         {
+            ApplyAuthHeader();
             var resp = await _http.GetAsync(ruta);
             resp.EnsureSuccessStatusCode();
 
             var json = await resp.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<List<T>>(json, _jsonOptions) ?? new List<T>();
         }
 
@@ -40,14 +58,15 @@ namespace Repository
 
         public async Task<T?> GetByIdAsync<T>(string ruta, string idPath)
         {
+            ApplyAuthHeader();
             return await _http.GetFromJsonAsync<T>($"{ruta}/{idPath}", _jsonOptions);
-            
         }
 
 
 
         public async Task<T?> Create<T>(string ruta, T objeto)
         {
+            ApplyAuthHeader();
             var response = await _http.PostAsJsonAsync(ruta, objeto, _jsonOptions);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
@@ -57,6 +76,7 @@ namespace Repository
 
         public async Task<T?> Update<T>(string ruta, string idPath, T objeto)
         {
+            ApplyAuthHeader();
             var response = await _http.PutAsJsonAsync<T>($"{ruta}/{idPath}", objeto, _jsonOptions);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
@@ -66,6 +86,7 @@ namespace Repository
 
         public async Task Delete(string ruta, string idPath)
         {
+            ApplyAuthHeader();
             var response = await _http.DeleteAsync($"{ruta}/{idPath}");
             response.EnsureSuccessStatusCode();
         }
