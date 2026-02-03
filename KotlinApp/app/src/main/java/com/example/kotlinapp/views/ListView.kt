@@ -1,5 +1,6 @@
 package com.example.kotlinapp.views
 
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -21,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.kotlinapp.R
 import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.model.Ruta
@@ -29,10 +31,10 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView(navController: NavController) {
+fun ListView(navController: NavHostController) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
@@ -56,6 +58,7 @@ fun ListView(navController: NavController) {
             FloatingActionButton(
                 onClick = {
                     // Por ahora no hace nada
+                    navController.navigate("Create")
                 },
                 containerColor = Color(0xFF4CAF50), // verde
                 contentColor = Color.White
@@ -72,7 +75,10 @@ fun ListView(navController: NavController) {
             Spacer(modifier = Modifier.height(8.dp))
             SearchBar(searchText) { searchText = it }
             Spacer(modifier = Modifier.height(8.dp))
-            RutaList(rutasFiltradas)
+            RutaList(
+                rutasFiltradas,
+                navController
+            )
         }
     }
 }
@@ -81,7 +87,7 @@ fun ListView(navController: NavController) {
 // TopBar de la lista con logo y botón de recarga
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaTopBar(context: android.content.Context /*, api: ApiModel*/) {
+fun ListaTopBar(context: Context /*, api: ApiModel*/) {
     TopAppBar(
         title = { ListaTopBarTitle() },
         actions = {
@@ -127,7 +133,7 @@ fun SearchBar(value: String, onValueChange: (String) -> Unit) {
 
 // Lista de rutas en LazyColumn
 @Composable
-fun RutaList(rutas: List<Ruta> /*, navController: NavHostController*/) {
+fun RutaList(rutas: List<Ruta> , navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp),
@@ -136,7 +142,7 @@ fun RutaList(rutas: List<Ruta> /*, navController: NavHostController*/) {
         items(rutas) { ruta ->
             RutaItem(ruta) {
                 // onClick: navegar al detalle de la ruta
-                // navController.navigate("detail/${ruta.idRuta}")
+                navController.navigate("detail/${ruta.id}")
             }
         }
     }
@@ -166,7 +172,7 @@ fun RutaItem(ruta: Ruta, onClick: () -> Unit) {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 fun cargarRutasDummy(): List<Ruta> {
     val usuarioDummy = Usuario(1, "Oriol", "Fernandez", "", "", Rol.ADMINISTRADOR)
     val usuarioRef = IdRef(usuarioDummy.id ?: 0)

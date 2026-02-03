@@ -1,7 +1,5 @@
 package com.example.kotlinapp.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,15 +8,20 @@ import com.example.kotlinapp.gps.permissions.RequestPermission
 import com.example.kotlinapp.views.CreateRutaView
 import com.example.kotlinapp.views.ListView
 import android.Manifest
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.example.kotlinapp.model.Ruta
+import com.example.kotlinapp.views.DetailView
+import com.example.kotlinapp.views.cargarRutasDummy
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Composable
 fun NavManager() {
     val navController = rememberNavController()
-
+    val rutas = cargarRutasDummy()
     NavHost(
         navController = navController,
-        startDestination = "Login"
+        startDestination = "List"
     ) {
         composable("Login") {
             //LoginView(navController)
@@ -29,6 +32,13 @@ fun NavManager() {
         composable("List") {
             ListView(navController)
         }
+
+        composable(route = "detail/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getInt("id")
+            DetailView(navController,rutas,id)
+        }
+
         composable("Create"){
             RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
                 CreateRutaView(navController)
