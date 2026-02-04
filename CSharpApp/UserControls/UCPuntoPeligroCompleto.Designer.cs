@@ -44,7 +44,7 @@
             lblKilometro = new Label();
             lbltxtGravedad = new Label();
             lblGravedad = new Label();
-            label11 = new Label();
+            lbltxtTimestamp = new Label();
             lblTimestamp = new Label();
             lbltxtDescripcion = new Label();
             lblDescripcion = new Label();
@@ -194,14 +194,14 @@
             lblGravedad.TabIndex = 22;
             lblGravedad.Text = "-Gravedad:";
             // 
-            // label11
+            // lbltxtTimestamp
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(233, 127);
-            label11.Name = "label11";
-            label11.Size = new Size(44, 15);
-            label11.TabIndex = 25;
-            label11.Text = "label11";
+            lbltxtTimestamp.AutoSize = true;
+            lbltxtTimestamp.Location = new Point(233, 127);
+            lbltxtTimestamp.Name = "lbltxtTimestamp";
+            lbltxtTimestamp.Size = new Size(44, 15);
+            lbltxtTimestamp.TabIndex = 25;
+            lbltxtTimestamp.Text = "label11";
             // 
             // lblTimestamp
             // 
@@ -236,7 +236,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lbltxtDescripcion);
             Controls.Add(lblDescripcion);
-            Controls.Add(label11);
+            Controls.Add(lbltxtTimestamp);
             Controls.Add(lblTimestamp);
             Controls.Add(lbltxtGravedad);
             Controls.Add(lblGravedad);
@@ -278,7 +278,7 @@
         private Label lblKilometro;
         private Label lbltxtGravedad;
         private Label lblGravedad;
-        private Label label11;
+        private Label lbltxtTimestamp;
         private Label lblTimestamp;
         private Label lbltxtDescripcion;
         private Label lblDescripcion;

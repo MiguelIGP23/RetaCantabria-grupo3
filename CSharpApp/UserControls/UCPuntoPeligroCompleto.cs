@@ -30,7 +30,12 @@ namespace UserControls
             lbltxtNombre.Text = pp.Nombre;
             lbltxtLatitud.Text = pp.Latitud.ToString();
             lbltxtLon.Text = pp.Longitud.ToString();
-            lbltxtLatitud.Text = pp.Latitud.ToString();
+            lbltxtElevacion.Text = pp.Elevacion.ToString();
+            lbltxtKilometro.Text = pp.Kilometros.ToString();
+            lbltxtGravedad.Text = pp.Gravedad.ToString();
+            lbltxtTimestamp.Text = pp.Timestamp.ToString();
+            lbltxtDescripcion.Text = pp.Descripcion;
+
         }
     }
 }

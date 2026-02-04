@@ -1,6 +1,6 @@
 ﻿namespace UserControls
 {
-    partial class UCRutaCompletoLista
+    partial class UCRutaCompleto
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -32,7 +32,7 @@
             lblDuracion = new Label();
             lbltxtDistancia = new Label();
             lblDistancia = new Label();
-            label2 = new Label();
+            lbltxtNombre = new Label();
             lblNombre = new Label();
             lblId = new Label();
             lbltxtId = new Label();
@@ -118,14 +118,14 @@
             lblDistancia.TabIndex = 8;
             lblDistancia.Text = "-Distancia:";
             // 
-            // label2
+            // lbltxtNombre
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(187, 33);
-            label2.Name = "label2";
-            label2.Size = new Size(62, 15);
-            label2.TabIndex = 7;
-            label2.Text = "txtnombre";
+            lbltxtNombre.AutoSize = true;
+            lbltxtNombre.Location = new Point(187, 33);
+            lbltxtNombre.Name = "lbltxtNombre";
+            lbltxtNombre.Size = new Size(62, 15);
+            lbltxtNombre.TabIndex = 7;
+            lbltxtNombre.Text = "txtnombre";
             // 
             // lblNombre
             // 
@@ -604,7 +604,7 @@
             Controls.Add(lblDuracion);
             Controls.Add(lbltxtDistancia);
             Controls.Add(lblDistancia);
-            Controls.Add(label2);
+            Controls.Add(lbltxtNombre);
             Controls.Add(lblNombre);
             Name = "UCRutaCompleto";
             Size = new Size(700, 396);
@@ -618,7 +618,7 @@
         private Label lblDuracion;
         private Label lbltxtDistancia;
         private Label lblDistancia;
-        private Label label2;
+        private Label lbltxtNombre;
         private Label lblNombre;
         private Label lblId;
         private Label lbltxtId;
