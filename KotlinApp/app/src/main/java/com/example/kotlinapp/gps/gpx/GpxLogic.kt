@@ -31,7 +31,6 @@ fun generateGpx(
 
     // Trackpoints
     sb.append("  <trk>\n")
-    sb.append("    <name>${ruta.nombre}</name>\n")
     sb.append("    <trkseg>\n")
     trackpoints.forEachIndexed { index, tp ->
         sb.append("      <trkpt lat=\"${tp.latitud}\" lon=\"${tp.longitud}\">\n")

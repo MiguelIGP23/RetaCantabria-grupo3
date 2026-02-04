@@ -38,7 +38,8 @@ fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
     val context = LocalContext.current
     val createFileLauncher = rememberGpxLauncher(
         context = context,
-        getGpxContent = { rutaSeleccionada.archivoGPX ?: "" }
+        getGpxContent = { rutaSeleccionada.archivoGPX ?: "" },
+
     )
     Scaffold(
         // TopBar con logo, título y botones

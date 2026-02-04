@@ -54,6 +54,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavHostController
 import androidx.preference.PreferenceManager
 import com.example.kotlinapp.data.IdRef
+import com.example.kotlinapp.gps.FinishRouteDialog
 import com.example.kotlinapp.gps.WaypointDialog
 import com.example.kotlinapp.gps.gpx.generateGpx
 import com.example.kotlinapp.gps.gpx.rememberGpxLauncher
@@ -182,6 +183,7 @@ fun CreateRutaView(navController: NavHostController) {
 
 fun generarRuta(
     nombre: String,
+    descripcion: String? = null,
     trackpoints: List<Trackpoint>,
     waypoints: List<Waypoint>,
     usuarioId: Int
@@ -244,13 +246,13 @@ fun generarRuta(
         accesibilidad = null,
         rutaFamiliar = null,
         archivoGPX = null, // 👈 todavía no
-        recomendacionesEquipo = null,
+        recomendacionesEquipo = descripcion,
         zonaGeografica = null,
         mediaEstrellas = null,
         usuario = IdRef(usuarioId)
     )
 
-    // 2️⃣ Generar GPX usando la ruta creada
+    // Generar GPX usando la ruta creada
     val gpx = runCatching {
         generateGpx(ruta, trackpointsList, waypointsList)
     }.getOrElse {
@@ -258,7 +260,7 @@ fun generarRuta(
         ""
     }
 
-    // 3️⃣ Retornar una copia de la ruta con GPX
+    // Retornar una copia de la ruta con GPX
     return ruta.copy(archivoGPX = gpx)
 }
 
@@ -337,119 +339,6 @@ fun createLocationCallback(
 
 
 @Composable
-fun FinishRouteDialog(
-    showDialog: MutableState<Boolean>,
-    rutaNombre: MutableState<String>,
-    rutaDescripcion: MutableState<String>,
-    savedTrackpoints: SnapshotStateList<Trackpoint>,
-    savedWaypoints: SnapshotStateList<Waypoint>,
-    usuarioId: Int,
-    currentGPX: MutableState<String>,
-    createFileLauncher: ActivityResultLauncher<String>,
-    onRouteSaved: () -> Unit = {}
-) {
-    if (!showDialog.value) return
-
-    AlertDialog(
-        onDismissRequest = { showDialog.value = false },
-        title = { Text("Finalizar Ruta") },
-        text = {
-            Column {
-                Text("Escribe un nombre para la ruta:")
-                OutlinedTextField(
-                    value = rutaNombre.value,
-                    onValueChange = { rutaNombre.value = it },
-                    placeholder = { Text("Nombre de la ruta") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(Modifier.height(8.dp))
-                Text("Escribe una descripción:")
-                OutlinedTextField(
-                    value = rutaDescripcion.value,
-                    onValueChange = { rutaDescripcion.value = it },
-                    placeholder = { Text("Descripción de la ruta") },
-                    singleLine = false,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-        },
-        confirmButton = {
-
-            Button(
-                onClick = {
-                    if (rutaNombre.value.isNotBlank()) {
-                        // Generar ruta con nombre y descripción
-                        val nuevaRuta = generarRuta(
-                            nombre = rutaNombre.value,
-                            trackpoints = savedTrackpoints.toList(),
-                            waypoints = savedWaypoints.toList(),
-                            usuarioId = usuarioId
-                        ).copy(recomendacionesEquipo = rutaDescripcion.value)
-
-                        // Guardar GPX
-                        currentGPX.value = nuevaRuta.archivoGPX ?: ""
-                        createFileLauncher.launch("${nuevaRuta.nombre}.gpx")
-
-                        // Limpiar estados
-                        showDialog.value = false
-                        rutaNombre.value = ""
-                        rutaDescripcion.value = ""
-                        savedTrackpoints.clear()
-                        savedWaypoints.clear()
-
-                        // Callback opcional
-                        onRouteSaved()
-                    }
-                }
-            ) {
-                Text("Guardar")
-            }
-            Button(
-                onClick = {
-                    if (rutaNombre.value.isNotBlank()) {
-                        // Generar ruta con nombre y descripción
-                        val nuevaRuta = generarRuta(
-                            nombre = rutaNombre.value,
-                            trackpoints = savedTrackpoints.toList(),
-                            waypoints = savedWaypoints.toList(),
-                            usuarioId = usuarioId
-                        ).copy(recomendacionesEquipo = rutaDescripcion.value)
-
-                        // Guardar GPX
-                        currentGPX.value = nuevaRuta.archivoGPX ?: ""
-                        createFileLauncher.launch("${nuevaRuta.nombre}.gpx")
-
-                        // Limpiar estados
-                        showDialog.value = false
-                        rutaNombre.value = ""
-                        rutaDescripcion.value = ""
-                        savedTrackpoints.clear()
-                        savedWaypoints.clear()
-
-                        // Callback opcional
-                        onRouteSaved()
-                    }
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF64B5F6),
-                    contentColor = Color.White
-                )
-            ) {
-                Text("Exportar")
-            }
-        },
-        dismissButton = {
-            Button(onClick = { showDialog.value = false }) {
-                Text("Cancelar")
-            }
-        }
-    )
-}
-
-
-
-@Composable
 fun LocationControls(
     textLat: MutableState<String>,
     textLon: MutableState<String>,
@@ -465,9 +354,44 @@ fun LocationControls(
     usuarioId: Int
 ) {
     var waypointDialog by remember { mutableStateOf<WaypointDialogData?>(null) }
-    val currentGPX = remember { mutableStateOf("") }
-// Pasamos una lambda que devuelve el valor actual de currentGPX
-    val createFileLauncher = rememberGpxLauncher(context) { currentGPX.value }
+    val pendingGpx = remember { mutableStateOf<String?>(null) }
+
+    val finishRouteDialog = remember { mutableStateOf(false) }
+    val rutaNombreState = remember { mutableStateOf("") }
+    val rutaDescripcionState = remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+
+    val createFileLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/gpx+xml")
+    ) { uri ->
+        if (uri != null) {
+            try {
+                // Genera GPX otra vez por si hubo cambios de última hora
+                val ruta = generarRuta(
+                    nombre = rutaNombreState.value.ifBlank { "mis_puntos" },
+                    trackpoints = savedTrackpoints.toList(),
+                    waypoints = savedWaypoints.toList(),
+                    usuarioId = usuarioId
+                )
+
+                context.contentResolver.openOutputStream(uri)?.use { output ->
+                    output.write((ruta.archivoGPX ?: "").toByteArray())
+                }
+
+                Log.d("GPX", "GPX guardado correctamente")
+
+                // limpiar lista y campos si quieres
+                savedTrackpoints.clear()
+                savedWaypoints.clear()
+                rutaNombreState.value = ""
+                rutaDescripcionState.value = ""
+
+            } catch (e: Exception) {
+                Log.e("GPX", "Error guardando GPX", e)
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -475,9 +399,7 @@ fun LocationControls(
             .background(Color.White)
             .padding(16.dp)
     ) {
-        val finishRouteDialog = remember { mutableStateOf(false) }
-        val rutaNombreState = remember { mutableStateOf("") }
-        val rutaDescripcionState = remember { mutableStateOf("") }
+
 
         Spacer(Modifier.height(16.dp))
 
@@ -604,15 +526,18 @@ fun LocationControls(
 
         // --- Diálogo Finalizar Ruta ---
         FinishRouteDialog(
-            showDialog = finishRouteDialog,
-            rutaNombre = rutaNombreState,
-            rutaDescripcion = rutaDescripcionState,
+            showDialog = finishRouteDialog,        // Pasamos el MutableState real
+            rutaNombre = rutaNombreState,          // Pasamos el MutableState real
+            rutaDescripcion = rutaDescripcionState,// Pasamos el MutableState real
             savedTrackpoints = savedTrackpoints,
             savedWaypoints = savedWaypoints,
-            usuarioId = usuarioId,
-            currentGPX = currentGPX,
+            usuarioId = usuarioId,              // usa el MutableState para GPX
             createFileLauncher = createFileLauncher,
-            onRouteSaved = { finishRouteDialog.value = false }
+            onRouteSaved = {
+                finishRouteDialog.value = false
+                // opcional: aquí puedes limpiar otros estados si quieres
+            },
+            currentGPX = pendingGpx
         )
     }
 }
