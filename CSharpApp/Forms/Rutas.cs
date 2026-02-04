@@ -1,6 +1,7 @@
 ﻿using Model;
 using Repository;
 using System.Net.Http.Json;
+using UserControls;
 using static System.Net.WebRequestMethods;
 
 
@@ -16,6 +17,21 @@ namespace Forms
             InitializeComponent();
             _api = api;
         }
+
+
+        // Método para cargar datos en la lista de user controls de rutas en el flowlayout
+        public async Task CargarRutas()
+        {
+            List<Ruta> rutas = await _api.GetAllAsync<Ruta>("api/reta3/rutas");
+            flpRutas.Controls.Clear();
+            foreach (Ruta ruta in rutas)
+            {
+                UCRutaLista uc = new UCRutaLista();
+                uc.SetData(ruta);
+                flpRutas.Controls.Add(uc);
+            }
+        }
+
 
 
         private async void btn_borrar_Click(object sender, EventArgs e)
@@ -48,6 +64,11 @@ namespace Forms
             await _api.DescargarFichaUsuarioAsync(idRuta, destino);
 
             MessageBox.Show("Ficha descargada en Descargas");
+        }
+
+        private async void Rutas_Load(object sender, EventArgs e)
+        {
+            await CargarRutas();
         }
     }
 }

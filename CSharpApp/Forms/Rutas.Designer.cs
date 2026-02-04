@@ -33,6 +33,8 @@
             btn_borrar = new Button();
             btn_detalles = new Button();
             flpRutas = new FlowLayoutPanel();
+            ucRutaLista1 = new UserControls.UCRutaLista();
+            flpRutas.SuspendLayout();
             SuspendLayout();
             // 
             // txt_buscar_ruta
@@ -76,10 +78,19 @@
             // 
             // flpRutas
             // 
+            flpRutas.Controls.Add(ucRutaLista1);
             flpRutas.Location = new Point(84, 93);
             flpRutas.Name = "flpRutas";
             flpRutas.Size = new Size(613, 299);
             flpRutas.TabIndex = 5;
+            // 
+            // ucRutaLista1
+            // 
+            ucRutaLista1.Location = new Point(3, 3);
+            ucRutaLista1.Name = "ucRutaLista1";
+            ucRutaLista1.Ruta = null;
+            ucRutaLista1.Size = new Size(600, 67);
+            ucRutaLista1.TabIndex = 0;
             // 
             // Rutas
             // 
@@ -94,6 +105,8 @@
             Margin = new Padding(4);
             Name = "Rutas";
             Text = "Rutas";
+            Load += Rutas_Load;
+            flpRutas.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
 
@@ -105,5 +118,6 @@
         private System.Windows.Forms.Button btn_borrar;
         private System.Windows.Forms.Button btn_detalles;
         private FlowLayoutPanel flpRutas;
+        private UserControls.UCRutaLista ucRutaLista1;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UserControls
 {
-    partial class UCPuntoDeInteres
+    partial class UCPuntoDeInteresLista
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

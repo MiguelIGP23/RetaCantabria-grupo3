@@ -32,7 +32,7 @@
             lblNombre = new Label();
             lbltxtRuta = new Label();
             lblRuta = new Label();
-            lbltxtPos = new Label();
+            lbltxtPosicion = new Label();
             lblPos = new Label();
             lblLatitud = new Label();
             lbltxtLatitud = new Label();
@@ -86,14 +86,14 @@
             lblRuta.TabIndex = 6;
             lblRuta.Text = "-Nº ruta:";
             // 
-            // lbltxtPos
+            // lbltxtPosicion
             // 
-            lbltxtPos.AutoSize = true;
-            lbltxtPos.Location = new Point(211, 29);
-            lbltxtPos.Name = "lbltxtPos";
-            lbltxtPos.Size = new Size(39, 15);
-            lbltxtPos.TabIndex = 13;
-            lbltxtPos.Text = "txtPos";
+            lbltxtPosicion.AutoSize = true;
+            lbltxtPosicion.Location = new Point(211, 29);
+            lbltxtPosicion.Name = "lbltxtPosicion";
+            lbltxtPosicion.Size = new Size(39, 15);
+            lbltxtPosicion.TabIndex = 13;
+            lbltxtPosicion.Text = "txtPos";
             // 
             // lblPos
             // 
@@ -248,7 +248,7 @@
             Controls.Add(lblLongitud);
             Controls.Add(lbltxtLatitud);
             Controls.Add(lblLatitud);
-            Controls.Add(lbltxtPos);
+            Controls.Add(lbltxtPosicion);
             Controls.Add(lblPos);
             Controls.Add(lbltxtNombre);
             Controls.Add(lblNombre);
@@ -266,7 +266,7 @@
         private Label lblNombre;
         private Label lbltxtRuta;
         private Label lblRuta;
-        private Label lbltxtPos;
+        private Label lbltxtPosicion;
         private Label lblPos;
         private Label lblLatitud;
         private Label lbltxtLatitud;

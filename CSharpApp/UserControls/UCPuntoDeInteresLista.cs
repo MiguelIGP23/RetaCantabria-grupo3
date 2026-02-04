@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace UserControls
 {
-    public partial class UCImagenPuntoInteres : UserControl
+    public partial class UCPuntoDeInteresLista : UserControl
     {
-        public UCImagenPuntoInteres()
+        public UCPuntoDeInteresLista()
         {
             InitializeComponent();
         }
+
     }
 }
