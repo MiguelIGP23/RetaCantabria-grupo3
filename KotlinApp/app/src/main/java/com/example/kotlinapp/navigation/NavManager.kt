@@ -19,10 +19,10 @@ import com.example.kotlinapp.views.cargarRutasDummy
 @Composable
 fun NavManager(dbViewModel: DatabaseViewModel) {
     val navController = rememberNavController()
-    val rutas = cargarRutasDummy()
+    val rutas = dbViewModel.rutas.value
     NavHost(
         navController = navController,
-        startDestination = "Login"
+        startDestination = "List"
     ) {
         composable("Login") {
             LoginView(navController, dbViewModel)
@@ -31,7 +31,7 @@ fun NavManager(dbViewModel: DatabaseViewModel) {
             //HomeView(navController)
         }
         composable("List") {
-            ListView(navController)
+            ListView(navController, dbViewModel)
         }
 
         composable(route = "detail/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })

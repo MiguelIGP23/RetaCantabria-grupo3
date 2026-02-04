@@ -1,5 +1,6 @@
 package com.example.kotlinapp.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -34,15 +35,21 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.model.enums.WaypointType
 import com.example.kotlinapp.ui.theme.fondoPrincipal
+import com.example.kotlinapp.viewmodels.DatabaseViewModel
 
 
+@SuppressLint("RememberReturnType")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView(navController: NavHostController) {
+fun ListView(navController: NavHostController,dbViewModel: DatabaseViewModel) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
-    val rutas = cargarRutasDummy() // Lista de ejemplo
+    LaunchedEffect(Unit) {
+        dbViewModel.cargarRutas()
+    }
+
+    val rutas = dbViewModel.rutas.value // Lista de ejemplo
 
     // Filtrar rutas según texto de búsqueda
     val rutasFiltradas = remember(rutas, searchText) {
