@@ -30,8 +30,8 @@
         {
             lblidPuntodeInteres = new Label();
             lbltxtIdPuntoInteres = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            lblNombre = new Label();
+            lbltxtNombre = new Label();
             lblLatitud = new Label();
             lbltxtLatitud = new Label();
             lblLongitud = new Label();
@@ -58,28 +58,28 @@
             lbltxtIdPuntoInteres.TabIndex = 1;
             lbltxtIdPuntoInteres.Text = "txtIdPuntoInteres";
             // 
-            // label3
+            // lblNombre
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(297, 33);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Nombre";
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(286, 33);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(51, 15);
+            lblNombre.TabIndex = 2;
+            lblNombre.Text = "Nombre";
             // 
-            // label4
+            // lbltxtNombre
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(392, 33);
-            label4.Name = "label4";
-            label4.Size = new Size(65, 15);
-            label4.TabIndex = 3;
-            label4.Text = "txtNombre";
+            lbltxtNombre.AutoSize = true;
+            lbltxtNombre.Location = new Point(343, 33);
+            lbltxtNombre.Name = "lbltxtNombre";
+            lbltxtNombre.Size = new Size(65, 15);
+            lbltxtNombre.TabIndex = 3;
+            lbltxtNombre.Text = "txtNombre";
             // 
             // lblLatitud
             // 
             lblLatitud.AutoSize = true;
-            lblLatitud.Location = new Point(500, 33);
+            lblLatitud.Location = new Point(456, 33);
             lblLatitud.Name = "lblLatitud";
             lblLatitud.Size = new Size(44, 15);
             lblLatitud.TabIndex = 4;
@@ -88,7 +88,7 @@
             // lbltxtLatitud
             // 
             lbltxtLatitud.AutoSize = true;
-            lbltxtLatitud.Location = new Point(573, 33);
+            lbltxtLatitud.Location = new Point(506, 33);
             lbltxtLatitud.Name = "lbltxtLatitud";
             lbltxtLatitud.Size = new Size(58, 15);
             lbltxtLatitud.TabIndex = 5;
@@ -97,7 +97,7 @@
             // lblLongitud
             // 
             lblLongitud.AutoSize = true;
-            lblLongitud.Location = new Point(678, 34);
+            lblLongitud.Location = new Point(584, 33);
             lblLongitud.Name = "lblLongitud";
             lblLongitud.Size = new Size(55, 15);
             lblLongitud.TabIndex = 6;
@@ -106,7 +106,7 @@
             // lbltxtLongitud
             // 
             lbltxtLongitud.AutoSize = true;
-            lbltxtLongitud.Location = new Point(755, 34);
+            lbltxtLongitud.Location = new Point(645, 33);
             lbltxtLongitud.Name = "lbltxtLongitud";
             lbltxtLongitud.Size = new Size(69, 15);
             lbltxtLongitud.TabIndex = 7;
@@ -115,7 +115,7 @@
             // lblTipo
             // 
             lblTipo.AutoSize = true;
-            lblTipo.Location = new Point(842, 35);
+            lblTipo.Location = new Point(751, 33);
             lblTipo.Name = "lblTipo";
             lblTipo.Size = new Size(30, 15);
             lblTipo.TabIndex = 8;
@@ -124,13 +124,13 @@
             // lbltxtTipo
             // 
             lbltxtTipo.AutoSize = true;
-            lbltxtTipo.Location = new Point(903, 35);
+            lbltxtTipo.Location = new Point(804, 33);
             lbltxtTipo.Name = "lbltxtTipo";
             lbltxtTipo.Size = new Size(44, 15);
             lbltxtTipo.TabIndex = 9;
             lbltxtTipo.Text = "txtTipo";
             // 
-            // UCPuntoDeInteres
+            // UCPuntoDeInteresLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -140,12 +140,12 @@
             Controls.Add(lblLongitud);
             Controls.Add(lbltxtLatitud);
             Controls.Add(lblLatitud);
-            Controls.Add(label4);
-            Controls.Add(label3);
+            Controls.Add(lbltxtNombre);
+            Controls.Add(lblNombre);
             Controls.Add(lbltxtIdPuntoInteres);
             Controls.Add(lblidPuntodeInteres);
-            Name = "UCPuntoDeInteres";
-            Size = new Size(964, 92);
+            Name = "UCPuntoDeInteresLista";
+            Size = new Size(915, 92);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -154,8 +154,8 @@
 
         private Label lblidPuntodeInteres;
         private Label lbltxtIdPuntoInteres;
-        private Label label3;
-        private Label label4;
+        private Label lblNombre;
+        private Label lbltxtNombre;
         private Label lblLatitud;
         private Label lbltxtLatitud;
         private Label lblLongitud;
