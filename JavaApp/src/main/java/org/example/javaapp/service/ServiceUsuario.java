@@ -25,7 +25,7 @@ public class ServiceUsuario implements IServiceUsuario{
         nuevo.setEmail(usuario.getEmail());
         nuevo.setRol(usuario.getRol());
         nuevo.setPassword(encoder.encode(usuario.getPassword()));  //Cifrado por BCrypt
-        return repo.save(usuario);
+        return repo.save(nuevo);
     }
 
     @Override
