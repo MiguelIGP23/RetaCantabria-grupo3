@@ -1,9 +1,11 @@
 package com.example.kotlinapp.model
 
 data class Trackpoint(
-    val id: TrackpointId,
+    val id: Int,
     val latitud: Double,
-    val longitud: Double
+    val longitud: Double,
+    val altitud: Double,
+    val time: Long
 )
 
 data class TrackpointId(

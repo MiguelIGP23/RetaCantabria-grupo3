@@ -6,6 +6,7 @@ import android.content.Context
 import android.location.Location
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -21,13 +22,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -50,14 +51,18 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.preference.PreferenceManager
+import com.example.kotlinapp.data.IdRef
+import com.example.kotlinapp.gps.FinishRouteDialog
 import com.example.kotlinapp.gps.WaypointDialog
 import com.example.kotlinapp.gps.gpx.generateGpx
+import com.example.kotlinapp.gps.gpx.rememberGpxLauncher
 import com.example.kotlinapp.gps.map.createCurrentLocationMarker
 import com.example.kotlinapp.gps.map.createMapView
 import com.example.kotlinapp.gps.map.createTrackpointMarker
+import com.example.kotlinapp.model.Ruta
+import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.model.WaypointDialogData
 import com.example.kotlinapp.model.enums.WaypointType
@@ -80,12 +85,14 @@ fun CreateRutaView(navController: NavHostController) {
     val autoTrackpointEnabled = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-
+    val trackpointIdCounter = remember { mutableStateOf(1) }
     val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
     val textLat = remember { mutableStateOf("Latitud: --") }
     val textLon = remember { mutableStateOf("Longitud: --") }
     val isTracking = remember { mutableStateOf(false) }
-    val savedTrackpoints = remember { mutableStateListOf<Triple<Double, Double, Double>>() }
+
+    // Ahora guardamos Trackpoint completo
+    val savedTrackpoints = remember { mutableStateListOf<Trackpoint>() }
     val savedWaypoints = remember { mutableStateListOf<Waypoint>() }
 
     // Configuración osmdroid
@@ -93,7 +100,6 @@ fun CreateRutaView(navController: NavHostController) {
     Configuration.getInstance().load(ctx, ctx.getSharedPreferences("osmdroid", Context.MODE_PRIVATE))
     Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
 
-    // --------------------------- MAPA ---------------------------
     val mapView = remember { createMapView(context) }
     val currentMarker = remember(mapView) { createCurrentLocationMarker(mapView, context) }
     LaunchedEffect(Unit) { mapView.overlays.add(currentMarker) }
@@ -120,15 +126,16 @@ fun CreateRutaView(navController: NavHostController) {
 
     val locationCallback = remember {
         createLocationCallback(
-            mapView = mapView,
-            marker = currentMarker,
-            isTracking = isTracking,
-            autoTrackpointEnabled = autoTrackpointEnabled,
-            savedLocations = savedTrackpoints,
-            context = context,
-            canSaveTrackpoint = ::canSaveTrackpoint,
-            textLat = textLat,
-            textLon = textLon
+            mapView,
+            currentMarker,
+            isTracking,
+            autoTrackpointEnabled,
+            savedTrackpoints,
+            context,
+            ::canSaveTrackpoint,
+            textLat,
+            textLon,
+            trackpointIdCounter
         )
     }
 
@@ -136,15 +143,10 @@ fun CreateRutaView(navController: NavHostController) {
         LocationManager(fusedLocationClient, locationRequest, locationCallback, isTracking)
     }
 
-    // Observar cambios de isTracking y activar/desactivar location updates
     LaunchedEffect(isTracking.value) {
-        if (isTracking.value) {
-            locationManager.start(context)  // aquí inicia las actualizaciones
-        } else {
-            locationManager.stop()   // aquí detiene las actualizaciones
-        }
+        if (isTracking.value) locationManager.start(context)
+        else locationManager.stop()
     }
-
 
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
@@ -154,40 +156,129 @@ fun CreateRutaView(navController: NavHostController) {
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 
-    // --------------------------- UI ---------------------------
+    // UI
     Box(modifier = Modifier.fillMaxSize()) {
         AndroidView(factory = { mapView }, modifier = Modifier.fillMaxWidth().height(300.dp))
-
         BackButton(navController)
 
         Column(modifier = Modifier.fillMaxSize()) {
             Spacer(modifier = Modifier.weight(1f))
             LocationControls(
-                textLat = textLat,
-                textLon = textLon,
-                isTracking = isTracking,
-                autoTrackpointEnabled = autoTrackpointEnabled,
-                savedTrackpoints = savedTrackpoints,
-                savedWaypoints = savedWaypoints,
-                mapView = mapView,
-                locationManager = locationManager,
-                context = context,
-                canSaveTrackpoint = ::canSaveTrackpoint
+                textLat,
+                textLon,
+                isTracking,
+                autoTrackpointEnabled,
+                savedTrackpoints,
+                savedWaypoints,
+                mapView,
+                locationManager,
+                context,
+                ::canSaveTrackpoint,
+                trackpointIdCounter,
+                usuarioId = 1
             )
         }
     }
 }
+
+fun generarRuta(
+    nombre: String,
+    descripcion: String? = null,
+    trackpoints: List<Trackpoint>,
+    waypoints: List<Waypoint>,
+    usuarioId: Int
+): Ruta {
+    require(trackpoints.isNotEmpty()) { "No hay trackpoints para generar la ruta" }
+
+    val trackpointsList = trackpoints.toList()
+    val waypointsList = waypoints.toList()
+
+    val latInicial = trackpointsList.first().latitud
+    val lonInicial = trackpointsList.first().longitud
+    val latFinal = trackpointsList.last().latitud
+    val lonFinal = trackpointsList.last().longitud
+
+    val altitudes = trackpointsList.mapNotNull { it.altitud }
+    val altMax = altitudes.maxOrNull() ?: 0.0
+    val altMin = altitudes.minOrNull() ?: 0.0
+
+    val distanciaTotal = if (trackpointsList.size > 1) {
+        trackpointsList.zipWithNext { a, b ->
+            GeoPoint(a.latitud, a.longitud).distanceToAsDouble(GeoPoint(b.latitud, b.longitud))
+        }.sum()
+    } else 0.0
+
+    val tiempoInicio = trackpointsList.first().time
+    val tiempoFinal = trackpointsList.last().time
+    val duracionSegundos = maxOf(0, ((tiempoFinal - tiempoInicio) / 1000).toInt())
+    val duracionStr = "%02d:%02d:%02d".format(
+        duracionSegundos / 3600,
+        (duracionSegundos % 3600) / 60,
+        duracionSegundos % 60
+    )
+
+    val desnivelPositivo = altitudes.zipWithNext { a, b -> (b - a).coerceAtLeast(0.0) }.sum()
+    val desnivelNegativo = altitudes.zipWithNext { a, b -> (a - b).coerceAtLeast(0.0) }.sum()
+
+    // 1️⃣ Crear ruta inicial sin GPX
+    val ruta = Ruta(
+        id = null,
+        nombre = nombre,
+        nombreInicioruta = "Inicio",
+        nombreFinalruta = "Fin",
+        latitudInicial = latInicial,
+        latitudFinal = latFinal,
+        longitudInicial = lonInicial,
+        longitudFinal = lonFinal,
+        distancia = distanciaTotal,
+        duracion = duracionStr,
+        desnivelPositivo = desnivelPositivo.toInt(),
+        desnivelNegativo = desnivelNegativo.toInt(),
+        altitudMax = altMax,
+        altitudMin = altMin,
+        clasificacion = null,
+        nivelEsfuerzo = null,
+        nivelRiesgo = null,
+        estadoRuta = null,
+        tipoTerreno = null,
+        indicaciones = null,
+        temporadas = null,
+        accesibilidad = null,
+        rutaFamiliar = null,
+        archivoGPX = null, // 👈 todavía no
+        recomendacionesEquipo = descripcion,
+        zonaGeografica = null,
+        mediaEstrellas = null,
+        usuario = IdRef(usuarioId)
+    )
+
+    // Generar GPX usando la ruta creada
+    val gpx = runCatching {
+        generateGpx(ruta, trackpointsList, waypointsList)
+    }.getOrElse {
+        Log.e("GPX", "Error generando GPX", it)
+        ""
+    }
+
+    // Retornar una copia de la ruta con GPX
+    return ruta.copy(archivoGPX = gpx)
+}
+
+
+
+
 
 fun createLocationCallback(
     mapView: MapView,
     marker: Marker,
     isTracking: MutableState<Boolean>,
     autoTrackpointEnabled: MutableState<Boolean>,
-    savedLocations: MutableList<Triple<Double, Double, Double>>, // <-- corregido
+    savedTrackpoints: MutableList<Trackpoint>,
     context: Context,
     canSaveTrackpoint: (Location) -> Boolean,
     textLat: MutableState<String>,
-    textLon: MutableState<String>
+    textLon: MutableState<String>,
+    trackpointIdCounter: MutableState<Int>
 ): LocationCallback {
 
     var lastLat: Double? = null
@@ -225,10 +316,19 @@ fun createLocationCallback(
             textLat.value = "Latitud: $lat"
             textLon.value = "Longitud: $lon"
 
+
+
             if (autoTrackpointEnabled.value && canSaveTrackpoint(location)) {
-                // Guardar lat, lon y altitud
-                savedLocations.add(Triple(lat, lon, alt))
-                val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedLocations.size}")
+                savedTrackpoints.add(
+                    Trackpoint(
+                        id = trackpointIdCounter.value++,
+                        latitud = lat,
+                        longitud = lon,
+                        altitud = alt,
+                        time = System.currentTimeMillis() // <-- guardamos el tiempo
+                    )
+                )
+                val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
                 wpMarker.position = GeoPoint(lat, lon, alt)
                 mapView.overlays.add(wpMarker)
                 mapView.invalidate()
@@ -238,22 +338,60 @@ fun createLocationCallback(
 }
 
 
-
-
 @Composable
 fun LocationControls(
     textLat: MutableState<String>,
     textLon: MutableState<String>,
     isTracking: MutableState<Boolean>,
     autoTrackpointEnabled: MutableState<Boolean>,
-    savedTrackpoints: SnapshotStateList<Triple<Double, Double, Double>>,
+    savedTrackpoints: SnapshotStateList<Trackpoint>,
     savedWaypoints: SnapshotStateList<Waypoint>,
     mapView: MapView,
     locationManager: LocationManager,
     context: Context,
-    canSaveTrackpoint: (Location) -> Boolean
+    canSaveTrackpoint: (Location) -> Boolean,
+    trackpointIdCounter: MutableState<Int>,
+    usuarioId: Int
 ) {
     var waypointDialog by remember { mutableStateOf<WaypointDialogData?>(null) }
+    val pendingGpx = remember { mutableStateOf<String?>(null) }
+
+    val finishRouteDialog = remember { mutableStateOf(false) }
+    val rutaNombreState = remember { mutableStateOf("") }
+    val rutaDescripcionState = remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+
+    val createFileLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/gpx+xml")
+    ) { uri ->
+        if (uri != null) {
+            try {
+                // Genera GPX otra vez por si hubo cambios de última hora
+                val ruta = generarRuta(
+                    nombre = rutaNombreState.value.ifBlank { "mis_puntos" },
+                    trackpoints = savedTrackpoints.toList(),
+                    waypoints = savedWaypoints.toList(),
+                    usuarioId = usuarioId
+                )
+
+                context.contentResolver.openOutputStream(uri)?.use { output ->
+                    output.write((ruta.archivoGPX ?: "").toByteArray())
+                }
+
+                Log.d("GPX", "GPX guardado correctamente")
+
+                // limpiar lista y campos si quieres
+                savedTrackpoints.clear()
+                savedWaypoints.clear()
+                rutaNombreState.value = ""
+                rutaDescripcionState.value = ""
+
+            } catch (e: Exception) {
+                Log.e("GPX", "Error guardando GPX", e)
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -262,29 +400,25 @@ fun LocationControls(
             .padding(16.dp)
     ) {
 
-        val createFileLauncher = rememberLauncherForActivityResult(
-            ActivityResultContracts.CreateDocument("application/gpx+xml")
-        ) { uri ->
-            if (uri != null) {
-                try {
-                    context.contentResolver.openOutputStream(uri)?.use { output ->
-                        output.write(generateGpx(savedTrackpoints,savedWaypoints).toByteArray())
-                    }
-                    Log.d("GPX", "GPX guardado correctamente")
-                } catch (e: Exception) {
-                    Log.e("GPX", "Error guardando GPX", e)
-                }
-            }
-        }
 
+        Spacer(Modifier.height(16.dp))
 
-        // --- Fila de Tracking y Añadir Trackpoint ---
+        // --- Resto de controles: Tracking, Añadir Trackpoint y Waypoints ---
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Button(
-                onClick = { isTracking.value = !isTracking.value },
+                onClick = {
+                    if (isTracking.value) {
+                        // Se estaba trackeando → lo detenemos y abrimos el diálogo
+                        isTracking.value = false
+                        finishRouteDialog.value = true
+                    } else {
+                        // Iniciar tracking
+                        isTracking.value = true
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isTracking.value) Color(0xFFFF6F61) else Color(0xFF4CAF50),
                     contentColor = Color.White
@@ -298,7 +432,13 @@ fun LocationControls(
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
                     val alt = 0.0
-                    savedTrackpoints.add(Triple(lat, lon, alt))
+                    savedTrackpoints.add(Trackpoint(
+                        id = trackpointIdCounter.value++,
+                        latitud = lat,
+                        longitud = lon,
+                        altitud = alt,
+                        time = System.currentTimeMillis()
+                    ))
                     val marker = createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
                     marker.position = GeoPoint(lat, lon, alt)
                     mapView.overlays.add(marker)
@@ -310,7 +450,7 @@ fun LocationControls(
                     contentColor = Color.White
                 ),
                 shape = RoundedCornerShape(12.dp),
-                modifier = Modifier.height(48.dp) // solo height, no align
+                modifier = Modifier.height(48.dp)
             ) {
                 Icon(Icons.Default.AddCircle, contentDescription = "Añadir Punto", modifier = Modifier.size(24.dp))
                 Spacer(modifier = Modifier.width(8.dp))
@@ -318,21 +458,14 @@ fun LocationControls(
             }
         }
 
-
-
-// --- Texto de Latitud y Longitud ---
-        Text(textLat.value, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-        Text(textLon.value, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-
         Spacer(Modifier.height(16.dp))
 
-// --- Toggle Auto Trackpoint ---
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(
                 checked = autoTrackpointEnabled.value,
                 onCheckedChange = { autoTrackpointEnabled.value = it },
                 colors = CheckboxDefaults.colors(
-                    checkedColor = Color(0xFF4CAF50), // verde suave
+                    checkedColor = Color(0xFF4CAF50),
                     uncheckedColor = Color.Gray
                 )
             )
@@ -342,7 +475,7 @@ fun LocationControls(
 
         Spacer(Modifier.height(16.dp))
 
-// --- Botones de Waypoint ---
+        // --- Botones de Waypoint ---
         Row {
             Button(
                 colors = ButtonDefaults.buttonColors(
@@ -352,8 +485,7 @@ fun LocationControls(
                 onClick = {
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
-                    val alt = 0.0
-                    waypointDialog = WaypointDialogData(lat, lon,alt, WaypointType.INTERES)
+                    waypointDialog = WaypointDialogData(lat, lon, 0.0, WaypointType.INTERES)
                 },
                 enabled = isTracking.value
             ) { Text("Punto Interés") }
@@ -362,35 +494,19 @@ fun LocationControls(
 
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFFFA726), // naranja suave
+                    containerColor = Color(0xFFFFA726),
                     contentColor = Color.White
                 ),
                 onClick = {
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
-                    val alt = 0.0
-                    waypointDialog = WaypointDialogData(lat, lon,alt, WaypointType.PELIGRO)
+                    waypointDialog = WaypointDialogData(lat, lon, 0.0, WaypointType.PELIGRO)
                 },
                 enabled = isTracking.value
             ) { Text("Punto Peligro") }
         }
 
         Spacer(Modifier.height(16.dp))
-
-        Button(
-            onClick = { createFileLauncher.launch("mis_puntos.gpx") },
-            enabled = savedTrackpoints.isNotEmpty(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF64B5F6), // azul suave
-                contentColor = Color.White
-            ),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Descargar GPX")
-        }
-
-
-
 
         // --- Diálogo Waypoint ---
         waypointDialog?.let { dialogData ->
@@ -407,5 +523,21 @@ fun LocationControls(
                 }
             )
         }
+
+        // --- Diálogo Finalizar Ruta ---
+        FinishRouteDialog(
+            showDialog = finishRouteDialog,        // Pasamos el MutableState real
+            rutaNombre = rutaNombreState,          // Pasamos el MutableState real
+            rutaDescripcion = rutaDescripcionState,// Pasamos el MutableState real
+            savedTrackpoints = savedTrackpoints,
+            savedWaypoints = savedWaypoints,
+            usuarioId = usuarioId,              // usa el MutableState para GPX
+            createFileLauncher = createFileLauncher,
+            onRouteSaved = {
+                finishRouteDialog.value = false
+                // opcional: aquí puedes limpiar otros estados si quieres
+            },
+            currentGPX = pendingGpx
+        )
     }
 }
