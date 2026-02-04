@@ -24,6 +24,7 @@ class SessionDataStore(private val context: Context) {
 
     // Función para guardar el token y rol de forma asíncrona
     suspend fun saveSession(token: String, role: Rol) {
+
         context.dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = token
             preferences[ROLE_KEY] = role.toString()
@@ -38,10 +39,5 @@ class SessionDataStore(private val context: Context) {
         }
     }
 
-    // Flow para obtener el token. Permite observar cambios en tiempo real.
-    fun getToken(): Flow<String?> {
-        return context.dataStore.data.map { preferences ->
-            preferences[TOKEN_KEY]
-        }
-    }
 }
+
