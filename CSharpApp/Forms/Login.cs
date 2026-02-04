@@ -52,7 +52,7 @@ namespace Forms
                 Session.Set(resp.Token, rol);
 
                 // Abrir form principal, si se cierra volvemos a login
-                var main = new Rutas(_api);
+                var main = new RutasLista(_api);
                 main.FormClosed += (_, __) =>
                 {
                     txt_password.Text = "";

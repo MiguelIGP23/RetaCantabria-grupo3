@@ -36,5 +36,56 @@ namespace UserControls
                 1 => Color.LightGreen,
             };
         }
+
+
+
+
+        // Evento que se dispara al hacer click en el user control o sus etiquetas
+        public event EventHandler<Ruta> RutaClick;
+
+        private void lbltxtNombre_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lblDistancia_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lbltxtDistancia_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lblDuracion_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lbltxtDuracion_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lblEstrellas_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void lbltxtEstrellas_Click(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
+
+        private void UCRutaLista_Load(object sender, EventArgs e)
+        {
+            RutaClick?.Invoke(this, Ruta);
+        }
     }
 }

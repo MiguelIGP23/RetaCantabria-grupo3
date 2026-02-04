@@ -46,6 +46,7 @@
             lbltxtNombre.Size = new Size(62, 15);
             lbltxtNombre.TabIndex = 1;
             lbltxtNombre.Text = "txtnombre";
+            lbltxtNombre.Click += lbltxtNombre_Click;
             // 
             // lblDistancia
             // 
@@ -56,6 +57,7 @@
             lblDistancia.Size = new Size(60, 15);
             lblDistancia.TabIndex = 2;
             lblDistancia.Text = "Distancia:";
+            lblDistancia.Click += lblDistancia_Click;
             // 
             // lbltxtDistancia
             // 
@@ -65,6 +67,7 @@
             lbltxtDistancia.Size = new Size(36, 15);
             lbltxtDistancia.TabIndex = 3;
             lbltxtDistancia.Text = "txtDis";
+            lbltxtDistancia.Click += lbltxtDistancia_Click;
             // 
             // lbltxtDuracion
             // 
@@ -74,6 +77,7 @@
             lbltxtDuracion.Size = new Size(39, 15);
             lbltxtDuracion.TabIndex = 5;
             lbltxtDuracion.Text = "txtDur";
+            lbltxtDuracion.Click += lbltxtDuracion_Click;
             // 
             // lblDuracion
             // 
@@ -84,6 +88,7 @@
             lblDuracion.Size = new Size(60, 15);
             lblDuracion.TabIndex = 4;
             lblDuracion.Text = "Duración:";
+            lblDuracion.Click += lblDuracion_Click;
             // 
             // lblNombre
             // 
@@ -94,6 +99,7 @@
             lblNombre.Size = new Size(56, 15);
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre:";
+            lblNombre.Click += lblNombre_Click;
             // 
             // lbltxtEstrellas
             // 
@@ -103,6 +109,7 @@
             lbltxtEstrellas.Size = new Size(35, 15);
             lbltxtEstrellas.TabIndex = 7;
             lbltxtEstrellas.Text = "txtEst";
+            lbltxtEstrellas.Click += lbltxtEstrellas_Click;
             // 
             // lblEstrellas
             // 
@@ -113,6 +120,7 @@
             lblEstrellas.Size = new Size(55, 15);
             lblEstrellas.TabIndex = 6;
             lblEstrellas.Text = "Estrellas:";
+            lblEstrellas.Click += lblEstrellas_Click;
             // 
             // UCRutaLista
             // 
@@ -128,6 +136,7 @@
             Controls.Add(lblNombre);
             Name = "UCRutaLista";
             Size = new Size(600, 67);
+            Load += UCRutaLista_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class Rutas
+    partial class RutasLista
     {
         /// <summary>
         /// Required designer variable.

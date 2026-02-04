@@ -7,12 +7,12 @@ using static System.Net.WebRequestMethods;
 
 namespace Forms
 {
-    public partial class Rutas : Form
+    public partial class RutasLista : Form
     {
 
         private readonly ApiReta _api;
 
-        public Rutas(ApiReta api)
+        public RutasLista(ApiReta api)
         {
             InitializeComponent();
             _api = api;
@@ -28,10 +28,10 @@ namespace Forms
             {
                 UCRutaLista uc = new UCRutaLista();
                 uc.SetData(ruta);
+                uc.RutaClick += RutaClick;
                 flpRutas.Controls.Add(uc);
             }
         }
-
 
 
         private async void btn_borrar_Click(object sender, EventArgs e)
@@ -69,6 +69,13 @@ namespace Forms
         private async void Rutas_Load(object sender, EventArgs e)
         {
             await CargarRutas();
+        }
+
+
+        // Métodos de eventos
+        private void RutaClick(object? sender, Ruta e)
+        {
+            new RutasDetalle().Show();
         }
     }
 }
