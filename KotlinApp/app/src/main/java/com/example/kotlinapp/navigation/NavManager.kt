@@ -10,21 +10,22 @@ import com.example.kotlinapp.views.ListView
 import android.Manifest
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.kotlinapp.model.Ruta
+import com.example.kotlinapp.viewmodels.DatabaseViewModel
 import com.example.kotlinapp.views.DetailView
+import com.example.kotlinapp.views.LoginView
 import com.example.kotlinapp.views.cargarRutasDummy
 
 
 @Composable
-fun NavManager() {
+fun NavManager(dbViewModel: DatabaseViewModel) {
     val navController = rememberNavController()
     val rutas = cargarRutasDummy()
     NavHost(
         navController = navController,
-        startDestination = "List"
+        startDestination = "Login"
     ) {
         composable("Login") {
-            //LoginView(navController)
+            LoginView(navController, dbViewModel)
         }
         composable("Home") {
             //HomeView(navController)
