@@ -9,10 +9,5 @@ public class JavaAppApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(JavaAppApplication.class, args);
-
-        // Metodo para ver el hash resultante al cifrar con BCrypt
-        System.out.println(new BCryptPasswordEncoder().encode("1234"));
-
     }
-
 }
