@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reta3/puntosinteres")
+@RequestMapping("/api/reta3/rutas")
 public class PuntosInteresController {
 
     private final ServicePuntosInteres service;
@@ -16,28 +16,28 @@ public class PuntosInteresController {
         this.service=service;
     }
 
-    @PostMapping
-    public PuntosInteres insert(@RequestBody PuntosInteres puntosInteres){
-        return service.insert(puntosInteres);
+    @PostMapping(("/{idRuta}/puntosinteres"))
+    public PuntosInteres insert(@PathVariable int idRuta,@RequestBody PuntosInteres puntosInteres){
+        return service.insertInRuta(idRuta, puntosInteres);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){
-        service.delete(id);
+    @DeleteMapping("/{idRuta}/puntosinteres/{idPunto}")
+    public void delete(@PathVariable int idPunto, @PathVariable int idRuta){
+        service.deleteFromRuta(idPunto, idRuta);
     }
 
-    @PutMapping("/{id}")
-    public PuntosInteres update(@PathVariable int id, @RequestBody PuntosInteres puntosInteres){
-        return service.update(id, puntosInteres);
+    @PutMapping("/{idRuta}/puntosinteres/{idPunto}")
+    public PuntosInteres update(@PathVariable int idPunto, @PathVariable int idRuta, @RequestBody PuntosInteres puntosInteres){
+        return service.updateInRuta(idPunto, idRuta, puntosInteres);
     }
 
-    @GetMapping("/{id}")
-    public PuntosInteres findById(@PathVariable int id){
-        return service.findById(id);
+    @GetMapping("/{idRuta}/puntosinteres/{idPunto}")
+    public PuntosInteres findById(@PathVariable int idPunto, @PathVariable int idRuta){
+        return service.findByRutaAndId(idPunto, idRuta).orElse(null);
     }
 
-    @GetMapping
-    public List<PuntosInteres> findAll(){
-        return service.findAll();
+    @GetMapping("/{idRuta}/puntosinteres")
+    public List<PuntosInteres> findAll(@PathVariable int idRuta){
+        return service.findAllByRuta(idRuta);
     }
 }

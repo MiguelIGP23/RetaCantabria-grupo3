@@ -1,48 +1,83 @@
 package org.example.javaapp.service;
 
 import org.example.javaapp.model.Actividad;
+import org.example.javaapp.model.Ruta;
 import org.example.javaapp.repository.ActividadRepository;
+import org.example.javaapp.repository.RutaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceActividad implements IServiceActividad {
 
-    private final ActividadRepository repo;
+    private final ActividadRepository repoActividad;
+    private final RutaRepository repoRuta;
 
-    public ServiceActividad(ActividadRepository repo){
-        this.repo=repo;
+    public ServiceActividad(ActividadRepository repo, RutaRepository repoRuta) {
+        this.repoActividad = repo;
+        this.repoRuta = repoRuta;
     }
 
     @Override
     public Actividad insert(Actividad actividad) {
-        return repo.save(actividad);
+        return repoActividad.save(actividad);
     }
 
     @Override
     public Actividad update(Integer id, Actividad actividad) {
         Actividad buscada = findById(id);
-        if(buscada!=null){
+        if (buscada != null) {
             buscada.setNombre(actividad.getNombre());
             buscada.setRuta(actividad.getRuta());
-            repo.save(buscada);
+            repoActividad.save(buscada);
         }
         return buscada;
     }
 
     @Override
     public void delete(Integer id) {
-        repo.deleteById(id);
+        repoActividad.deleteById(id);
     }
 
     @Override
     public Actividad findById(Integer id) {
-        return repo.getReferenceById(id);
+        return repoActividad.findById(id).orElse(null);
     }
 
     @Override
     public List<Actividad> findAll() {
-        return repo.findAll();
+        return repoActividad.findAll();
+    }
+
+    public Actividad insertInRuta(int idRuta, Actividad actividad) {
+        Ruta ruta = repoRuta.findById(idRuta).orElse(null);
+        Actividad nueva = null;
+        if (ruta != null) {
+            actividad.setRuta(ruta);
+            nueva = repoActividad.save(actividad);
+        }
+        return nueva;
+    }
+
+    public Actividad updateInRuta(int idActividad, int idRuta, Actividad actividad) {
+        Optional<Actividad> act = repoActividad.findByIdAndRuta_Id(idActividad, idRuta);
+        if (act.isEmpty()) return null;
+        Actividad buscada= act.get();
+        buscada.setNombre(actividad.getNombre());
+        return repoActividad.save(buscada);
+    }
+
+    public void deleteFromRuta(int idActividad, int idRuta) {
+        repoActividad.deleteByIdAndRuta_Id(idActividad, idRuta);
+    }
+
+    public List<Actividad> findAllByRuta(int idRuta) {
+        return repoActividad.findByRuta_Id(idRuta);
+    }
+
+    public Optional<Actividad> findByRutaAndId(int idActividad, int idRuta) {
+        return repoActividad.findByIdAndRuta_Id(idActividad, idRuta);
     }
 }

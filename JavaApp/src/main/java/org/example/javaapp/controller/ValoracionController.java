@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/reta3/valoraciones")
+@RequestMapping("api/reta3/rutas")
 public class ValoracionController {
 
     private final ServiceValoracion service;
@@ -16,29 +16,31 @@ public class ValoracionController {
         this.service = service;
     }
 
-    @PostMapping
-    public Valoracion insert(@RequestBody Valoracion valoracion) {
-        return service.insert(valoracion);
+
+
+    @PostMapping("/{idRuta}/valoraciones")
+    public Valoracion insert(@PathVariable int idRuta, @RequestBody Valoracion valoracion) {
+        return service.insertInRuta(idRuta, valoracion);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        service.delete(id);
+    @DeleteMapping("/{idRuta}/valoraciones/{idValoracion}")
+    public void delete(@PathVariable int idValoracion, @PathVariable int idRuta) {
+        service.deleteFromRuta(idValoracion, idRuta);
     }
 
-    @PutMapping("/{id}")
-    public Valoracion update(@PathVariable int id, @RequestBody Valoracion valoracion) {
-        return service.update(id, valoracion);
+    @PutMapping("/{idRuta}/valoraciones/{idValoracion}")
+    public Valoracion update(@PathVariable int idValoracion, @PathVariable int idRuta, @RequestBody Valoracion valoracion) {
+        return service.updateInRuta(idValoracion, idRuta, valoracion);
     }
 
-    @GetMapping("/{id}")
-    public Valoracion findById(@PathVariable int id){
-        return service.findById(id);
+    @GetMapping("/{idRuta}/valoraciones/{idValoracion}")
+    public Valoracion findById(@PathVariable int idValoracion, @PathVariable int idRuta){
+        return service.findByRutaAndId(idValoracion, idRuta).orElse(null);
     }
 
-    @GetMapping
-    public List<Valoracion> findAll() {
-        return service.findAll();
+    @GetMapping("/{idRuta}/valoraciones")
+    public List<Valoracion> findAll(@PathVariable int idRuta) {
+        return service.findAllByRuta(idRuta);
     }
 
 }

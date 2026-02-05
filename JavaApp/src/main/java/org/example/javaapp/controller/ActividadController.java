@@ -2,42 +2,43 @@ package org.example.javaapp.controller;
 
 import org.example.javaapp.model.Actividad;
 import org.example.javaapp.service.ServiceActividad;
+import org.example.javaapp.service.ServiceRuta;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reta3/actividades")
+@RequestMapping("/api/reta3/rutas")
 public class ActividadController {
 
-    private final ServiceActividad service;
+    private final ServiceActividad serviceActividad;
 
-    public ActividadController(ServiceActividad service){
-        this.service=service;
+    public ActividadController(ServiceActividad serviceActividad){
+        this.serviceActividad=serviceActividad;
     }
 
-    @PostMapping()
-    public Actividad insert(@RequestBody Actividad actividad){
-        return service.insert(actividad);
+    @PostMapping("/{idRuta}/actividades")
+    public Actividad insert(@PathVariable int idRuta, @RequestBody Actividad actividad){
+        return serviceActividad.insertInRuta(idRuta, actividad);
     }
 
-    @GetMapping()
-    public List<Actividad> getAll(){
-        return service.findAll();
+    @GetMapping("/{idRuta}/actividades")
+    public List<Actividad> getAll(@PathVariable int idRuta){
+        return serviceActividad.findAllByRuta(idRuta);
     }
 
-    @GetMapping("/{id}")
-    public Actividad getById(@PathVariable int id){
-        return service.findById(id);
+    @GetMapping("/{idRuta}/actividades/{idActividad}")
+    public Actividad getById(@PathVariable int idActividad, @PathVariable int idRuta){
+        return serviceActividad.findByRutaAndId(idActividad, idRuta).orElse(null);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){
-        service.delete(id);
+    @DeleteMapping("/{idRuta}/actividades/{idActividad}")
+    public void delete(@PathVariable int idRuta, @PathVariable int idActividad){
+        serviceActividad.deleteFromRuta(idActividad, idRuta);
     }
 
-    @PutMapping("/{id}")
-    public Actividad update(@PathVariable int id, @RequestBody Actividad actividad){
-        return service.update(id, actividad);
+    @PutMapping("/{idRuta}/actividades/{idActividad}")
+    public Actividad update(@PathVariable int idRuta, @PathVariable int idActividad,@RequestBody Actividad actividad){
+        return serviceActividad.updateInRuta(idActividad, idRuta, actividad);
     }
 }

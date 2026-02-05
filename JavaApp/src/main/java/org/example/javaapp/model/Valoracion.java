@@ -30,16 +30,16 @@ public class Valoracion {
     @Column(name = "valoracionTecnica")
     private String valoracionTecnica;
 
-    @Column(name = "`reseña`")
+    @Column(name = "reseña")
     private String reseña;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usuario_idUsuario", nullable = false)
-    private Usuario usuarioIdusuario;
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "rutas_idRuta", nullable = false)
-    private Ruta rutasIdruta;
+    private Ruta ruta;
 
     public Integer getId() {
         return id;
@@ -105,20 +105,22 @@ public class Valoracion {
         this.reseña = reseña;
     }
 
-    public Usuario getUsuarioIdusuario() {
-        return usuarioIdusuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioIdusuario(Usuario usuarioIdusuario) {
-        this.usuarioIdusuario = usuarioIdusuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Ruta getRutasIdruta() {
-        return rutasIdruta;
+    public Ruta getRuta() {
+        return ruta;
     }
 
-    public void setRutasIdruta(Ruta rutasIdruta) {
-        this.rutasIdruta = rutasIdruta;
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
     }
+
+
 
 }

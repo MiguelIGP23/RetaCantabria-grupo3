@@ -16,29 +16,29 @@ public class PuntosPeligroController {
         this.service=service;
     }
 
-    @PostMapping
-    public PuntosPeligro insert(@RequestBody PuntosPeligro puntospeligro){
-        return service.insert(puntospeligro);
+    @PostMapping("/{idRuta}/puntospeligro")
+    public PuntosPeligro insert(@PathVariable int idRuta, @RequestBody PuntosPeligro puntospeligro){
+        return service.insertInRuta(idRuta, puntospeligro);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){
-        service.delete(id);
+    @DeleteMapping("/{idRuta}/puntospeligro/{idPunto}")
+    public void delete(@PathVariable int idPunto, @PathVariable int idRuta){
+        service.deleteFromRuta(idPunto, idRuta);
     }
 
-    @PutMapping("/{id}")
-    public PuntosPeligro update(@PathVariable int id, @RequestBody PuntosPeligro puntospeligro){
-        return service.update(id, puntospeligro);
+    @PutMapping("/{idRuta}/puntospeligro/{idPunto}")
+    public PuntosPeligro update(@PathVariable int idPunto, @PathVariable int idRuta, @RequestBody PuntosPeligro puntospeligro){
+        return service.updateInRuta(idPunto, idRuta, puntospeligro);
     }
 
-//    @GetMapping("/{id}")
-//    public PuntosPeligro findById(@PathVariable int id){
-//        return service.findById(id);
-//    }
+    @GetMapping("/{idRuta}/puntospeligro/{idPunto}")
+    public PuntosPeligro findById(@PathVariable int idPunto, @PathVariable int idRuta){
+        return service.findByRutaAndId(idPunto, idRuta).orElse(null);
+    }
 
-    @GetMapping("/{id}/puntospeligro")
-    public List<PuntosPeligro> findAll(@PathVariable int id){
-        return service.findByIdruta(id);
+    @GetMapping("/{idRuta}/puntospeligro")
+    public List<PuntosPeligro> findAll(@PathVariable int idRuta){
+        return service.findAllByRuta(idRuta);
     }
 
 
