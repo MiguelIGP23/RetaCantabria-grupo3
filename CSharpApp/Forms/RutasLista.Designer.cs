@@ -33,8 +33,7 @@
             btn_borrar = new Button();
             btn_detalles = new Button();
             flpRutas = new FlowLayoutPanel();
-            ucRutaLista1 = new UserControls.UCRutaLista();
-            flpRutas.SuspendLayout();
+            btnAgregar = new Button();
             SuspendLayout();
             // 
             // txt_buscar_ruta
@@ -78,35 +77,36 @@
             // 
             // flpRutas
             // 
-            flpRutas.Controls.Add(ucRutaLista1);
             flpRutas.Location = new Point(84, 93);
             flpRutas.Name = "flpRutas";
             flpRutas.Size = new Size(613, 299);
             flpRutas.TabIndex = 5;
             // 
-            // ucRutaLista1
+            // btnAgregar
             // 
-            ucRutaLista1.Location = new Point(3, 3);
-            ucRutaLista1.Name = "ucRutaLista1";
-            ucRutaLista1.Ruta = null;
-            ucRutaLista1.Size = new Size(600, 67);
-            ucRutaLista1.TabIndex = 0;
+            btnAgregar.Location = new Point(339, 416);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(75, 23);
+            btnAgregar.TabIndex = 6;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.Click += btnAgregar_Click;
             // 
-            // Rutas
+            // RutasLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(786, 519);
+            Controls.Add(btnAgregar);
             Controls.Add(flpRutas);
             Controls.Add(btn_detalles);
             Controls.Add(btn_borrar);
             Controls.Add(btn_buscar);
             Controls.Add(txt_buscar_ruta);
             Margin = new Padding(4);
-            Name = "Rutas";
+            Name = "RutasLista";
             Text = "Rutas";
             Load += Rutas_Load;
-            flpRutas.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
 
@@ -119,5 +119,6 @@
         private System.Windows.Forms.Button btn_detalles;
         private FlowLayoutPanel flpRutas;
         private UserControls.UCRutaLista ucRutaLista1;
+        private Button btnAgregar;
     }
 }

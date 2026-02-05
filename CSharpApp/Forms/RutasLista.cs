@@ -80,5 +80,11 @@ namespace Forms
             var frm = new RutasDetalle(ruta, _api);
             frm.Show();
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            AgregarRuta agregarRuta = new AgregarRuta();
+            agregarRuta.Show();
+        }
     }
 }
