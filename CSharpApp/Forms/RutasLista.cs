@@ -18,6 +18,11 @@ namespace Forms
             _api = api;
         }
 
+        private async void Rutas_Load(object sender, EventArgs e)
+        {
+            await CargarRutas();
+        }
+
 
         // Método para cargar datos en la lista de user controls de rutas en el flowlayout
         public async Task CargarRutas()
@@ -66,16 +71,14 @@ namespace Forms
             MessageBox.Show("Ficha descargada en Descargas");
         }
 
-        private async void Rutas_Load(object sender, EventArgs e)
-        {
-            await CargarRutas();
-        }
+
 
 
         // Métodos de eventos
-        private void RutaClick(object? sender, Ruta e)
+        private void RutaClick(object? sender, Ruta ruta)
         {
-            new RutasDetalle().Show();
+            var frm = new RutasDetalle(ruta, _api);
+            frm.Show();
         }
     }
 }

@@ -83,7 +83,7 @@ namespace UserControls
             RutaClick?.Invoke(this, Ruta);
         }
 
-        private void UCRutaLista_Load(object sender, EventArgs e)
+        private void UCRutaLista_Click(object sender, EventArgs e)
         {
             RutaClick?.Invoke(this, Ruta);
         }

@@ -33,7 +33,7 @@
             txt_usuario = new TextBox();
             txt_password = new TextBox();
             btn_login = new Button();
-            btn_registro = new Button();
+            btn_verRutas = new Button();
             SuspendLayout();
             // 
             // lbl_usuario
@@ -85,23 +85,23 @@
             btn_login.UseVisualStyleBackColor = true;
             btn_login.Click += btn_login_Click;
             // 
-            // btn_registro
+            // btn_verRutas
             // 
-            btn_registro.Location = new Point(293, 257);
-            btn_registro.Margin = new Padding(4, 5, 4, 5);
-            btn_registro.Name = "btn_registro";
-            btn_registro.Size = new Size(100, 35);
-            btn_registro.TabIndex = 5;
-            btn_registro.Text = "Registro";
-            btn_registro.UseVisualStyleBackColor = true;
-            btn_registro.Click += btn_registro_Click;
+            btn_verRutas.Location = new Point(293, 257);
+            btn_verRutas.Margin = new Padding(4, 5, 4, 5);
+            btn_verRutas.Name = "btn_verRutas";
+            btn_verRutas.Size = new Size(100, 35);
+            btn_verRutas.TabIndex = 5;
+            btn_verRutas.Text = "Ver rutas";
+            btn_verRutas.UseVisualStyleBackColor = true;
+            btn_verRutas.Click += btn_registro_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(558, 350);
-            Controls.Add(btn_registro);
+            Controls.Add(btn_verRutas);
             Controls.Add(btn_login);
             Controls.Add(txt_password);
             Controls.Add(txt_usuario);
@@ -122,7 +122,7 @@
         private System.Windows.Forms.TextBox txt_usuario;
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Button btn_login;
-        private System.Windows.Forms.Button btn_registro;
+        private System.Windows.Forms.Button btn_verRutas;
     }
 }
 

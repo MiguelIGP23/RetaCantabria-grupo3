@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reta3/puntospeligro")
+@RequestMapping("/api/reta3/rutas")
 public class PuntosPeligroController {
 
     private final ServicePuntosPeligro service;
@@ -31,14 +31,14 @@ public class PuntosPeligroController {
         return service.update(id, puntospeligro);
     }
 
-    @GetMapping("/{id}")
-    public PuntosPeligro findById(@PathVariable int id){
-        return service.findById(id);
-    }
+//    @GetMapping("/{id}")
+//    public PuntosPeligro findById(@PathVariable int id){
+//        return service.findById(id);
+//    }
 
-    @GetMapping
-    public List<PuntosPeligro> findAll(){
-        return service.findAll();
+    @GetMapping("/{id}/puntospeligro")
+    public List<PuntosPeligro> findAll(@PathVariable int id){
+        return service.findByIdruta(id);
     }
 
 
