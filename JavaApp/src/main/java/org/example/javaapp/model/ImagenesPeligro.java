@@ -18,7 +18,7 @@ public class ImagenesPeligro {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "puntospeligro_idPuntospeligro", nullable = false)
-    private PuntosPeligro puntospeligro;
+    private PuntosPeligro puntosPeligro;
 
     public Integer getId() {
         return id;
@@ -44,11 +44,12 @@ public class ImagenesPeligro {
         this.descripcion = descripcion;
     }
 
-    public void setPuntospeligro(PuntosPeligro puntospeligro) {
-        this.puntospeligro = puntospeligro;
+    public void setPuntosPeligro(PuntosPeligro puntospeligro) {
+        this.puntosPeligro = puntospeligro;
     }
 
-    public PuntosPeligro getPuntospeligro() {
-        return puntospeligro;
+    public PuntosPeligro getPuntosPeligro() {
+        return puntosPeligro;
     }
+
 }

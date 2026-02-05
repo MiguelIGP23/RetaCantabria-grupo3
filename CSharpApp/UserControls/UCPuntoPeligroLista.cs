@@ -23,10 +23,10 @@ namespace UserControls
 
 
         // Carga en el user control los datos del punto de peligro dado como parámetro
-        public void SetData(PuntoPeligro pp)
+        public void SetData(PuntoPeligro pp, Ruta ruta)
         {
             PuntoPeligro = pp;
-            lbltxtRuta.Text = pp.Rutas_idRuta.ToString();
+            lbltxtRuta.Text = ruta.IdRuta.ToString();
             lbltxtPosicion.Text = pp.Posicion.ToString();
             lbltxtNombre.Text = pp.Nombre;
             BackColor = pp.Gravedad switch

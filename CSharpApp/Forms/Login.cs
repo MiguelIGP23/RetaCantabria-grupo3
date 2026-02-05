@@ -21,7 +21,7 @@ namespace Forms
         public Login()
         {
             InitializeComponent();
-            _api = new ApiReta("https://reta.raspiremote.org/");
+            _api = new ApiReta("http://localhost:8080/");
         }
 
         private async void btn_login_Click(object sender, EventArgs e)

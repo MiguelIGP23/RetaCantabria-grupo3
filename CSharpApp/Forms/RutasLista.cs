@@ -27,12 +27,21 @@ namespace Forms
         // Método para cargar datos en la lista de user controls de rutas en el flowlayout
         public async Task CargarRutas()
         {
-            List<Ruta> rutas = await _api.GetAllAsync<Ruta>("api/reta3/rutas");
+            string ruta;
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                ruta = "api/reta3/rutas";
+            }
+            else
+            {
+                ruta = "api/reta3/rutas/validadas";
+            }
+                List<Ruta> rutas = await _api.GetAllAsync<Ruta>(ruta);
             flpRutas.Controls.Clear();
-            foreach (Ruta ruta in rutas)
+            foreach (Ruta r in rutas)
             {
                 UCRutaLista uc = new UCRutaLista();
-                uc.SetData(ruta);
+                uc.SetData(r);
                 uc.RutaClick += RutaClick;
                 flpRutas.Controls.Add(uc);
             }

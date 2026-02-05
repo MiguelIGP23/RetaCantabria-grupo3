@@ -27,18 +27,18 @@ namespace Forms
 
         private void PuntosPeligroLista_Load(object sender, EventArgs e)
         {
-            CargarPuntosPeligro();
+            CargarPuntosPeligro(_ruta);
         }
 
 
-        public async void CargarPuntosPeligro()
+        public async void CargarPuntosPeligro(Ruta ruta)
         {
-            List<PuntoPeligro> puntosPeligro = await _api.GetAllAsync<PuntoPeligro>($"api/reta3/puntospeligro");
+            List<PuntoPeligro> puntosPeligro = await _api.GetAllAsync<PuntoPeligro>($"api/reta3/rutas/{ruta.IdRuta}/puntospeligro");
             flpPuntosPeligro.Controls.Clear();
             foreach (PuntoPeligro p in puntosPeligro)
             {
                 UCPuntoPeligroLista uc = new UCPuntoPeligroLista();
-                uc.SetData(p);
+                uc.SetData(p, ruta);
                 flpPuntosPeligro.Controls.Add(uc);
             }
         }
