@@ -1,6 +1,6 @@
-package com.example.kotlinapp.repository
+package com.example.kotlinapp.data.room.repository
 
-import com.example.kotlinapp.data.PuntosInteresDao
+import com.example.kotlinapp.data.room.daos.PuntosInteresDao
 
 
 class PuntosInteresRepository(private val puntosDao: PuntosInteresDao) {

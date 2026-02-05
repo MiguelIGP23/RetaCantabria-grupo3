@@ -1,5 +1,7 @@
 package com.example.kotlinapp.data
 
+import com.example.kotlinapp.data.services.AuthService
+
 class AuthRepository(
     private val api: AuthService,
     private val session: SessionDataStore

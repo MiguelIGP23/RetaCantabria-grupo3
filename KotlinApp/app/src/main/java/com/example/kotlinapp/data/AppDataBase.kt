@@ -2,6 +2,9 @@ package com.example.kotlinapp.data
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+import com.example.kotlinapp.data.room.daos.PuntosInteresDao
+import com.example.kotlinapp.data.room.daos.RutaDao
+import com.example.kotlinapp.data.room.daos.UsuarioDao
 
 
 @Database(

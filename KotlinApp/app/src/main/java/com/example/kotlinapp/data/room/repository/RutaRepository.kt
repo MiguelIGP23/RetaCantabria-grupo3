@@ -1,6 +1,6 @@
-package com.example.kotlinapp.repository
+package com.example.kotlinapp.data.room.repository
 
-import com.example.kotlinapp.data.RutaDao
+import com.example.kotlinapp.data.room.daos.RutaDao
 
 class RutaRepository(private val rutaDao: RutaDao) {
 

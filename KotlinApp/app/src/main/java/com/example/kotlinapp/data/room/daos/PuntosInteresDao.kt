@@ -1,8 +1,6 @@
-package com.example.kotlinapp.data
+package com.example.kotlinapp.data.room.daos
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
 
 @Dao
 interface PuntosInteresDao {
