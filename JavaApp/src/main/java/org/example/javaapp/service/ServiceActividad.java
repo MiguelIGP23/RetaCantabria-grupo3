@@ -20,6 +20,9 @@ public class ServiceActividad implements IServiceActividad {
         this.repoRuta = repoRuta;
     }
 
+
+    //CRUD genérico
+
     @Override
     public Actividad insert(Actividad actividad) {
         return repoActividad.save(actividad);
@@ -51,6 +54,10 @@ public class ServiceActividad implements IServiceActividad {
         return repoActividad.findAll();
     }
 
+
+
+    //CRUD dependiente de ruta
+
     public Actividad insertInRuta(int idRuta, Actividad actividad) {
         Ruta ruta = repoRuta.findById(idRuta).orElse(null);
         Actividad nueva = null;
@@ -80,4 +87,7 @@ public class ServiceActividad implements IServiceActividad {
     public Optional<Actividad> findByRutaAndId(int idActividad, int idRuta) {
         return repoActividad.findByIdAndRuta_Id(idActividad, idRuta);
     }
+
+
+
 }
