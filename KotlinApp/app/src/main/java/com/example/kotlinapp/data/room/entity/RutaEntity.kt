@@ -1,10 +1,14 @@
-package com.example.kotlinapp.model
+package com.example.kotlinapp.data.room.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.model.enums.Clasificacion
 
-data class Ruta(
-    val id: Int?,
+@Entity(tableName = "rutas")
+data class RutaEntity(
+    @PrimaryKey
+    val idRuta: Int?,
     val nombre: String,
     val nombreInicioruta: String,
     val nombreFinalruta: String,

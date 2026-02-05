@@ -1,34 +1,31 @@
 package com.example.kotlinapp.data.room.repository
 
 import com.example.kotlinapp.data.room.daos.RutaDao
+import com.example.kotlinapp.data.room.entity.RutaEntity
+import com.example.kotlinapp.data.room.mappers.toDomain
+import com.example.kotlinapp.data.room.mappers.toEntity
+import com.example.kotlinapp.data.services.RutaService
+import com.example.kotlinapp.model.Ruta
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class RutaRepository(private val rutaDao: RutaDao) {
+class RutaRepository(
+    private val api: RutaService,
+    private val dao: RutaDao
+) {
 
-    // --- Catálogo ---
-    //suspend fun obtenerCatalogo(): List<Ruta> {
-    // return rutaDao.obtenerCatalogo()
-    // }
+    fun getRutas(): Flow<List<Ruta>> = dao.getAll()
+        .map { list -> list.map { it.toDomain() } }  // mapeo aquí
 
-    // suspend fun insertarCatalogo(rutas: List<Ruta>) {
-    // rutaDao.insertarCatalogo(rutas)
-    // }
 
-    // --- Seguimiento ---
-    // suspend fun obtenerRuta(id: Int): Ruta? {
-    // return rutaDao.obtenerRuta(id)
-    // }
+    suspend fun syncRutas() {
+        val response = api.findAll()
 
-    // --- Grabación de rutas (modo tracking) ---
-    // suspend fun insertarRutaGrabada(ruta: Ruta): Long {
-    // return rutaDao.insertarRutaGrabada(ruta)
-    // }
-
-    // --- Sincronización ---
-    // suspend fun obtenerRutasPendientes(): List<Ruta> {
-    // return rutaDao.obtenerRutasPendientes()
-    // }
-
-    // suspend fun marcarComoSincronizada(id: Int) {
-    // rutaDao.marcarComoSincronizada(id)
-    // }
+        if (response.isSuccessful) {
+            response.body()?.let { rutas ->
+                dao.insertAll(rutas.map { it.toEntity() })
+            }
+        }
+    }
 }
+
