@@ -1,6 +1,7 @@
 package com.example.kotlinapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -34,7 +35,12 @@ class MainActivity : ComponentActivity() {
         // Instancia de la base de datos (Room)
         val database = AppDatabase.getDatabase(this) // tu singleton de Room
         val rutaDao = database.rutaDao()
-
+        try {
+            val db = AppDatabase.getDatabase(this)
+            Log.d("TEST", "DB instance creada: $db")
+        } catch (e: Exception) {
+            Log.e("TEST", "Error creando la BD", e)
+        }
         // Instancia del API
         val rutaService = ServiceFactory.ruta { dbViewModel.token.toString() } // Retrofit service
 

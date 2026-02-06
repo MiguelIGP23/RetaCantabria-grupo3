@@ -7,8 +7,8 @@ import com.example.kotlinapp.model.enums.Clasificacion
 
 @Entity(tableName = "rutas")
 data class RutaEntity(
-    @PrimaryKey
-    val idRuta: Int?,
+    @PrimaryKey(autoGenerate = true)
+    val idRuta: Int = 0,
     val nombre: String,
     val nombreInicioruta: String,
     val nombreFinalruta: String,

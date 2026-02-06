@@ -76,6 +76,7 @@ fun LoginView(
             Button(
                 onClick = {
                     vm.login(email, password)
+                    navController.navigate("List")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {

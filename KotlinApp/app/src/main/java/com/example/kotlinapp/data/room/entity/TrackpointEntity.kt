@@ -18,7 +18,7 @@ import com.example.kotlinapp.model.Ruta
     ]
 )
 data class TrackpointEntity(
-    val idRuta: Long,
+    val idRuta: Int,
     val posicion: Int,
     val latitud: Double,
     val longitud: Double,

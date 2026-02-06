@@ -1,16 +1,19 @@
 package com.example.kotlinapp.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.kotlinapp.data.room.Converters
 import com.example.kotlinapp.data.room.daos.RutaDao
 import com.example.kotlinapp.data.room.entity.PuntoInteresEntity
 import com.example.kotlinapp.data.room.entity.PuntoPeligroEntity
 import com.example.kotlinapp.data.room.entity.RutaEntity
 import com.example.kotlinapp.data.room.entity.TrackpointEntity
+import java.util.concurrent.Executors
 
 @Database(
     entities = [
@@ -37,7 +40,24 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                )
+                    .setQueryCallback(
+                        { sql, args ->
+                            Log.d("SQL", "Query: $sql | Args: $args")
+                        },
+                        Executors.newSingleThreadExecutor()
+                    )
+                    .fallbackToDestructiveMigration()
+                    .addCallback(
+                        object : RoomDatabase.Callback() {
+                            override fun onCreate(db: SupportSQLiteDatabase) {
+                                super.onCreate(db)
+                                Log.d("ROOM", "Base de datos creada correctamente")
+                            }
+                        }
+                    )
+                    .build()
+
                 INSTANCE = instance
                 instance
             }

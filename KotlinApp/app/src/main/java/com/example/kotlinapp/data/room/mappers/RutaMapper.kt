@@ -5,7 +5,7 @@ import com.example.kotlinapp.model.Ruta
 
 // Dominio -> Entidad
 fun Ruta.toEntity() = RutaEntity(
-    idRuta = id,
+    idRuta = id ?: 0,
     nombre = nombre,
     nombreInicioruta = nombreInicioruta,
     nombreFinalruta = nombreFinalruta,
