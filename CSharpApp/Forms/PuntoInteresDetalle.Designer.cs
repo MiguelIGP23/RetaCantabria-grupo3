@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class ImagenPeligroDetalle
+    partial class PuntoInteresDetalle
     {
         /// <summary>
         /// Required designer variable.
@@ -28,65 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            imagenPeligroCompleto1 = new UserControls.UCImagenPeligroCompleto();
+            btnImagenes = new Button();
             btnEditar = new Button();
             btnEliminar = new Button();
             btnVolver = new Button();
+            ucPuntoDeInteresCompleto1 = new UserControls.UCPuntoDeInteresCompleto();
             SuspendLayout();
             // 
-            // imagenPeligroCompleto1
+            // btnImagenes
             // 
-            imagenPeligroCompleto1.Location = new Point(12, 12);
-            imagenPeligroCompleto1.Name = "imagenPeligroCompleto1";
-            imagenPeligroCompleto1.Size = new Size(346, 332);
-            imagenPeligroCompleto1.TabIndex = 0;
+            btnImagenes.Location = new Point(435, 367);
+            btnImagenes.Name = "btnImagenes";
+            btnImagenes.Size = new Size(104, 23);
+            btnImagenes.TabIndex = 8;
+            btnImagenes.Text = "Ver imágenes";
+            btnImagenes.UseVisualStyleBackColor = true;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(149, 379);
+            btnEditar.Location = new Point(316, 367);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(75, 23);
-            btnEditar.TabIndex = 1;
+            btnEditar.TabIndex = 7;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(255, 379);
+            btnEliminar.Location = new Point(199, 367);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 23);
-            btnEliminar.TabIndex = 2;
+            btnEliminar.TabIndex = 6;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(40, 379);
+            btnVolver.Location = new Point(81, 367);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(75, 23);
-            btnVolver.TabIndex = 3;
-            btnVolver.Text = "Vovler";
+            btnVolver.TabIndex = 5;
+            btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
             // 
-            // ImagenPeligroDetalle
+            // ucPuntoDeInteresCompleto1
+            // 
+            ucPuntoDeInteresCompleto1.Location = new Point(12, 12);
+            ucPuntoDeInteresCompleto1.Name = "ucPuntoDeInteresCompleto1";
+            ucPuntoDeInteresCompleto1.puntoInteres = null;
+            ucPuntoDeInteresCompleto1.Size = new Size(569, 324);
+            ucPuntoDeInteresCompleto1.TabIndex = 9;
+            // 
+            // PuntoInteresDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(374, 428);
-            Controls.Add(btnVolver);
-            Controls.Add(btnEliminar);
+            ClientSize = new Size(604, 420);
+            Controls.Add(ucPuntoDeInteresCompleto1);
+            Controls.Add(btnImagenes);
             Controls.Add(btnEditar);
-            Controls.Add(imagenPeligroCompleto1);
-            Name = "ImagenPeligroDetalle";
-            Text = "ImagenPeligroDetalle";
+            Controls.Add(btnEliminar);
+            Controls.Add(btnVolver);
+            Name = "PuntoInteresDetalle";
+            Text = "PuntosInteresDetalle";
             ResumeLayout(false);
         }
 
         #endregion
 
-        private UserControls.UCImagenPeligroCompleto imagenPeligroCompleto1;
+        private Button btnImagenes;
         private Button btnEditar;
         private Button btnEliminar;
         private Button btnVolver;
+        private UserControls.UCPuntoDeInteresCompleto ucPuntoDeInteresCompleto1;
     }
 }

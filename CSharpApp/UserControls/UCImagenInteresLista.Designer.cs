@@ -36,18 +36,19 @@
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(308, 18);
+            lbltxtDescripcion.Location = new Point(296, 18);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(347, 52);
+            lbltxtDescripcion.Size = new Size(368, 46);
             lbltxtDescripcion.TabIndex = 8;
             lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
+            lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblDescripcion.Location = new Point(210, 18);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(77, 15);
+            lblDescripcion.Size = new Size(80, 15);
             lblDescripcion.TabIndex = 7;
             lblDescripcion.Text = "-Descripción:";
             // 
@@ -63,9 +64,10 @@
             // lblPuntoInteres
             // 
             lblPuntoInteres.AutoSize = true;
+            lblPuntoInteres.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblPuntoInteres.Location = new Point(22, 18);
             lblPuntoInteres.Name = "lblPuntoInteres";
-            lblPuntoInteres.Size = new Size(85, 15);
+            lblPuntoInteres.Size = new Size(90, 15);
             lblPuntoInteres.TabIndex = 5;
             lblPuntoInteres.Text = "-Punto interés:";
             // 

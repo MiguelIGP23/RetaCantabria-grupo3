@@ -43,47 +43,52 @@
             // lblId
             // 
             lblId.AutoSize = true;
+            lblId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblId.Location = new Point(23, 20);
             lblId.Name = "lblId";
-            lblId.Size = new Size(20, 15);
+            lblId.Size = new Size(26, 15);
             lblId.TabIndex = 0;
-            lblId.Text = "Id:";
+            lblId.Text = "-Id:";
             // 
             // lblRol
             // 
             lblRol.AutoSize = true;
+            lblRol.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblRol.Location = new Point(177, 20);
             lblRol.Name = "lblRol";
-            lblRol.Size = new Size(27, 15);
+            lblRol.Size = new Size(33, 15);
             lblRol.TabIndex = 1;
-            lblRol.Text = "Rol:";
+            lblRol.Text = "-Rol:";
             // 
             // lblApellido
             // 
             lblApellido.AutoSize = true;
+            lblApellido.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblApellido.Location = new Point(177, 76);
             lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(54, 15);
+            lblApellido.Size = new Size(60, 15);
             lblApellido.TabIndex = 2;
-            lblApellido.Text = "Apellido:";
+            lblApellido.Text = "-Apellido:";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblEmail.Location = new Point(23, 134);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(39, 15);
+            lblEmail.Size = new Size(44, 15);
             lblEmail.TabIndex = 3;
-            lblEmail.Text = "Email:";
+            lblEmail.Text = "-Email:";
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblNombre.Location = new Point(23, 76);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
+            lblNombre.Size = new Size(61, 15);
             lblNombre.TabIndex = 4;
-            lblNombre.Text = "Nombre:";
+            lblNombre.Text = "-Nombre:";
             // 
             // lbltxtNombre
             // 

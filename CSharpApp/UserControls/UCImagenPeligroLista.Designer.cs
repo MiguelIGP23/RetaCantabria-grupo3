@@ -37,9 +37,10 @@
             // lblPuntoPeligro
             // 
             lblPuntoPeligro.AutoSize = true;
+            lblPuntoPeligro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblPuntoPeligro.Location = new Point(22, 20);
             lblPuntoPeligro.Name = "lblPuntoPeligro";
-            lblPuntoPeligro.Size = new Size(87, 15);
+            lblPuntoPeligro.Size = new Size(90, 15);
             lblPuntoPeligro.TabIndex = 0;
             lblPuntoPeligro.Text = "-Punto peligro:";
             // 
@@ -63,9 +64,10 @@
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
+            lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblDescripcion.Location = new Point(219, 20);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(77, 15);
+            lblDescripcion.Size = new Size(80, 15);
             lblDescripcion.TabIndex = 2;
             lblDescripcion.Text = "-Descripción:";
             // 

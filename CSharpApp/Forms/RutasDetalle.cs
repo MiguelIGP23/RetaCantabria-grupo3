@@ -23,6 +23,7 @@ namespace Forms
             InitializeComponent();
             _ruta = ruta;
             _api = api;
+            cbFicha.SelectedIndex = 0;
         }
 
         // Carga en el user control los datos de la ruta pasada
@@ -40,6 +41,34 @@ namespace Forms
         {
             PuntosPeligroLista form = new PuntosPeligroLista(_ruta, _api);
             form.Show();
+        }
+
+
+        private async void pbDescarga_Click(object sender, EventArgs e)
+        {
+            int idRuta = _ruta.IdRuta;
+
+            string downloads = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            string opcion = cbFicha.SelectedItem?.ToString();
+
+            switch (opcion)
+            {
+                case "Usuario":
+                    downloads = Path.Combine(downloads, "ficha-usuario.txt");
+                    await _api.DescargarFichaUsuarioAsync(idRuta, downloads);
+                    break;
+                
+                case "Organización":
+                    downloads = Path.Combine(downloads, "ficha-organizacion.txt");
+                    await _api.DescargarFichaOrganizacionAsync(idRuta, downloads);
+                    break;
+                
+                case "Seguridad":
+                    downloads = Path.Combine(downloads, "ficha-seguridad.txt");
+                    await _api.DescargarFichaSeguridadAsync(idRuta, downloads);
+                    break;
+            }
+            MessageBox.Show("Ficha guardada en Descargas");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class ImagenPeligroDetalle
+    partial class ImagenInteresDetalle
     {
         /// <summary>
         /// Required designer variable.
@@ -28,47 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            imagenPeligroCompleto1 = new UserControls.UCImagenPeligroCompleto();
-            btnEditar = new Button();
-            btnEliminar = new Button();
+            ucImagenInteresCompleto1 = new UserControls.UCImagenInteresCompleto();
             btnVolver = new Button();
+            btnEliminar = new Button();
+            btnEditar = new Button();
             SuspendLayout();
             // 
-            // imagenPeligroCompleto1
+            // ucImagenInteresCompleto1
             // 
-            imagenPeligroCompleto1.Location = new Point(12, 12);
-            imagenPeligroCompleto1.Name = "imagenPeligroCompleto1";
-            imagenPeligroCompleto1.Size = new Size(346, 332);
-            imagenPeligroCompleto1.TabIndex = 0;
-            // 
-            // btnEditar
-            // 
-            btnEditar.Location = new Point(149, 379);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(75, 23);
-            btnEditar.TabIndex = 1;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Location = new Point(255, 379);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(75, 23);
-            btnEliminar.TabIndex = 2;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            ucImagenInteresCompleto1.Location = new Point(12, 24);
+            ucImagenInteresCompleto1.Name = "ucImagenInteresCompleto1";
+            ucImagenInteresCompleto1.Size = new Size(346, 332);
+            ucImagenInteresCompleto1.TabIndex = 0;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(40, 379);
+            btnVolver.Location = new Point(41, 381);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(75, 23);
-            btnVolver.TabIndex = 3;
+            btnVolver.TabIndex = 6;
             btnVolver.Text = "Vovler";
             btnVolver.UseVisualStyleBackColor = true;
             // 
-            // ImagenPeligroDetalle
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(256, 381);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.TabIndex = 5;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Location = new Point(150, 381);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 4;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            // 
+            // ImagenInteresDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -76,17 +76,17 @@
             Controls.Add(btnVolver);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
-            Controls.Add(imagenPeligroCompleto1);
-            Name = "ImagenPeligroDetalle";
-            Text = "ImagenPeligroDetalle";
+            Controls.Add(ucImagenInteresCompleto1);
+            Name = "ImagenInteresDetalle";
+            Text = "ImagenInteresDetalle";
             ResumeLayout(false);
         }
 
         #endregion
 
-        private UserControls.UCImagenPeligroCompleto imagenPeligroCompleto1;
-        private Button btnEditar;
-        private Button btnEliminar;
+        private UserControls.UCImagenInteresCompleto ucImagenInteresCompleto1;
         private Button btnVolver;
+        private Button btnEliminar;
+        private Button btnEditar;
     }
 }

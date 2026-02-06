@@ -28,7 +28,7 @@ namespace Forms
         public async Task CargarRutas()
         {
             string ruta;
-            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            if (Session.Rol == EnumRoles.ADMINISTRADOR)
             {
                 ruta = "api/reta3/rutas";
             }

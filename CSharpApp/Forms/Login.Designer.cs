@@ -59,7 +59,7 @@
             // txt_usuario
             // 
             txt_usuario.Location = new Point(208, 46);
-            txt_usuario.Margin = new Padding(4, 4, 4, 4);
+            txt_usuario.Margin = new Padding(4);
             txt_usuario.Name = "txt_usuario";
             txt_usuario.Size = new Size(161, 23);
             txt_usuario.TabIndex = 2;
@@ -68,18 +68,17 @@
             // txt_password
             // 
             txt_password.Location = new Point(208, 107);
-            txt_password.Margin = new Padding(4, 4, 4, 4);
+            txt_password.Margin = new Padding(4);
             txt_password.Name = "txt_password";
             txt_password.PasswordChar = '*';
             txt_password.Size = new Size(161, 23);
             txt_password.TabIndex = 3;
-            txt_password.Text = "1234";
             txt_password.UseSystemPasswordChar = true;
             // 
             // btn_login
             // 
             btn_login.Location = new Point(122, 193);
-            btn_login.Margin = new Padding(4, 4, 4, 4);
+            btn_login.Margin = new Padding(4);
             btn_login.Name = "btn_login";
             btn_login.Size = new Size(88, 26);
             btn_login.TabIndex = 4;
@@ -90,7 +89,7 @@
             // btn_verRutas
             // 
             btn_verRutas.Location = new Point(256, 193);
-            btn_verRutas.Margin = new Padding(4, 4, 4, 4);
+            btn_verRutas.Margin = new Padding(4);
             btn_verRutas.Name = "btn_verRutas";
             btn_verRutas.Size = new Size(88, 26);
             btn_verRutas.TabIndex = 5;
@@ -109,7 +108,7 @@
             Controls.Add(txt_usuario);
             Controls.Add(lbl_password);
             Controls.Add(lbl_usuario);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Login";
             Text = "Login";
             ResumeLayout(false);

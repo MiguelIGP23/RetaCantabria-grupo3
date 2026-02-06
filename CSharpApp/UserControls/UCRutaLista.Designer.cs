@@ -41,9 +41,9 @@
             // lbltxtNombre
             // 
             lbltxtNombre.AutoSize = true;
-            lbltxtNombre.Location = new Point(93, 33);
+            lbltxtNombre.Location = new Point(81, 25);
             lbltxtNombre.Name = "lbltxtNombre";
-            lbltxtNombre.Size = new Size(78, 20);
+            lbltxtNombre.Size = new Size(62, 15);
             lbltxtNombre.TabIndex = 1;
             lbltxtNombre.Text = "txtnombre";
             lbltxtNombre.Click += lbltxtNombre_Click;
@@ -52,19 +52,19 @@
             // 
             lblDistancia.AutoSize = true;
             lblDistancia.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDistancia.Location = new Point(259, 33);
+            lblDistancia.Location = new Point(227, 25);
             lblDistancia.Name = "lblDistancia";
-            lblDistancia.Size = new Size(77, 20);
+            lblDistancia.Size = new Size(65, 15);
             lblDistancia.TabIndex = 2;
-            lblDistancia.Text = "Distancia:";
+            lblDistancia.Text = "-Distancia:";
             lblDistancia.Click += lblDistancia_Click;
             // 
             // lbltxtDistancia
             // 
             lbltxtDistancia.AutoSize = true;
-            lbltxtDistancia.Location = new Point(334, 33);
+            lbltxtDistancia.Location = new Point(292, 25);
             lbltxtDistancia.Name = "lbltxtDistancia";
-            lbltxtDistancia.Size = new Size(47, 20);
+            lbltxtDistancia.Size = new Size(36, 15);
             lbltxtDistancia.TabIndex = 3;
             lbltxtDistancia.Text = "txtDis";
             lbltxtDistancia.Click += lbltxtDistancia_Click;
@@ -72,9 +72,9 @@
             // lbltxtDuracion
             // 
             lbltxtDuracion.AutoSize = true;
-            lbltxtDuracion.Location = new Point(474, 33);
+            lbltxtDuracion.Location = new Point(415, 25);
             lbltxtDuracion.Name = "lbltxtDuracion";
-            lbltxtDuracion.Size = new Size(50, 20);
+            lbltxtDuracion.Size = new Size(39, 15);
             lbltxtDuracion.TabIndex = 5;
             lbltxtDuracion.Text = "txtDur";
             lbltxtDuracion.Click += lbltxtDuracion_Click;
@@ -83,30 +83,30 @@
             // 
             lblDuracion.AutoSize = true;
             lblDuracion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDuracion.Location = new Point(397, 33);
+            lblDuracion.Location = new Point(347, 25);
             lblDuracion.Name = "lblDuracion";
-            lblDuracion.Size = new Size(76, 20);
+            lblDuracion.Size = new Size(65, 15);
             lblDuracion.TabIndex = 4;
-            lblDuracion.Text = "Duración:";
+            lblDuracion.Text = "-Duración:";
             lblDuracion.Click += lblDuracion_Click;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNombre.Location = new Point(26, 33);
+            lblNombre.Location = new Point(23, 25);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(71, 20);
+            lblNombre.Size = new Size(61, 15);
             lblNombre.TabIndex = 0;
-            lblNombre.Text = "Nombre:";
+            lblNombre.Text = "-Nombre:";
             lblNombre.Click += lblNombre_Click;
             // 
             // lbltxtEstrellas
             // 
             lbltxtEstrellas.AutoSize = true;
-            lbltxtEstrellas.Location = new Point(627, 33);
+            lbltxtEstrellas.Location = new Point(549, 25);
             lbltxtEstrellas.Name = "lbltxtEstrellas";
-            lbltxtEstrellas.Size = new Size(45, 20);
+            lbltxtEstrellas.Size = new Size(35, 15);
             lbltxtEstrellas.TabIndex = 7;
             lbltxtEstrellas.Text = "txtEst";
             lbltxtEstrellas.Click += lbltxtEstrellas_Click;
@@ -115,16 +115,16 @@
             // 
             lblEstrellas.AutoSize = true;
             lblEstrellas.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblEstrellas.Location = new Point(538, 33);
+            lblEstrellas.Location = new Point(471, 25);
             lblEstrellas.Name = "lblEstrellas";
-            lblEstrellas.Size = new Size(92, 20);
+            lblEstrellas.Size = new Size(77, 15);
             lblEstrellas.TabIndex = 6;
-            lblEstrellas.Text = "Puntuación:";
+            lblEstrellas.Text = "-Puntuación:";
             lblEstrellas.Click += lblEstrellas_Click;
             // 
             // UCRutaLista
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lbltxtEstrellas);
             Controls.Add(lblEstrellas);
@@ -134,9 +134,8 @@
             Controls.Add(lblDistancia);
             Controls.Add(lbltxtNombre);
             Controls.Add(lblNombre);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "UCRutaLista";
-            Size = new Size(686, 89);
+            Size = new Size(600, 67);
             Click += UCRutaLista_Click;
             ResumeLayout(false);
             PerformLayout();

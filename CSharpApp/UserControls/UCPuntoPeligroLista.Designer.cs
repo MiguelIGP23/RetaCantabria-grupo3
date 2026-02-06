@@ -39,9 +39,10 @@
             // lblRuta
             // 
             lblRuta.AutoSize = true;
+            lblRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblRuta.Location = new Point(27, 24);
             lblRuta.Name = "lblRuta";
-            lblRuta.Size = new Size(53, 15);
+            lblRuta.Size = new Size(55, 15);
             lblRuta.TabIndex = 0;
             lblRuta.Text = "-Nº ruta:";
             // 
@@ -66,6 +67,7 @@
             // lblPos
             // 
             lblPos.AutoSize = true;
+            lblPos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblPos.Location = new Point(148, 24);
             lblPos.Name = "lblPos";
             lblPos.Size = new Size(60, 15);
@@ -84,9 +86,10 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblNombre.Location = new Point(264, 24);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(56, 15);
+            lblNombre.Size = new Size(58, 15);
             lblNombre.TabIndex = 4;
             lblNombre.Text = "-Nombre";
             // 

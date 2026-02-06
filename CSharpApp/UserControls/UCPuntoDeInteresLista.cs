@@ -23,8 +23,7 @@ namespace UserControls
         {
             puntoInteres = p;
             lbltxtNombre.Text = p.Nombre;
-            lbltxtLatitud.Text = p.Latitud.ToString();
-            lbltxtLongitud.Text = p.Longitud.ToString();
+            lbltxtRuta.Text = p.Rutas_idRuta.ToString();
             lblTipo.Text = p.Tipo.ToString();
         }
 

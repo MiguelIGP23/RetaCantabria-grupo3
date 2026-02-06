@@ -39,29 +39,32 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblNombre.Location = new Point(90, 24);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
+            lblNombre.Size = new Size(61, 15);
             lblNombre.TabIndex = 9;
-            lblNombre.Text = "Nombre:";
+            lblNombre.Text = "-Nombre:";
             // 
             // lblApellido
             // 
             lblApellido.AutoSize = true;
+            lblApellido.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblApellido.Location = new Point(279, 24);
             lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(54, 15);
+            lblApellido.Size = new Size(60, 15);
             lblApellido.TabIndex = 7;
-            lblApellido.Text = "Apellido:";
+            lblApellido.Text = "-Apellido:";
             // 
             // lblId
             // 
             lblId.AutoSize = true;
+            lblId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblId.Location = new Point(16, 24);
             lblId.Name = "lblId";
-            lblId.Size = new Size(20, 15);
+            lblId.Size = new Size(26, 15);
             lblId.TabIndex = 5;
-            lblId.Text = "Id:";
+            lblId.Text = "-Id:";
             // 
             // lbltxtId
             // 

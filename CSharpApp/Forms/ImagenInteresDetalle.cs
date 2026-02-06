@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserControls
+namespace Forms
 {
-    public partial class ImagenPeligroCompleto : UserControl
+    public partial class ImagenInteresDetalle : Form
     {
-        public ImagenPeligroCompleto()
+        public ImagenInteresDetalle()
         {
             InitializeComponent();
         }

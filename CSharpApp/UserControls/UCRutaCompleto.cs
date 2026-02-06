@@ -42,15 +42,20 @@ namespace UserControls
             lbltxtClasificacion.Text = ruta.Clasificacion.ToString();
             lbltxtNivelEsfuerzo.Text = ruta.NivelEsfuerzo.ToString();
             lbltxtNivelRiesgo.Text = ruta.NivelRiesgo.ToString();
-            lbltxtEstadoRuta.Text = (ruta.EstadoRuta==1) ? "Aprobada" : "En espera";
+            lbltxtEstadoRuta.Text = (ruta.EstadoRuta == 1) ? "Aprobada" : "En espera";
             lbltxtTipoTerreno.Text = ruta.TipoTerreno.ToString();
             lbltxtIndicaciones.Text = ruta.Indicaciones.ToString();
             lbltxtTemporadas.Text = ruta.Temporadas.ToString();
-            lbltxtAccesibilidad.Text = (ruta.Accesibilidad==1) ? "SI" : "NO";
-            lbltxtRutaFamiliar.Text = (ruta.RutaFamiliar==1) ? "SI" : "NO";
+            lbltxtAccesibilidad.Text = (ruta.Accesibilidad == 1) ? "SI" : "NO";
+            lbltxtRutaFamiliar.Text = (ruta.RutaFamiliar == 1) ? "SI" : "NO";
             lbltxtRecomendaciones.Text = ruta.RecomendacionesEquipo;
             lbltxtZonaGeografica.Text = ruta.ZonaGeografica;
             lbltxtPuntuacion.Text = ruta.MediaEstrellas.ToString();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
