@@ -48,7 +48,7 @@
             // 
             lbltxtDescripcion.Location = new Point(114, 53);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(191, 67);
+            lbltxtDescripcion.Size = new Size(201, 67);
             lbltxtDescripcion.TabIndex = 17;
             lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
             // 
