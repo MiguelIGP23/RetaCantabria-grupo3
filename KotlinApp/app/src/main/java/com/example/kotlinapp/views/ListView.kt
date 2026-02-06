@@ -34,12 +34,12 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.model.enums.WaypointType
 import com.example.kotlinapp.ui.theme.fondoPrincipal
-import com.example.kotlinapp.viewmodels.RutaViewModel
+import com.example.kotlinapp.viewmodels.RutasViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView(navController: NavHostController, viewModel: RutaViewModel) {
+fun ListView(navController: NavHostController, viewModel: RutasViewModel) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 

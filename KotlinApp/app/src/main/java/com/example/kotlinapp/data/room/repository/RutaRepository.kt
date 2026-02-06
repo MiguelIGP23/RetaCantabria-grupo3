@@ -1,5 +1,6 @@
 package com.example.kotlinapp.data.room.repository
 
+import android.util.Log
 import com.example.kotlinapp.data.room.daos.RutaDao
 import com.example.kotlinapp.data.room.entity.RutaEntity
 import com.example.kotlinapp.data.room.mappers.toDomain
@@ -21,8 +22,11 @@ class RutaRepository(
     suspend fun syncRutas() {
         val response = api.findAll()
 
+        Log.d("RUTAS", "code=${response.code()} body=${response.body()}")
+
         if (response.isSuccessful) {
             response.body()?.let { rutas ->
+                Log.d("RUTAS", "insertando ${rutas.size}")
                 dao.insertAll(rutas.map { it.toEntity() })
             }
         }

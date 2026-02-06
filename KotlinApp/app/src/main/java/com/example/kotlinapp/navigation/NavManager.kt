@@ -11,14 +11,14 @@ import android.Manifest
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.kotlinapp.viewmodels.DatabaseViewModel
-import com.example.kotlinapp.viewmodels.RutaViewModel
+import com.example.kotlinapp.viewmodels.RutasViewModel
 import com.example.kotlinapp.views.DetailView
 import com.example.kotlinapp.views.LoginView
 import com.example.kotlinapp.views.cargarRutasDummy
 
 
 @Composable
-fun NavManager(dbViewModel: DatabaseViewModel, viewModel: RutaViewModel) {
+fun NavManager(dbViewModel: DatabaseViewModel, viewModel: RutasViewModel) {
     val navController = rememberNavController()
     val rutas = cargarRutasDummy()
     NavHost(

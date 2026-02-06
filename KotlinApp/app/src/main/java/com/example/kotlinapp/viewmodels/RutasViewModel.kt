@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.stateIn
 
 
-class RutaViewModel (private val repository: RutaRepository) : ViewModel() {
+class RutasViewModel (private val repository: RutaRepository) : ViewModel() {
 
     val rutas = repository.getRutas()
         .stateIn(

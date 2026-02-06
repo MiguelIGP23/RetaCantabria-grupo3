@@ -15,12 +15,14 @@ import com.example.kotlinapp.data.SessionDataStore
 import com.example.kotlinapp.data.room.repository.RutaRepository
 import com.example.kotlinapp.navigation.NavManager
 import com.example.kotlinapp.viewmodels.DatabaseViewModel
-import com.example.kotlinapp.viewmodels.RutaViewModel
+import com.example.kotlinapp.viewmodels.RutasViewModel
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
     private lateinit var session : SessionDataStore
     private lateinit var dbViewModel: DatabaseViewModel
-    private lateinit var rutaViewModel: RutaViewModel
+    private lateinit var rutaViewModel: RutasViewModel
     private lateinit var rutaRepo: RutaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +44,18 @@ class MainActivity : ComponentActivity() {
             Log.e("TEST", "Error creando la BD", e)
         }
         // Instancia del API
-        val rutaService = ServiceFactory.ruta { dbViewModel.token.toString() } // Retrofit service
+        val rutaService = ServiceFactory.ruta {
+            runBlocking {
+                session.tokenFlow.firstOrNull()
+            }
+        }
+// Retrofit service
 
         // Repository
         rutaRepo = RutaRepository(rutaService, rutaDao)
 
         // ViewModel de rutas
-        rutaViewModel = RutaViewModel(rutaRepo)
+        rutaViewModel = RutasViewModel(rutaRepo)
         setContent {
             Scaffold { padding ->
                 MainScreen(modifier = Modifier.padding(padding),dbViewModel, rutaViewModel)
@@ -59,7 +66,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun MainScreen(modifier: Modifier,databaseViewModel: DatabaseViewModel,ViewModel: RutaViewModel) {
+fun MainScreen(modifier: Modifier,databaseViewModel: DatabaseViewModel,ViewModel: RutasViewModel) {
     NavManager(
         databaseViewModel,
         viewModel = ViewModel
