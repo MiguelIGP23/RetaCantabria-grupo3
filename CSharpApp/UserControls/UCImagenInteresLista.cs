@@ -27,7 +27,6 @@ namespace UserControls
             ImagenDeInteres = i;
             lbltxtPuntoInteres.Text = i.Descripcion;
             lbltxtDescripcion.Text = i.Descripcion;
-            pbImagenInteres.Load(i.Url);
         }
     }
 }

@@ -32,14 +32,12 @@
             lbltxtPuntoPeligro = new Label();
             lbltxtDescripcion = new Label();
             lblDescripcion = new Label();
-            pbImagenPeligro = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pbImagenPeligro).BeginInit();
             SuspendLayout();
             // 
             // lblPuntoPeligro
             // 
             lblPuntoPeligro.AutoSize = true;
-            lblPuntoPeligro.Location = new Point(22, 25);
+            lblPuntoPeligro.Location = new Point(22, 20);
             lblPuntoPeligro.Name = "lblPuntoPeligro";
             lblPuntoPeligro.Size = new Size(87, 15);
             lblPuntoPeligro.TabIndex = 0;
@@ -48,7 +46,7 @@
             // lbltxtPuntoPeligro
             // 
             lbltxtPuntoPeligro.AutoSize = true;
-            lbltxtPuntoPeligro.Location = new Point(115, 25);
+            lbltxtPuntoPeligro.Location = new Point(115, 20);
             lbltxtPuntoPeligro.Name = "lbltxtPuntoPeligro";
             lbltxtPuntoPeligro.Size = new Size(47, 15);
             lbltxtPuntoPeligro.TabIndex = 1;
@@ -56,41 +54,31 @@
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(105, 56);
+            lbltxtDescripcion.Location = new Point(302, 20);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(151, 50);
+            lbltxtDescripcion.Size = new Size(358, 50);
             lbltxtDescripcion.TabIndex = 3;
             lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(22, 56);
+            lblDescripcion.Location = new Point(219, 20);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(77, 15);
             lblDescripcion.TabIndex = 2;
             lblDescripcion.Text = "-Descripción:";
             // 
-            // pbImagenPeligro
-            // 
-            pbImagenPeligro.Location = new Point(22, 119);
-            pbImagenPeligro.Name = "pbImagenPeligro";
-            pbImagenPeligro.Size = new Size(234, 140);
-            pbImagenPeligro.TabIndex = 4;
-            pbImagenPeligro.TabStop = false;
-            // 
             // UCImagenPeligroLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(pbImagenPeligro);
             Controls.Add(lbltxtDescripcion);
             Controls.Add(lblDescripcion);
             Controls.Add(lbltxtPuntoPeligro);
             Controls.Add(lblPuntoPeligro);
             Name = "UCImagenPeligroLista";
-            Size = new Size(281, 278);
-            ((System.ComponentModel.ISupportInitialize)pbImagenPeligro).EndInit();
+            Size = new Size(690, 75);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -101,6 +89,5 @@
         private Label lbltxtPuntoPeligro;
         private Label lbltxtDescripcion;
         private Label lblDescripcion;
-        private PictureBox pbImagenPeligro;
     }
 }

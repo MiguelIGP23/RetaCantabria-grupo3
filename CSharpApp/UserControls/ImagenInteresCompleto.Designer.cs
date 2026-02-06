@@ -1,6 +1,6 @@
 ﻿namespace UserControls
 {
-    partial class UCImagenInteresLista
+    partial class ImagenInteresCompleto
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -32,61 +32,75 @@
             lblDescripcion = new Label();
             lbltxtPuntoInteres = new Label();
             lblPuntoInteres = new Label();
+            pbImagen = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(308, 18);
+            lbltxtDescripcion.Location = new Point(111, 56);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(347, 52);
-            lbltxtDescripcion.TabIndex = 8;
+            lbltxtDescripcion.Size = new Size(191, 67);
+            lbltxtDescripcion.TabIndex = 12;
             lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(210, 18);
+            lblDescripcion.Location = new Point(28, 56);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(77, 15);
-            lblDescripcion.TabIndex = 7;
+            lblDescripcion.TabIndex = 11;
             lblDescripcion.Text = "-Descripción:";
             // 
             // lbltxtPuntoInteres
             // 
             lbltxtPuntoInteres.AutoSize = true;
-            lbltxtPuntoInteres.Location = new Point(115, 18);
+            lbltxtPuntoInteres.Location = new Point(119, 23);
             lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
             lbltxtPuntoInteres.Size = new Size(47, 15);
-            lbltxtPuntoInteres.TabIndex = 6;
+            lbltxtPuntoInteres.TabIndex = 10;
             lbltxtPuntoInteres.Text = "txtNum";
             // 
             // lblPuntoInteres
             // 
             lblPuntoInteres.AutoSize = true;
-            lblPuntoInteres.Location = new Point(22, 18);
+            lblPuntoInteres.Location = new Point(28, 23);
             lblPuntoInteres.Name = "lblPuntoInteres";
             lblPuntoInteres.Size = new Size(85, 15);
-            lblPuntoInteres.TabIndex = 5;
+            lblPuntoInteres.TabIndex = 9;
             lblPuntoInteres.Text = "-Punto interés:";
             // 
-            // UCImagenInteresLista
+            // pbImagen
+            // 
+            pbImagen.Location = new Point(28, 145);
+            pbImagen.Name = "pbImagen";
+            pbImagen.Size = new Size(284, 157);
+            pbImagen.TabIndex = 13;
+            pbImagen.TabStop = false;
+            // 
+            // ImagenInteresCompleto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pbImagen);
             Controls.Add(lbltxtDescripcion);
             Controls.Add(lblDescripcion);
             Controls.Add(lbltxtPuntoInteres);
             Controls.Add(lblPuntoInteres);
-            Name = "UCImagenInteresLista";
-            Size = new Size(690, 75);
+            Name = "ImagenInteresCompleto";
+            Size = new Size(346, 332);
+            ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
         private Label lbltxtDescripcion;
         private Label lblDescripcion;
         private Label lbltxtPuntoInteres;
         private Label lblPuntoInteres;
+        private PictureBox pbImagen;
     }
 }

@@ -27,7 +27,6 @@ namespace UserControls
             ImagenPeligro = ip;
             lbltxtPuntoPeligro.Text = ip.Puntospeligro_idPuntosinteres.ToString();
             lblDescripcion.Text = ip.Descripcion;
-            pbImagenPeligro.Load(ip.Url);
         }
     }
 }

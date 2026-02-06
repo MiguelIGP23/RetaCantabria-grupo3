@@ -31,6 +31,7 @@
             flpPuntosPeligro = new FlowLayoutPanel();
             ucPuntoPeligroLista1 = new UserControls.UCPuntoPeligroLista();
             btnVolver = new Button();
+            btnNuevo = new Button();
             flpPuntosPeligro.SuspendLayout();
             SuspendLayout();
             // 
@@ -38,37 +39,49 @@
             // 
             flpPuntosPeligro.AutoScroll = true;
             flpPuntosPeligro.Controls.Add(ucPuntoPeligroLista1);
-            flpPuntosPeligro.Location = new Point(41, 41);
+            flpPuntosPeligro.Location = new Point(36, 31);
+            flpPuntosPeligro.Margin = new Padding(3, 2, 3, 2);
             flpPuntosPeligro.Name = "flpPuntosPeligro";
-            flpPuntosPeligro.Size = new Size(726, 324);
+            flpPuntosPeligro.Size = new Size(635, 243);
             flpPuntosPeligro.TabIndex = 0;
             // 
             // ucPuntoPeligroLista1
             // 
-            ucPuntoPeligroLista1.Location = new Point(3, 4);
-            ucPuntoPeligroLista1.Margin = new Padding(3, 4, 3, 4);
+            ucPuntoPeligroLista1.Location = new Point(3, 3);
             ucPuntoPeligroLista1.Name = "ucPuntoPeligroLista1";
             ucPuntoPeligroLista1.PuntoPeligro = null;
-            ucPuntoPeligroLista1.Size = new Size(708, 100);
+            ucPuntoPeligroLista1.Size = new Size(620, 75);
             ucPuntoPeligroLista1.TabIndex = 0;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(313, 391);
+            btnVolver.Location = new Point(120, 294);
+            btnVolver.Margin = new Padding(3, 2, 3, 2);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(94, 29);
+            btnVolver.Size = new Size(82, 22);
             btnVolver.TabIndex = 1;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
             btnVolver.Click += btnVolver_Click;
             // 
+            // btnNuevo
+            // 
+            btnNuevo.Location = new Point(323, 293);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(103, 23);
+            btnNuevo.TabIndex = 2;
+            btnNuevo.Text = "Nuevo punto";
+            btnNuevo.UseVisualStyleBackColor = true;
+            // 
             // PuntosPeligroLista
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
+            Controls.Add(btnNuevo);
             Controls.Add(btnVolver);
             Controls.Add(flpPuntosPeligro);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "PuntosPeligroLista";
             Text = "PuntosPeligroLista";
             Load += PuntosPeligroLista_Load;
@@ -81,5 +94,6 @@
         private FlowLayoutPanel flpPuntosPeligro;
         private UserControls.UCPuntoPeligroLista ucPuntoPeligroLista1;
         private Button btnVolver;
+        private Button btnNuevo;
     }
 }

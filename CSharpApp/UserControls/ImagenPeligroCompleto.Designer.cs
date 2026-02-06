@@ -1,6 +1,6 @@
 ﻿namespace UserControls
 {
-    partial class UCImagenInteresLista
+    partial class ImagenPeligroCompleto
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -28,65 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
+            pbImagen = new PictureBox();
             lbltxtDescripcion = new Label();
             lblDescripcion = new Label();
-            lbltxtPuntoInteres = new Label();
-            lblPuntoInteres = new Label();
+            lbltxtPuntoPeligro = new Label();
+            lblPuntoPeligro = new Label();
+            ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
+            // 
+            // pbImagen
+            // 
+            pbImagen.Location = new Point(31, 142);
+            pbImagen.Name = "pbImagen";
+            pbImagen.Size = new Size(284, 157);
+            pbImagen.TabIndex = 18;
+            pbImagen.TabStop = false;
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(308, 18);
+            lbltxtDescripcion.Location = new Point(114, 53);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(347, 52);
-            lbltxtDescripcion.TabIndex = 8;
+            lbltxtDescripcion.Size = new Size(191, 67);
+            lbltxtDescripcion.TabIndex = 17;
             lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(210, 18);
+            lblDescripcion.Location = new Point(31, 53);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(77, 15);
-            lblDescripcion.TabIndex = 7;
+            lblDescripcion.TabIndex = 16;
             lblDescripcion.Text = "-Descripción:";
             // 
-            // lbltxtPuntoInteres
+            // lbltxtPuntoPeligro
             // 
-            lbltxtPuntoInteres.AutoSize = true;
-            lbltxtPuntoInteres.Location = new Point(115, 18);
-            lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
-            lbltxtPuntoInteres.Size = new Size(47, 15);
-            lbltxtPuntoInteres.TabIndex = 6;
-            lbltxtPuntoInteres.Text = "txtNum";
+            lbltxtPuntoPeligro.AutoSize = true;
+            lbltxtPuntoPeligro.Location = new Point(122, 20);
+            lbltxtPuntoPeligro.Name = "lbltxtPuntoPeligro";
+            lbltxtPuntoPeligro.Size = new Size(47, 15);
+            lbltxtPuntoPeligro.TabIndex = 15;
+            lbltxtPuntoPeligro.Text = "txtNum";
             // 
-            // lblPuntoInteres
+            // lblPuntoPeligro
             // 
-            lblPuntoInteres.AutoSize = true;
-            lblPuntoInteres.Location = new Point(22, 18);
-            lblPuntoInteres.Name = "lblPuntoInteres";
-            lblPuntoInteres.Size = new Size(85, 15);
-            lblPuntoInteres.TabIndex = 5;
-            lblPuntoInteres.Text = "-Punto interés:";
+            lblPuntoPeligro.AutoSize = true;
+            lblPuntoPeligro.Location = new Point(31, 20);
+            lblPuntoPeligro.Name = "lblPuntoPeligro";
+            lblPuntoPeligro.Size = new Size(87, 15);
+            lblPuntoPeligro.TabIndex = 14;
+            lblPuntoPeligro.Text = "-Punto peligro:";
             // 
-            // UCImagenInteresLista
+            // ImagenPeligroCompleto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pbImagen);
             Controls.Add(lbltxtDescripcion);
             Controls.Add(lblDescripcion);
-            Controls.Add(lbltxtPuntoInteres);
-            Controls.Add(lblPuntoInteres);
-            Name = "UCImagenInteresLista";
-            Size = new Size(690, 75);
+            Controls.Add(lbltxtPuntoPeligro);
+            Controls.Add(lblPuntoPeligro);
+            Name = "ImagenPeligroCompleto";
+            Size = new Size(346, 332);
+            ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        private PictureBox pbImagen;
         private Label lbltxtDescripcion;
         private Label lblDescripcion;
-        private Label lbltxtPuntoInteres;
-        private Label lblPuntoInteres;
+        private Label lbltxtPuntoPeligro;
+        private Label lblPuntoPeligro;
     }
 }
