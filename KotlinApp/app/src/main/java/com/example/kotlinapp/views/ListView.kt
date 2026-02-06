@@ -184,9 +184,9 @@ fun cargarRutasDummy(): List<Ruta> {
 
     // Trackpoints dummy
     val trackpoints1 = listOf(
-        Trackpoint(1, 40.0, -3.0, 100.0, System.currentTimeMillis()),
-        Trackpoint(2, 40.1, -3.05, 120.0, System.currentTimeMillis() + 10000),
-        Trackpoint(3, 40.2, -3.1, 130.0, System.currentTimeMillis() + 20000)
+        Trackpoint(1, 1,40.0, -3.0, 100.0, System.currentTimeMillis()),
+        Trackpoint(1, 2,40.1, -3.05, 120.0, System.currentTimeMillis() + 10000),
+        Trackpoint(1, 3,40.2, -3.1, 130.0, System.currentTimeMillis() + 20000)
     )
 
     // Waypoints dummy

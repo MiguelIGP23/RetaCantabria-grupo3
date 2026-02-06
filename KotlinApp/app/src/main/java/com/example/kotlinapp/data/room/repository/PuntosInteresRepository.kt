@@ -1,30 +1,33 @@
 package com.example.kotlinapp.data.room.repository
 
+import android.util.Log
 import com.example.kotlinapp.data.room.daos.PuntosInteresDao
+import com.example.kotlinapp.data.room.entity.PuntoInteresEntity
+import com.example.kotlinapp.data.room.mappers.toDomain
+import com.example.kotlinapp.data.room.mappers.toEntity
+import com.example.kotlinapp.data.services.PuntoInteresService
+import com.example.kotlinapp.model.PuntoInteres
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
+class PuntosInteresRepository(
+    private val api: PuntoInteresService,
+    private val dao: PuntosInteresDao
+) {
+    fun getPuntosInteres(): Flow<List<PuntoInteres>> = dao.getAll()
+        .map { list -> list.map { it.toDomain() } }
 
-class PuntosInteresRepository(private val puntosDao: PuntosInteresDao) {
+    suspend fun insertPuntoInteres(punto: PuntoInteres) {
+        dao.insert(punto.toEntity())
+    }
 
-    // --- Puntos del catálogo ---
-    // suspend fun obtenerPuntosDeRuta(rutaId: Int): List<PuntosInteres> {
-    // return puntosDao.obtenerPuntosDeRuta(rutaId)
-    // }
-
-    // --- Waypoints grabados ---
-    // suspend fun insertarPunto(punto: PuntosInteres): Long {
-    // return puntosDao.insertarPunto(punto)
-    // }
-
-    // suspend fun insertarPuntos(puntos: List<PuntosInteres>) {
-    // puntosDao.insertarPuntos(puntos)
-    // }
-
-    // --- Sincronización ---
-    // suspend fun obtenerPuntosPendientes(): List<PuntosInteres> {
-    // return puntosDao.obtenerPuntosPendientes()
-    // }
-
-    // suspend fun marcarComoSincronizado(id: Int) {
-    // puntosDao.marcarComoSincronizado(id)
-    // }
+    suspend fun syncPuntosInteres() {
+        val response = api.findAll()
+        Log.d("PUNTOSINTERES", "code=${response.code()} body=${response.body()}")
+        if (response.isSuccessful) {
+            response.body()?.let { puntos ->
+                dao.insertAll(puntos.map { it.toEntity() })
+            }
+        }
+    }
 }

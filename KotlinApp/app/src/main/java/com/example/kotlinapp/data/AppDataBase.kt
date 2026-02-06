@@ -9,10 +9,13 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.kotlinapp.data.room.Converters
 import com.example.kotlinapp.data.room.daos.RutaDao
+import com.example.kotlinapp.data.room.entity.ImagenInteresEntity
+import com.example.kotlinapp.data.room.entity.ImagenPeligroEntity
 import com.example.kotlinapp.data.room.entity.PuntoInteresEntity
 import com.example.kotlinapp.data.room.entity.PuntoPeligroEntity
 import com.example.kotlinapp.data.room.entity.RutaEntity
 import com.example.kotlinapp.data.room.entity.TrackpointEntity
+import com.example.kotlinapp.data.room.entity.UsuarioEntity
 import java.util.concurrent.Executors
 
 @Database(
@@ -20,9 +23,12 @@ import java.util.concurrent.Executors
         RutaEntity::class,
         TrackpointEntity::class,
         PuntoInteresEntity::class,
-        PuntoPeligroEntity::class
+        PuntoPeligroEntity::class,
+        ImagenInteresEntity::class,
+        ImagenPeligroEntity::class,
+        UsuarioEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

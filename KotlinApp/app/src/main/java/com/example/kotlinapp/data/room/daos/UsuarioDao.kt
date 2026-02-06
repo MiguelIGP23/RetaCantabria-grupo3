@@ -1,23 +1,28 @@
 package com.example.kotlinapp.data.room.daos
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.example.kotlinapp.data.room.entity.PuntoInteresEntity
+import com.example.kotlinapp.data.room.entity.UsuarioEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UsuarioDao {
 
-    // --- Login ---
-    // @Query("SELECT * FROM Usuario WHERE email = :email AND password = :password")
-    //suspend fun login(email: String, password: String): Usuario?
+    @Query("SELECT * FROM usuario")
+    fun getAll(): Flow<List<UsuarioEntity>>
 
-    // --- Obtener usuario por ID ---
-    // @Query("SELECT * FROM Usuario WHERE idUsuario = :id")
-    // suspend fun obtenerUsuario(id: Int): Usuario?
+    @Query("SELECT * FROM usuario WHERE idUsuario = :id")
+    suspend fun getById(id: Int): UsuarioEntity?
 
-    // --- Guardar usuario autenticado ---
-    // @Insert(onConflict = OnConflictStrategy.REPLACE)
-    // suspend fun guardarUsuario(usuario: Usuario): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(usuario: List<UsuarioEntity>)
 
-    // --- Roles ---
-    // @Query("SELECT rol FROM Usuario WHERE idUsuario = :id")
-    // suspend fun obtenerRol(id: Int): Rol?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(usuario: UsuarioEntity)
+
+    @Query("DELETE FROM usuario WHERE idUsuario = :id")
+    suspend fun clear(id: Int)
 }

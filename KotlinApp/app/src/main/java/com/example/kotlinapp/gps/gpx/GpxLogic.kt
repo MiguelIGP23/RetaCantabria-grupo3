@@ -36,7 +36,7 @@ fun generateGpx(
         sb.append("      <trkpt lat=\"${tp.latitud}\" lon=\"${tp.longitud}\">\n")
         sb.append("        <ele>${tp.altitud}</ele>\n")
         sb.append("        <time>${epochToIso(tp.time)}</time>\n")
-        sb.append("        <name>Trackpoint ${index + 1}</name>\n")
+        sb.append("        <name>${index + 1}</name>\n")
         sb.append("      </trkpt>\n")
     }
     sb.append("    </trkseg>\n")
