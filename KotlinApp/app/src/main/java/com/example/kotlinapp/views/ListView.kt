@@ -1,8 +1,6 @@
 package com.example.kotlinapp.views
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,7 +20,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.kotlinapp.R
 import com.example.kotlinapp.data.IdRef
@@ -34,16 +32,31 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.model.enums.WaypointType
 import com.example.kotlinapp.ui.theme.fondoPrincipal
+import com.example.kotlinapp.viewmodels.DBViewModel
+import kotlinx.coroutines.flow.firstOrNull
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView(navController: NavHostController) {
+fun ListView(navController: NavHostController, vm: DBViewModel) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
     val rutas = cargarRutasDummy() // Lista de ejemplo
 
+    val loginState by vm.loginState.collectAsState()
+    LaunchedEffect(Unit) {
+        if (vm.token.firstOrNull() != null) {
+            vm.checkAuth()
+        } else {
+            navController.navigate("Login")
+        }
+    }
+    LaunchedEffect(loginState) {
+        when (loginState) {
+            DBViewModel.LoginState.Valid -> Unit
+            DBViewModel.LoginState.Waiting -> Unit
+            else -> navController.navigate("Login")
+        }
+    }
     // Filtrar rutas según texto de búsqueda
     val rutasFiltradas = remember(rutas, searchText) {
         if (searchText.isNotEmpty()) {
@@ -56,21 +69,21 @@ fun ListView(navController: NavHostController) {
     }
 
     // Scaffold con floatingActionButton
-    Scaffold(
-        topBar = { ListaTopBar(context) },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    // Por ahora no hace nada
-                    navController.navigate("Create")
-                },
-                containerColor = Color(0xFF4CAF50), // verde
-                contentColor = Color.White
-            ) {
-                Icon(Icons.Default.AddCircle, contentDescription = "Añadir Ruta", modifier = Modifier.size(24.dp))
-            }
+    Scaffold(topBar = { ListaTopBar(context, vm) }, floatingActionButton = {
+        FloatingActionButton(
+            onClick = {
+                // Por ahora no hace nada
+                navController.navigate("Create")
+            }, containerColor = Color(0xFF4CAF50), // verde
+            contentColor = Color.White
+        ) {
+            Icon(
+                Icons.Default.AddCircle,
+                contentDescription = "Añadir Ruta",
+                modifier = Modifier.size(24.dp)
+            )
         }
-    ) { innerPadding ->
+    }) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -80,8 +93,7 @@ fun ListView(navController: NavHostController) {
             SearchBar(searchText) { searchText = it }
             Spacer(modifier = Modifier.height(8.dp))
             RutaList(
-                rutasFiltradas,
-                navController
+                rutasFiltradas, navController
             )
         }
     }
@@ -91,17 +103,21 @@ fun ListView(navController: NavHostController) {
 // TopBar de la lista con logo y botón de recarga
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaTopBar(context: Context /*, api: ApiModel*/) {
+fun ListaTopBar(context: Context, vm: DBViewModel) {
     TopAppBar(
-        title = { ListaTopBarTitle() },
-        actions = {
+        title = { ListaTopBarTitle() }, actions = {
             IconButton(onClick = { /* api.cargarRutas() */ }) {
                 Icon(Icons.Filled.Refresh, contentDescription = "Recargar Rutas")
             }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = fondoPrincipal,
-            titleContentColor = Color.Black
+            IconButton(
+                onClick = { vm.logout()}) {
+                Icon(
+                    Icons.Outlined.AccountCircle,
+                    contentDescription = "Cerrar Sesion"
+                ) //Icono temporal
+            }
+        }, colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = fondoPrincipal, titleContentColor = Color.Black
         )
     )
 }
@@ -121,7 +137,6 @@ fun ListaTopBarTitle() {
 }
 
 
-
 // Campo de búsqueda de rutas
 @Composable
 fun SearchBar(value: String, onValueChange: (String) -> Unit) {
@@ -137,7 +152,7 @@ fun SearchBar(value: String, onValueChange: (String) -> Unit) {
 
 // Lista de rutas en LazyColumn
 @Composable
-fun RutaList(rutas: List<Ruta> , navController: NavHostController) {
+fun RutaList(rutas: List<Ruta>, navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp),
@@ -166,12 +181,9 @@ fun RutaItem(ruta: Ruta, onClick: () -> Unit) {
             .fillMaxWidth()
             .background(color)
             .padding(16.dp)
-            .clickable { onClick() }
-    ) {
+            .clickable { onClick() }) {
         Text(
-            text = "Ruta: ${ruta.nombre}",
-            color = Color.Black,
-            fontSize = 16.sp
+            text = "Ruta: ${ruta.nombre}", color = Color.Black, fontSize = 16.sp
         )
     }
 }
