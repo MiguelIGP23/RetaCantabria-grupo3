@@ -25,4 +25,10 @@ interface RutaService {
 
     @GET("rutas")
     suspend fun findAll(): Response<List<Ruta>>
+
+    @GET("rutas/validadas")
+    suspend fun findAllValidadas(): Response<List<Ruta>>
+
+    @GET("rutas/validadas/{id}")
+    suspend fun findValidadaById(@Path("id") id: Int) : Response<Ruta>
 }
