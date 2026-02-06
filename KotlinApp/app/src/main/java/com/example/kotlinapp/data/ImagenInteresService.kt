@@ -11,17 +11,31 @@ import retrofit2.http.Path
 
 interface ImagenInteresService {
 
-    @POST("imagenesinteres")
-    suspend fun insert(@Body t: ImagenInteres): Response<ImagenInteres>
-    @PUT("imagenesinteres/{id}")
+    @POST("rutas/{idRuta}/puntosPeligro/{idPunto}/imagenesinteres")
+    suspend fun insert(
+        @Path("idRuta") idRuta: Int, @Path("idPunto") idPunto: Int, @Body t: ImagenInteres
+    ): Response<ImagenInteres>
+
+    @PUT("rutas/{idRuta}/puntosPeligro/{idPunto}/imagenesinteres/{id}")
     suspend fun update(
+        @Path("idRuta") idRuta: Int,
+        @Path("idPunto") idPunto: Int,
         @Path("id") id: Int,
         @Body imagen: ImagenInteres
     ): Response<ImagenInteres>
-    @DELETE("imagenesinteres/{id}")
-    suspend fun delete(@Path("id") id: Int): Response<Unit>
-    @GET("imagenesinteres/{id}")
-    suspend fun findById(@Path("id") id: Int): Response<ImagenInteres>
-    @GET("imagenesinteres")
-    suspend fun findAll(): Response<List<ImagenInteres>>
+
+    @DELETE("rutas/{idRuta}/puntosPeligro/{idPunto}/imagenesinteres/{id}")
+    suspend fun delete(
+        @Path("idRuta") idRuta: Int, @Path("idPunto") idPunto: Int, @Path("id") id: Int
+    ): Response<Unit>
+
+    @GET("rutas/{idRuta}/puntosPeligro/{idPunto}/imagenesinteres/{id}")
+    suspend fun findById(
+        @Path("idRuta") idRuta: Int, @Path("idPunto") idPunto: Int, @Path("id") id: Int
+    ): Response<ImagenInteres>
+
+    @GET("rutas/{idRuta}/puntosPeligro/{idPunto}/imagenesinteres")
+    suspend fun findAll(
+        @Path("idRuta") idRuta: Int, @Path("idPunto") idPunto: Int
+    ): Response<List<ImagenInteres>>
 }
