@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flpListaPuntos = new FlowLayoutPanel();
             ucImagenInteresLista1 = new UserControls.UCImagenInteresLista();
             btnVolver = new Button();
-            flowLayoutPanel1.SuspendLayout();
+            flpListaPuntos.SuspendLayout();
             SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flpListaPuntos
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Controls.Add(ucImagenInteresLista1);
-            flowLayoutPanel1.Location = new Point(35, 32);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(635, 243);
-            flowLayoutPanel1.TabIndex = 0;
+            flpListaPuntos.AutoScroll = true;
+            flpListaPuntos.Controls.Add(ucImagenInteresLista1);
+            flpListaPuntos.Location = new Point(35, 32);
+            flpListaPuntos.Name = "flpListaPuntos";
+            flpListaPuntos.Size = new Size(635, 243);
+            flpListaPuntos.TabIndex = 0;
             // 
             // ucImagenInteresLista1
             // 
@@ -60,6 +60,7 @@
             btnVolver.TabIndex = 2;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // PuntosInteresLista
             // 
@@ -67,16 +68,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
             Controls.Add(btnVolver);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(flpListaPuntos);
             Name = "PuntosInteresLista";
             Text = "PuntosInteresLista";
-            flowLayoutPanel1.ResumeLayout(false);
+            Load += PuntosInteresLista_Load;
+            flpListaPuntos.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flpListaPuntos;
         private Button btnVolver;
         private UserControls.UCImagenInteresLista ucImagenInteresLista1;
     }

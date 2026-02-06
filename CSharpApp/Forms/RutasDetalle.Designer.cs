@@ -71,6 +71,7 @@
             btnPuntosInteres.TabIndex = 3;
             btnPuntosInteres.Text = "Puntos de interés";
             btnPuntosInteres.UseVisualStyleBackColor = true;
+            btnPuntosInteres.Click += btnPuntosInteres_Click;
             // 
             // button1
             // 

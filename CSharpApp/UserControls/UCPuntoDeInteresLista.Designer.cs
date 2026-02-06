@@ -39,7 +39,7 @@
             // lbltxtNombre
             // 
             lbltxtNombre.AutoSize = true;
-            lbltxtNombre.Location = new Point(337, 22);
+            lbltxtNombre.Location = new Point(369, 22);
             lbltxtNombre.Name = "lbltxtNombre";
             lbltxtNombre.Size = new Size(64, 15);
             lbltxtNombre.TabIndex = 11;
@@ -49,7 +49,7 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNombre.Location = new Point(275, 22);
+            lblNombre.Location = new Point(307, 22);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(58, 15);
             lblNombre.TabIndex = 10;
@@ -58,7 +58,7 @@
             // lbltxtTipo
             // 
             lbltxtTipo.AutoSize = true;
-            lbltxtTipo.Location = new Point(194, 22);
+            lbltxtTipo.Location = new Point(186, 22);
             lbltxtTipo.Name = "lbltxtTipo";
             lbltxtTipo.Size = new Size(44, 15);
             lbltxtTipo.TabIndex = 9;
@@ -68,7 +68,7 @@
             // 
             lblTipo.AutoSize = true;
             lblTipo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblTipo.Location = new Point(149, 22);
+            lblTipo.Location = new Point(141, 22);
             lblTipo.Name = "lblTipo";
             lblTipo.Size = new Size(39, 15);
             lblTipo.TabIndex = 8;
@@ -77,7 +77,7 @@
             // lbltxtRuta
             // 
             lbltxtRuta.AutoSize = true;
-            lbltxtRuta.Location = new Point(87, 22);
+            lbltxtRuta.Location = new Point(80, 22);
             lbltxtRuta.Name = "lbltxtRuta";
             lbltxtRuta.Size = new Size(44, 15);
             lbltxtRuta.TabIndex = 7;
@@ -87,7 +87,7 @@
             // 
             lblRuta.AutoSize = true;
             lblRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblRuta.Location = new Point(28, 22);
+            lblRuta.Location = new Point(21, 22);
             lblRuta.Name = "lblRuta";
             lblRuta.Size = new Size(55, 15);
             lblRuta.TabIndex = 6;

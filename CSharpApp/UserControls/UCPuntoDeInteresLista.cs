@@ -14,17 +14,31 @@ namespace UserControls
     public partial class UCPuntoDeInteresLista : UserControl
     {
         public PuntoInteres puntoInteres { get; set; }
+        private Ruta _ruta { get; set; }
 
-        public UCPuntoDeInteresLista()
+        public UCPuntoDeInteresLista(Ruta ruta)
         {
             InitializeComponent();
+            _ruta = ruta;
         }
-        public void SetData(PuntoInteres p)
+        public void SetData(PuntoInteres p, Ruta ruta)
         {
             puntoInteres = p;
             lbltxtNombre.Text = p.Nombre;
-            lbltxtRuta.Text = p.Rutas_idRuta.ToString();
-            lblTipo.Text = p.Tipo.ToString();
+            lbltxtRuta.Text = ruta.IdRuta.ToString();
+            lbltxtTipo.Text = p.Tipo.ToString().Replace("_", " ");
+            BackColor = p.Tipo switch
+            {
+                EnumTiposPuntoInteres.ALOJAMIENTO => Color.RebeccaPurple,
+                EnumTiposPuntoInteres.AREA_DE_DESCANSO => Color.PeachPuff,
+                EnumTiposPuntoInteres.BOTANICO => Color.GreenYellow,
+                EnumTiposPuntoInteres.CULTURAL => Color.Chartreuse,
+                EnumTiposPuntoInteres.FAUNA => Color.Salmon,
+                EnumTiposPuntoInteres.GEOLOGICO => Color.Khaki,
+                EnumTiposPuntoInteres.HISTORICO => Color.Aquamarine,
+                EnumTiposPuntoInteres.MIRADOR => Color.Lime,
+                EnumTiposPuntoInteres.PUNTO_DE_AGUA => Color.LightBlue,
+            };
         }
 
     }

@@ -57,18 +57,24 @@ namespace Forms
                     downloads = Path.Combine(downloads, "ficha-usuario.txt");
                     await _api.DescargarFichaUsuarioAsync(idRuta, downloads);
                     break;
-                
+
                 case "Organización":
                     downloads = Path.Combine(downloads, "ficha-organizacion.txt");
                     await _api.DescargarFichaOrganizacionAsync(idRuta, downloads);
                     break;
-                
+
                 case "Seguridad":
                     downloads = Path.Combine(downloads, "ficha-seguridad.txt");
                     await _api.DescargarFichaSeguridadAsync(idRuta, downloads);
                     break;
             }
             MessageBox.Show("Ficha guardada en Descargas");
+        }
+
+        private void btnPuntosInteres_Click(object sender, EventArgs e)
+        {
+            PuntosInteresLista form = new PuntosInteresLista(_api, _ruta);
+            form.Show();
         }
     }
 }
