@@ -30,7 +30,7 @@
         {
             lblRuta = new Label();
             lbltxtRuta = new Label();
-            lbltxtPos = new Label();
+            lbltxtPosicion = new Label();
             lblPos = new Label();
             lbltxtNombre = new Label();
             lblNombre = new Label();
@@ -39,9 +39,10 @@
             // lblRuta
             // 
             lblRuta.AutoSize = true;
+            lblRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblRuta.Location = new Point(27, 24);
             lblRuta.Name = "lblRuta";
-            lblRuta.Size = new Size(53, 15);
+            lblRuta.Size = new Size(55, 15);
             lblRuta.TabIndex = 0;
             lblRuta.Text = "-Nº ruta:";
             // 
@@ -54,18 +55,19 @@
             lbltxtRuta.TabIndex = 1;
             lbltxtRuta.Text = "txtRuta";
             // 
-            // lbltxtPos
+            // lbltxtPosicion
             // 
-            lbltxtPos.AutoSize = true;
-            lbltxtPos.Location = new Point(218, 24);
-            lbltxtPos.Name = "lbltxtPos";
-            lbltxtPos.Size = new Size(39, 15);
-            lbltxtPos.TabIndex = 3;
-            lbltxtPos.Text = "txtPos";
+            lbltxtPosicion.AutoSize = true;
+            lbltxtPosicion.Location = new Point(218, 24);
+            lbltxtPosicion.Name = "lbltxtPosicion";
+            lbltxtPosicion.Size = new Size(39, 15);
+            lbltxtPosicion.TabIndex = 3;
+            lbltxtPosicion.Text = "txtPos";
             // 
             // lblPos
             // 
             lblPos.AutoSize = true;
+            lblPos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblPos.Location = new Point(148, 24);
             lblPos.Name = "lblPos";
             lblPos.Size = new Size(60, 15);
@@ -84,9 +86,10 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblNombre.Location = new Point(264, 24);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(56, 15);
+            lblNombre.Size = new Size(58, 15);
             lblNombre.TabIndex = 4;
             lblNombre.Text = "-Nombre";
             // 
@@ -96,7 +99,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lbltxtNombre);
             Controls.Add(lblNombre);
-            Controls.Add(lbltxtPos);
+            Controls.Add(lbltxtPosicion);
             Controls.Add(lblPos);
             Controls.Add(lbltxtRuta);
             Controls.Add(lblRuta);
@@ -110,7 +113,7 @@
 
         private Label lblRuta;
         private Label lbltxtRuta;
-        private Label lbltxtPos;
+        private Label lbltxtPosicion;
         private Label lblPos;
         private Label lbltxtNombre;
         private Label lblNombre;
