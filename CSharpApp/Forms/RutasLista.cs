@@ -28,15 +28,15 @@ namespace Forms
         public async Task CargarRutas()
         {
             string ruta;
-            if (Session.Rol == EnumRoles.ADMINISTRADOR)
-            {
-                ruta = "api/reta3/rutas";
-            }
-            else
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
             {
                 ruta = "api/reta3/rutas/validadas";
             }
-                List<Ruta> rutas = await _api.GetAllAsync<Ruta>(ruta);
+            else
+            {
+                ruta = "api/reta3/rutas";
+            }
+            List<Ruta> rutas = await _api.GetAllAsync<Ruta>(ruta);
             flpRutas.Controls.Clear();
             foreach (Ruta r in rutas)
             {
@@ -48,52 +48,34 @@ namespace Forms
         }
 
 
-        private async void btn_borrar_Click(object sender, EventArgs e)
-        {
-            int idRuta = 1; // la ruta seleccionada
-
-            string downloads = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                "Downloads"
-            );
-
-            string destino = Path.Combine(
-                downloads,
-                "ficha-organizacion.txt"
-            );
-            await _api.DescargarFichaOrganizacionAsync(idRuta, destino);
-
-
-            destino = Path.Combine(
-                downloads,
-                "ficha-seguridad.txt"
-            );
-            await _api.DescargarFichaSeguridadAsync(idRuta, destino);
-
-
-            destino = Path.Combine(
-                downloads,
-                "ficha-usuario.txt"
-            );
-            await _api.DescargarFichaUsuarioAsync(idRuta, destino);
-
-            MessageBox.Show("Ficha descargada en Descargas");
-        }
-
-
-
 
         // Métodos de eventos
-        private void RutaClick(object? sender, Ruta ruta)
+        private async void RutaClick(object? sender, Ruta ruta)
         {
-            var frm = new RutasDetalle(ruta, _api);
-            frm.Show();
+            using (var frm = new RutasDetalle(ruta, _api))
+            {
+                var result = frm.ShowDialog();
+                if(result == DialogResult.Cancel)
+                {
+                    await CargarRutas();
+                }
+            }
         }
 
+
+
+        // Métodos de botones
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            AgregarRuta agregarRuta = new AgregarRuta();
+            CrearEditarRuta agregarRuta = new CrearEditarRuta(_api, null);
             agregarRuta.Show();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Logout();
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Model
 {
     public class Trackpoint
     {
-        [JsonPropertyName("id")]
+        [JsonPropertyName("idRuta")]
         public TrackpointId Id { get; set; }
 
         [JsonPropertyName("latitud")]

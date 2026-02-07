@@ -12,10 +12,10 @@ namespace Model
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
 
-        [JsonPropertyName("nombre_inicioruta")]
+        [JsonPropertyName("nombreInicioruta")]
         public string Nombre_inicioruta { get; set; }
 
-        [JsonPropertyName("nombre_finalruta")]
+        [JsonPropertyName("nombreFinalruta")]
         public string Nombre_finalruta { get; set; }
 
         [JsonPropertyName("latitudInicial")]
@@ -34,7 +34,7 @@ namespace Model
         public double Distancia { get; set; }
 
         [JsonPropertyName("duracion")]
-        public string Duracion { get; set; }
+        public TimeSpan Duracion { get; set; }
 
         [JsonPropertyName("desnivelPositivo")]
         public int? DesnivelPositivo { get; set; }
@@ -95,7 +95,7 @@ namespace Model
 
         }
 
-        public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, string duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, int accesibilidad, int rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, Usuario usuario_idUsuario)
+        public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, TimeSpan duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, int accesibilidad, int rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, Usuario usuario_idUsuario)
         {
             IdRuta = idRuta;
             Nombre = nombre;

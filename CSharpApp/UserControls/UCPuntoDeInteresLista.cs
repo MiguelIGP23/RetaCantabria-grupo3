@@ -41,5 +41,44 @@ namespace UserControls
             };
         }
 
+
+
+        // Evento que se dispara al hacer click en el user control o sus etiquetas
+        public event EventHandler<PuntoInteres> PuntoInteresClick;
+        private void lblRuta_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lbltxtRuta_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lblTipo_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lbltxtTipo_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lbltxtNombre_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void UCPuntoDeInteresLista_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
     }
 }

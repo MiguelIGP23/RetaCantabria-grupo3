@@ -17,6 +17,7 @@ namespace Forms
     {
 
         private readonly ApiReta _api;
+
         private Ruta _ruta { get; set; }
 
         public PuntosInteresLista(ApiReta api, Ruta ruta)
@@ -32,6 +33,8 @@ namespace Forms
         }
 
 
+
+        //Mñetodo para cargar datos en la lista de user controls de puntos de interes en el flowlayout
         private async void CargarPuntosInteres(Ruta ruta)
         {
             List<PuntoInteres> puntosInteres = await _api.GetAllAsync<PuntoInteres>($"api/reta3/rutas/{ruta.IdRuta}/puntosinteres");
@@ -40,10 +43,31 @@ namespace Forms
             {
                 UCPuntoDeInteresLista uc = new UCPuntoDeInteresLista(ruta);
                 uc.SetData(p, ruta);
+                uc.PuntoInteresClick += PuntoInteresClick;
                 flpListaPuntos.Controls.Add(uc);
             }
         }
 
+
+
+
+        // Métodos de eventos
+        private void PuntoInteresClick(object? sender, PuntoInteres e)
+        {
+            using (var frm = new PuntoInteresDetalle(_api, e))
+            {
+                var result = frm.ShowDialog();
+                if (result == DialogResult.Cancel)
+                {
+                    CargarPuntosInteres(_ruta);
+                }
+            }
+        }
+
+
+
+
+        // Métodos de botones
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();

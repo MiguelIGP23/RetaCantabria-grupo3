@@ -52,7 +52,6 @@ namespace Repository
         {
             ApplyAuthHeader();
             string path = ruta;
-            if (Session.Rol == null) path+="/validadas";
 
             try
             {
@@ -108,12 +107,12 @@ namespace Repository
 
 
 
-        public async Task<T?> Update<T>(string ruta, string idPath, T objeto)
+        public async Task<T?> Update<T>(string ruta, string id, T objeto)
         {
             ApplyAuthHeader();
             try
             {
-                var response = await _http.PutAsJsonAsync($"{ruta}/{idPath}", objeto, _jsonOptions);
+                var response = await _http.PutAsJsonAsync($"{ruta}/{id}", objeto, _jsonOptions);
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
             }
@@ -126,17 +125,19 @@ namespace Repository
 
 
 
-        public async Task Delete(string ruta, string idPath)
+        public async Task<Boolean> Delete(string ruta, string id)
         {
             ApplyAuthHeader();
             try
             {
-                var response = await _http.DeleteAsync($"{ruta}/{idPath}");
+                var response = await _http.DeleteAsync($"{ruta}/{id}");
                 response.EnsureSuccessStatusCode();
+                return true;
             }
             catch (HttpRequestException ex)
             {
                 MostrarErrorHttp(ex);
+                return false;
             }
         }
 
@@ -207,7 +208,7 @@ namespace Repository
 
 
         // Muestra mensaje de aviso en peticiones sin autorización
-        public void MostrarErrorHttp(HttpRequestException ex)
+        public static void MostrarErrorHttp(HttpRequestException ex)
         {
 
             int codigo = (int?) ex.StatusCode ?? -1;

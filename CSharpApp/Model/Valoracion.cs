@@ -30,7 +30,7 @@ namespace Model
         [JsonPropertyName("valoracionTecnica")]
         public string? ValoracionTecnica { get; set; }
 
-        [JsonPropertyName("resena")]
+        [JsonPropertyName("reseña")]
         public string? Resena { get; set; }
 
         [JsonPropertyName("usuario_idUsuario")]

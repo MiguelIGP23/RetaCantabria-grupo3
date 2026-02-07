@@ -30,80 +30,69 @@
         {
             txt_buscar_ruta = new TextBox();
             btn_buscar = new Button();
-            btn_borrar = new Button();
-            btn_detalles = new Button();
             flpRutas = new FlowLayoutPanel();
             btnAgregar = new Button();
+            btnLogout = new Button();
             SuspendLayout();
             // 
             // txt_buscar_ruta
             // 
-            txt_buscar_ruta.Location = new Point(84, 39);
-            txt_buscar_ruta.Margin = new Padding(4);
+            txt_buscar_ruta.Location = new Point(96, 52);
+            txt_buscar_ruta.Margin = new Padding(5, 5, 5, 5);
             txt_buscar_ruta.Name = "txt_buscar_ruta";
-            txt_buscar_ruta.Size = new Size(472, 23);
+            txt_buscar_ruta.Size = new Size(539, 27);
             txt_buscar_ruta.TabIndex = 1;
             // 
             // btn_buscar
             // 
-            btn_buscar.Location = new Point(609, 39);
-            btn_buscar.Margin = new Padding(4);
+            btn_buscar.Location = new Point(696, 52);
+            btn_buscar.Margin = new Padding(5, 5, 5, 5);
             btn_buscar.Name = "btn_buscar";
-            btn_buscar.Size = new Size(88, 26);
+            btn_buscar.Size = new Size(101, 35);
             btn_buscar.TabIndex = 2;
             btn_buscar.Text = "Buscar";
             btn_buscar.UseVisualStyleBackColor = true;
             // 
-            // btn_borrar
-            // 
-            btn_borrar.Location = new Point(595, 416);
-            btn_borrar.Margin = new Padding(4);
-            btn_borrar.Name = "btn_borrar";
-            btn_borrar.Size = new Size(88, 26);
-            btn_borrar.TabIndex = 3;
-            btn_borrar.Text = "Borrar";
-            btn_borrar.UseVisualStyleBackColor = true;
-            btn_borrar.Click += btn_borrar_Click;
-            // 
-            // btn_detalles
-            // 
-            btn_detalles.Location = new Point(108, 416);
-            btn_detalles.Margin = new Padding(4);
-            btn_detalles.Name = "btn_detalles";
-            btn_detalles.Size = new Size(88, 26);
-            btn_detalles.TabIndex = 4;
-            btn_detalles.Text = "Ver Detalles";
-            btn_detalles.UseVisualStyleBackColor = true;
-            // 
             // flpRutas
             // 
-            flpRutas.Location = new Point(84, 93);
+            flpRutas.Location = new Point(96, 124);
+            flpRutas.Margin = new Padding(3, 4, 3, 4);
             flpRutas.Name = "flpRutas";
-            flpRutas.Size = new Size(613, 299);
+            flpRutas.Size = new Size(701, 399);
             flpRutas.TabIndex = 5;
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(339, 416);
+            btnAgregar.Location = new Point(549, 577);
+            btnAgregar.Margin = new Padding(3, 4, 3, 4);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(75, 23);
+            btnAgregar.Size = new Size(86, 31);
             btnAgregar.TabIndex = 6;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = true;
             btnAgregar.Click += btnAgregar_Click;
             // 
+            // btnLogout
+            // 
+            btnLogout.Location = new Point(270, 578);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(94, 29);
+            btnLogout.TabIndex = 7;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
             // RutasLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(786, 519);
+            ClientSize = new Size(898, 692);
+            Controls.Add(btnLogout);
             Controls.Add(btnAgregar);
             Controls.Add(flpRutas);
-            Controls.Add(btn_detalles);
-            Controls.Add(btn_borrar);
             Controls.Add(btn_buscar);
             Controls.Add(txt_buscar_ruta);
-            Margin = new Padding(4);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "RutasLista";
             Text = "Rutas";
             Load += Rutas_Load;
@@ -115,10 +104,9 @@
         #endregion
         private System.Windows.Forms.TextBox txt_buscar_ruta;
         private System.Windows.Forms.Button btn_buscar;
-        private System.Windows.Forms.Button btn_borrar;
-        private System.Windows.Forms.Button btn_detalles;
         private FlowLayoutPanel flpRutas;
         private UserControls.UCRutaLista ucRutaLista1;
         private Button btnAgregar;
+        private Button btnLogout;
     }
 }

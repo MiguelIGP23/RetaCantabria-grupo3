@@ -9,7 +9,7 @@ namespace Model
 {
     public class PuntoPeligro
     {
-        [JsonPropertyName("idPuntoPeligro")]
+        [JsonPropertyName("idPuntoPeligroz")]
         public int IdPuntoPeligro { get; set; }
 
         [JsonPropertyName("nombre")]

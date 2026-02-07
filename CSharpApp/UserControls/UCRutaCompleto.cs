@@ -34,7 +34,7 @@ namespace UserControls
             lbltxtLonInicial.Text = ruta.LongitudInicial.ToString();
             lbltxtLonFinal.Text = ruta.LongitudFinal.ToString();
             lbltxtDistancia.Text = ruta.Distancia.ToString("F2") + " m";
-            lbltxtDuracion.Text = ruta.Duracion;
+            lbltxtDuracion.Text = ruta.Duracion.ToString();
             lbltxtDesnivelPositivo.Text = ruta.DesnivelPositivo.ToString() + " m";
             lbltxtDesnivelNegativo.Text = ruta.DesnivelNegativo.ToString() + " m";
             lbltxtAltitudMaxima.Text = ruta.AltitudMax.ToString() + " m";
@@ -53,9 +53,5 @@ namespace UserControls
             lbltxtPuntuacion.Text = ruta.MediaEstrellas.ToString();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
