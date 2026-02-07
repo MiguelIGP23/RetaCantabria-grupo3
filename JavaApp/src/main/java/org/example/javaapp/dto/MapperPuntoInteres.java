@@ -2,9 +2,9 @@ package org.example.javaapp.dto;
 
 import org.example.javaapp.model.PuntosInteres;
 
-public class PuntoInteresMapper {
+public class MapperPuntoInteres {
 
-    private PuntoInteresMapper() {} // evita instanciarla
+    private MapperPuntoInteres() {}
 
     public static DtoPuntoInteres toDto(PuntosInteres p) {
         return new DtoPuntoInteres(

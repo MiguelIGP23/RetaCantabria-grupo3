@@ -47,6 +47,9 @@ public class ServiceRuta implements IServiceRuta {
             buscada.setArchivoGPX(ruta.getArchivoGPX());
             buscada.setRecomendacionesEquipo(ruta.getRecomendacionesEquipo());
             buscada.setZonaGeografica(ruta.getZonaGeografica());
+            buscada.setNivelRiesgo(ruta.getNivelRiesgo());
+            buscada.setNivelEsfuerzo(ruta.getNivelEsfuerzo());
+            buscada.setMediaEstrellas(ruta.getMediaEstrellas());
             buscada.setUsuario(ruta.getUsuario());
             repo.save(buscada);
         }

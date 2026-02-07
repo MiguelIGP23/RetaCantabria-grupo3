@@ -50,7 +50,7 @@ namespace Forms
 
                 // Guardar token y rol en sesión
                 var rol = Enum.Parse<EnumRoles>(resp.Rol, true);
-                Session.Set(resp.Token, rol);
+                Session.Set(resp.Token, rol, resp.Id);
 
                 this.Hide();
                 using (var form = new RutasLista(_api))

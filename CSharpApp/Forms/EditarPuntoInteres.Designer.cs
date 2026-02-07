@@ -43,11 +43,13 @@
             lblLongitud = new Label();
             lblLatitud = new Label();
             lblNombre = new Label();
-            lbltxtRuta = new Label();
+            lbltxtId = new Label();
             lblId = new Label();
-            txtRutaId = new Label();
+            lbltxtIdRuta = new Label();
             lblRutaId = new Label();
             cbTipo = new ComboBox();
+            tbCaractetisticas = new TextBox();
+            lblCaracteristicas = new Label();
             ((System.ComponentModel.ISupportInitialize)nudTimestamp).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudElevacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudLongitud).BeginInit();
@@ -56,28 +58,31 @@
             // 
             // tbNombre
             // 
-            tbNombre.Location = new Point(419, 48);
+            tbNombre.Location = new Point(479, 64);
+            tbNombre.Margin = new Padding(3, 4, 3, 4);
             tbNombre.Name = "tbNombre";
-            tbNombre.Size = new Size(225, 23);
+            tbNombre.Size = new Size(257, 27);
             tbNombre.TabIndex = 86;
             // 
             // nudTimestamp
             // 
-            nudTimestamp.Location = new Point(586, 109);
+            nudTimestamp.Location = new Point(670, 145);
+            nudTimestamp.Margin = new Padding(3, 4, 3, 4);
             nudTimestamp.Maximum = new decimal(new int[] { 600, 0, 0, 0 });
             nudTimestamp.Name = "nudTimestamp";
-            nudTimestamp.Size = new Size(58, 23);
+            nudTimestamp.Size = new Size(66, 27);
             nudTimestamp.TabIndex = 85;
             nudTimestamp.TextAlign = HorizontalAlignment.Right;
             // 
             // nudElevacion
             // 
             nudElevacion.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            nudElevacion.Location = new Point(425, 109);
+            nudElevacion.Location = new Point(486, 145);
+            nudElevacion.Margin = new Padding(3, 4, 3, 4);
             nudElevacion.Maximum = new decimal(new int[] { 3800, 0, 0, 0 });
             nudElevacion.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             nudElevacion.Name = "nudElevacion";
-            nudElevacion.Size = new Size(58, 23);
+            nudElevacion.Size = new Size(66, 27);
             nudElevacion.TabIndex = 83;
             nudElevacion.TextAlign = HorizontalAlignment.Right;
             // 
@@ -85,11 +90,12 @@
             // 
             nudLongitud.DecimalPlaces = 4;
             nudLongitud.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudLongitud.Location = new Point(257, 109);
+            nudLongitud.Location = new Point(294, 145);
+            nudLongitud.Margin = new Padding(3, 4, 3, 4);
             nudLongitud.Maximum = new decimal(new int[] { 180, 0, 0, 0 });
             nudLongitud.Minimum = new decimal(new int[] { 180, 0, 0, int.MinValue });
             nudLongitud.Name = "nudLongitud";
-            nudLongitud.Size = new Size(73, 23);
+            nudLongitud.Size = new Size(83, 27);
             nudLongitud.TabIndex = 82;
             nudLongitud.TextAlign = HorizontalAlignment.Right;
             // 
@@ -97,154 +103,182 @@
             // 
             nudLatitud.DecimalPlaces = 4;
             nudLatitud.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudLatitud.Location = new Point(98, 109);
+            nudLatitud.Location = new Point(112, 145);
+            nudLatitud.Margin = new Padding(3, 4, 3, 4);
             nudLatitud.Maximum = new decimal(new int[] { 90, 0, 0, 0 });
             nudLatitud.Minimum = new decimal(new int[] { 90, 0, 0, int.MinValue });
             nudLatitud.Name = "nudLatitud";
-            nudLatitud.Size = new Size(71, 23);
+            nudLatitud.Size = new Size(81, 27);
             nudLatitud.TabIndex = 81;
             nudLatitud.TextAlign = HorizontalAlignment.Right;
             // 
             // tbDescripcion
             // 
-            tbDescripcion.Location = new Point(437, 173);
+            tbDescripcion.Location = new Point(405, 265);
+            tbDescripcion.Margin = new Padding(3, 4, 3, 4);
             tbDescripcion.Multiline = true;
             tbDescripcion.Name = "tbDescripcion";
-            tbDescripcion.Size = new Size(207, 107);
+            tbDescripcion.Size = new Size(331, 107);
             tbDescripcion.TabIndex = 79;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(219, 257);
+            btnGuardar.Location = new Point(405, 427);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.Size = new Size(86, 31);
             btnGuardar.TabIndex = 78;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(81, 257);
+            btnCancelar.Location = new Point(248, 427);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Size = new Size(86, 31);
             btnCancelar.TabIndex = 77;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(354, 176);
+            lblDescripcion.Location = new Point(405, 221);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(77, 15);
+            lblDescripcion.Size = new Size(96, 20);
             lblDescripcion.TabIndex = 76;
             lblDescripcion.Text = "-Descripción:";
             // 
             // lblTimestamp
             // 
             lblTimestamp.AutoSize = true;
-            lblTimestamp.Location = new Point(505, 111);
+            lblTimestamp.Location = new Point(577, 148);
             lblTimestamp.Name = "lblTimestamp";
-            lblTimestamp.Size = new Size(75, 15);
+            lblTimestamp.Size = new Size(92, 20);
             lblTimestamp.TabIndex = 75;
             lblTimestamp.Text = "-Timestamp:";
             // 
             // lblTipo
             // 
             lblTipo.AutoSize = true;
-            lblTipo.Location = new Point(40, 178);
+            lblTipo.Location = new Point(46, 221);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(39, 15);
+            lblTipo.Size = new Size(48, 20);
             lblTipo.TabIndex = 74;
             lblTipo.Text = "-Tipo:";
             // 
             // lblElevacion
             // 
             lblElevacion.AutoSize = true;
-            lblElevacion.Location = new Point(354, 111);
+            lblElevacion.Location = new Point(405, 148);
             lblElevacion.Name = "lblElevacion";
-            lblElevacion.Size = new Size(65, 15);
+            lblElevacion.Size = new Size(81, 20);
             lblElevacion.TabIndex = 72;
             lblElevacion.Text = "-Elevación:";
             // 
             // lblLongitud
             // 
             lblLongitud.AutoSize = true;
-            lblLongitud.Location = new Point(188, 111);
+            lblLongitud.Location = new Point(215, 148);
             lblLongitud.Name = "lblLongitud";
-            lblLongitud.Size = new Size(63, 15);
+            lblLongitud.Size = new Size(77, 20);
             lblLongitud.TabIndex = 71;
             lblLongitud.Text = "-Longitud:";
             // 
             // lblLatitud
             // 
             lblLatitud.AutoSize = true;
-            lblLatitud.Location = new Point(40, 111);
+            lblLatitud.Location = new Point(46, 148);
             lblLatitud.Name = "lblLatitud";
-            lblLatitud.Size = new Size(52, 15);
+            lblLatitud.Size = new Size(64, 20);
             lblLatitud.TabIndex = 70;
             lblLatitud.Text = "-Latitud:";
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(354, 51);
+            lblNombre.Location = new Point(405, 68);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(59, 15);
+            lblNombre.Size = new Size(73, 20);
             lblNombre.TabIndex = 68;
             lblNombre.Text = "-Nombre:";
             // 
-            // lbltxtRuta
+            // lbltxtId
             // 
-            lbltxtRuta.AutoSize = true;
-            lbltxtRuta.Location = new Point(110, 48);
-            lbltxtRuta.Name = "lbltxtRuta";
-            lbltxtRuta.Size = new Size(30, 15);
-            lbltxtRuta.TabIndex = 67;
-            lbltxtRuta.Text = "txtId";
+            lbltxtId.AutoSize = true;
+            lbltxtId.Location = new Point(126, 64);
+            lbltxtId.Name = "lbltxtId";
+            lbltxtId.Size = new Size(39, 20);
+            lbltxtId.TabIndex = 67;
+            lbltxtId.Text = "txtId";
             // 
             // lblId
             // 
             lblId.AutoSize = true;
-            lblId.Location = new Point(40, 48);
+            lblId.Location = new Point(46, 64);
             lblId.Name = "lblId";
-            lblId.Size = new Size(64, 15);
+            lblId.Size = new Size(78, 20);
             lblId.TabIndex = 66;
             lblId.Text = "-Nº punto:";
             // 
-            // txtRutaId
+            // lbltxtIdRuta
             // 
-            txtRutaId.AutoSize = true;
-            txtRutaId.Location = new Point(250, 48);
-            txtRutaId.Name = "txtRutaId";
-            txtRutaId.Size = new Size(44, 15);
-            txtRutaId.TabIndex = 89;
-            txtRutaId.Text = "txtRuta";
+            lbltxtIdRuta.AutoSize = true;
+            lbltxtIdRuta.Location = new Point(286, 64);
+            lbltxtIdRuta.Name = "lbltxtIdRuta";
+            lbltxtIdRuta.Size = new Size(56, 20);
+            lbltxtIdRuta.TabIndex = 89;
+            lbltxtIdRuta.Text = "txtRuta";
             // 
             // lblRutaId
             // 
             lblRutaId.AutoSize = true;
-            lblRutaId.Location = new Point(191, 48);
+            lblRutaId.Location = new Point(218, 64);
             lblRutaId.Name = "lblRutaId";
-            lblRutaId.Size = new Size(53, 15);
+            lblRutaId.Size = new Size(65, 20);
             lblRutaId.TabIndex = 88;
             lblRutaId.Text = "-Nº ruta:";
             // 
             // cbTipo
             // 
+            cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTipo.FormattingEnabled = true;
-            cbTipo.Location = new Point(85, 176);
+            cbTipo.Location = new Point(100, 218);
+            cbTipo.Margin = new Padding(3, 4, 3, 4);
             cbTipo.Name = "cbTipo";
-            cbTipo.Size = new Size(159, 23);
+            cbTipo.Size = new Size(224, 28);
             cbTipo.TabIndex = 90;
+            // 
+            // tbCaractetisticas
+            // 
+            tbCaractetisticas.Location = new Point(46, 320);
+            tbCaractetisticas.Margin = new Padding(3, 4, 3, 4);
+            tbCaractetisticas.Multiline = true;
+            tbCaractetisticas.Name = "tbCaractetisticas";
+            tbCaractetisticas.Size = new Size(278, 52);
+            tbCaractetisticas.TabIndex = 92;
+            // 
+            // lblCaracteristicas
+            // 
+            lblCaracteristicas.AutoSize = true;
+            lblCaracteristicas.Location = new Point(46, 281);
+            lblCaracteristicas.Name = "lblCaracteristicas";
+            lblCaracteristicas.Size = new Size(113, 20);
+            lblCaracteristicas.TabIndex = 91;
+            lblCaracteristicas.Text = "-Características:";
             // 
             // EditarPuntoInteres
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(692, 316);
+            ClientSize = new Size(791, 521);
+            Controls.Add(tbCaractetisticas);
+            Controls.Add(lblCaracteristicas);
             Controls.Add(cbTipo);
-            Controls.Add(txtRutaId);
+            Controls.Add(lbltxtIdRuta);
             Controls.Add(lblRutaId);
             Controls.Add(tbNombre);
             Controls.Add(nudTimestamp);
@@ -261,8 +295,9 @@
             Controls.Add(lblLongitud);
             Controls.Add(lblLatitud);
             Controls.Add(lblNombre);
-            Controls.Add(lbltxtRuta);
+            Controls.Add(lbltxtId);
             Controls.Add(lblId);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "EditarPuntoInteres";
             Text = "EditarPuntoInteres";
             Load += EditarPuntoInteres_Load;
@@ -290,10 +325,12 @@
         private Label lblLongitud;
         private Label lblLatitud;
         private Label lblNombre;
-        private Label lbltxtRuta;
+        private Label lbltxtId;
         private Label lblId;
-        private Label txtRutaId;
+        private Label lbltxtIdRuta;
         private Label lblRutaId;
         private ComboBox cbTipo;
+        private TextBox tbCaractetisticas;
+        private Label lblCaracteristicas;
     }
 }

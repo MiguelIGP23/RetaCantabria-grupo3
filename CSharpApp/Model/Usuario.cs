@@ -6,7 +6,7 @@ namespace Model
 {
     public class Usuario
     {
-        [JsonPropertyName("idUsuario")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         [JsonPropertyName("nombre")]

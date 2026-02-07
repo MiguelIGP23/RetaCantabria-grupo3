@@ -24,7 +24,6 @@ namespace UserControls
         public void SetData(PuntoInteres p)
         {
             PuntoInteres = p;
-            MessageBox.Show("id" + p.Id.ToString() + "idruta"+ p.IdRuta.ToString());
             lbltxtIdPuntoDeInteres.Text = p.Id.ToString();
             lbltxtRutasid.Text = p.IdRuta.ToString();
             lbltxtNombre.Text = p.Nombre;

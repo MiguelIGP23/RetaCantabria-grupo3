@@ -17,12 +17,13 @@ namespace Forms
             _api = api;
             _ruta = ruta;
             cbClasificacion.DataSource = Enum.GetValues(typeof(EnumClasificaciones));
-            
+
         }
 
 
         private void CrearEditarRuta_Load(object sender, EventArgs e)
         {
+
             if (_ruta != null)
             {
                 CargarDatos(_ruta);
@@ -38,7 +39,7 @@ namespace Forms
                 nudDesnivelNeg.Value = 0;
                 nudDesnivelPos.Value = 0;
                 nudAltitudMin.Value = 0;
-                nudAltitudMax.Value = 0;  
+                nudAltitudMax.Value = 0;
                 cbClasificacion.SelectedItem = EnumClasificaciones.CIRCULAR;
                 nudTipoTerreno.Value = 0;
                 nudIndicaciones.Value = 0;
@@ -105,12 +106,13 @@ namespace Forms
 
         private async void btnAceptar_Click_1(object sender, EventArgs e)
         {
+            
             Ruta rutaNueva = (_ruta != null) ? _ruta : new Ruta();
             rutaNueva.Nombre = txtNombre.Text;
             rutaNueva.Nombre_inicioruta = txtInicio.Text;
             rutaNueva.Nombre_finalruta = txtFinal.Text;
             rutaNueva.LatitudInicial = (double)nudLatIni.Value;
-            rutaNueva.LatitudFinal= (double)nudLatFin.Value;
+            rutaNueva.LatitudFinal = (double)nudLatFin.Value;
             rutaNueva.LongitudInicial = (double)nudLonIni.Value;
             rutaNueva.LongitudFinal = (double)nudLonFin.Value;
             rutaNueva.Distancia = (double)nudDistancia.Value;
@@ -120,7 +122,7 @@ namespace Forms
             rutaNueva.AltitudMax = (int)nudAltitudMax.Value;
             rutaNueva.AltitudMin = (int)nudAltitudMin.Value;
             rutaNueva.Clasificacion = (EnumClasificaciones)cbClasificacion.SelectedItem;
-            rutaNueva.EstadoRuta = (_ruta==null) ? 0 : _ruta.EstadoRuta;
+            rutaNueva.EstadoRuta = (_ruta == null) ? 0 : _ruta.EstadoRuta;
             rutaNueva.TipoTerreno = (int)nudTipoTerreno.Value;
             rutaNueva.Indicaciones = (int)nudIndicaciones.Value;
             rutaNueva.Temporadas = txtTemporada.Text;
@@ -130,6 +132,7 @@ namespace Forms
             rutaNueva.RecomendacionesEquipo = txtRecomendaciones.Text;
             rutaNueva.ZonaGeografica = txtZonaGeo.Text;
 
+            rutaNueva.UsuarioId = (int)Session.IdUsuario;
 
             if (string.IsNullOrWhiteSpace(rutaNueva.Nombre) ||
                 string.IsNullOrWhiteSpace(rutaNueva.Nombre_inicioruta) ||
@@ -138,7 +141,8 @@ namespace Forms
                 MessageBox.Show("Los campos Nombre, Inicio y Final son obligatorios.");
                 return;
             }
-                       
+
+
             if (_ruta != null)
             {
                 await _api.Update<Ruta>("api/reta3/rutas", rutaNueva.IdRuta.ToString(), rutaNueva);
@@ -149,10 +153,13 @@ namespace Forms
                 await _api.Create<Ruta>("api/reta3/rutas", rutaNueva);
                 MessageBox.Show("Ruta creada correctamente");
             }
+
+
+
             Ruta = rutaNueva;
             this.DialogResult = DialogResult.OK;
             this.Close();
-            
+
         }
     }
 }

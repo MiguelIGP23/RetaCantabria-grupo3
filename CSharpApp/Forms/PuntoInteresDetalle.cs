@@ -38,5 +38,18 @@ namespace Forms
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            using (var form = new EditarPuntoInteres(_api, _puntoInteres))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    _puntoInteres = form.PuntoInteres;
+                    ucPuntoDeInteresCompleto1.SetData(_puntoInteres);
+                }
+            }
+        }
     }
 }

@@ -524,7 +524,7 @@
             // nudAltitudMin
             // 
             nudAltitudMin.Location = new Point(171, 360);
-            nudAltitudMin.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            nudAltitudMin.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             nudAltitudMin.Name = "nudAltitudMin";
             nudAltitudMin.Size = new Size(119, 27);
             nudAltitudMin.TabIndex = 64;
@@ -534,7 +534,7 @@
             // nudAltitudMax
             // 
             nudAltitudMax.Location = new Point(529, 360);
-            nudAltitudMax.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            nudAltitudMax.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             nudAltitudMax.Name = "nudAltitudMax";
             nudAltitudMax.Size = new Size(110, 27);
             nudAltitudMax.TabIndex = 65;

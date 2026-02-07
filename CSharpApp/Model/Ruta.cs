@@ -87,15 +87,15 @@ namespace Model
         [JsonPropertyName("mediaEstrellas")]
         public double? MediaEstrellas { get; set; }
 
-        [JsonPropertyName("usuario")]
-        public Usuario Usuario { get; set; }
+        [JsonPropertyName("usuarioId")]
+        public int UsuarioId { get; set; }
 
 
         public Ruta() { 
 
         }
 
-        public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, TimeSpan duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, int accesibilidad, int rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, Usuario usuario_idUsuario)
+        public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, TimeSpan duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, int accesibilidad, int rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, int usuario_idUsuario)
         {
             IdRuta = idRuta;
             Nombre = nombre;
@@ -121,7 +121,7 @@ namespace Model
             ArchivoGPX = archivoGPX;
             RecomendacionesEquipo = recomendacionesEquipo;
             ZonaGeografica = zonaGeografica;
-            Usuario = usuario_idUsuario;
+            UsuarioId = usuario_idUsuario;
         }
     }
 }

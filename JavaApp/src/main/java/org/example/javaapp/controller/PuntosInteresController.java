@@ -1,7 +1,7 @@
 package org.example.javaapp.controller;
 
 import org.example.javaapp.dto.DtoPuntoInteres;
-import org.example.javaapp.dto.PuntoInteresMapper;
+import org.example.javaapp.dto.MapperPuntoInteres;
 import org.example.javaapp.model.PuntosInteres;
 import org.example.javaapp.service.ServicePuntosInteres;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class PuntosInteresController {
     @PostMapping(("/{idRuta}/puntosinteres"))
     public DtoPuntoInteres insert(@PathVariable int idRuta, @RequestBody PuntosInteres puntosInteres) {
         PuntosInteres entidad = service.insertInRuta(idRuta, puntosInteres);
-        return PuntoInteresMapper.toDto(entidad);
+        return MapperPuntoInteres.toDto(entidad);
     }
 
 
@@ -36,14 +36,14 @@ public class PuntosInteresController {
     @PutMapping("/{idRuta}/puntosinteres/{idPunto}")
     public DtoPuntoInteres update(@PathVariable int idPunto, @PathVariable int idRuta, @RequestBody PuntosInteres puntosInteres) {
         PuntosInteres entidad = service.updateInRuta(idPunto, idRuta, puntosInteres);
-        return PuntoInteresMapper.toDto(entidad);
+        return MapperPuntoInteres.toDto(entidad);
     }
 
 
     @GetMapping("/{idRuta}/puntosinteres/{idPunto}")
     public DtoPuntoInteres findById(@PathVariable int idPunto, @PathVariable int idRuta) {
         return service.findByRutaAndId(idPunto, idRuta)
-                .map(PuntoInteresMapper::toDto)
+                .map(MapperPuntoInteres::toDto)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Punto no encontrado")
                 );
@@ -54,7 +54,7 @@ public class PuntosInteresController {
     public List<DtoPuntoInteres> findAll(@PathVariable int idRuta) {
         return service.findAllByRuta(idRuta)
                 .stream()
-                .map(PuntoInteresMapper::toDto)
+                .map(MapperPuntoInteres::toDto)
                 .toList();
     }
 }

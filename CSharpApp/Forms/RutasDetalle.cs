@@ -109,7 +109,7 @@ namespace Forms
             var id = _ruta.IdRuta;
             if(MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                var exito = await _api.Delete($"/api/reta3/rutas/", id.ToString());
+                var exito = await _api.Delete($"/api/reta3/rutas", id.ToString());
                 if(exito)
                 {
                     MessageBox.Show("Ruta eliminada correctamente");
