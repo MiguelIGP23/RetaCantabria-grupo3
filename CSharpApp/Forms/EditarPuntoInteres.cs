@@ -19,6 +19,7 @@ namespace Forms
         private PuntoInteres _puntoInteres { get; set; }
         public PuntoInteres PuntoInteres { get; private set; }
 
+
         public EditarPuntoInteres(ApiReta api, PuntoInteres puntoInteres)
         {
             InitializeComponent();

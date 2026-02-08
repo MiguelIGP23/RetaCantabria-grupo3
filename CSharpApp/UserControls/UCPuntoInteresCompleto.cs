@@ -11,10 +11,10 @@ using Model;
 
 namespace UserControls
 {
-    public partial class UCPuntoDeInteresCompleto : UserControl
+    public partial class UCPuntoInteresCompleto : UserControl
     {
         public PuntoInteres PuntoInteres { get; set; }
-        public UCPuntoDeInteresCompleto()
+        public UCPuntoInteresCompleto()
         {
             InitializeComponent();
         }

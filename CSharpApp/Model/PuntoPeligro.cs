@@ -10,7 +10,7 @@ namespace Model
     public class PuntoPeligro
     {
         [JsonPropertyName("id")]
-        public int IdPuntoPeligro { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
@@ -47,7 +47,7 @@ namespace Model
 
         public PuntoPeligro(int idPuntoPeligro, string nombre, double latitud, double longitud, double elevacion, double kilometros, byte gravedad, int posicion, string descripcion, int timestamp, int rutas_idRuta)
         {
-            IdPuntoPeligro = idPuntoPeligro;
+            Id = idPuntoPeligro;
             Nombre = nombre;
             Latitud = latitud;
             Longitud = longitud;

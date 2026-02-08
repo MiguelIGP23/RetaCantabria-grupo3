@@ -13,7 +13,7 @@ namespace UserControls
 {
     public partial class UCPuntoPeligroCompleto : UserControl
     {
-        //Representa el punto de peligro asociado al user control
+        // Representa el punto de peligro asociado al user control
         public PuntoPeligro PuntoPeligro { get; set; }
 
         public UCPuntoPeligroCompleto()
@@ -21,7 +21,7 @@ namespace UserControls
             InitializeComponent();
         }
 
-        ////Carga en el user control los datos del punto de peligro dado como parámetro
+        // Carga en el user control los datos del punto de peligro dado como parámetro
         public void SetData(PuntoPeligro pp)
         {
             PuntoPeligro = pp;

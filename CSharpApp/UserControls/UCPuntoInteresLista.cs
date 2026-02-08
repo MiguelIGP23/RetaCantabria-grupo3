@@ -11,12 +11,12 @@ using Model;
 
 namespace UserControls
 {
-    public partial class UCPuntoDeInteresLista : UserControl
+    public partial class UCPuntoInteresLista : UserControl
     {
         public PuntoInteres puntoInteres { get; set; }
         private Ruta _ruta { get; set; }
 
-        public UCPuntoDeInteresLista(Ruta ruta)
+        public UCPuntoInteresLista(Ruta ruta)
         {
             InitializeComponent();
             _ruta = ruta;

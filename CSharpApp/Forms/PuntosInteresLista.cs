@@ -1,14 +1,5 @@
 ﻿using Model;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using UserControls;
 
 namespace Forms
@@ -17,7 +8,6 @@ namespace Forms
     {
 
         private readonly ApiReta _api;
-
         private Ruta _ruta { get; set; }
 
         public PuntosInteresLista(ApiReta api, Ruta ruta)
@@ -34,7 +24,7 @@ namespace Forms
 
 
 
-        //Mñetodo para cargar datos en la lista de user controls de puntos de interes en el flowlayout
+        //Método para cargar datos en la lista de user controls de puntos de interes en el flowlayout
         private async void CargarPuntosInteres(Ruta ruta)
         {
             try
@@ -43,7 +33,7 @@ namespace Forms
                 flpListaPuntos.Controls.Clear();
                 foreach (PuntoInteres p in puntosInteres)
                 {
-                    UCPuntoDeInteresLista uc = new UCPuntoDeInteresLista(ruta);
+                    UCPuntoInteresLista uc = new UCPuntoInteresLista(ruta);
                     uc.SetData(p, ruta);
                     uc.PuntoInteresClick += PuntoInteresClick;
                     flpListaPuntos.Controls.Add(uc);
