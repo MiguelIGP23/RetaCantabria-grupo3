@@ -37,7 +37,7 @@ namespace Model
         public int? Timestamp { get; set; }
 
         [JsonPropertyName("rutaId")]
-        public int IdRuta { get; set; }
+        public int RutaId { get; set; }
 
         public PuntoInteres() { }
 
@@ -52,7 +52,7 @@ namespace Model
             Tipo = tipo;
             Descripcion = descripcion;
             Timestamp = timestamp;
-            IdRuta = rutas_idRuta;
+            RutaId = rutas_idRuta;
         }
     }
 }

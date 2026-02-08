@@ -18,17 +18,22 @@ namespace Model
         [JsonPropertyName("descripcion")]
         public string? Descripcion { get; set; }
 
-        [JsonPropertyName("puntosinteres_idPuntosinteres")]
-        public int Puntosinteres_idPuntosinteres { get; set; }
+        [JsonPropertyName("puntosInteresId")]
+        public int PuntosInteresId { get; set; }
+
+        [JsonPropertyName("rutaId")]
+        public int RutaId { get; set; }
+
 
         public ImagenInteres() { }
 
-        public ImagenInteres(int idimagenesinteres, string url, string descripcion, int puntosinteres_idPuntosinteres)
+        public ImagenInteres(int idimagenesinteres, string url, string descripcion, int puntosInteresId, int rutaId)
         {
             Idimagenesinteres = idimagenesinteres;
             Url = url;
             Descripcion = descripcion;
-            Puntosinteres_idPuntosinteres = puntosinteres_idPuntosinteres;
+            PuntosInteresId = puntosInteresId;
+            RutaId = rutaId;
         }
     }
 }

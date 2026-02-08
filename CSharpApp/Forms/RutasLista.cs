@@ -72,10 +72,16 @@ namespace Forms
 
 
         // Métodos de botones
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private async void btnAgregar_Click(object sender, EventArgs e)
         {
-            CrearEditarRuta agregarRuta = new CrearEditarRuta(_api, null);
-            agregarRuta.Show();
+            using (var form = new CrearEditarRuta(_api, null))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    await CargarRutas();
+                }
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

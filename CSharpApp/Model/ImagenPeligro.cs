@@ -18,19 +18,23 @@ namespace Model
         [JsonPropertyName("descripcion")]
         public string? Descripcion { get; set; }
 
-        [JsonPropertyName("puntospeligro_idPuntosinteres")]
-        public int Puntospeligro_idPuntosinteres { get; set; }
+        [JsonPropertyName("puntosPeligroId")]
+        public int PuntosPeligroId { get; set; }
 
-        // Constructor por defecto (one-line)
+        [JsonPropertyName("rutaId")]
+        public int RutaId { get; set; }
+
+
+
         public ImagenPeligro() { }
 
-        // Constructor completo (firma one-line)
-        public ImagenPeligro(int idimagenes_peligro, string url, string descripcion, int puntospeligro_idPuntosinteres)
+        public ImagenPeligro(int idimagenes_peligro, string url, string descripcion, int puntosPeligroId, int rutaId)
         {
             Idimagenes_peligro = idimagenes_peligro;
             Url = url;
             Descripcion = descripcion;
-            Puntospeligro_idPuntosinteres = puntospeligro_idPuntosinteres;
+            PuntosPeligroId = puntosPeligroId;
+            RutaId = rutaId;
         }
     }
 }

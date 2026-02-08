@@ -25,7 +25,7 @@ namespace UserControls
         public void SetData(ImagenPeligro ip)
         {
             ImagenPeligro = ip;
-            lbltxtPuntoPeligro.Text = ip.Puntospeligro_idPuntosinteres.ToString();
+            lbltxtPuntoPeligro.Text = ip.PuntosPeligroId.ToString();
             lblDescripcion.Text = ip.Descripcion;
         }
     }

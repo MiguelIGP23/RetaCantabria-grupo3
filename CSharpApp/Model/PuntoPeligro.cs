@@ -9,7 +9,7 @@ namespace Model
 {
     public class PuntoPeligro
     {
-        [JsonPropertyName("idPuntoPeligroz")]
+        [JsonPropertyName("id")]
         public int IdPuntoPeligro { get; set; }
 
         [JsonPropertyName("nombre")]
@@ -39,13 +39,11 @@ namespace Model
         [JsonPropertyName("timestamp")]
         public int? Timestamp { get; set; }
 
-        [JsonPropertyName("rutas_idRuta")]
-        public int Rutas_idRuta { get; set; }
+        [JsonPropertyName("rutaId")]
+        public int RutaId { get; set; }
 
 
-        public PuntoPeligro()
-        {
-        }
+        public PuntoPeligro() { }
 
         public PuntoPeligro(int idPuntoPeligro, string nombre, double latitud, double longitud, double elevacion, double kilometros, byte gravedad, int posicion, string descripcion, int timestamp, int rutas_idRuta)
         {
@@ -59,7 +57,7 @@ namespace Model
             Posicion = posicion;
             Descripcion = descripcion;
             Timestamp = timestamp;
-            Rutas_idRuta = rutas_idRuta;
+            RutaId = rutas_idRuta;
         }
     }
 }

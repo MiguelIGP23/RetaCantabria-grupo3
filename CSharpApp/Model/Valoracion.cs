@@ -9,7 +9,7 @@ namespace Model
 {
     public class Valoracion
     {
-        [JsonPropertyName("idValora")]
+        [JsonPropertyName("id")]
         public int IdValora { get; set; }
 
         [JsonPropertyName("dificultad")]
@@ -30,14 +30,14 @@ namespace Model
         [JsonPropertyName("valoracionTecnica")]
         public string? ValoracionTecnica { get; set; }
 
-        [JsonPropertyName("reseña")]
+        [JsonPropertyName("resena")]
         public string? Resena { get; set; }
 
-        [JsonPropertyName("usuario_idUsuario")]
-        public int Usuario_idUsuario { get; set; }
+        [JsonPropertyName("usuarioId")]
+        public int UsuarioId { get; set; }
 
-        [JsonPropertyName("rutas_idRuta")]
-        public int Rutas_idRuta { get; set; }
+        [JsonPropertyName("rutaId")]
+        public int RutaId { get; set; }
 
         public Valoracion() { }
 
@@ -51,8 +51,8 @@ namespace Model
             Belleza = belleza;
             ValoracionTecnica = valoracionTecnica;
             Resena = resena;
-            Usuario_idUsuario = usuario_idUsuario;
-            Rutas_idRuta = rutas_idRuta;
+            UsuarioId = usuario_idUsuario;
+            RutaId = rutas_idRuta;
         }
     }
 }

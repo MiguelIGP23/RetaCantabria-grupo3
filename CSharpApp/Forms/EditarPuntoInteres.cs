@@ -59,7 +59,7 @@ namespace Forms
         public void CargarDatos(PuntoInteres puntoInteres)
         {
             lbltxtId.Text = puntoInteres.Id.ToString();
-            lbltxtIdRuta.Text = puntoInteres.IdRuta.ToString();
+            lbltxtIdRuta.Text = puntoInteres.RutaId.ToString();
             tbNombre.Text = puntoInteres.Nombre;
             nudLatitud.Value = (decimal)puntoInteres.Latitud;
             nudLongitud.Value = (decimal)puntoInteres.Longitud;
@@ -89,7 +89,7 @@ namespace Forms
 
             try
             {
-                await _api.Update<PuntoInteres>($"api/reta3/rutas/{_puntoInteres.IdRuta}/puntosinteres", _puntoInteres.Id.ToString(), _puntoInteres);
+                await _api.Update<PuntoInteres>($"api/reta3/rutas/{_puntoInteres.RutaId}/puntosinteres", _puntoInteres.Id.ToString(), _puntoInteres);
                 MessageBox.Show("Punto de interés actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (HttpRequestException ex)

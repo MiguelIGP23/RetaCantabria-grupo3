@@ -25,7 +25,7 @@ namespace UserControls
         public void SetData(PuntoPeligro pp)
         {
             PuntoPeligro = pp;
-            lbltxtRuta.Text = pp.Rutas_idRuta.ToString();
+            lbltxtRuta.Text = pp.RutaId.ToString();
             lbltxtPosicion.Text = pp.Posicion.ToString();
             lbltxtNombre.Text = pp.Nombre;
             lbltxtLatitud.Text = pp.Latitud.ToString();

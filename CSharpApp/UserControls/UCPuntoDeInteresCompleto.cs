@@ -25,7 +25,7 @@ namespace UserControls
         {
             PuntoInteres = p;
             lbltxtIdPuntoDeInteres.Text = p.Id.ToString();
-            lbltxtRutasid.Text = p.IdRuta.ToString();
+            lbltxtRutasid.Text = p.RutaId.ToString();
             lbltxtNombre.Text = p.Nombre;
             lbltxtLatitud.Text = p.Latitud.ToString();
             lbltxtLogitud.Text = p.Longitud.ToString();
