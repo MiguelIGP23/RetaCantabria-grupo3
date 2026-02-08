@@ -5,6 +5,7 @@ import org.example.javaapp.model.PuntosInteres;
 import org.example.javaapp.repository.ImagenInteresRepository;
 import org.example.javaapp.repository.PuntosInteresRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -62,42 +63,33 @@ public class ServiceImagenInteres implements IServiceImagenInteres {
     public ImagenesInteres insertInPunto(int idRuta, int idPunto, ImagenesInteres img) {
         PuntosInteres punto = repoPuntos.findByIdAndRuta_Id(idPunto, idRuta).orElse(null);
         if (punto == null) return null;
+
+        img.setId(null);
         img.setPuntosInteres(punto);
         return repoImagen.save(img);
+    }
+
+    public ImagenesInteres updateInPunto(int idRuta, int idPunto, int idImagen, ImagenesInteres img) {
+        Optional<ImagenesInteres> opt = repoImagen.findByIdAndPuntosInteres_IdAndPuntosInteres_Ruta_Id((idImagen), idPunto, idRuta);
+        if (opt.isEmpty()) return null;
+
+        ImagenesInteres buscada = opt.get();
+        buscada.setUrl(img.getUrl());
+        buscada.setDescripcion(img.getDescripcion());
+        return repoImagen.save(buscada);
+    }
+
+    @Transactional
+    public void deleteFromPunto(int idRuta, int idPunto, int idImagen) {
+        repoImagen.deleteByIdAndPuntosInteres_IdAndPuntosInteres_Ruta_Id(idImagen, idPunto, idRuta);
     }
 
     public List<ImagenesInteres> findAllByPunto(int idRuta, int idPunto) {
-        if (repoPuntos.findByIdAndRuta_Id(idPunto, idRuta).isEmpty()) {
-            return List.of();
-        }
-        return repoImagen.findByPuntosInteres_Id(idPunto);
+        return repoImagen.findByPuntosInteres_IdAndPuntosInteres_Ruta_Id(idPunto, idRuta);
     }
 
     public Optional<ImagenesInteres> findByPuntoAndId(int idRuta, int idPunto, int idImagen) {
-        if (repoPuntos.findByIdAndRuta_Id(idPunto, idRuta).isEmpty()) {
-            return Optional.empty();
-        }
-        return repoImagen.findByIdAndPuntosInteres_Id(idImagen, idPunto);
-    }
-
-    public ImagenesInteres updateInPunto(int idRuta, int idPunto, int idImagen, ImagenesInteres nueva) {
-        PuntosInteres punto = repoPuntos.findByIdAndRuta_Id(idPunto, idRuta).orElse(null);
-        if (punto == null) return null;
-
-        Optional<ImagenesInteres> opt = repoImagen.findByIdAndPuntosInteres_Id(idImagen, idPunto);
-        if (opt.isEmpty()) return null;
-
-        ImagenesInteres img = opt.get();
-        img.setDescripcion(nueva.getDescripcion());
-        img.setUrl(nueva.getUrl());
-        img.setPuntosInteres(punto);
-
-        return repoImagen.save(img);
-    }
-
-    public void deleteFromPunto(int idRuta, int idPunto, int idImagen) {
-        if (repoPuntos.findByIdAndRuta_Id(idPunto, idRuta).isEmpty()) return;
-        repoImagen.deleteByIdAndPuntosInteres_Id(idImagen, idPunto);
+        return repoImagen.findByIdAndPuntosInteres_IdAndPuntosInteres_Ruta_Id(idImagen, idPunto, idRuta);
     }
 
 }
