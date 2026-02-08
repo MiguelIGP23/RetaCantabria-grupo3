@@ -1,6 +1,6 @@
 package org.example.javaapp.controller;
 
-import org.example.javaapp.dto.DtoActividad;
+import org.example.javaapp.dto.DtoActividades;
 import org.example.javaapp.dto.MapperActividad;
 import org.example.javaapp.model.Actividad;
 import org.example.javaapp.model.Ruta;
@@ -25,7 +25,7 @@ public class ActividadController {
     }
 
     @PostMapping("/{idRuta}/actividades")
-    public DtoActividad insert(@PathVariable int idRuta, @RequestBody DtoActividad dto) {
+    public DtoActividades insert(@PathVariable int idRuta, @RequestBody DtoActividades dto) {
         Ruta ruta = serviceRuta.findById(idRuta);
         if (ruta == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ruta no encontrada");
 
@@ -42,19 +42,16 @@ public class ActividadController {
     }
 
 
-    @GetMapping("/{idRuta}/actividad/{idActividad}")
-    public DtoActividad findById(@PathVariable int idActividad, @PathVariable int idRuta) {
+    @GetMapping("/{idRuta}/actividades/{idActividad}")
+    public DtoActividades findById(@PathVariable int idActividad, @PathVariable int idRuta) {
         return serviceActividad.findByRutaAndId(idActividad, idRuta)
                 .map(MapperActividad::toDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Actividad no encontrada"));
     }
 
-    @GetMapping("/{idRuta}/actividad")
-    public List<DtoActividad> findAll(@PathVariable int idRuta) {
-        return serviceActividad.findAllByRuta(idRuta)
-                .stream()
-                .map(MapperActividad::toDto)
-                .toList();
+    @GetMapping("/{idRuta}/actividades")
+    public List<DtoActividades> findAll(@PathVariable int idRuta) {
+        return serviceActividad.findAllByRuta(idRuta).stream().map(MapperActividad::toDto).toList();
     }
 
 
@@ -65,7 +62,7 @@ public class ActividadController {
 
 
     @PutMapping("/{idRuta}/actividades/{idActividad}")
-    public DtoActividad update(@PathVariable int idActividad, @PathVariable int idRuta, @RequestBody DtoActividad dto) {
+    public DtoActividades update(@PathVariable int idActividad, @PathVariable int idRuta, @RequestBody DtoActividades dto) {
         Ruta ruta = serviceRuta.findById(idRuta);
         if (ruta == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ruta no encontrada");
 

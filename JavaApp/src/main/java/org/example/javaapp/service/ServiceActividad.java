@@ -5,6 +5,7 @@ import org.example.javaapp.model.Ruta;
 import org.example.javaapp.repository.ActividadRepository;
 import org.example.javaapp.repository.RutaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -75,6 +76,7 @@ public class ServiceActividad implements IServiceActividad {
         return repoActividad.save(buscada);
     }
 
+    @Transactional
     public void deleteFromRuta(int idActividad, int idRuta) {
         repoActividad.deleteByIdAndRuta_Id(idActividad, idRuta);
     }

@@ -3,7 +3,7 @@ package org.example.javaapp.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.example.javaapp.model.TipoPunto;
 
-public record DtoPuntoInteres(
+public record DtoPuntosInteres(
 
         @JsonProperty("id")
         Integer id,

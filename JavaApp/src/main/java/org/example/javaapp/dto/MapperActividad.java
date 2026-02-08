@@ -7,15 +7,15 @@ public class MapperActividad {
 
     private MapperActividad(){}
 
-    public static DtoActividad toDto(Actividad a) {
-        return new DtoActividad(
+    public static DtoActividades toDto(Actividad a) {
+        return new DtoActividades(
                 a.getId(),
                 a.getNombre(),
                 a.getRuta().getId()
         );
     }
 
-    public static Actividad toEntity(DtoActividad dto, Ruta ruta){
+    public static Actividad toEntity(DtoActividades dto, Ruta ruta){
         Actividad act = new Actividad();
 
         act.setId(dto.id());

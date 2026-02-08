@@ -1,7 +1,7 @@
 package org.example.javaapp.controller;
 
 
-import org.example.javaapp.dto.DtoRuta;
+import org.example.javaapp.dto.DtoRutas;
 import org.example.javaapp.dto.MapperRuta;
 import org.example.javaapp.export.FichaOrganizacionGenerator;
 import org.example.javaapp.export.FichaSeguridadGenerator;
@@ -43,7 +43,7 @@ public class RutaController {
     // Endpoints comunes
 
     @PostMapping()
-    public DtoRuta insert(@RequestBody DtoRuta dto) {
+    public DtoRutas insert(@RequestBody DtoRutas dto) {
         Usuario usu = serviceUsuario.findById(dto.usuarioId());
         if (usu == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
@@ -56,13 +56,13 @@ public class RutaController {
 
 
     @GetMapping()
-    public List<DtoRuta> getAll() {
+    public List<DtoRutas> getAll() {
         return serviceRuta.findAll().stream().map(MapperRuta::toDto).toList();
     }
 
 
     @GetMapping("/{id}")
-    public DtoRuta getById(@PathVariable int id) {
+    public DtoRutas getById(@PathVariable int id) {
         return MapperRuta.toDto(serviceRuta.findById(id));
     }
 
@@ -74,7 +74,7 @@ public class RutaController {
 
 
     @PutMapping("/{id}")
-    public DtoRuta update(@PathVariable int id, @RequestBody DtoRuta dto) {
+    public DtoRutas update(@PathVariable int id, @RequestBody DtoRutas dto) {
         if (dto.usuarioId() == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuarioId es obligatorio");
 
@@ -92,13 +92,13 @@ public class RutaController {
     // Endpoints para validar rutas y ver rutas validadas
 
     @PutMapping("/{id}/validar")
-    public DtoRuta validar(@PathVariable int id) {
+    public DtoRutas validar(@PathVariable int id) {
         return MapperRuta.toDto(serviceRuta.validar(id));
     }
 
 
     @GetMapping("/validadas")
-    public List<DtoRuta> getValidadas() {
+    public List<DtoRutas> getValidadas() {
         return serviceRuta.findValidadas().stream().map(MapperRuta::toDto).toList();
     }
 

@@ -7,8 +7,8 @@ public class MapperRuta {
 
     private MapperRuta() {}
 
-    public static DtoRuta toDto(Ruta r) {
-        return new DtoRuta(
+    public static DtoRutas toDto(Ruta r) {
+        return new DtoRutas(
                 r.getId(),
                 r.getNombre(),
                 r.getNombreInicioruta(),
@@ -40,7 +40,7 @@ public class MapperRuta {
         );
     }
 
-    public static Ruta toEntity(DtoRuta dto, Usuario usuario) {
+    public static Ruta toEntity(DtoRutas dto, Usuario usuario) {
         Ruta r = new Ruta();
 
         r.setId(dto.id());

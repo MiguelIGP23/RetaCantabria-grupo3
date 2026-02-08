@@ -2,7 +2,7 @@ package org.example.javaapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record DtoActividad(
+public record DtoActividades(
 
         @JsonProperty("id")
         Integer id,

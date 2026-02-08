@@ -5,6 +5,7 @@ import org.example.javaapp.model.Ruta;
 import org.example.javaapp.repository.PuntosInteresRepository;
 import org.example.javaapp.repository.RutaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -90,10 +91,10 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
         p.setTipo(datos.getTipo());
         p.setDescripcion(datos.getDescripcion());
         p.setTimestamp(datos.getTimestamp());
-
         return repoPuntos.save(p);
     }
 
+    @Transactional
     public void deleteFromRuta(Integer idPunto, Integer idRuta) {
         repoPuntos.deleteByIdAndRuta_Id(idPunto, idRuta);
     }

@@ -5,7 +5,7 @@ import org.example.javaapp.model.Clasificacion;
 
 import java.time.LocalTime;
 
-public record DtoRuta(
+public record DtoRutas(
 
         @JsonProperty("id")
         Integer id,

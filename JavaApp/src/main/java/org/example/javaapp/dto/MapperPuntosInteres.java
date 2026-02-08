@@ -3,12 +3,12 @@ package org.example.javaapp.dto;
 import org.example.javaapp.model.PuntosInteres;
 import org.example.javaapp.model.Ruta;
 
-public class MapperPuntoInteres {
+public class MapperPuntosInteres {
 
-    private MapperPuntoInteres() {}
+    private MapperPuntosInteres() {}
 
-    public static DtoPuntoInteres toDto(PuntosInteres p) {
-        return new DtoPuntoInteres(
+    public static DtoPuntosInteres toDto(PuntosInteres p) {
+        return new DtoPuntosInteres(
                 p.getId(),
                 p.getNombre(),
                 p.getLatitud(),
@@ -22,7 +22,7 @@ public class MapperPuntoInteres {
         );
     }
 
-    public static PuntosInteres toEntity(DtoPuntoInteres dto, Ruta ruta) {
+    public static PuntosInteres toEntity(DtoPuntosInteres dto, Ruta ruta) {
         PuntosInteres p = new PuntosInteres();
         p.setId(dto.id());
         p.setNombre(dto.nombre());
