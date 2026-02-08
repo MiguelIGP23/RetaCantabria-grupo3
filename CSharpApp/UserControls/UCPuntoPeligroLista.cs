@@ -18,6 +18,8 @@ namespace UserControls
         
         private Ruta _ruta { get; set; }
 
+
+        public UCPuntoPeligroLista() { }
         public UCPuntoPeligroLista(Ruta ruta)
         {
             InitializeComponent();

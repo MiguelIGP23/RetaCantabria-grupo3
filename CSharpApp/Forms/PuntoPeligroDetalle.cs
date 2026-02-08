@@ -74,7 +74,7 @@ namespace Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            using (var form = new EditarPuntoInteres(_api, _puntoPeligro))
+            using (var form = new EditarPuntoPeligro(_api, _puntoPeligro))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -89,7 +89,7 @@ namespace Forms
 
         private void btnImagenes_Click(object sender, EventArgs e)
         {
-            using (var form = new ImagenesPeligroLista(_api, _ruta, _puntoPeligro))
+            using (var form = new ImagenesPeligroLista())
             {
                 form.ShowDialog();
             }

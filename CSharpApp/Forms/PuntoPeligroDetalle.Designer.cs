@@ -101,6 +101,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "PuntoPeligroDetalle";
             Text = "PuntoPeligroDetalle";
+            Load += PuntoPeligroDetalle_Load;
             ResumeLayout(false);
         }
 

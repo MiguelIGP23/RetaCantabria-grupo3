@@ -47,7 +47,7 @@ namespace Forms
 
         private void btnPuntosPeligro_Click(object sender, EventArgs e)
         {
-            PuntosPeligroLista form = new PuntosPeligroLista(_ruta, _api);
+            PuntosPeligroLista form = new PuntosPeligroLista(_api, _ruta);
             form.Show();
         }
 

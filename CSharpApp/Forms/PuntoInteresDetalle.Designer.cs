@@ -32,7 +32,7 @@
             btnEditar = new Button();
             btnEliminar = new Button();
             btnVolver = new Button();
-            ucPuntoDeInteresCompleto1 = new UserControls.UCPuntoDeInteresCompleto();
+            ucPuntoDeInteresCompleto1 = new UserControls.UCPuntoInteresCompleto();
             SuspendLayout();
             // 
             // btnImagenes
@@ -111,6 +111,6 @@
         private Button btnEditar;
         private Button btnEliminar;
         private Button btnVolver;
-        private UserControls.UCPuntoDeInteresCompleto ucPuntoDeInteresCompleto1;
+        private UserControls.UCPuntoInteresCompleto ucPuntoDeInteresCompleto1;
     }
 }

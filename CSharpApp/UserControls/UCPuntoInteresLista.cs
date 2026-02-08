@@ -38,6 +38,7 @@ namespace UserControls
                 EnumTiposPuntoInteres.HISTORICO => Color.Aquamarine,
                 EnumTiposPuntoInteres.MIRADOR => Color.Lime,
                 EnumTiposPuntoInteres.PUNTO_DE_AGUA => Color.LightBlue,
+                null => Color.White,
             };
         }
 

@@ -95,8 +95,8 @@ namespace Forms
 
             try
             {
-                await _api.Update<PuntoPeligro>($"api/reta3/rutas/{_puntoPeligro.RutaId}/puntosinteres", _puntoPeligro.Id.ToString(), _puntoPeligro);
-                MessageBox.Show("Punto de interés actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await _api.Update<PuntoPeligro>($"api/reta3/rutas/{_puntoPeligro.RutaId}/puntospeligro", _puntoPeligro.Id.ToString(), _puntoPeligro);
+                MessageBox.Show("Punto de peligro actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (HttpRequestException ex)
             {
