@@ -45,7 +45,7 @@
             // 
             // ucImagenInteresLista1
             // 
-            ucImagenInteresLista1.ImagenDeInteres = null;
+            ucImagenInteresLista1.ImagenInteres = null;
             ucImagenInteresLista1.Location = new Point(3, 3);
             ucImagenInteresLista1.Name = "ucImagenInteresLista1";
             ucImagenInteresLista1.Size = new Size(623, 75);

@@ -77,6 +77,7 @@
             btnBuscarImagen.TabIndex = 34;
             btnBuscarImagen.Text = "Buscar imágen";
             btnBuscarImagen.UseVisualStyleBackColor = true;
+            btnBuscarImagen.Click += btnBuscarImagen_Click;
             // 
             // tbDescripcion
             // 

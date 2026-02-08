@@ -53,12 +53,12 @@ namespace Forms
 
             try
             {
-                if (MessageBox.Show("¿Seguro que quieres eliminar este punto?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("¿Seguro que quieres eliminar esta imágen?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     var exito = await _api.Delete($"/api/reta3/rutas/{idRuta}/puntospeligro", idPunto.ToString());
                     if (exito)
                     {
-                        MessageBox.Show("Punto eliminado correctamente");
+                        MessageBox.Show("Imágen eliminada :) correctamente");
                         this.DialogResult = DialogResult.Cancel;
                         this.Close();
                     }
@@ -89,7 +89,7 @@ namespace Forms
 
         private void btnImagenes_Click(object sender, EventArgs e)
         {
-            using (var form = new ImagenesPeligroLista())
+            using (var form = new ImagenesPeligroLista(_api, _ruta, _puntoPeligro))
             {
                 form.ShowDialog();
             }

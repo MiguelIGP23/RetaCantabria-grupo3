@@ -1,15 +1,5 @@
 ﻿using Model;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using UserControls;
 
 namespace Forms
 {
@@ -59,8 +49,6 @@ namespace Forms
             {
                 if (MessageBox.Show("¿Seguro que quieres eliminar esta imágen?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    MessageBox.Show($"ruta:{idRuta} - punto:{idPunto} - imagen:{idImagen}");
-
                     var exito = await _api.Delete($"/api/reta3/rutas/{idRuta}/puntosinteres/{idPunto}/imagenes", idImagen.ToString());
                     if (exito)
                     {

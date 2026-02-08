@@ -53,12 +53,6 @@ namespace Forms
 
 
 
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
         // Metodos de eventos
         private void ImagenInteresClick(object? sender, ImagenInteres imagen)
         {
@@ -72,6 +66,9 @@ namespace Forms
             }
         }
 
+
+
+        // Metodos de botones
         private void btnNuevaImagen_Click(object sender, EventArgs e)
         {
             var idRuta = _puntoInteres.RutaId;
@@ -85,6 +82,11 @@ namespace Forms
                     CargarImagenes(_puntoInteres);
                 }
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

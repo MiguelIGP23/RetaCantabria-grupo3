@@ -40,7 +40,7 @@
             lbltxtDescripcion.Name = "lbltxtDescripcion";
             lbltxtDescripcion.Size = new Size(419, 61);
             lbltxtDescripcion.TabIndex = 8;
-            lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
+            lbltxtDescripcion.Text = "txtDescripcion";
             lbltxtDescripcion.Click += lbltxtDescripcion_Click;
             // 
             // lblDescripcion

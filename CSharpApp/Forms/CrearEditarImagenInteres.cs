@@ -39,7 +39,7 @@ namespace Forms
         }
 
 
-
+        // Metodo para cargar datos en el user control
 
         public void CargarDatos(ImagenInteres imagenInteres)
         {
@@ -49,6 +49,8 @@ namespace Forms
         }
 
 
+
+        // Metodos de botones
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -98,6 +100,23 @@ namespace Forms
                 ApiReta.MostrarErrorHttp(ex);
             }
 
+        }
+
+        private void btnBuscarImagen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Selecciona una imágen";
+                ofd.Filter = "Todos los archivos (*.*)|*.*";
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string rutaArchivo = ofd.FileName;
+                    string nombreArchivo = Path.GetFileName(ofd.FileName);
+                    tbUrl.Text = rutaArchivo;
+                }
+            }
         }
     }
 }

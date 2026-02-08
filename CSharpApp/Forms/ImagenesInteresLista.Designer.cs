@@ -47,7 +47,7 @@
             // 
             // ucImagenInteresLista1
             // 
-            ucImagenInteresLista1.ImagenDeInteres = null;
+            ucImagenInteresLista1.ImagenInteres = null;
             ucImagenInteresLista1.Location = new Point(3, 5);
             ucImagenInteresLista1.Margin = new Padding(3, 5, 3, 5);
             ucImagenInteresLista1.Name = "ucImagenInteresLista1";

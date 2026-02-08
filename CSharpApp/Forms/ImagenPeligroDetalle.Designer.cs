@@ -36,49 +36,59 @@
             // 
             // imagenPeligroCompleto1
             // 
-            imagenPeligroCompleto1.Location = new Point(12, 12);
+            imagenPeligroCompleto1.Font = new Font("Segoe UI", 9F);
+            imagenPeligroCompleto1.Location = new Point(14, 16);
+            imagenPeligroCompleto1.Margin = new Padding(3, 5, 3, 5);
             imagenPeligroCompleto1.Name = "imagenPeligroCompleto1";
-            imagenPeligroCompleto1.Size = new Size(346, 332);
+            imagenPeligroCompleto1.Size = new Size(395, 443);
             imagenPeligroCompleto1.TabIndex = 0;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(149, 379);
+            btnEditar.Location = new Point(170, 505);
+            btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(75, 23);
+            btnEditar.Size = new Size(86, 31);
             btnEditar.TabIndex = 1;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(255, 379);
+            btnEliminar.Location = new Point(291, 505);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.Size = new Size(86, 31);
             btnEliminar.TabIndex = 2;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(40, 379);
+            btnVolver.Location = new Point(46, 505);
+            btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(75, 23);
+            btnVolver.Size = new Size(86, 31);
             btnVolver.TabIndex = 3;
-            btnVolver.Text = "Vovler";
+            btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // ImagenPeligroDetalle
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(374, 428);
+            ClientSize = new Size(427, 571);
             Controls.Add(btnVolver);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
             Controls.Add(imagenPeligroCompleto1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenPeligroDetalle";
             Text = "ImagenPeligroDetalle";
+            Load += ImagenPeligroDetalle_Load;
             ResumeLayout(false);
         }
 

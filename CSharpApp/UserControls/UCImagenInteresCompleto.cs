@@ -15,10 +15,13 @@ namespace UserControls
     {
 
         public ImagenInteres ImagenInteres { get; private set; }
+
+
         public UCImagenInteresCompleto()
         {
             InitializeComponent();
         }
+
 
         public void SetData(Model.ImagenInteres imagenInteres)
         {
