@@ -1,8 +1,8 @@
 package org.example.javaapp.controller;
 
 
-import org.example.javaapp.dto.DtoRutas;
-import org.example.javaapp.dto.MapperRutas;
+import org.example.javaapp.dto.DtoRuta;
+import org.example.javaapp.dto.MapperRuta;
 import org.example.javaapp.export.FichaOrganizacionGenerator;
 import org.example.javaapp.export.FichaSeguridadGenerator;
 import org.example.javaapp.export.FichaUsuarioGenerator;
@@ -43,30 +43,27 @@ public class RutaController {
     // Endpoints comunes
 
     @PostMapping()
-    public DtoRutas insert(@RequestBody DtoRutas dto) {
-        if (dto.usuarioId() == null)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuarioId es obligatorio");
-
+    public DtoRuta insert(@RequestBody DtoRuta dto) {
         Usuario usu = serviceUsuario.findById(dto.usuarioId());
         if (usu == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
 
-        Ruta entidad = MapperRutas.toEntity(dto, usu);
+        Ruta entidad = MapperRuta.toEntity(dto, usu);
         entidad.setId(null);
         Ruta nueva = serviceRuta.insert(entidad);
-        return MapperRutas.toDto(nueva);
+        return MapperRuta.toDto(nueva);
     }
 
 
     @GetMapping()
-    public List<DtoRutas> getAll() {
-        return serviceRuta.findAll().stream().map(MapperRutas::toDto).toList();
+    public List<DtoRuta> getAll() {
+        return serviceRuta.findAll().stream().map(MapperRuta::toDto).toList();
     }
 
 
     @GetMapping("/{id}")
-    public DtoRutas getById(@PathVariable int id) {
-        return MapperRutas.toDto(serviceRuta.findById(id));
+    public DtoRuta getById(@PathVariable int id) {
+        return MapperRuta.toDto(serviceRuta.findById(id));
     }
 
 
@@ -77,7 +74,7 @@ public class RutaController {
 
 
     @PutMapping("/{id}")
-    public DtoRutas update(@PathVariable int id, @RequestBody DtoRutas dto) {
+    public DtoRuta update(@PathVariable int id, @RequestBody DtoRuta dto) {
         if (dto.usuarioId() == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuarioId es obligatorio");
 
@@ -85,9 +82,9 @@ public class RutaController {
         if (usu == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
 
-        Ruta entidad = MapperRutas.toEntity(dto, usu);
+        Ruta entidad = MapperRuta.toEntity(dto, usu);
         Ruta nueva = serviceRuta.update(id, entidad);
-        return MapperRutas.toDto(nueva);
+        return MapperRuta.toDto(nueva);
     }
 
 
@@ -95,14 +92,14 @@ public class RutaController {
     // Endpoints para validar rutas y ver rutas validadas
 
     @PutMapping("/{id}/validar")
-    public DtoRutas validar(@PathVariable int id) {
-        return MapperRutas.toDto(serviceRuta.validar(id));
+    public DtoRuta validar(@PathVariable int id) {
+        return MapperRuta.toDto(serviceRuta.validar(id));
     }
 
 
     @GetMapping("/validadas")
-    public List<DtoRutas> getValidadas() {
-        return serviceRuta.findValidadas().stream().map(MapperRutas::toDto).toList();
+    public List<DtoRuta> getValidadas() {
+        return serviceRuta.findValidadas().stream().map(MapperRuta::toDto).toList();
     }
 
 

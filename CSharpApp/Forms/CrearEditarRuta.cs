@@ -106,7 +106,7 @@ namespace Forms
 
         private async void btnAceptar_Click_1(object sender, EventArgs e)
         {
-            
+
             Ruta rutaNueva = (_ruta != null) ? _ruta : new Ruta();
             rutaNueva.Nombre = txtNombre.Text;
             rutaNueva.Nombre_inicioruta = txtInicio.Text;
@@ -142,19 +142,24 @@ namespace Forms
                 return;
             }
 
-
-            if (_ruta != null)
+            try
             {
-                await _api.Update<Ruta>("api/reta3/rutas", rutaNueva.IdRuta.ToString(), rutaNueva);
-                MessageBox.Show("Ruta actualizada correctamente");
+                if (_ruta != null)
+                {
+                    await _api.Update<Ruta>("api/reta3/rutas", rutaNueva.IdRuta.ToString(), rutaNueva);
+                    MessageBox.Show("Ruta actualizada correctamente");
+                }
+                else
+                {
+                    await _api.Create<Ruta>("api/reta3/rutas", rutaNueva);
+                    MessageBox.Show("Ruta creada correctamente");
+                }
             }
-            else
+            catch (HttpRequestException ex)
             {
-                await _api.Create<Ruta>("api/reta3/rutas", rutaNueva);
-                MessageBox.Show("Ruta creada correctamente");
+                ApiReta.MostrarErrorHttp(ex);
+                return;
             }
-
-
 
             Ruta = rutaNueva;
             this.DialogResult = DialogResult.OK;

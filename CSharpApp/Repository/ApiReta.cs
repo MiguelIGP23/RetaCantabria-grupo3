@@ -53,19 +53,10 @@ namespace Repository
             ApplyAuthHeader();
             string path = ruta;
 
-            try
-            {
-                var resp = await _http.GetAsync(path);
-                resp.EnsureSuccessStatusCode();
-                var json = await resp.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<List<T>>(json, _jsonOptions) ?? new List<T>();
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return new List<T>();
-            }
-
+            var resp = await _http.GetAsync(path);
+            resp.EnsureSuccessStatusCode();
+            var json = await resp.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<T>>(json, _jsonOptions) ?? new List<T>();
         }
 
 
@@ -73,17 +64,11 @@ namespace Repository
         public async Task<T?> GetByIdAsync<T>(string ruta, string idPath)
         {
             ApplyAuthHeader();
-            try
-            {
-                var response = await _http.GetAsync($"{ruta}/{idPath}");
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return default;
-            }
+
+            var response = await _http.GetAsync($"{ruta}/{idPath}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+
         }
 
 
@@ -92,17 +77,10 @@ namespace Repository
         {
             ApplyAuthHeader();
 
-            try
-            {
-                var response = await _http.PostAsJsonAsync(ruta, objeto, _jsonOptions);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return default;
-            }
+            var response = await _http.PostAsJsonAsync(ruta, objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+
         }
 
 
@@ -110,17 +88,10 @@ namespace Repository
         public async Task<T?> Update<T>(string ruta, string id, T objeto)
         {
             ApplyAuthHeader();
-            try
-            {
-                var response = await _http.PutAsJsonAsync($"{ruta}/{id}", objeto, _jsonOptions);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return default;
-            }
+
+            var response = await _http.PutAsJsonAsync($"{ruta}/{id}", objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
         }
 
 
@@ -128,17 +99,10 @@ namespace Repository
         public async Task<Boolean> Delete(string ruta, string id)
         {
             ApplyAuthHeader();
-            try
-            {
-                var response = await _http.DeleteAsync($"{ruta}/{id}");
-                response.EnsureSuccessStatusCode();
-                return true;
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return false;
-            }
+
+            var response = await _http.DeleteAsync($"{ruta}/{id}");
+            response.EnsureSuccessStatusCode();
+            return true;
         }
 
 
@@ -211,7 +175,7 @@ namespace Repository
         public static void MostrarErrorHttp(HttpRequestException ex)
         {
 
-            int codigo = (int?) ex.StatusCode ?? -1;
+            int codigo = (int?)ex.StatusCode ?? -1;
             string titulo = ex.StatusCode?.ToString() ?? "ERROR";
             string mensaje = $"ERROR_CODE {codigo}: ";
             var icono = MessageBoxIcon.Warning;

@@ -60,12 +60,11 @@ public class ServiceActividad implements IServiceActividad {
 
     public Actividad insertInRuta(int idRuta, Actividad actividad) {
         Ruta ruta = repoRuta.findById(idRuta).orElse(null);
-        Actividad nueva = null;
-        if (ruta != null) {
-            actividad.setRuta(ruta);
-            nueva = repoActividad.save(actividad);
-        }
-        return nueva;
+        if (ruta == null) return null;
+
+        actividad.setId(null);
+        actividad.setRuta(ruta);
+        return repoActividad.save(actividad);
     }
 
     public Actividad updateInRuta(int idActividad, int idRuta, Actividad actividad) {

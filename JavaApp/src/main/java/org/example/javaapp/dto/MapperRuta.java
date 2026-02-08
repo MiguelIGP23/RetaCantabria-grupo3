@@ -3,12 +3,12 @@ package org.example.javaapp.dto;
 import org.example.javaapp.model.Ruta;
 import org.example.javaapp.model.Usuario;
 
-public class MapperRutas {
+public class MapperRuta {
 
-    private MapperRutas() {}
+    private MapperRuta() {}
 
-    public static DtoRutas toDto(Ruta r) {
-        return new DtoRutas(
+    public static DtoRuta toDto(Ruta r) {
+        return new DtoRuta(
                 r.getId(),
                 r.getNombre(),
                 r.getNombreInicioruta(),
@@ -40,7 +40,7 @@ public class MapperRutas {
         );
     }
 
-    public static Ruta toEntity(DtoRutas dto, Usuario usuario) {
+    public static Ruta toEntity(DtoRuta dto, Usuario usuario) {
         Ruta r = new Ruta();
 
         r.setId(dto.id());

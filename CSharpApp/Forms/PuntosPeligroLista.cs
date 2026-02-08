@@ -33,13 +33,20 @@ namespace Forms
 
         public async void CargarPuntosPeligro(Ruta ruta)
         {
-            List<PuntoPeligro> puntosPeligro = await _api.GetAllAsync<PuntoPeligro>($"api/reta3/rutas/{ruta.IdRuta}/puntospeligro");
-            flpPuntosPeligro.Controls.Clear();
-            foreach (PuntoPeligro p in puntosPeligro)
+            try
             {
-                UCPuntoPeligroLista uc = new UCPuntoPeligroLista();
-                uc.SetData(p, ruta);
-                flpPuntosPeligro.Controls.Add(uc);
+                List<PuntoPeligro> puntosPeligro = await _api.GetAllAsync<PuntoPeligro>($"api/reta3/rutas/{ruta.IdRuta}/puntospeligro");
+                flpPuntosPeligro.Controls.Clear();
+                foreach (PuntoPeligro p in puntosPeligro)
+                {
+                    UCPuntoPeligroLista uc = new UCPuntoPeligroLista();
+                    uc.SetData(p, ruta);
+                    flpPuntosPeligro.Controls.Add(uc);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
             }
         }
 

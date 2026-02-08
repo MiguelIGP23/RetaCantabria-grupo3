@@ -87,8 +87,17 @@ namespace Forms
                 return;
             }
 
-            await _api.Update<PuntoInteres>($"api/reta3/rutas/{_puntoInteres.IdRuta}/puntosinteres", _puntoInteres.Id.ToString(), _puntoInteres);
-            MessageBox.Show("Punto de interés actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                await _api.Update<PuntoInteres>($"api/reta3/rutas/{_puntoInteres.IdRuta}/puntosinteres", _puntoInteres.Id.ToString(), _puntoInteres);
+                MessageBox.Show("Punto de interés actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+                return;
+            }
+
             PuntoInteres = _puntoInteres;
             this.DialogResult = DialogResult.OK;
             this.Close();

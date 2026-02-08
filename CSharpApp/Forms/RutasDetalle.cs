@@ -92,7 +92,7 @@ namespace Forms
 
         private void btnActividades_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -106,19 +106,24 @@ namespace Forms
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            var id = _ruta.IdRuta;
-            if(MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                var exito = await _api.Delete($"/api/reta3/rutas", id.ToString());
-                if(exito)
+                var id = _ruta.IdRuta;
+                if (MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    MessageBox.Show("Ruta eliminada correctamente");
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
+                    var exito = await _api.Delete($"/api/reta3/rutas", id.ToString());
+                    if (exito)
+                    {
+                        MessageBox.Show("Ruta eliminada correctamente");
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
                 }
             }
-
-
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+            }
         }
 
 
@@ -128,7 +133,7 @@ namespace Forms
             using (var form = new CrearEditarRuta(_api, _ruta))
             {
                 var result = form.ShowDialog();
-                if(result == DialogResult.OK)
+                if (result == DialogResult.OK)
                 {
                     _ruta = form.Ruta;
                     ucRutaCompleto1.SetData(_ruta);
@@ -136,7 +141,7 @@ namespace Forms
             }
 
 
-            
+
         }
     }
 }

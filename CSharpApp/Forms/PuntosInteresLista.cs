@@ -37,14 +37,20 @@ namespace Forms
         //Mñetodo para cargar datos en la lista de user controls de puntos de interes en el flowlayout
         private async void CargarPuntosInteres(Ruta ruta)
         {
-            List<PuntoInteres> puntosInteres = await _api.GetAllAsync<PuntoInteres>($"api/reta3/rutas/{ruta.IdRuta}/puntosinteres");
-            flpListaPuntos.Controls.Clear();
-            foreach (PuntoInteres p in puntosInteres)
+            try
             {
-                UCPuntoDeInteresLista uc = new UCPuntoDeInteresLista(ruta);
-                uc.SetData(p, ruta);
-                uc.PuntoInteresClick += PuntoInteresClick;
-                flpListaPuntos.Controls.Add(uc);
+                List<PuntoInteres> puntosInteres = await _api.GetAllAsync<PuntoInteres>($"api/reta3/rutas/{ruta.IdRuta}/puntosinteres");
+                flpListaPuntos.Controls.Clear();
+                foreach (PuntoInteres p in puntosInteres)
+                {
+                    UCPuntoDeInteresLista uc = new UCPuntoDeInteresLista(ruta);
+                    uc.SetData(p, ruta);
+                    uc.PuntoInteresClick += PuntoInteresClick;
+                    flpListaPuntos.Controls.Add(uc);
+                }
+            }catch(HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);   
             }
         }
 
