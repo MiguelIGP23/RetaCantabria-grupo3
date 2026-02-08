@@ -1,6 +1,5 @@
 ﻿using Model;
 using Repository;
-using System.Threading.Tasks;
 
 namespace Forms
 {
@@ -17,7 +16,6 @@ namespace Forms
             _api = api;
             _ruta = ruta;
             cbClasificacion.DataSource = Enum.GetValues(typeof(EnumClasificaciones));
-
         }
 
 

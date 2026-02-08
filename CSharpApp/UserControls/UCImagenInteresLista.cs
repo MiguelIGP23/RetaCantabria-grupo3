@@ -25,8 +25,39 @@ namespace UserControls
         public void SetData(ImagenInteres i)
         {
             ImagenDeInteres = i;
-            lbltxtPuntoInteres.Text = i.Descripcion;
+            lbltxtId.Text = i.Id.ToString();
             lbltxtDescripcion.Text = i.Descripcion;
+            BackColor = Color.LightGray;
+        }
+
+
+
+        // Eventos que se disparan al hacer click en el user control o sus etiquetas
+        public event EventHandler<ImagenInteres> ImagenInteresClick;
+
+        private void lblPuntoInteres_Click(object sender, EventArgs e)
+        {
+            ImagenInteresClick?.Invoke(this, ImagenDeInteres);
+        }
+
+        private void lbltxtPuntoInteres_Click(object sender, EventArgs e)
+        {
+            ImagenInteresClick?.Invoke(this, ImagenDeInteres);
+        }
+
+        private void lblDescripcion_Click(object sender, EventArgs e)
+        {
+            ImagenInteresClick?.Invoke(this, ImagenDeInteres);
+        }
+
+        private void lbltxtDescripcion_Click(object sender, EventArgs e)
+        {
+            ImagenInteresClick?.Invoke(this, ImagenDeInteres);
+        }
+
+        private void UCImagenInteresLista_Click(object sender, EventArgs e)
+        {
+            ImagenInteresClick?.Invoke(this, ImagenDeInteres);
         }
     }
 }

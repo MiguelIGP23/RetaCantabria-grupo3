@@ -44,6 +44,7 @@
             btnImagenes.TabIndex = 8;
             btnImagenes.Text = "Ver imágenes";
             btnImagenes.UseVisualStyleBackColor = true;
+            btnImagenes.Click += btnImagenes_Click;
             // 
             // btnEditar
             // 
@@ -65,6 +66,7 @@
             btnEliminar.TabIndex = 6;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnVolver
             // 

@@ -9,8 +9,8 @@ namespace Model
 {
     public class ImagenInteres
     {
-        [JsonPropertyName("idimagenesinteres")]
-        public int Idimagenesinteres { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
         [JsonPropertyName("url")]
         public string Url { get; set; }
@@ -29,7 +29,7 @@ namespace Model
 
         public ImagenInteres(int idimagenesinteres, string url, string descripcion, int puntosInteresId, int rutaId)
         {
-            Idimagenesinteres = idimagenesinteres;
+            Id = idimagenesinteres;
             Url = url;
             Descripcion = descripcion;
             PuntosInteresId = puntosInteresId;
