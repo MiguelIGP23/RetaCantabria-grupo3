@@ -5,6 +5,7 @@ import org.example.javaapp.model.PuntosPeligro;
 import org.example.javaapp.repository.ImagenPeligroRepository;
 import org.example.javaapp.repository.PuntosPeligroRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,40 +59,38 @@ public class ServiceImagenPeligro implements IService<ImagenesPeligro,Integer> {
 
     //CRUD dependiente de ruta + punto peligro
 
-    public ImagenesPeligro insertInPunto(int idRuta, int idPunto, ImagenesPeligro img) {
-        PuntosPeligro punto = repoPunto.findByIdAndRuta_Id(idPunto, idRuta).orElse(null);
+    public ImagenesPeligro insertInPunto(int idRuta, int idPuntoPeligro, ImagenesPeligro img) {
+        PuntosPeligro punto = repoPunto.findByIdAndRuta_Id(idPuntoPeligro, idRuta).orElse(null);
         if (punto == null) return null;
+
+        img.setId(null);
         img.setPuntosPeligro(punto);
         return repoImagen.save(img);
     }
 
-    public List<ImagenesPeligro> findAllByPunto(int idRuta, int idPunto) {
-        if (repoPunto.findByIdAndRuta_Id(idPunto, idRuta).isEmpty()) return List.of();
-        return repoImagen.findByPuntosPeligro_Id(idPunto);
-    }
+    public ImagenesPeligro updateInPunto(int idRuta, int idPuntoPeligro, int idImagen, ImagenesPeligro img) {
+        Optional<ImagenesPeligro> opt =
+                repoImagen.findByIdAndPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(idImagen, idPuntoPeligro, idRuta);
 
-    public Optional<ImagenesPeligro> findByPuntoAndId(int idRuta, int idPunto, int idImagen) {
-        if (repoPunto.findByIdAndRuta_Id(idPunto, idRuta).isEmpty()) return Optional.empty();
-        return repoImagen.findByIdAndPuntosPeligro_Id(idImagen, idPunto);
-    }
-
-    public ImagenesPeligro updateInPunto(int idRuta, int idPunto, int idImagen, ImagenesPeligro nueva) {
-        PuntosPeligro punto = repoPunto.findByIdAndRuta_Id(idPunto, idRuta).orElse(null);
-        if (punto == null) return null;
-
-        Optional<ImagenesPeligro> opt = repoImagen.findByIdAndPuntosPeligro_Id(idImagen, idPunto);
         if (opt.isEmpty()) return null;
 
-        ImagenesPeligro img = opt.get();
-        img.setDescripcion(nueva.getDescripcion());
-        img.setUrl(nueva.getUrl());
-        img.setPuntosPeligro(punto);
-        return repoImagen.save(img);
+        ImagenesPeligro buscada = opt.get();
+        buscada.setUrl(img.getUrl());
+        buscada.setDescripcion(img.getDescripcion());
+        return repoImagen.save(buscada);
     }
 
-    public void deleteFromPunto(int idRuta, int idPunto, int idImagen) {
-        if (repoPunto.findByIdAndRuta_Id(idPunto, idRuta).isEmpty()) return;
-        repoImagen.deleteByIdAndPuntosPeligro_Id(idImagen, idPunto);
+    @Transactional
+    public void deleteFromPunto(int idRuta, int idPuntoPeligro, int idImagen) {
+        repoImagen.deleteByIdAndPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(idImagen, idPuntoPeligro, idRuta);
+    }
+
+    public List<ImagenesPeligro> findAllByPunto(int idRuta, int idPuntoPeligro) {
+        return repoImagen.findByPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(idPuntoPeligro, idRuta);
+    }
+
+    public Optional<ImagenesPeligro> findByPuntoAndId(int idRuta, int idPuntoPeligro, int idImagen) {
+        return repoImagen.findByIdAndPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(idImagen, idPuntoPeligro, idRuta);
     }
 
 }
