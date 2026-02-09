@@ -21,8 +21,8 @@ class ImagenPeligroRepository(
         dao.insert(imagen.toEntity())
     }
 
-    suspend fun syncImagenesPeligro() {
-        val response = api.findAll()
+    suspend fun syncImagenesPeligro(idRuta: Int,idPunto: Int) {
+        val response = api.findAll(idRuta,idPunto)
         Log.d("IMAGENESPELIGRO", "code=${response.code()} body=${response.body()}")
         if (response.isSuccessful) {
             response.body()?.let { images ->

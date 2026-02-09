@@ -49,6 +49,21 @@ fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.End
             ) {
+                FloatingActionButton(
+                    onClick = {
+                        // Navega a la pantalla Travel y pasa la id de la ruta
+                        navController.navigate("travel/${rutaSeleccionada.id}")
+                    },
+                    containerColor = Color(0xFF2196F3), // azul claro
+                    contentColor = Color.White
+                ) {
+                    Icon(
+                        Icons.Default.ArrowBack, // puedes usar otro icono, por ejemplo DirectionsWalk
+                        contentDescription = "Ir a Travel",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
                 // Botón Modificar
                 FloatingActionButton(
                     onClick = {

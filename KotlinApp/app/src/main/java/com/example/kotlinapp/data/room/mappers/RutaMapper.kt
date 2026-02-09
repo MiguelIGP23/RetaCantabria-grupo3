@@ -1,5 +1,6 @@
 package com.example.kotlinapp.data.room.mappers
 
+import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.data.room.entity.RutaEntity
 import com.example.kotlinapp.model.Ruta
 
@@ -32,7 +33,7 @@ fun Ruta.toEntity() = RutaEntity(
     recomendacionesEquipo = recomendacionesEquipo,
     zonaGeografica = zonaGeografica,
     mediaEstrellas = mediaEstrellas,
-    usuario = usuario
+    usuario = IdRef(usuario.id)
 )
 
 // Entidad -> Dominio

@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import com.example.kotlinapp.viewmodels.DBViewModel
 import com.example.kotlinapp.views.DetailView
 import com.example.kotlinapp.views.LoginView
+import com.example.kotlinapp.views.TravelRutaView
 import com.example.kotlinapp.views.cargarRutasDummy
 
 
@@ -48,6 +49,26 @@ fun NavManager(dbViewModel: DBViewModel) {
                 CreateRutaView(navController)
             }
 
+        }
+
+        composable(
+//            "Travel"
+            route = "Travel/{rutaId}",
+            arguments = listOf(
+                navArgument("rutaId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+
+            val rutaId = backStackEntry.arguments!!.getInt("rutaId")
+
+             val ruta = rutas.first { it.id == rutaId } // o ViewModel
+
+            RequestPermission(
+                Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido"
+            ) {
+                TravelRutaView(navController = navController, ruta = ruta
+                )
+            }
         }
     }
 }
