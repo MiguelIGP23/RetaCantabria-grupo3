@@ -40,6 +40,7 @@
             pbDescarga = new PictureBox();
             cbFicha = new ComboBox();
             label1 = new Label();
+            btnValidar = new Button();
             ((System.ComponentModel.ISupportInitialize)pbDescarga).BeginInit();
             SuspendLayout();
             // 
@@ -163,11 +164,23 @@
             label1.TabIndex = 67;
             label1.Text = "-Elegir ficha:";
             // 
+            // btnValidar
+            // 
+            btnValidar.Location = new Point(631, 664);
+            btnValidar.Margin = new Padding(3, 4, 3, 4);
+            btnValidar.Name = "btnValidar";
+            btnValidar.Size = new Size(135, 31);
+            btnValidar.TabIndex = 70;
+            btnValidar.Text = "Validar";
+            btnValidar.UseVisualStyleBackColor = true;
+            btnValidar.Click += btnValidar_Click;
+            // 
             // RutasDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(835, 752);
+            Controls.Add(btnValidar);
             Controls.Add(pbDescarga);
             Controls.Add(cbFicha);
             Controls.Add(label1);
@@ -201,5 +214,6 @@
         private PictureBox pbDescarga;
         private ComboBox cbFicha;
         private Label label1;
+        private Button btnValidar;
     }
 }

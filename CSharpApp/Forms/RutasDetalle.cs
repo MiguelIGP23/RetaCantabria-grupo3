@@ -78,7 +78,7 @@ namespace Forms
                 }
                 MessageBox.Show("Ficha guardada en Descargas");
             }
-            catch(HttpRequestException ex)
+            catch (HttpRequestException ex)
             {
                 ApiReta.MostrarErrorHttp(ex);
             }
@@ -146,6 +146,30 @@ namespace Forms
 
 
 
+        }
+
+        private async void btnValidar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var id = _ruta.IdRuta;
+                if (MessageBox.Show("¿Validar esta ruta?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Ruta validada = _ruta;
+                    validada.EstadoRuta = ((byte)1);
+                    var exito = await _api.Update($"/api/reta3/rutas/{_ruta.IdRuta}/validar", id.ToString(), validada);
+                    if (exito != null)
+                    {
+                        MessageBox.Show("Ruta eliminada correctamente");
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+            }
         }
     }
 }
