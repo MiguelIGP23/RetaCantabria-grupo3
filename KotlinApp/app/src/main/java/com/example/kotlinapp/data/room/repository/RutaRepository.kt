@@ -14,11 +14,15 @@ class RutaRepository(
     private val api: RutaService,
     private val dao: RutaDao
 ) {
-
+    //todas las rutas local
     fun getRutas(): Flow<List<Ruta>> = dao.getAll()
-        .map { list -> list.map { it.toDomain() } }  // mapeo aquí
+        .map { list -> list.map { it.toDomain() } }
 
+    suspend fun insertRuta(ruta: Ruta) {
+        dao.insert(ruta.toEntity())
+    }
 
+    //todas las rutas remotas
     suspend fun syncRutas() {
         val response = api.findAll()
 

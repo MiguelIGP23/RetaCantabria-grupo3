@@ -1,26 +1,33 @@
 package com.example.kotlinapp.data.room.repository
 
+import android.util.Log
 import com.example.kotlinapp.data.room.daos.UsuarioDao
+import com.example.kotlinapp.data.room.entity.UsuarioEntity
+import com.example.kotlinapp.data.room.mappers.toDomain
+import com.example.kotlinapp.data.room.mappers.toEntity
+import com.example.kotlinapp.data.services.UsuarioService
+import com.example.kotlinapp.model.Usuario
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class UsuarioRepository(private val usuarioDao: UsuarioDao) {
+class UsuarioRepository(
+    private val api: UsuarioService,
+    private val dao: UsuarioDao
+) {
+    fun getUsuarios(): Flow<List<Usuario>> = dao.getAll()
+        .map { list -> list.map { it.toDomain() } }
 
-    // --- Login ---
-    // suspend fun login(email: String, password: String): Usuario? {
-    // return usuarioDao.login(email, password)
-    // }
+    suspend fun insertUsuario(usuario: Usuario) {
+        dao.insert(usuario.toEntity())
+    }
 
-    // --- Obtener usuario por ID ---
-    // suspend fun obtenerUsuario(id: Int): Usuario? {
-    // return usuarioDao.obtenerUsuario(id)
-    // }
-
-    // --- Guardar usuario autenticado ---
-    // suspend fun guardarUsuario(usuario: Usuario): Long {
-    // return usuarioDao.guardarUsuario(usuario)
-    // }
-
-    // --- Roles ---
-    // suspend fun obtenerRol(id: Int): Rol? {
-    // return usuarioDao.obtenerRol(id)
-    // }
+    suspend fun syncUsuarios() {
+        val response = api.findAll()
+        Log.d("USUARIOS", "code=${response.code()} body=${response.body()}")
+        if (response.isSuccessful) {
+            response.body()?.let { usuarios ->
+                dao.insertAll(usuarios.map { it.toEntity() })
+            }
+        }
+    }
 }

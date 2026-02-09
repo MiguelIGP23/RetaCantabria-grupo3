@@ -22,4 +22,10 @@ class RutasViewModel (private val repository: RutaRepository) : ViewModel() {
             repository.syncRutas()
         }
     }
+
+    fun insertRuta(ruta: com.example.kotlinapp.model.Ruta) {
+        viewModelScope.launch {
+            repository.insertRuta(ruta)
+        }
+    }
 }
