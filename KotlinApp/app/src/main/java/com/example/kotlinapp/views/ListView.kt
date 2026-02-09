@@ -1,6 +1,7 @@
 package com.example.kotlinapp.views
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -117,17 +118,24 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
 fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewModel) {
     val context = LocalContext.current
 
-    // Launcher para seleccionar archivo GPX
     val gpxLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument(),
         onResult = { uri: Uri? ->
-            uri?.let {
-                // Leer contenido del GPX seleccionado
-                val gpxContent = context.contentResolver.openInputStream(uri)?.bufferedReader().use { it?.readText() }
+            uri?.let { selectedUri ->
+                // Tomar permiso persistente
+                context.contentResolver.takePersistableUriPermission(
+                    selectedUri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+
+                // Leer GPX
+                val gpxContent = context.contentResolver.openInputStream(selectedUri)
+                    ?.bufferedReader().use { it?.readText() }
+
                 if (!gpxContent.isNullOrEmpty()) {
-                    // Crear ruta temporal con este GPX
+                    // Crear ruta temporal
                     val rutaImportada = Ruta(
-                        id = -1, // id temporal
+                        id = -1,
                         nombre = "Ruta importada",
                         nombreInicioruta = "Inicio GPX",
                         nombreFinalruta = "Final GPX",
@@ -156,16 +164,19 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
                         mediaEstrellas = 0.0,
                         usuario = IdRef(1)
                     )
-                    // Navegar a TravelRutaView con esta ruta
-                    navController.currentBackStackEntry?.savedStateHandle?.set("rutaImportada", rutaImportada)
-                    navController.navigate("travel/imported")
+                    // Guardar en ViewModel
+                    vm.setRutaImportada(rutaImportada)
+
+                    // Navegar a Travel
+                    navController.navigate("Travel/imported")
                 }
             }
         }
     )
 
     TopAppBar(
-        title = { ListaTopBarTitle() }, actions = {
+        title = { ListaTopBarTitle() },
+        actions = {
             // Botón para importar GPX
             IconButton(onClick = { gpxLauncher.launch(arrayOf("application/gpx+xml")) }) {
                 Icon(Icons.Default.Build, contentDescription = "Importar GPX")
@@ -187,6 +198,7 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
         )
     )
 }
+
 
 
 // Composable de título del TopBar (logo + texto)
