@@ -1,4 +1,4 @@
-package com.example.kotlinapp.data
+package com.example.kotlinapp.data.services
 
 import com.example.kotlinapp.model.Ruta
 import retrofit2.Response

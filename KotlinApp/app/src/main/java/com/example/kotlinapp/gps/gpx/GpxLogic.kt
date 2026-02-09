@@ -36,7 +36,7 @@ fun generateGpx(
         sb.append("      <trkpt lat=\"${tp.latitud}\" lon=\"${tp.longitud}\">\n")
         sb.append("        <ele>${tp.altitud}</ele>\n")
         sb.append("        <time>${epochToIso(tp.time)}</time>\n")
-        sb.append("        <name>Trackpoint ${index + 1}</name>\n")
+        sb.append("        <name>${index + 1}</name>\n")
         sb.append("      </trkpt>\n")
     }
     sb.append("    </trkseg>\n")
@@ -68,8 +68,12 @@ fun generateGpx(
 
 // Función para convertir milisegundos a ISO 8601
 fun epochToIso(time: Long): String {
-    val instant = java.time.Instant.ofEpochMilli(time)
-    return java.time.format.DateTimeFormatter.ISO_INSTANT.format(instant)
+    val sdf = java.text.SimpleDateFormat(
+        "yyyy-MM-dd'T'HH:mm:ss'Z'",
+        java.util.Locale.US
+    )
+    sdf.timeZone = java.util.TimeZone.getTimeZone("UTC")
+    return sdf.format(java.util.Date(time))
 }
 
 @Composable

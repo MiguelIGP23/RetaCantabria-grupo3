@@ -1,5 +1,7 @@
 package com.example.kotlinapp.data
 
+import com.example.kotlinapp.data.services.AuthService
+
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
@@ -21,10 +23,7 @@ class AuthRepository(
             false
         }
     }
-
-    suspend fun logout() {
+    suspend fun logout(){
         session.clearSession()
     }
-
-
 }

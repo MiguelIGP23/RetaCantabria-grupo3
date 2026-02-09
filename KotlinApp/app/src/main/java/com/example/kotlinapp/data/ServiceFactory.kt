@@ -1,5 +1,13 @@
 package com.example.kotlinapp.data
 
+import com.example.kotlinapp.data.services.AuthService
+import com.example.kotlinapp.data.services.ImagenInteresService
+import com.example.kotlinapp.data.services.ImagenPeligroService
+import com.example.kotlinapp.data.services.PuntoInteresService
+import com.example.kotlinapp.data.services.PuntoPeligroService
+import com.example.kotlinapp.data.services.RutaService
+import com.example.kotlinapp.data.services.TrackpointService
+import com.example.kotlinapp.data.services.UsuarioService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

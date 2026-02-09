@@ -10,7 +10,6 @@ data class PuntoPeligro(
     val elevacion: Double,
     val kilometros: Double?,
     val gravedad: Byte?,
-    val posicion: Int?,
     val descripcion: String?,
     val timestamp: Int?,
     val ruta: IdRef

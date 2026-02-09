@@ -32,15 +32,19 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.model.enums.WaypointType
 import com.example.kotlinapp.ui.theme.fondoPrincipal
+import com.example.kotlinapp.viewmodels.RutasViewModel
 import com.example.kotlinapp.viewmodels.DBViewModel
 import kotlinx.coroutines.flow.firstOrNull
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView(navController: NavHostController, vm: DBViewModel) {
+fun ListView(navController: NavHostController, viewModel: RutasViewModel) {
+//fun ListView(navController: NavHostController, vm: DBViewModel) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
-    val rutas = cargarRutasDummy() // Lista de ejemplo
+    val rutas by viewModel.rutas.collectAsState() // Lista de ejemplo
 
     val loginState by vm.loginState.collectAsState()
     LaunchedEffect(Unit) {
@@ -72,7 +76,6 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
     Scaffold(topBar = { ListaTopBar(context, vm) }, floatingActionButton = {
         FloatingActionButton(
             onClick = {
-                // Por ahora no hace nada
                 navController.navigate("Create")
             }, containerColor = Color(0xFF4CAF50), // verde
             contentColor = Color.White
@@ -93,7 +96,8 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
             SearchBar(searchText) { searchText = it }
             Spacer(modifier = Modifier.height(8.dp))
             RutaList(
-                rutasFiltradas, navController
+                rutasFiltradas,
+                navController
             )
         }
     }
@@ -183,7 +187,9 @@ fun RutaItem(ruta: Ruta, onClick: () -> Unit) {
             .padding(16.dp)
             .clickable { onClick() }) {
         Text(
-            text = "Ruta: ${ruta.nombre}", color = Color.Black, fontSize = 16.sp
+            text = "Ruta: ${ruta.nombre}",
+            color = Color.Black,
+            fontSize = 16.sp
         )
     }
 }
@@ -195,9 +201,9 @@ fun cargarRutasDummy(): List<Ruta> {
 
     // Trackpoints dummy
     val trackpoints1 = listOf(
-        Trackpoint(1, 40.0, -3.0, 100.0, System.currentTimeMillis()),
-        Trackpoint(2, 40.1, -3.05, 120.0, System.currentTimeMillis() + 10000),
-        Trackpoint(3, 40.2, -3.1, 130.0, System.currentTimeMillis() + 20000)
+        Trackpoint(1, 1,40.0, -3.0, 100.0, System.currentTimeMillis()),
+        Trackpoint(1, 2,40.1, -3.05, 120.0, System.currentTimeMillis() + 10000),
+        Trackpoint(1, 3,40.2, -3.1, 130.0, System.currentTimeMillis() + 20000)
     )
 
     // Waypoints dummy

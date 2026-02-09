@@ -325,7 +325,8 @@ fun createLocationCallback(
                         latitud = lat,
                         longitud = lon,
                         altitud = alt,
-                        time = System.currentTimeMillis() // <-- guardamos el tiempo
+                        time = System.currentTimeMillis(),
+                        posicion = savedTrackpoints.size + 1
                     )
                 )
                 val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
@@ -437,7 +438,8 @@ fun LocationControls(
                         latitud = lat,
                         longitud = lon,
                         altitud = alt,
-                        time = System.currentTimeMillis()
+                        time = System.currentTimeMillis(),
+                        posicion = savedTrackpoints.size + 1
                     ))
                     val marker = createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
                     marker.position = GeoPoint(lat, lon, alt)
