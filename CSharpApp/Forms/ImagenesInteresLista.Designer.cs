@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             flpImagenesLista = new FlowLayoutPanel();
+            ucImagenInteresLista1 = new UserControls.UCImagenInteresLista();
             btnNuevaImagen = new Button();
             btnVolver = new Button();
-            ucImagenInteresLista1 = new UserControls.UCImagenInteresLista();
             flpImagenesLista.SuspendLayout();
             SuspendLayout();
             // 
@@ -39,47 +39,55 @@
             // 
             flpImagenesLista.AutoScroll = true;
             flpImagenesLista.Controls.Add(ucImagenInteresLista1);
-            flpImagenesLista.Location = new Point(51, 42);
+            flpImagenesLista.Location = new Point(58, 56);
+            flpImagenesLista.Margin = new Padding(3, 4, 3, 4);
             flpImagenesLista.Name = "flpImagenesLista";
-            flpImagenesLista.Size = new Size(700, 295);
+            flpImagenesLista.Size = new Size(800, 393);
             flpImagenesLista.TabIndex = 0;
-            // 
-            // btnNuevaImagen
-            // 
-            btnNuevaImagen.Location = new Point(461, 373);
-            btnNuevaImagen.Name = "btnNuevaImagen";
-            btnNuevaImagen.Size = new Size(112, 23);
-            btnNuevaImagen.TabIndex = 4;
-            btnNuevaImagen.Text = "Nueva imágen";
-            btnNuevaImagen.UseVisualStyleBackColor = true;
-            // 
-            // btnVolver
-            // 
-            btnVolver.Location = new Point(220, 373);
-            btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(75, 23);
-            btnVolver.TabIndex = 3;
-            btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
             // 
             // ucImagenInteresLista1
             // 
-            ucImagenInteresLista1.ImagenDeInteres = null;
-            ucImagenInteresLista1.Location = new Point(3, 3);
+            ucImagenInteresLista1.ImagenInteres = null;
+            ucImagenInteresLista1.Location = new Point(3, 5);
+            ucImagenInteresLista1.Margin = new Padding(3, 5, 3, 5);
             ucImagenInteresLista1.Name = "ucImagenInteresLista1";
-            ucImagenInteresLista1.Size = new Size(690, 75);
+            ucImagenInteresLista1.Size = new Size(789, 100);
             ucImagenInteresLista1.TabIndex = 0;
+            // 
+            // btnNuevaImagen
+            // 
+            btnNuevaImagen.Location = new Point(527, 497);
+            btnNuevaImagen.Margin = new Padding(3, 4, 3, 4);
+            btnNuevaImagen.Name = "btnNuevaImagen";
+            btnNuevaImagen.Size = new Size(128, 31);
+            btnNuevaImagen.TabIndex = 4;
+            btnNuevaImagen.Text = "Nueva imágen";
+            btnNuevaImagen.UseVisualStyleBackColor = true;
+            btnNuevaImagen.Click += btnNuevaImagen_Click;
+            // 
+            // btnVolver
+            // 
+            btnVolver.Location = new Point(251, 497);
+            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(86, 31);
+            btnVolver.TabIndex = 3;
+            btnVolver.Text = "Volver";
+            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // ImagenesInteresLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(btnNuevaImagen);
             Controls.Add(btnVolver);
             Controls.Add(flpImagenesLista);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenesInteresLista";
             Text = "ImagenesInteresLista";
+            Load += ImagenesInteresLista_Load;
             flpImagenesLista.ResumeLayout(false);
             ResumeLayout(false);
         }

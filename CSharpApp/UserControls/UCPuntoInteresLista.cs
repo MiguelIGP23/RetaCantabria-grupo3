@@ -11,12 +11,12 @@ using Model;
 
 namespace UserControls
 {
-    public partial class UCPuntoDeInteresLista : UserControl
+    public partial class UCPuntoInteresLista : UserControl
     {
         public PuntoInteres puntoInteres { get; set; }
         private Ruta _ruta { get; set; }
 
-        public UCPuntoDeInteresLista(Ruta ruta)
+        public UCPuntoInteresLista(Ruta ruta)
         {
             InitializeComponent();
             _ruta = ruta;
@@ -38,7 +38,47 @@ namespace UserControls
                 EnumTiposPuntoInteres.HISTORICO => Color.Aquamarine,
                 EnumTiposPuntoInteres.MIRADOR => Color.Lime,
                 EnumTiposPuntoInteres.PUNTO_DE_AGUA => Color.LightBlue,
+                null => Color.White,
             };
+        }
+
+
+
+        // Evento que se dispara al hacer click en el user control o sus etiquetas
+        public event EventHandler<PuntoInteres> PuntoInteresClick;
+        private void lblRuta_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lbltxtRuta_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lblTipo_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lbltxtTipo_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void lbltxtNombre_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
+        }
+
+        private void UCPuntoDeInteresLista_Click(object sender, EventArgs e)
+        {
+            PuntoInteresClick?.Invoke(this, puntoInteres);
         }
 
     }

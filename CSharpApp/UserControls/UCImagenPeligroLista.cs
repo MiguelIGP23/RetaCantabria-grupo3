@@ -25,8 +25,39 @@ namespace UserControls
         public void SetData(ImagenPeligro ip)
         {
             ImagenPeligro = ip;
-            lbltxtPuntoPeligro.Text = ip.Puntospeligro_idPuntosinteres.ToString();
-            lblDescripcion.Text = ip.Descripcion;
+            lbltxtImagenId.Text = ip.Id.ToString();
+            lbltxtDescripcion.Text = ip.Descripcion;
+            BackColor = Color.LightGray;
+        }
+
+
+
+        // Evento que se dispara al hacer click en el user control o sus etiquetas 
+        public event EventHandler<ImagenPeligro> ImagenPeligroClick;
+
+        private void lblPuntoPeligro_Click(object sender, EventArgs e)
+        {
+            ImagenPeligroClick?.Invoke(this, ImagenPeligro);
+        }
+
+        private void lbltxtPuntoPeligro_Click(object sender, EventArgs e)
+        {
+            ImagenPeligroClick?.Invoke(this, ImagenPeligro);
+        }
+
+        private void lblDescripcion_Click(object sender, EventArgs e)
+        {
+            ImagenPeligroClick?.Invoke(this, ImagenPeligro);
+        }
+
+        private void lbltxtDescripcion_Click(object sender, EventArgs e)
+        {
+            ImagenPeligroClick?.Invoke(this, ImagenPeligro);
+        }
+
+        private void UCImagenPeligroLista_Click(object sender, EventArgs e)
+        {
+            ImagenPeligroClick?.Invoke(this, ImagenPeligro);
         }
     }
 }

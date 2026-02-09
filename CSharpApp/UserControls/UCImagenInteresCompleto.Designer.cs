@@ -33,33 +33,35 @@
             lbltxtPuntoInteres = new Label();
             lblPuntoInteres = new Label();
             pbImagen = new PictureBox();
+            lbltxtImagen = new Label();
+            lblImagen = new Label();
             ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(111, 56);
+            lbltxtDescripcion.Location = new Point(127, 75);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(191, 67);
+            lbltxtDescripcion.Size = new Size(218, 89);
             lbltxtDescripcion.TabIndex = 12;
-            lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
+            lbltxtDescripcion.Text = "txtDescripcion";
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDescripcion.Location = new Point(28, 56);
+            lblDescripcion.Location = new Point(32, 75);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(80, 15);
+            lblDescripcion.Size = new Size(100, 20);
             lblDescripcion.TabIndex = 11;
             lblDescripcion.Text = "-Descripción:";
             // 
             // lbltxtPuntoInteres
             // 
             lbltxtPuntoInteres.AutoSize = true;
-            lbltxtPuntoInteres.Location = new Point(119, 23);
+            lbltxtPuntoInteres.Location = new Point(122, 31);
             lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
-            lbltxtPuntoInteres.Size = new Size(47, 15);
+            lbltxtPuntoInteres.Size = new Size(58, 20);
             lbltxtPuntoInteres.TabIndex = 10;
             lbltxtPuntoInteres.Text = "txtNum";
             // 
@@ -67,31 +69,54 @@
             // 
             lblPuntoInteres.AutoSize = true;
             lblPuntoInteres.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblPuntoInteres.Location = new Point(28, 23);
+            lblPuntoInteres.Location = new Point(32, 31);
             lblPuntoInteres.Name = "lblPuntoInteres";
-            lblPuntoInteres.Size = new Size(90, 15);
+            lblPuntoInteres.Size = new Size(84, 20);
             lblPuntoInteres.TabIndex = 9;
-            lblPuntoInteres.Text = "-Punto interés:";
+            lblPuntoInteres.Text = "-Nº punto:";
             // 
             // pbImagen
             // 
-            pbImagen.Location = new Point(28, 145);
+            pbImagen.Location = new Point(32, 193);
+            pbImagen.Margin = new Padding(3, 4, 3, 4);
             pbImagen.Name = "pbImagen";
-            pbImagen.Size = new Size(284, 157);
+            pbImagen.Size = new Size(325, 209);
             pbImagen.TabIndex = 13;
             pbImagen.TabStop = false;
             // 
+            // lbltxtImagen
+            // 
+            lbltxtImagen.AutoSize = true;
+            lbltxtImagen.Location = new Point(299, 31);
+            lbltxtImagen.Name = "lbltxtImagen";
+            lbltxtImagen.Size = new Size(58, 20);
+            lbltxtImagen.TabIndex = 15;
+            lbltxtImagen.Text = "txtNum";
+            // 
+            // lblImagen
+            // 
+            lblImagen.AutoSize = true;
+            lblImagen.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblImagen.Location = new Point(199, 31);
+            lblImagen.Name = "lblImagen";
+            lblImagen.Size = new Size(94, 20);
+            lblImagen.TabIndex = 14;
+            lblImagen.Text = "-Nº imágen:";
+            // 
             // UCImagenInteresCompleto
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lbltxtImagen);
+            Controls.Add(lblImagen);
             Controls.Add(pbImagen);
             Controls.Add(lbltxtDescripcion);
             Controls.Add(lblDescripcion);
             Controls.Add(lbltxtPuntoInteres);
             Controls.Add(lblPuntoInteres);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UCImagenInteresCompleto";
-            Size = new Size(346, 332);
+            Size = new Size(395, 443);
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -104,5 +129,7 @@
         private Label lbltxtPuntoInteres;
         private Label lblPuntoInteres;
         private PictureBox pbImagen;
+        private Label lbltxtImagen;
+        private Label lblImagen;
     }
 }

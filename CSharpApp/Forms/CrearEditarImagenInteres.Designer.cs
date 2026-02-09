@@ -34,94 +34,104 @@
             btnBuscarImagen = new Button();
             tbDescripcion = new TextBox();
             lblDescripcion = new Label();
-            lbltxtPuntoPeligro = new Label();
-            lblPuntoPeligro = new Label();
+            lbltxtPuntoInteres = new Label();
+            lblPuntoInteres = new Label();
             SuspendLayout();
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(244, 250);
+            btnGuardar.Location = new Point(279, 333);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.Size = new Size(86, 31);
             btnGuardar.TabIndex = 37;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(101, 250);
+            btnCancelar.Location = new Point(115, 333);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Size = new Size(86, 31);
             btnCancelar.TabIndex = 36;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // tbUrl
             // 
-            tbUrl.Location = new Point(165, 187);
+            tbUrl.Location = new Point(189, 249);
+            tbUrl.Margin = new Padding(3, 4, 3, 4);
             tbUrl.Name = "tbUrl";
-            tbUrl.Size = new Size(217, 23);
+            tbUrl.Size = new Size(247, 27);
             tbUrl.TabIndex = 35;
             // 
             // btnBuscarImagen
             // 
-            btnBuscarImagen.Location = new Point(36, 183);
+            btnBuscarImagen.Location = new Point(41, 244);
+            btnBuscarImagen.Margin = new Padding(3, 4, 3, 4);
             btnBuscarImagen.Name = "btnBuscarImagen";
-            btnBuscarImagen.Size = new Size(114, 29);
+            btnBuscarImagen.Size = new Size(130, 39);
             btnBuscarImagen.TabIndex = 34;
             btnBuscarImagen.Text = "Buscar imágen";
             btnBuscarImagen.UseVisualStyleBackColor = true;
+            btnBuscarImagen.Click += btnBuscarImagen_Click;
             // 
             // tbDescripcion
             // 
-            tbDescripcion.Location = new Point(119, 72);
+            tbDescripcion.Location = new Point(136, 96);
+            tbDescripcion.Margin = new Padding(3, 4, 3, 4);
             tbDescripcion.Multiline = true;
             tbDescripcion.Name = "tbDescripcion";
-            tbDescripcion.Size = new Size(263, 68);
+            tbDescripcion.Size = new Size(300, 89);
             tbDescripcion.TabIndex = 33;
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(36, 75);
+            lblDescripcion.Location = new Point(41, 100);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(77, 15);
+            lblDescripcion.Size = new Size(96, 20);
             lblDescripcion.TabIndex = 32;
             lblDescripcion.Text = "-Descripción:";
             // 
-            // lbltxtPuntoPeligro
+            // lbltxtPuntoInteres
             // 
-            lbltxtPuntoPeligro.AutoSize = true;
-            lbltxtPuntoPeligro.Location = new Point(129, 34);
-            lbltxtPuntoPeligro.Name = "lbltxtPuntoPeligro";
-            lbltxtPuntoPeligro.Size = new Size(47, 15);
-            lbltxtPuntoPeligro.TabIndex = 31;
-            lbltxtPuntoPeligro.Text = "txtNum";
+            lbltxtPuntoInteres.AutoSize = true;
+            lbltxtPuntoInteres.Location = new Point(151, 45);
+            lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
+            lbltxtPuntoInteres.Size = new Size(58, 20);
+            lbltxtPuntoInteres.TabIndex = 31;
+            lbltxtPuntoInteres.Text = "txtNum";
             // 
-            // lblPuntoPeligro
+            // lblPuntoInteres
             // 
-            lblPuntoPeligro.AutoSize = true;
-            lblPuntoPeligro.Location = new Point(36, 34);
-            lblPuntoPeligro.Name = "lblPuntoPeligro";
-            lblPuntoPeligro.Size = new Size(87, 15);
-            lblPuntoPeligro.TabIndex = 30;
-            lblPuntoPeligro.Text = "-Punto peligro:";
+            lblPuntoInteres.AutoSize = true;
+            lblPuntoInteres.Location = new Point(41, 45);
+            lblPuntoInteres.Name = "lblPuntoInteres";
+            lblPuntoInteres.Size = new Size(104, 20);
+            lblPuntoInteres.TabIndex = 30;
+            lblPuntoInteres.Text = "-Punto interés:";
             // 
             // CrearEditarImagenInteres
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(426, 303);
+            ClientSize = new Size(487, 404);
             Controls.Add(btnGuardar);
             Controls.Add(btnCancelar);
             Controls.Add(tbUrl);
             Controls.Add(btnBuscarImagen);
             Controls.Add(tbDescripcion);
             Controls.Add(lblDescripcion);
-            Controls.Add(lbltxtPuntoPeligro);
-            Controls.Add(lblPuntoPeligro);
+            Controls.Add(lbltxtPuntoInteres);
+            Controls.Add(lblPuntoInteres);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarImagenInteres";
             Text = "CrearEditarImagenInteres";
+            Load += CrearEditarImagenInteres_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -134,7 +144,7 @@
         private Button btnBuscarImagen;
         private TextBox tbDescripcion;
         private Label lblDescripcion;
-        private Label lbltxtPuntoPeligro;
-        private Label lblPuntoPeligro;
+        private Label lbltxtPuntoInteres;
+        private Label lblPuntoInteres;
     }
 }

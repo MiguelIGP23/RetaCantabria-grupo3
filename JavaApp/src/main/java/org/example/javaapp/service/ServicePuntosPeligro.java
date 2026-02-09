@@ -5,6 +5,7 @@ import org.example.javaapp.model.Ruta;
 import org.example.javaapp.repository.PuntosPeligroRepository;
 import org.example.javaapp.repository.RutaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -69,41 +70,42 @@ public class ServicePuntosPeligro implements IServicePuntosPeligro{
 
     //CRUD dependiente de ruta
 
-    public PuntosPeligro insertInRuta(int idRuta, PuntosPeligro punto) {
+    public PuntosPeligro insertInRuta(int idRuta, PuntosPeligro puntosPeligro) {
         Ruta ruta = repoRuta.findById(idRuta).orElse(null);
         if (ruta == null) return null;
 
-        punto.setRuta(ruta);
-        return repoPunto.save(punto);
+        puntosPeligro.setId(null);
+        puntosPeligro.setRuta(ruta);
+        return repoPunto.save(puntosPeligro);
     }
 
-    public PuntosPeligro updateInRuta(int idPunto, int idRuta, PuntosPeligro punto) {
-        Optional<PuntosPeligro> opt = repoPunto.findByIdAndRuta_Id(idPunto, idRuta);
+    public PuntosPeligro updateInRuta(int idPuntoPeligro, int idRuta, PuntosPeligro puntosPeligro) {
+        Optional<PuntosPeligro> opt = repoPunto.findByIdAndRuta_Id(idPuntoPeligro, idRuta);
         if (opt.isEmpty()) return null;
-        PuntosPeligro buscado = opt.get();
 
-        buscado.setNombre(punto.getNombre());
-        buscado.setLatitud(punto.getLatitud());
-        buscado.setLongitud(punto.getLongitud());
-        buscado.setElevacion(punto.getElevacion());
-        buscado.setKilometros(punto.getKilometros());
-        buscado.setGravedad(punto.getGravedad());
-        buscado.setPosicion(punto.getPosicion());
-        buscado.setDescripcion(punto.getDescripcion());
-        buscado.setTimestamp(punto.getTimestamp());
-        buscado.setRuta(punto.getRuta());
+        PuntosPeligro buscado = opt.get();
+        buscado.setNombre(puntosPeligro.getNombre());
+        buscado.setLatitud(puntosPeligro.getLatitud());
+        buscado.setLongitud(puntosPeligro.getLongitud());
+        buscado.setElevacion(puntosPeligro.getElevacion());
+        buscado.setKilometros(puntosPeligro.getKilometros());
+        buscado.setGravedad(puntosPeligro.getGravedad());
+        buscado.setPosicion(puntosPeligro.getPosicion());
+        buscado.setDescripcion(puntosPeligro.getDescripcion());
+        buscado.setTimestamp(puntosPeligro.getTimestamp());
         return repoPunto.save(buscado);
     }
 
-    public void deleteFromRuta(int idPunto, int idRuta) {
-        repoPunto.deleteByIdAndRuta_Id(idPunto, idRuta);
+    @Transactional
+    public void deleteFromRuta(int idPuntoPeligro, int idRuta) {
+        repoPunto.deleteByIdAndRuta_Id(idPuntoPeligro, idRuta);
     }
 
     public List<PuntosPeligro> findAllByRuta(int idRuta) {
         return repoPunto.findByRuta_Id(idRuta);
     }
 
-    public Optional<PuntosPeligro> findByRutaAndId(int idPunto, int idRuta) {
-        return repoPunto.findByIdAndRuta_Id(idPunto, idRuta);
+    public Optional<PuntosPeligro> findByRutaAndId(int idPuntoPeligro, int idRuta) {
+        return repoPunto.findByIdAndRuta_Id(idPuntoPeligro, idRuta);
     }
 }

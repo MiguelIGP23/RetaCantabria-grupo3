@@ -9,8 +9,8 @@ namespace Model
 {
     public class Trackpoint
     {
-        [JsonPropertyName("id")]
-        public TrackpointId Id { get; set; }
+        [JsonPropertyName("idRuta")]
+        public TrackpointId RutaId { get; set; }
 
         [JsonPropertyName("latitud")]
         public double Latitud { get; set; }
@@ -22,7 +22,7 @@ namespace Model
 
         public Trackpoint(TrackpointId id, double latitud, double longitud)
         {
-            Id = id;
+            RutaId = id;
             Latitud = latitud;
             Longitud = longitud;
         }

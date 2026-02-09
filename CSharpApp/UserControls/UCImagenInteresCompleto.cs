@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,23 @@ namespace UserControls
 {
     public partial class UCImagenInteresCompleto : UserControl
     {
+
+        public ImagenInteres ImagenInteres { get; private set; }
+
+
         public UCImagenInteresCompleto()
         {
             InitializeComponent();
+        }
+
+
+        public void SetData(Model.ImagenInteres imagenInteres)
+        {
+            ImagenInteres = imagenInteres;
+            lbltxtPuntoInteres.Text = imagenInteres.PuntosInteresId.ToString();
+            lbltxtImagen.Text = imagenInteres.Id.ToString();
+            lbltxtDescripcion.Text = imagenInteres.Descripcion;
+            //Falta cargar la imagen en el picturebox, se necesita un metodo para convertir el byte[] a imagen
         }
     }
 }

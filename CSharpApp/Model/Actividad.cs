@@ -15,8 +15,8 @@ namespace Model
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
 
-        [JsonPropertyName("rutas_idRuta")]
-        public int Rutas_idRuta { get; set; }
+        [JsonPropertyName("rutaId")]
+        public int rutaId { get; set; }
 
         public Actividad() { }
 
@@ -24,7 +24,7 @@ namespace Model
         {
             IdActividad = idActividad;
             Nombre = nombre;
-            Rutas_idRuta = rutas_idRuta;
+            rutaId = rutas_idRuta;
         }
     }
 }

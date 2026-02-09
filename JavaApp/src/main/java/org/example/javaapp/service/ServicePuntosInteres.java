@@ -5,6 +5,7 @@ import org.example.javaapp.model.Ruta;
 import org.example.javaapp.repository.PuntosInteresRepository;
 import org.example.javaapp.repository.RutaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -72,36 +73,37 @@ public class ServicePuntosInteres implements IServicePuntosInteres{
         Ruta ruta = repoRuta.findById(idRuta).orElse(null);
         if (ruta == null) return null;
 
+        pi.setId(null);
         pi.setRuta(ruta);
         return repoPuntos.save(pi);
     }
 
-    public PuntosInteres updateInRuta(int idPuntoInteres, int idRuta, PuntosInteres pi) {
-        Optional<PuntosInteres> opt = repoPuntos.findByIdAndRuta_Id(idPuntoInteres, idRuta);
+    public PuntosInteres updateInRuta(Integer idPunto, Integer idRuta, PuntosInteres datos) {
+        Optional<PuntosInteres> opt = repoPuntos.findByIdAndRuta_Id(idPunto, idRuta);
         if (opt.isEmpty()) return null;
-        PuntosInteres buscado = opt.get();
 
-        buscado.setNombre(pi.getNombre());
-        buscado.setLatitud(pi.getLatitud());
-        buscado.setLongitud(pi.getLongitud());
-        buscado.setElevacion(pi.getElevacion());
-        buscado.setTipo(pi.getTipo());
-        buscado.setDescripcion(pi.getDescripcion());
-        buscado.setCaracteristicas(pi.getCaracteristicas());
-        buscado.setTimestamp(pi.getTimestamp());
-        buscado.setRuta(pi.getRuta());
-        return repoPuntos.save(buscado);
+        PuntosInteres p = opt.get();
+        p.setNombre(datos.getNombre());
+        p.setLatitud(datos.getLatitud());
+        p.setLongitud(datos.getLongitud());
+        p.setElevacion(datos.getElevacion());
+        p.setCaracteristicas(datos.getCaracteristicas());
+        p.setTipo(datos.getTipo());
+        p.setDescripcion(datos.getDescripcion());
+        p.setTimestamp(datos.getTimestamp());
+        return repoPuntos.save(p);
     }
 
-    public void deleteFromRuta(int idPuntoInteres, int idRuta) {
-        repoPuntos.deleteByIdAndRuta_Id(idPuntoInteres, idRuta);
+    @Transactional
+    public void deleteFromRuta(Integer idPunto, Integer idRuta) {
+        repoPuntos.deleteByIdAndRuta_Id(idPunto, idRuta);
     }
 
-    public List<PuntosInteres> findAllByRuta(int idRuta) {
+    public Optional<PuntosInteres> findByRutaAndId(Integer idPunto, Integer idRuta) {
+        return repoPuntos.findByIdAndRuta_Id(idPunto, idRuta);
+    }
+
+    public List<PuntosInteres> findAllByRuta(Integer idRuta) {
         return repoPuntos.findByRuta_Id(idRuta);
-    }
-
-    public Optional<PuntosInteres> findByRutaAndId(int idPuntoInteres, int idRuta) {
-        return repoPuntos.findByIdAndRuta_Id(idPuntoInteres, idRuta);
     }
 }

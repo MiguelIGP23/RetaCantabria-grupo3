@@ -43,7 +43,7 @@ public class ServiceLogin {
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer(issuer)
                 .issuedAt(now)
-                .expiresAt(now.plusSeconds(60* 60))     // token dura 1 hora
+                .expiresAt(now.plusSeconds(60 * 60 * 12))     // token dura 12 horas
                 .subject(usuario.getEmail())
                 .claim("rol", usuario.getRol().name())
                 .build();

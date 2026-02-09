@@ -5,6 +5,7 @@ import org.example.javaapp.model.Ruta;
 import org.example.javaapp.repository.ActividadRepository;
 import org.example.javaapp.repository.RutaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,12 +61,11 @@ public class ServiceActividad implements IServiceActividad {
 
     public Actividad insertInRuta(int idRuta, Actividad actividad) {
         Ruta ruta = repoRuta.findById(idRuta).orElse(null);
-        Actividad nueva = null;
-        if (ruta != null) {
-            actividad.setRuta(ruta);
-            nueva = repoActividad.save(actividad);
-        }
-        return nueva;
+        if (ruta == null) return null;
+
+        actividad.setId(null);
+        actividad.setRuta(ruta);
+        return repoActividad.save(actividad);
     }
 
     public Actividad updateInRuta(int idActividad, int idRuta, Actividad actividad) {
@@ -76,6 +76,7 @@ public class ServiceActividad implements IServiceActividad {
         return repoActividad.save(buscada);
     }
 
+    @Transactional
     public void deleteFromRuta(int idActividad, int idRuta) {
         repoActividad.deleteByIdAndRuta_Id(idActividad, idRuta);
     }

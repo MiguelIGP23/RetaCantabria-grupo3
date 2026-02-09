@@ -28,7 +28,7 @@ public class LoginController {
         }
 
         String token = service.generarToken(usuario);
-        return ResponseEntity.ok(new LoginResponse(token, usuario.getRol().name()));
+        return ResponseEntity.ok(new LoginResponse(token, usuario.getRol().name(), usuario.getId()));
     }
 
 }

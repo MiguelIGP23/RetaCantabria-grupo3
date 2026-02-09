@@ -21,7 +21,7 @@ namespace Forms
         public Login()
         {
             InitializeComponent();
-            _api = new ApiReta("https://reta.raspiremote.org/");
+            _api = new ApiReta("http://localhost:8080/");
         }
 
         private async void btn_login_Click(object sender, EventArgs e)
@@ -50,12 +50,19 @@ namespace Forms
 
                 // Guardar token y rol en sesión
                 var rol = Enum.Parse<EnumRoles>(resp.Rol, true);
-                Session.Set(resp.Token, rol);
+                Session.Set(resp.Token, rol, resp.Id);
 
-                // Abrir form principal, si se cierra volvemos a login
-                var main = new RutasLista(_api);
-                main.Show();
+                this.Hide();
+                using (var form = new RutasLista(_api))
+                {
+                    var result = form.ShowDialog();
 
+                    if(result == DialogResult.Cancel)
+                    {
+                        this.Show();
+                    }
+
+                }
             }
             catch (HttpRequestException ex)
             {
@@ -67,7 +74,7 @@ namespace Forms
             }
         }
 
-        private void btn_registro_Click(object sender, EventArgs e)
+        private void btn_verRutas_Click(object sender, EventArgs e)
         {
             RutasLista form = new RutasLista(_api);
             form.Show();

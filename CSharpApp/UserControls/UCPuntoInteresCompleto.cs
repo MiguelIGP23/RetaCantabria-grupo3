@@ -11,35 +11,30 @@ using Model;
 
 namespace UserControls
 {
-    public partial class UCPuntoDeInteresCompleto : UserControl
+    public partial class UCPuntoInteresCompleto : UserControl
     {
-        public PuntoInteres puntoInteres { get; set; }
-        public UCPuntoDeInteresCompleto()
+        public PuntoInteres PuntoInteres { get; set; }
+        public UCPuntoInteresCompleto()
         {
             InitializeComponent();
         }
 
+
+        // Método para cargar los datos del punto de interes en el user control
         public void SetData(PuntoInteres p)
         {
-            puntoInteres = p;
-            lbltxtIdPuntoDeInteres.Text = p.IdPuntosinteres.ToString();
+            PuntoInteres = p;
+            lbltxtIdPuntoDeInteres.Text = p.Id.ToString();
+            lbltxtRutasid.Text = p.RutaId.ToString();
             lbltxtNombre.Text = p.Nombre;
             lbltxtLatitud.Text = p.Latitud.ToString();
             lbltxtLogitud.Text = p.Longitud.ToString();
             lbltxtElevacion.Text = p.Elevacion.ToString();
             lbltxtCaracteristicas.Text = p.Caracteristicas;
-            lblTipo.Text = p.Tipo.ToString();
+            lbltxtTipo.Text = p.Tipo.ToString();
             lbltxtDescripcion.Text = p.Descripcion;
             lbltxtTimestamp.Text = p.Timestamp.ToString();
-               
-
-
-
-
-                
-            
-
+  
         }
-
     }
 }

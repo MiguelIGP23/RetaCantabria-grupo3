@@ -15,10 +15,15 @@ namespace UserControls
     {
         // Representa el punto de peligro asociado al user control
         public PuntoPeligro PuntoPeligro { get; set; }
+        
+        private Ruta _ruta { get; set; }
 
-        public UCPuntoPeligroLista()
+
+        public UCPuntoPeligroLista() { }
+        public UCPuntoPeligroLista(Ruta ruta)
         {
             InitializeComponent();
+            _ruta = ruta;
         }
 
 
@@ -37,6 +42,45 @@ namespace UserControls
                 4 => Color.LightSalmon,
                 5 => Color.Red,
             };
+        }
+
+
+        // Evento que se dispara al hacer click en el user control o sus etiquetas
+        public event EventHandler<PuntoPeligro> PuntoPeligroClick;
+
+        private void lblRuta_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
+        }
+
+        private void lbltxtRuta_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
+        }
+
+        private void lblPos_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
+        }
+
+        private void lbltxtPosicion_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
+        }
+
+        private void lbltxtNombre_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
+        }
+
+        private void UCPuntoPeligroLista_Click(object sender, EventArgs e)
+        {
+            PuntoPeligroClick?.Invoke(this, PuntoPeligro);
         }
     }
 }

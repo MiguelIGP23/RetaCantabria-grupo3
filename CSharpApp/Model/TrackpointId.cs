@@ -10,7 +10,7 @@ namespace Model
     public class TrackpointId
     {
         [JsonPropertyName("idRuta")]
-        public int IdRuta { get; set; }
+        public int RutaId { get; set; }
 
         [JsonPropertyName("posicion")]
         public int Posicion { get; set; }
@@ -19,7 +19,7 @@ namespace Model
 
         public TrackpointId(int idRuta, int posicion)
         {
-            IdRuta = idRuta;
+            RutaId = idRuta;
             Posicion = posicion;
         }
     }

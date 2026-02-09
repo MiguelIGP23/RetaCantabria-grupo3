@@ -30,57 +30,63 @@
         {
             lbltxtDescripcion = new Label();
             lblDescripcion = new Label();
-            lbltxtPuntoInteres = new Label();
-            lblPuntoInteres = new Label();
+            lbltxtId = new Label();
+            lblId = new Label();
             SuspendLayout();
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(296, 18);
+            lbltxtDescripcion.Location = new Point(340, 24);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(368, 46);
+            lbltxtDescripcion.Size = new Size(419, 61);
             lbltxtDescripcion.TabIndex = 8;
-            lbltxtDescripcion.Text = "Barranco al borde del acantilado con pirañas y tiburones uuuuuuuh";
+            lbltxtDescripcion.Text = "txtDescripcion";
+            lbltxtDescripcion.Click += lbltxtDescripcion_Click;
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDescripcion.Location = new Point(210, 18);
+            lblDescripcion.Location = new Point(238, 24);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(80, 15);
+            lblDescripcion.Size = new Size(100, 20);
             lblDescripcion.TabIndex = 7;
             lblDescripcion.Text = "-Descripción:";
+            lblDescripcion.Click += lblDescripcion_Click;
             // 
-            // lbltxtPuntoInteres
+            // lbltxtId
             // 
-            lbltxtPuntoInteres.AutoSize = true;
-            lbltxtPuntoInteres.Location = new Point(115, 18);
-            lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
-            lbltxtPuntoInteres.Size = new Size(47, 15);
-            lbltxtPuntoInteres.TabIndex = 6;
-            lbltxtPuntoInteres.Text = "txtNum";
+            lbltxtId.AutoSize = true;
+            lbltxtId.Location = new Point(125, 24);
+            lbltxtId.Name = "lbltxtId";
+            lbltxtId.Size = new Size(58, 20);
+            lbltxtId.TabIndex = 6;
+            lbltxtId.Text = "txtNum";
+            lbltxtId.Click += lbltxtPuntoInteres_Click;
             // 
-            // lblPuntoInteres
+            // lblId
             // 
-            lblPuntoInteres.AutoSize = true;
-            lblPuntoInteres.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblPuntoInteres.Location = new Point(22, 18);
-            lblPuntoInteres.Name = "lblPuntoInteres";
-            lblPuntoInteres.Size = new Size(90, 15);
-            lblPuntoInteres.TabIndex = 5;
-            lblPuntoInteres.Text = "-Punto interés:";
+            lblId.AutoSize = true;
+            lblId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblId.Location = new Point(25, 24);
+            lblId.Name = "lblId";
+            lblId.Size = new Size(94, 20);
+            lblId.TabIndex = 5;
+            lblId.Text = "-Nº imágen:";
+            lblId.Click += lblPuntoInteres_Click;
             // 
             // UCImagenInteresLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lbltxtDescripcion);
             Controls.Add(lblDescripcion);
-            Controls.Add(lbltxtPuntoInteres);
-            Controls.Add(lblPuntoInteres);
+            Controls.Add(lbltxtId);
+            Controls.Add(lblId);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UCImagenInteresLista";
-            Size = new Size(690, 75);
+            Size = new Size(789, 100);
+            Click += UCImagenInteresLista_Click;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -88,7 +94,7 @@
         #endregion
         private Label lbltxtDescripcion;
         private Label lblDescripcion;
-        private Label lbltxtPuntoInteres;
-        private Label lblPuntoInteres;
+        private Label lbltxtId;
+        private Label lblId;
     }
 }

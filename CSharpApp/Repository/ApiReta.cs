@@ -52,21 +52,11 @@ namespace Repository
         {
             ApplyAuthHeader();
             string path = ruta;
-            if (Session.Rol == null) path+="/validadas";
 
-            try
-            {
-                var resp = await _http.GetAsync(path);
-                resp.EnsureSuccessStatusCode();
-                var json = await resp.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<List<T>>(json, _jsonOptions) ?? new List<T>();
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return new List<T>();
-            }
-
+            var resp = await _http.GetAsync(path);
+            resp.EnsureSuccessStatusCode();
+            var json = await resp.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<T>>(json, _jsonOptions) ?? new List<T>();
         }
 
 
@@ -74,17 +64,11 @@ namespace Repository
         public async Task<T?> GetByIdAsync<T>(string ruta, string idPath)
         {
             ApplyAuthHeader();
-            try
-            {
-                var response = await _http.GetAsync($"{ruta}/{idPath}");
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return default;
-            }
+
+            var response = await _http.GetAsync($"{ruta}/{idPath}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+
         }
 
 
@@ -93,51 +77,41 @@ namespace Repository
         {
             ApplyAuthHeader();
 
-            try
-            {
-                var response = await _http.PostAsJsonAsync(ruta, objeto, _jsonOptions);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return default;
-            }
+            var response = await _http.PostAsJsonAsync(ruta, objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+
         }
 
 
 
-        public async Task<T?> Update<T>(string ruta, string idPath, T objeto)
+        public async Task<T?> Update<T>(string ruta, string id, T objeto)
         {
             ApplyAuthHeader();
-            try
-            {
-                var response = await _http.PutAsJsonAsync($"{ruta}/{idPath}", objeto, _jsonOptions);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-                return default;
-            }
+
+            var response = await _http.PutAsJsonAsync($"{ruta}/{id}", objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+        }
+
+        //Update sin id usado para validar rutas
+        public async Task<T?> Validar<T>(string ruta, T objeto)
+        {
+            ApplyAuthHeader();
+
+            var response = await _http.PutAsJsonAsync($"{ruta}", objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
         }
 
 
-
-        public async Task Delete(string ruta, string idPath)
+        public async Task<Boolean> Delete(string ruta, string id)
         {
             ApplyAuthHeader();
-            try
-            {
-                var response = await _http.DeleteAsync($"{ruta}/{idPath}");
-                response.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException ex)
-            {
-                MostrarErrorHttp(ex);
-            }
+
+            var response = await _http.DeleteAsync($"{ruta}/{id}");
+            response.EnsureSuccessStatusCode();
+            return true;
         }
 
 
@@ -159,11 +133,20 @@ namespace Repository
             ApplyAuthHeader();
             try
             {
-                var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/organizacion");
-                response.EnsureSuccessStatusCode();
+                var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/organizacion");
+                resp.EnsureSuccessStatusCode();
 
-                var bytes = await response.Content.ReadAsByteArrayAsync();
-                File.WriteAllBytes(rutaDestino, bytes);
+                byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+
+                var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
+                string filename = cd.FileName;                                      // obtener nombre del content disposition
+
+                filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+
+                if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-organizacion.txt";      // nombre por defecto en caso de error
+
+                string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
+                await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
             }
             catch (HttpRequestException ex)
             {
@@ -176,11 +159,20 @@ namespace Repository
             ApplyAuthHeader();
             try
             {
-                var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/usuario");
-                response.EnsureSuccessStatusCode();
+                var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/usuario");
+                resp.EnsureSuccessStatusCode();
 
-                var bytes = await response.Content.ReadAsByteArrayAsync();
-                File.WriteAllBytes(rutaDestino, bytes);
+                byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+
+                var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
+                string filename = cd.FileName;                                      // obtener nombre del content disposition
+
+                filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+
+                if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-usuario.txt";      // nombre por defecto en caso de error
+
+                string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
+                await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
             }
             catch (HttpRequestException ex)
             {
@@ -193,11 +185,20 @@ namespace Repository
             ApplyAuthHeader();
             try
             {
-                var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/seguridad");
-                response.EnsureSuccessStatusCode();
+                var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/seguridad"); 
+                resp.EnsureSuccessStatusCode();
 
-                var bytes = await response.Content.ReadAsByteArrayAsync();
-                File.WriteAllBytes(rutaDestino, bytes);
+                byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+
+                var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
+                string filename = cd.FileName;                                      // obtener nombre del content disposition
+
+                filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+
+                if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-seguridad.txt";      // nombre por defecto en caso de error
+
+                string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
+                await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
             }
             catch (HttpRequestException ex)
             {
@@ -207,10 +208,10 @@ namespace Repository
 
 
         // Muestra mensaje de aviso en peticiones sin autorización
-        public void MostrarErrorHttp(HttpRequestException ex)
+        public static void MostrarErrorHttp(HttpRequestException ex)
         {
 
-            int codigo = (int?) ex.StatusCode ?? -1;
+            int codigo = (int?)ex.StatusCode ?? -1;
             string titulo = ex.StatusCode?.ToString() ?? "ERROR";
             string mensaje = $"ERROR_CODE {codigo}: ";
             var icono = MessageBoxIcon.Warning;

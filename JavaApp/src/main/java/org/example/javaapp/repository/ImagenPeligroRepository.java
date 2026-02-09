@@ -8,8 +8,9 @@ import java.util.Optional;
 
 public interface ImagenPeligroRepository extends JpaRepository<ImagenesPeligro,Integer> {
 
-    List<ImagenesPeligro> findByPuntosPeligro_Id(Integer idPunto);
-    Optional<ImagenesPeligro> findByIdAndPuntosPeligro_Id(Integer idImagen, Integer idPunto);
-    void deleteByIdAndPuntosPeligro_Id(Integer idImagen, Integer idPunto);
+    List<ImagenesPeligro> findByPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(Integer idPuntoPeligro, Integer idRuta);
+    Optional<ImagenesPeligro> findByIdAndPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(Integer idImagen, Integer idPuntoPeligro, Integer idRuta);
+    void deleteByIdAndPuntosPeligro_IdAndPuntosPeligro_Ruta_Id(Integer idImagen, Integer idPuntoPeligro, Integer idRuta);
 }
+
 

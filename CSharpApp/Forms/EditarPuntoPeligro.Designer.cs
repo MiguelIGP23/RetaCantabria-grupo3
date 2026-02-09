@@ -49,146 +49,152 @@
             nudKilometro = new NumericUpDown();
             nudTimestamp = new NumericUpDown();
             tbNombre = new TextBox();
-            mudGravedad = new NumericUpDown();
+            nudGravedad = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)nudPosicion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudLatitud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudLongitud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudElevacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudKilometro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudTimestamp).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)mudGravedad).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudGravedad).BeginInit();
             SuspendLayout();
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(351, 168);
+            lblDescripcion.Location = new Point(401, 224);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(77, 15);
+            lblDescripcion.Size = new Size(96, 20);
             lblDescripcion.TabIndex = 46;
             lblDescripcion.Text = "-Descripción:";
             // 
             // lblTimestamp
             // 
             lblTimestamp.AutoSize = true;
-            lblTimestamp.Location = new Point(188, 168);
+            lblTimestamp.Location = new Point(215, 224);
             lblTimestamp.Name = "lblTimestamp";
-            lblTimestamp.Size = new Size(75, 15);
+            lblTimestamp.Size = new Size(92, 20);
             lblTimestamp.TabIndex = 44;
             lblTimestamp.Text = "-Timestamp:";
             // 
             // lblGravedad
             // 
             lblGravedad.AutoSize = true;
-            lblGravedad.Location = new Point(37, 168);
+            lblGravedad.Location = new Point(42, 224);
             lblGravedad.Name = "lblGravedad";
-            lblGravedad.Size = new Size(65, 15);
+            lblGravedad.Size = new Size(82, 20);
             lblGravedad.TabIndex = 42;
             lblGravedad.Text = "-Gravedad:";
             // 
             // lblKilometro
             // 
             lblKilometro.AutoSize = true;
-            lblKilometro.Location = new Point(502, 101);
+            lblKilometro.Location = new Point(574, 135);
             lblKilometro.Name = "lblKilometro";
-            lblKilometro.Size = new Size(67, 15);
+            lblKilometro.Size = new Size(84, 20);
             lblKilometro.TabIndex = 40;
             lblKilometro.Text = "-Kilómetro:";
             // 
             // lblElevacion
             // 
             lblElevacion.AutoSize = true;
-            lblElevacion.Location = new Point(351, 101);
+            lblElevacion.Location = new Point(401, 135);
             lblElevacion.Name = "lblElevacion";
-            lblElevacion.Size = new Size(65, 15);
+            lblElevacion.Size = new Size(81, 20);
             lblElevacion.TabIndex = 38;
             lblElevacion.Text = "-Elevación:";
             // 
             // lblLongitud
             // 
             lblLongitud.AutoSize = true;
-            lblLongitud.Location = new Point(185, 101);
+            lblLongitud.Location = new Point(211, 135);
             lblLongitud.Name = "lblLongitud";
-            lblLongitud.Size = new Size(63, 15);
+            lblLongitud.Size = new Size(77, 20);
             lblLongitud.TabIndex = 36;
             lblLongitud.Text = "-Longitud:";
             // 
             // lblLatitud
             // 
             lblLatitud.AutoSize = true;
-            lblLatitud.Location = new Point(37, 101);
+            lblLatitud.Location = new Point(42, 135);
             lblLatitud.Name = "lblLatitud";
-            lblLatitud.Size = new Size(52, 15);
+            lblLatitud.Size = new Size(64, 20);
             lblLatitud.TabIndex = 34;
             lblLatitud.Text = "-Latitud:";
             // 
             // lblPos
             // 
             lblPos.AutoSize = true;
-            lblPos.Location = new Point(188, 38);
+            lblPos.Location = new Point(215, 51);
             lblPos.Name = "lblPos";
-            lblPos.Size = new Size(60, 15);
+            lblPos.Size = new Size(72, 20);
             lblPos.TabIndex = 32;
             lblPos.Text = "-Posición:";
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(371, 38);
+            lblNombre.Location = new Point(424, 51);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(59, 15);
+            lblNombre.Size = new Size(73, 20);
             lblNombre.TabIndex = 30;
             lblNombre.Text = "-Nombre:";
             // 
             // lbltxtRuta
             // 
             lbltxtRuta.AutoSize = true;
-            lbltxtRuta.Location = new Point(96, 38);
+            lbltxtRuta.Location = new Point(110, 51);
             lbltxtRuta.Name = "lbltxtRuta";
-            lbltxtRuta.Size = new Size(44, 15);
+            lbltxtRuta.Size = new Size(56, 20);
             lbltxtRuta.TabIndex = 29;
             lbltxtRuta.Text = "txtRuta";
             // 
             // lblRuta
             // 
             lblRuta.AutoSize = true;
-            lblRuta.Location = new Point(37, 38);
+            lblRuta.Location = new Point(42, 51);
             lblRuta.Name = "lblRuta";
-            lblRuta.Size = new Size(53, 15);
+            lblRuta.Size = new Size(65, 20);
             lblRuta.TabIndex = 28;
             lblRuta.Text = "-Nº ruta:";
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(203, 249);
+            btnCancelar.Location = new Point(232, 332);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Size = new Size(86, 31);
             btnCancelar.TabIndex = 48;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(341, 249);
+            btnGuardar.Location = new Point(390, 332);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.Size = new Size(86, 31);
             btnGuardar.TabIndex = 49;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // tbDescripcion
             // 
-            tbDescripcion.Location = new Point(434, 165);
+            tbDescripcion.Location = new Point(496, 220);
+            tbDescripcion.Margin = new Padding(3, 4, 3, 4);
             tbDescripcion.Multiline = true;
             tbDescripcion.Name = "tbDescripcion";
-            tbDescripcion.Size = new Size(199, 58);
+            tbDescripcion.Size = new Size(227, 76);
             tbDescripcion.TabIndex = 57;
             // 
             // nudPosicion
             // 
-            nudPosicion.Location = new Point(254, 36);
+            nudPosicion.Location = new Point(290, 48);
+            nudPosicion.Margin = new Padding(3, 4, 3, 4);
             nudPosicion.Name = "nudPosicion";
-            nudPosicion.Size = new Size(58, 23);
+            nudPosicion.Size = new Size(66, 27);
             nudPosicion.TabIndex = 58;
             nudPosicion.TextAlign = HorizontalAlignment.Right;
             // 
@@ -196,11 +202,12 @@
             // 
             nudLatitud.DecimalPlaces = 4;
             nudLatitud.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudLatitud.Location = new Point(95, 99);
+            nudLatitud.Location = new Point(109, 132);
+            nudLatitud.Margin = new Padding(3, 4, 3, 4);
             nudLatitud.Maximum = new decimal(new int[] { 90, 0, 0, 0 });
             nudLatitud.Minimum = new decimal(new int[] { 90, 0, 0, int.MinValue });
             nudLatitud.Name = "nudLatitud";
-            nudLatitud.Size = new Size(71, 23);
+            nudLatitud.Size = new Size(81, 27);
             nudLatitud.TabIndex = 59;
             nudLatitud.TextAlign = HorizontalAlignment.Right;
             // 
@@ -208,66 +215,72 @@
             // 
             nudLongitud.DecimalPlaces = 4;
             nudLongitud.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudLongitud.Location = new Point(254, 99);
+            nudLongitud.Location = new Point(290, 132);
+            nudLongitud.Margin = new Padding(3, 4, 3, 4);
             nudLongitud.Maximum = new decimal(new int[] { 180, 0, 0, 0 });
             nudLongitud.Minimum = new decimal(new int[] { 180, 0, 0, int.MinValue });
             nudLongitud.Name = "nudLongitud";
-            nudLongitud.Size = new Size(73, 23);
+            nudLongitud.Size = new Size(83, 27);
             nudLongitud.TabIndex = 60;
             nudLongitud.TextAlign = HorizontalAlignment.Right;
             // 
             // nudElevacion
             // 
             nudElevacion.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            nudElevacion.Location = new Point(422, 99);
+            nudElevacion.Location = new Point(482, 132);
+            nudElevacion.Margin = new Padding(3, 4, 3, 4);
             nudElevacion.Maximum = new decimal(new int[] { 3800, 0, 0, 0 });
             nudElevacion.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             nudElevacion.Name = "nudElevacion";
-            nudElevacion.Size = new Size(58, 23);
+            nudElevacion.Size = new Size(66, 27);
             nudElevacion.TabIndex = 61;
             nudElevacion.TextAlign = HorizontalAlignment.Right;
             // 
             // nudKilometro
             // 
-            nudKilometro.Location = new Point(575, 99);
+            nudKilometro.Location = new Point(657, 132);
+            nudKilometro.Margin = new Padding(3, 4, 3, 4);
             nudKilometro.Name = "nudKilometro";
-            nudKilometro.Size = new Size(58, 23);
+            nudKilometro.Size = new Size(66, 27);
             nudKilometro.TabIndex = 62;
             nudKilometro.TextAlign = HorizontalAlignment.Right;
             // 
             // nudTimestamp
             // 
-            nudTimestamp.Location = new Point(269, 166);
+            nudTimestamp.Location = new Point(307, 221);
+            nudTimestamp.Margin = new Padding(3, 4, 3, 4);
             nudTimestamp.Maximum = new decimal(new int[] { 600, 0, 0, 0 });
             nudTimestamp.Name = "nudTimestamp";
-            nudTimestamp.Size = new Size(58, 23);
+            nudTimestamp.Size = new Size(66, 27);
             nudTimestamp.TabIndex = 63;
             nudTimestamp.TextAlign = HorizontalAlignment.Right;
             // 
             // tbNombre
             // 
-            tbNombre.Location = new Point(434, 35);
+            tbNombre.Location = new Point(496, 47);
+            tbNombre.Margin = new Padding(3, 4, 3, 4);
             tbNombre.Name = "tbNombre";
-            tbNombre.Size = new Size(199, 23);
+            tbNombre.Size = new Size(227, 27);
             tbNombre.TabIndex = 64;
             // 
-            // mudGravedad
+            // nudGravedad
             // 
-            mudGravedad.Location = new Point(108, 165);
-            mudGravedad.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
-            mudGravedad.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            mudGravedad.Name = "mudGravedad";
-            mudGravedad.Size = new Size(58, 23);
-            mudGravedad.TabIndex = 65;
-            mudGravedad.TextAlign = HorizontalAlignment.Right;
-            mudGravedad.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            nudGravedad.Location = new Point(123, 220);
+            nudGravedad.Margin = new Padding(3, 4, 3, 4);
+            nudGravedad.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            nudGravedad.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudGravedad.Name = "nudGravedad";
+            nudGravedad.Size = new Size(66, 27);
+            nudGravedad.TabIndex = 65;
+            nudGravedad.TextAlign = HorizontalAlignment.Right;
+            nudGravedad.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // EditarPuntoPeligro
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 312);
-            Controls.Add(mudGravedad);
+            ClientSize = new Size(782, 416);
+            Controls.Add(nudGravedad);
             Controls.Add(tbNombre);
             Controls.Add(nudTimestamp);
             Controls.Add(nudKilometro);
@@ -289,15 +302,17 @@
             Controls.Add(lblNombre);
             Controls.Add(lbltxtRuta);
             Controls.Add(lblRuta);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "EditarPuntoPeligro";
             Text = "CrearPuntoPeligro";
+            Load += EditarPuntoPeligro_Load;
             ((System.ComponentModel.ISupportInitialize)nudPosicion).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudLatitud).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudLongitud).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudElevacion).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudKilometro).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudTimestamp).EndInit();
-            ((System.ComponentModel.ISupportInitialize)mudGravedad).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudGravedad).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -324,6 +339,6 @@
         private NumericUpDown nudKilometro;
         private NumericUpDown nudTimestamp;
         private TextBox tbNombre;
-        private NumericUpDown mudGravedad;
+        private NumericUpDown nudGravedad;
     }
 }

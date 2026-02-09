@@ -39,47 +39,55 @@
             // 
             flpImagenes.AutoScroll = true;
             flpImagenes.Controls.Add(ucImagenPeligroLista1);
-            flpImagenes.Location = new Point(50, 55);
+            flpImagenes.Location = new Point(57, 73);
+            flpImagenes.Margin = new Padding(3, 4, 3, 4);
             flpImagenes.Name = "flpImagenes";
-            flpImagenes.Size = new Size(700, 295);
+            flpImagenes.Size = new Size(800, 393);
             flpImagenes.TabIndex = 0;
             // 
             // ucImagenPeligroLista1
             // 
             ucImagenPeligroLista1.ImagenPeligro = null;
-            ucImagenPeligroLista1.Location = new Point(3, 3);
+            ucImagenPeligroLista1.Location = new Point(3, 5);
+            ucImagenPeligroLista1.Margin = new Padding(3, 5, 3, 5);
             ucImagenPeligroLista1.Name = "ucImagenPeligroLista1";
-            ucImagenPeligroLista1.Size = new Size(690, 75);
+            ucImagenPeligroLista1.Size = new Size(789, 100);
             ucImagenPeligroLista1.TabIndex = 0;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(212, 376);
+            btnVolver.Location = new Point(242, 501);
+            btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(75, 23);
+            btnVolver.Size = new Size(86, 31);
             btnVolver.TabIndex = 1;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // btnNuevaImagen
             // 
-            btnNuevaImagen.Location = new Point(453, 376);
+            btnNuevaImagen.Location = new Point(518, 501);
+            btnNuevaImagen.Margin = new Padding(3, 4, 3, 4);
             btnNuevaImagen.Name = "btnNuevaImagen";
-            btnNuevaImagen.Size = new Size(112, 23);
+            btnNuevaImagen.Size = new Size(128, 31);
             btnNuevaImagen.TabIndex = 2;
             btnNuevaImagen.Text = "Nueva imágen";
             btnNuevaImagen.UseVisualStyleBackColor = true;
+            btnNuevaImagen.Click += btnNuevaImagen_Click;
             // 
             // ImagenesPeligroLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(btnNuevaImagen);
             Controls.Add(btnVolver);
             Controls.Add(flpImagenes);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenesPeligroLista";
             Text = "ImagenesPeligroLista";
+            Load += ImagenesPeligroLista_Load;
             flpImagenes.ResumeLayout(false);
             ResumeLayout(false);
         }

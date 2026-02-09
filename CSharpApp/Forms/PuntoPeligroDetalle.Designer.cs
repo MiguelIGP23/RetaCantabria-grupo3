@@ -37,60 +37,71 @@
             // 
             // ucPuntoPeligroCompleto1
             // 
-            ucPuntoPeligroCompleto1.Location = new Point(30, 42);
+            ucPuntoPeligroCompleto1.Location = new Point(34, 56);
+            ucPuntoPeligroCompleto1.Margin = new Padding(3, 5, 3, 5);
             ucPuntoPeligroCompleto1.Name = "ucPuntoPeligroCompleto1";
             ucPuntoPeligroCompleto1.PuntoPeligro = null;
-            ucPuntoPeligroCompleto1.Size = new Size(555, 173);
+            ucPuntoPeligroCompleto1.Size = new Size(634, 231);
             ucPuntoPeligroCompleto1.TabIndex = 0;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(78, 261);
+            btnVolver.Location = new Point(89, 348);
+            btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(75, 23);
+            btnVolver.Size = new Size(86, 31);
             btnVolver.TabIndex = 1;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(196, 261);
+            btnEliminar.Location = new Point(224, 348);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.Size = new Size(86, 31);
             btnEliminar.TabIndex = 2;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(313, 261);
+            btnEditar.Location = new Point(358, 348);
+            btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(75, 23);
+            btnEditar.Size = new Size(86, 31);
             btnEditar.TabIndex = 3;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnImagenes
             // 
-            btnImagenes.Location = new Point(432, 261);
+            btnImagenes.Location = new Point(494, 348);
+            btnImagenes.Margin = new Padding(3, 4, 3, 4);
             btnImagenes.Name = "btnImagenes";
-            btnImagenes.Size = new Size(104, 23);
+            btnImagenes.Size = new Size(119, 31);
             btnImagenes.TabIndex = 4;
             btnImagenes.Text = "Ver imágenes";
             btnImagenes.UseVisualStyleBackColor = true;
+            btnImagenes.Click += btnImagenes_Click;
             // 
             // PuntoPeligroDetalle
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(612, 333);
+            ClientSize = new Size(699, 444);
             Controls.Add(btnImagenes);
             Controls.Add(btnEditar);
             Controls.Add(btnEliminar);
             Controls.Add(btnVolver);
             Controls.Add(ucPuntoPeligroCompleto1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "PuntoPeligroDetalle";
             Text = "PuntoPeligroDetalle";
+            Load += PuntoPeligroDetalle_Load;
             ResumeLayout(false);
         }
 

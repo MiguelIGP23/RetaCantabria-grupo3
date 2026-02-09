@@ -11,13 +11,16 @@ namespace Model
         public static string? Token { get; private set; }
         public static EnumRoles? Rol { get; private set; }
 
+        public static int? IdUsuario { get; private set; }
+
         public static bool IsLogged => !string.IsNullOrWhiteSpace(Token);
 
         // Para login
-        public static void Set(string token, EnumRoles rol)
+        public static void Set(string token, EnumRoles rol, int idUsuario)
         {
             Token = token;
             Rol = rol;
+            IdUsuario = idUsuario;
         }
 
         // Para logout
@@ -25,6 +28,7 @@ namespace Model
         {
             Token = null;
             Rol = null;
+            IdUsuario = null;
         }
     }
 }

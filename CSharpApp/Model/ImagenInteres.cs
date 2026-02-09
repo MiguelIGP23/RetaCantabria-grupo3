@@ -9,8 +9,8 @@ namespace Model
 {
     public class ImagenInteres
     {
-        [JsonPropertyName("idimagenesinteres")]
-        public int Idimagenesinteres { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
         [JsonPropertyName("url")]
         public string Url { get; set; }
@@ -18,17 +18,22 @@ namespace Model
         [JsonPropertyName("descripcion")]
         public string? Descripcion { get; set; }
 
-        [JsonPropertyName("puntosinteres_idPuntosinteres")]
-        public int Puntosinteres_idPuntosinteres { get; set; }
+        [JsonPropertyName("puntosInteresId")]
+        public int PuntosInteresId { get; set; }
+
+        [JsonPropertyName("rutaId")]
+        public int RutaId { get; set; }
+
 
         public ImagenInteres() { }
 
-        public ImagenInteres(int idimagenesinteres, string url, string descripcion, int puntosinteres_idPuntosinteres)
+        public ImagenInteres(int idimagenesinteres, string url, string descripcion, int puntosInteresId, int rutaId)
         {
-            Idimagenesinteres = idimagenesinteres;
+            Id = idimagenesinteres;
             Url = url;
             Descripcion = descripcion;
-            Puntosinteres_idPuntosinteres = puntosinteres_idPuntosinteres;
+            PuntosInteresId = puntosInteresId;
+            RutaId = rutaId;
         }
     }
 }

@@ -9,8 +9,8 @@ namespace Model
 {
     public class PuntoInteres
     {
-        [JsonPropertyName("idPuntosinteres")]
-        public int IdPuntosinteres { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
@@ -36,14 +36,14 @@ namespace Model
         [JsonPropertyName("timestamp")]
         public int? Timestamp { get; set; }
 
-        [JsonPropertyName("rutas_idRuta")]
-        public int Rutas_idRuta { get; set; }
+        [JsonPropertyName("rutaId")]
+        public int RutaId { get; set; }
 
         public PuntoInteres() { }
 
         public PuntoInteres(int idPuntosinteres, string nombre, double latitud, double longitud, double elevacion, string caracteristicas, EnumTiposPuntoInteres tipo, string descripcion, int timestamp, int rutas_idRuta)
         {
-            IdPuntosinteres = idPuntosinteres;
+            Id = idPuntosinteres;
             Nombre = nombre;
             Latitud = latitud;
             Longitud = longitud;
@@ -52,7 +52,7 @@ namespace Model
             Tipo = tipo;
             Descripcion = descripcion;
             Timestamp = timestamp;
-            Rutas_idRuta = rutas_idRuta;
+            RutaId = rutas_idRuta;
         }
     }
 }

@@ -1,19 +1,25 @@
 package org.example.javaapp.controller;
 
 
+import org.example.javaapp.dto.DtoRutas;
+import org.example.javaapp.dto.MapperRuta;
 import org.example.javaapp.export.FichaOrganizacionGenerator;
 import org.example.javaapp.export.FichaSeguridadGenerator;
 import org.example.javaapp.export.FichaUsuarioGenerator;
 import org.example.javaapp.model.PuntosInteres;
 import org.example.javaapp.model.PuntosPeligro;
 import org.example.javaapp.model.Ruta;
+import org.example.javaapp.model.Usuario;
 import org.example.javaapp.service.ServicePuntosInteres;
 import org.example.javaapp.service.ServicePuntosPeligro;
 import org.example.javaapp.service.ServiceRuta;
+import org.example.javaapp.service.ServiceUsuario;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,11 +28,13 @@ import java.util.List;
 public class RutaController {
 
     private final ServiceRuta serviceRuta;
+    private final ServiceUsuario serviceUsuario;
     private final ServicePuntosPeligro servicePuntoPeligro;
     private final ServicePuntosInteres servicePuntosInteres;
 
-    public RutaController(ServiceRuta serviceRuta, ServicePuntosPeligro servicePuntoPeligro, ServicePuntosInteres servicePuntosInteres) {
+    public RutaController(ServiceRuta serviceRuta, ServiceUsuario serviceUsuario, ServicePuntosPeligro servicePuntoPeligro, ServicePuntosInteres servicePuntosInteres) {
         this.serviceRuta = serviceRuta;
+        this.serviceUsuario = serviceUsuario;
         this.servicePuntoPeligro = servicePuntoPeligro;
         this.servicePuntosInteres = servicePuntosInteres;
     }
@@ -35,28 +43,48 @@ public class RutaController {
     // Endpoints comunes
 
     @PostMapping()
-    public Ruta insert(@RequestBody Ruta ruta) {
-        return serviceRuta.insert(ruta);
+    public DtoRutas insert(@RequestBody DtoRutas dto) {
+        Usuario usu = serviceUsuario.findById(dto.usuarioId());
+        if (usu == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+
+        Ruta entidad = MapperRuta.toEntity(dto, usu);
+        entidad.setId(null);
+        Ruta nueva = serviceRuta.insert(entidad);
+        return MapperRuta.toDto(nueva);
     }
+
 
     @GetMapping()
-    public List<Ruta> getAll() {
-        return serviceRuta.findAll();
+    public List<DtoRutas> getAll() {
+        return serviceRuta.findAll().stream().map(MapperRuta::toDto).toList();
     }
 
+
     @GetMapping("/{id}")
-    public Ruta getById(@PathVariable int id) {
-        return serviceRuta.findById(id);
+    public DtoRutas getById(@PathVariable int id) {
+        return MapperRuta.toDto(serviceRuta.findById(id));
     }
+
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
         serviceRuta.delete(id);
     }
 
+
     @PutMapping("/{id}")
-    public Ruta update(@PathVariable int id, @RequestBody Ruta ruta) {
-        return serviceRuta.update(id, ruta);
+    public DtoRutas update(@PathVariable int id, @RequestBody DtoRutas dto) {
+        if (dto.usuarioId() == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuarioId es obligatorio");
+
+        Usuario usu = serviceUsuario.findById(dto.usuarioId());
+        if (usu == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+
+        Ruta entidad = MapperRuta.toEntity(dto, usu);
+        Ruta nueva = serviceRuta.update(id, entidad);
+        return MapperRuta.toDto(nueva);
     }
 
 
@@ -64,13 +92,14 @@ public class RutaController {
     // Endpoints para validar rutas y ver rutas validadas
 
     @PutMapping("/{id}/validar")
-    public Ruta validar(@PathVariable int id) {
-        return serviceRuta.validar(id);
+    public DtoRutas validar(@PathVariable int id) {
+        return MapperRuta.toDto(serviceRuta.validar(id));
     }
 
+
     @GetMapping("/validadas")
-    public List<Ruta> getValidadas() {
-        return serviceRuta.findValidadas();
+    public List<DtoRutas> getValidadas() {
+        return serviceRuta.findValidadas().stream().map(MapperRuta::toDto).toList();
     }
 
 
