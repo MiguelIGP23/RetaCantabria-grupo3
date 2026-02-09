@@ -124,11 +124,20 @@ namespace Repository
             ApplyAuthHeader();
             try
             {
-                var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/organizacion");
-                response.EnsureSuccessStatusCode();
+                var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/organizacion");
+                resp.EnsureSuccessStatusCode();
 
-                var bytes = await response.Content.ReadAsByteArrayAsync();
-                File.WriteAllBytes(rutaDestino, bytes);
+                byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+
+                var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
+                string filename = cd.FileName;                                      // obtener nombre del content disposition
+
+                filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+
+                if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-organizacion.txt";      // nombre por defecto en caso de error
+
+                string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
+                await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
             }
             catch (HttpRequestException ex)
             {
@@ -141,11 +150,20 @@ namespace Repository
             ApplyAuthHeader();
             try
             {
-                var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/usuario");
-                response.EnsureSuccessStatusCode();
+                var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/usuario");
+                resp.EnsureSuccessStatusCode();
 
-                var bytes = await response.Content.ReadAsByteArrayAsync();
-                File.WriteAllBytes(rutaDestino, bytes);
+                byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+
+                var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
+                string filename = cd.FileName;                                      // obtener nombre del content disposition
+
+                filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+
+                if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-usuario.txt";      // nombre por defecto en caso de error
+
+                string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
+                await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
             }
             catch (HttpRequestException ex)
             {
@@ -158,11 +176,20 @@ namespace Repository
             ApplyAuthHeader();
             try
             {
-                var response = await _http.GetAsync($"api/reta3/rutas/{idRuta}/fichas/seguridad");
-                response.EnsureSuccessStatusCode();
+                var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/seguridad"); 
+                resp.EnsureSuccessStatusCode();
 
-                var bytes = await response.Content.ReadAsByteArrayAsync();
-                File.WriteAllBytes(rutaDestino, bytes);
+                byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+
+                var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
+                string filename = cd.FileName;                                      // obtener nombre del content disposition
+
+                filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+
+                if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-seguridad.txt";      // nombre por defecto en caso de error
+
+                string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
+                await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
             }
             catch (HttpRequestException ex)
             {

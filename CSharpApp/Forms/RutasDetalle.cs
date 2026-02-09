@@ -60,24 +60,28 @@ namespace Forms
             string downloads = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string opcion = cbFicha.SelectedItem?.ToString();
 
-            switch (opcion)
+            try
             {
-                case "Usuario":
-                    downloads = Path.Combine(downloads, "ficha-usuario.txt");
-                    await _api.DescargarFichaUsuarioAsync(idRuta, downloads);
-                    break;
+                switch (opcion)
+                {
+                    case "Usuario":
+                        await _api.DescargarFichaUsuarioAsync(idRuta, downloads);
+                        break;
 
-                case "Organización":
-                    downloads = Path.Combine(downloads, "ficha-organizacion.txt");
-                    await _api.DescargarFichaOrganizacionAsync(idRuta, downloads);
-                    break;
+                    case "Organización":
+                        await _api.DescargarFichaOrganizacionAsync(idRuta, downloads);
+                        break;
 
-                case "Seguridad":
-                    downloads = Path.Combine(downloads, "ficha-seguridad.txt");
-                    await _api.DescargarFichaSeguridadAsync(idRuta, downloads);
-                    break;
+                    case "Seguridad":
+                        await _api.DescargarFichaSeguridadAsync(idRuta, downloads);
+                        break;
+                }
+                MessageBox.Show("Ficha guardada en Descargas");
             }
-            MessageBox.Show("Ficha guardada en Descargas");
+            catch(HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+            }
         }
 
 
