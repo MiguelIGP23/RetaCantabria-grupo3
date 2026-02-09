@@ -32,19 +32,18 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.model.enums.WaypointType
 import com.example.kotlinapp.ui.theme.fondoPrincipal
-import com.example.kotlinapp.viewmodels.RutasViewModel
 import com.example.kotlinapp.viewmodels.DBViewModel
 import kotlinx.coroutines.flow.firstOrNull
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListView(navController: NavHostController, viewModel: RutasViewModel) {
+fun ListView(navController: NavHostController, vm: DBViewModel) {
 //fun ListView(navController: NavHostController, vm: DBViewModel) {
     val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
 
-    val rutas by viewModel.rutas.collectAsState() // Lista de ejemplo
+    val rutas by vm.rutas.collectAsState() // Lista de ejemplo
 
     val loginState by vm.loginState.collectAsState()
     LaunchedEffect(Unit) {

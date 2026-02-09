@@ -14,7 +14,6 @@ import com.example.kotlinapp.data.ServiceFactory
 import com.example.kotlinapp.data.SessionDataStore
 import com.example.kotlinapp.data.room.repository.RutaRepository
 import com.example.kotlinapp.navigation.NavManager
-import com.example.kotlinapp.viewmodels.RutasViewModel
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import com.example.kotlinapp.viewmodels.DBViewModel
@@ -22,8 +21,6 @@ import com.example.kotlinapp.viewmodels.DBViewModel
 class MainActivity : ComponentActivity() {
     private lateinit var session : SessionDataStore
     private lateinit var dbViewModel: DBViewModel
-    private lateinit var rutaViewModel: RutasViewModel
-    private lateinit var rutaRepo: RutaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,33 +29,12 @@ class MainActivity : ComponentActivity() {
             AuthRepository(
                 api = ServiceFactory.auth(),
                 session = session
-            )
+            ),
+            AppDatabase.getDatabase(this)
         )
-        // Instancia de la base de datos (Room)
-        val database = AppDatabase.getDatabase(this) // tu singleton de Room
-        val rutaDao = database.rutaDao()
-        try {
-            val db = AppDatabase.getDatabase(this)
-            Log.d("TEST", "DB instance creada: $db")
-        } catch (e: Exception) {
-            Log.e("TEST", "Error creando la BD", e)
-        }
-        // Instancia del API
-        val rutaService = ServiceFactory.ruta {
-            runBlocking {
-                session.tokenFlow.firstOrNull()
-            }
-        }
-// Retrofit service
-
-        // Repository
-        rutaRepo = RutaRepository(rutaService, rutaDao)
-
-        // ViewModel de rutas
-        rutaViewModel = RutasViewModel(rutaRepo)
         setContent {
             Scaffold { padding ->
-                MainScreen(modifier = Modifier.padding(padding),dbViewModel, rutaViewModel)
+                MainScreen(modifier = Modifier.padding(padding),dbViewModel)
             }
         }
     }
@@ -66,9 +42,8 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun MainScreen(modifier: Modifier,dbViewModel: DBViewModel,ViewModel: RutasViewModel) {
+fun MainScreen(modifier: Modifier,dbViewModel: DBViewModel) {
     NavManager(
-        databaseViewModel,
-        viewModel = ViewModel
+        dbViewModel = dbViewModel
     )
 }
