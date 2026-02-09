@@ -94,6 +94,15 @@ namespace Repository
             return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
         }
 
+        //Update sin id usado para validar rutas
+        public async Task<T?> Validar<T>(string ruta, T objeto)
+        {
+            ApplyAuthHeader();
+
+            var response = await _http.PutAsJsonAsync($"{ruta}", objeto, _jsonOptions);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+        }
 
 
         public async Task<Boolean> Delete(string ruta, string id)

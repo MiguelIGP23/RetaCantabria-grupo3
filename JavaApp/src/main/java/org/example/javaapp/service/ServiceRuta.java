@@ -79,7 +79,8 @@ public class ServiceRuta implements IServiceRuta {
     public Ruta validar(Integer id){
         Ruta ruta = findById(id);
         if(ruta == null) return null;
-        ruta.setEstadoRuta((byte) 1);
+        byte estado = (ruta.getEstadoRuta() == ((byte)0)) ? ((byte) 1) : ((byte)0);
+        ruta.setEstadoRuta(estado);
         return repo.save(ruta);
     }
 }

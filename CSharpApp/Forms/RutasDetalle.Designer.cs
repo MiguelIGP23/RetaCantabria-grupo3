@@ -81,7 +81,7 @@
             btnActividades.Location = new Point(631, 580);
             btnActividades.Margin = new Padding(3, 4, 3, 4);
             btnActividades.Name = "btnActividades";
-            btnActividades.Size = new Size(138, 31);
+            btnActividades.Size = new Size(144, 31);
             btnActividades.TabIndex = 5;
             btnActividades.Text = "Actividades";
             btnActividades.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             btnValidar.Location = new Point(631, 664);
             btnValidar.Margin = new Padding(3, 4, 3, 4);
             btnValidar.Name = "btnValidar";
-            btnValidar.Size = new Size(135, 31);
+            btnValidar.Size = new Size(144, 31);
             btnValidar.TabIndex = 70;
-            btnValidar.Text = "Validar";
+            btnValidar.Text = "Validar/Desvalidar";
             btnValidar.UseVisualStyleBackColor = true;
             btnValidar.Click += btnValidar_Click;
             // 

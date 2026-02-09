@@ -32,6 +32,7 @@ namespace Forms
         private void RutasDetalle_Load(object sender, EventArgs e)
         {
             ucRutaCompleto1.SetData(_ruta);
+            btnValidar.Text = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Invalidar";
         }
 
 
@@ -153,14 +154,17 @@ namespace Forms
             try
             {
                 var id = _ruta.IdRuta;
-                if (MessageBox.Show("¿Validar esta ruta?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                string msj = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Quitar validación de";
+                if (MessageBox.Show($"¿{msj} esta ruta?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     Ruta validada = _ruta;
                     validada.EstadoRuta = ((byte)1);
-                    var exito = await _api.Update($"/api/reta3/rutas/{_ruta.IdRuta}/validar", id.ToString(), validada);
+                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.IdRuta}/validar", validada);
                     if (exito != null)
                     {
-                        MessageBox.Show("Ruta eliminada correctamente");
+                        msj = (exito.EstadoRuta == (byte)1) ? "validada" : "invalidada";
+                        MessageBox.Show($"Ruta {msj} correctamente");
+                        _ruta = exito;
                         this.DialogResult = DialogResult.Cancel;
                         this.Close();
                     }
@@ -170,6 +174,8 @@ namespace Forms
             {
                 ApiReta.MostrarErrorHttp(ex);
             }
+            
+            ucRutaCompleto1.SetData(_ruta);
         }
     }
 }
