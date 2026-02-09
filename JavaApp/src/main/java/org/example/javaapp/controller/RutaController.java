@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -102,6 +103,13 @@ public class RutaController {
         return serviceRuta.findValidadas().stream().map(MapperRuta::toDto).toList();
     }
 
+
+    // Endpoint para recibir archivo gpx de ruta
+
+    @GetMapping("/{id}/gpx")
+    public void uploadGpx(@PathVariable int id, @RequestParam("file") MultipartFile file) {
+        serviceRuta.subirGpxYGenerarTrackpoints(id, file);
+    }
 
 
     //Endpoints para descarga de ficheros

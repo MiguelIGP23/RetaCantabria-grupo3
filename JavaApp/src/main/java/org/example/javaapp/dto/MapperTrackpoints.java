@@ -13,7 +13,9 @@ public class MapperTrackpoints {
                 tp.getId().getIdRuta(),
                 tp.getId().getPosicion(),
                 tp.getLatitud(),
-                tp.getLongitud()
+                tp.getLongitud(),
+                tp.getElevacion(),
+                tp.getTime()
         );
     }
 
@@ -28,6 +30,8 @@ public class MapperTrackpoints {
         tp.setIdRuta(ruta); // @MapsId("idRuta")
         tp.setLatitud(dto.latitud());
         tp.setLongitud(dto.longitud());
+        tp.setElevacion(dto.elevacion());
+        tp.setTime(dto.time());
 
         return tp;
     }

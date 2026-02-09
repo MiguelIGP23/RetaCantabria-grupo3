@@ -1,23 +1,33 @@
 package org.example.javaapp.service;
 
 import org.example.javaapp.model.Ruta;
+import org.example.javaapp.model.Trackpoint;
 import org.example.javaapp.repository.RutaRepository;
+import org.example.javaapp.repository.TrackpointRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Service
 public class ServiceRuta implements IServiceRuta {
 
-    private RutaRepository repo;
+    private final RutaRepository repoRuta;
+    private final TrackpointRepository repoTrack;
 
-    public ServiceRuta(RutaRepository repo) {
-        this.repo = repo;
+    public ServiceRuta(RutaRepository repoRuta, TrackpointRepository repoTrack) {
+        this.repoRuta = repoRuta;
+        this.repoTrack = repoTrack;
     }
 
     @Override
     public Ruta insert(Ruta ruta) {
-        return repo.save(ruta);
+        return repoRuta.save(ruta);
     }
 
     @Override
@@ -51,29 +61,31 @@ public class ServiceRuta implements IServiceRuta {
             buscada.setNivelEsfuerzo(ruta.getNivelEsfuerzo());
             buscada.setMediaEstrellas(ruta.getMediaEstrellas());
             buscada.setUsuario(ruta.getUsuario());
-            repo.save(buscada);
+            repoRuta.save(buscada);
         }
         return buscada;
     }
 
     @Override
     public void delete(Integer id) {
-        repo.deleteById(id);
+        repoRuta.deleteById(id);
     }
 
     @Override
     public Ruta findById(Integer id) {
-        return repo.findById(id).orElse(null);
+        return repoRuta.findById(id).orElse(null);
     }
 
     @Override
     public List<Ruta> findAll() {
-        return repo.findAll();
+        return repoRuta.findAll();
     }
 
 
+    // Parte de ruta validadas
+
     public List<Ruta> findValidadas(){
-        return repo.findByEstadoRuta((byte) 1);
+        return repoRuta.findByEstadoRuta((byte) 1);
     }
 
     public Ruta validar(Integer id){
@@ -81,6 +93,32 @@ public class ServiceRuta implements IServiceRuta {
         if(ruta == null) return null;
         byte estado = (ruta.getEstadoRuta() == ((byte)0)) ? ((byte) 1) : ((byte)0);
         ruta.setEstadoRuta(estado);
-        return repo.save(ruta);
+        return repoRuta.save(ruta);
     }
+
+    //Parte de gpx
+    @Transactional
+    public void subirGpxYGenerarTrackpoints(int idRuta, MultipartFile file) {
+
+        Ruta ruta = repoRuta.findById(idRuta).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ruta no encontrada"));
+
+        try {
+            byte[] bytes = file.getBytes();
+            String gpxBase64 = Base64.getEncoder().encodeToString(bytes);
+
+            ruta.setArchivoGPX(gpxBase64);
+            repoRuta.save(ruta);
+
+            // ahora generas trackpoints
+            List<Trackpoint> puntos = parsearTrackpoints(bytes, ruta);
+
+            // si quieres reemplazar los anteriores:
+            repoTrack.deleteById_IdRuta(idRuta);
+            repoTrack.saveAll(puntos);
+
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No se pudo leer el GPX", e);
+        }
+    }
+
 }

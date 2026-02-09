@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.time.LocalTime;
+
 @Entity
 @Table(name = "trackpoints", schema = "retadb")
 public class Trackpoint {
@@ -21,6 +23,12 @@ public class Trackpoint {
 
     @Column(name = "longitud", nullable = false)
     private Double longitud;
+
+    @Column(name = "elevacion", nullable = false)
+    private Double elevacion;
+
+    @Column(name = "time", nullable = false)
+    private LocalTime time;
 
     public TrackpointId getId() {
         return id;
@@ -54,4 +62,19 @@ public class Trackpoint {
         this.longitud = longitud;
     }
 
+    public Double getElevacion() {
+        return elevacion;
+    }
+
+    public void setElevacion(Double elevacion) {
+        this.elevacion = elevacion;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
 }
