@@ -1,53 +1,78 @@
 package com.example.kotlinapp.views
 
-import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.example.kotlinapp.data.AuthRepository
-import com.example.kotlinapp.viewmodels.DatabaseViewModel
+import com.example.kotlinapp.ui.theme.botonActivo
+import com.example.kotlinapp.ui.theme.botonActivoTexto
+import com.example.kotlinapp.ui.theme.fondoPrincipal
+import com.example.kotlinapp.viewmodels.DBViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginView(
-    navController: NavController,
-    vm: DatabaseViewModel
+    navController: NavController, vm: DBViewModel
 ) {
     // Local UI state
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val loginState by vm.loginState.collectAsState()
+    LaunchedEffect(loginState) {
+        when (loginState) {
+            DBViewModel.LoginState.Valid -> navController.popBackStack("List",false)
+            DBViewModel.LoginState.Invalid -> {
+                Toast.makeText(
+                    context, "Inicio de Sesión Invalido", Toast.LENGTH_SHORT
+                ).show()
+                vm.resetLoginState()
+            }
 
-    // Collect token + role from your global ViewModel
-    val token by vm.token.collectAsState(initial = null)
-    val rol by vm.rol.collectAsState(initial = null)
-
+            else -> Unit
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Login") }
+                title = {
+                    Text("LOGIN")
+                }, colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = fondoPrincipal, titleContentColor = Color.Black
+                )
             )
-        }
-    ) { padding ->
+        }) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding)
@@ -59,35 +84,53 @@ fun LoginView(
             // Email field
             OutlinedTextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = { email = it.trim() },
                 label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = botonActivo,
+                    focusedLabelColor = botonActivo,
+                    cursorColor = Color.Black
+                )
             )
 
-            // Password field
+            var passwordVisible by remember { mutableStateOf(false) }
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = { password = it.trim() },
                 label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth()
-            )
+                visualTransformation = if (passwordVisible) VisualTransformation.None
+                else PasswordVisualTransformation(),
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = botonActivo,
+                    focusedLabelColor = botonActivo,
+                    cursorColor = Color.Black
+                ),
+                trailingIcon = {
+                    val icon = if (passwordVisible) Icons.Default.KeyboardArrowDown
+                    else Icons.Default.KeyboardArrowUp
+                    IconButton(
+                        onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(
+                            imageVector = icon, contentDescription = null
+                        )
+                    }
+                })
+
 
             // Login button
-            Button(
+            TextButton(
                 onClick = {
                     vm.login(email, password)
-                    navController.navigate("List")
-                },
-                modifier = Modifier.fillMaxWidth()
+
+
+                }, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.textButtonColors(
+                    contentColor = botonActivoTexto, containerColor = botonActivo
+                )
             ) {
                 Text("Login")
             }
-
-            Divider()
-
-            // Token + Role display for testing
-            Text("Token: ${token ?: "No token"}")
-            Text("Role: ${rol ?: "No role"}")
         }
     }
 }

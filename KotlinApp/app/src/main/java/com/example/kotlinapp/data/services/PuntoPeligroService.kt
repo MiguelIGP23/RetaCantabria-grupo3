@@ -1,6 +1,7 @@
 package com.example.kotlinapp.data.services
 
 import com.example.kotlinapp.model.PuntoPeligro
+import com.example.kotlinapp.model.Ruta
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -11,18 +12,22 @@ import retrofit2.http.Path
 
 interface PuntoPeligroService {
 
-    @POST("puntospeligro")
-    suspend fun insert(@Body t: PuntoPeligro): Response<PuntoPeligro>
+    @POST("rutas/{idRuta}/puntospeligro")
+    suspend fun insert(@Path("idRuta") idRuta: Int, @Body t: PuntoPeligro): Response<PuntoPeligro>
 
-    @PUT("puntospeligro/{id}")
-    suspend fun update(@Path("id") id: Int, @Body t: PuntoPeligro): Response<PuntoPeligro>
+    @PUT("rutas/{idRuta}/puntospeligro/{id}")
+    suspend fun update(
+        @Path("idRuta") idRuta: Int,
+        @Path("id") id: Int,
+        @Body t: PuntoPeligro
+    ): Response<PuntoPeligro>
 
-    @DELETE("puntospeligro/{id}")
-    suspend fun delete(@Path("id") id: Int): Response<Unit>
+    @DELETE("rutas/{idRuta}/puntospeligro/{id}")
+    suspend fun delete(@Path("idRuta") idRuta: Int, @Path("id") id: Int): Response<Unit>
 
-    @GET("puntospeligro/{id}")
-    suspend fun findById(@Path("id") id: Int): Response<PuntoPeligro>
+    @GET("rutas/{idRuta}/puntospeligro/{id}")
+    suspend fun findById(@Path("idRuta") idRuta: Int, @Path("id") id: Int): Response<PuntoPeligro>
 
-    @GET("puntospeligro")
-    suspend fun findAll(): Response<List<PuntoPeligro>>
+    @GET("rutas/{idRuta}/puntospeligro")
+    suspend fun findAll(@Path("idRuta") idRuta: Int): Response<List<PuntoPeligro>>
 }
