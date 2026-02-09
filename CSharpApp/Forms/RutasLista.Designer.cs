@@ -96,6 +96,7 @@
             Name = "RutasLista";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Rutas";
+            FormClosing += RutasLista_FormClosing;
             Load += Rutas_Load;
             ResumeLayout(false);
             PerformLayout();

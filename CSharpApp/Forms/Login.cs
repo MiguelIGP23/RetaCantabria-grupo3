@@ -21,7 +21,7 @@ namespace Forms
         public Login()
         {
             InitializeComponent();
-            _api = new ApiReta("http://localhost:8080/");
+            _api = new ApiReta("https://reta.raspiremote.org/");
         }
 
         private async void btn_login_Click(object sender, EventArgs e)
@@ -52,12 +52,24 @@ namespace Forms
                 var rol = Enum.Parse<EnumRoles>(resp.Rol, true);
                 Session.Set(resp.Token, rol, resp.Id);
 
-                this.Hide();
-                using (var form = new RutasLista(_api))
+
+                try
                 {
-                    var result = form.ShowDialog();
+                    this.Enabled = false;
+                    this.Opacity = 0;
+
+                    using (var form = new RutasLista(_api))
+                    {
+                        form.ShowDialog(this);
+                    }
                 }
-                this.Show();
+                finally
+                {
+                    Session.Logout();   // al volver al login cerramos sesion anteror
+                    this.Opacity = 1;
+                    this.Enabled = true;
+                    this.Activate();
+                }
 
 
             }
@@ -73,12 +85,22 @@ namespace Forms
 
         private void btn_verRutas_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            using (var form = new RutasLista(_api))
-            { 
-                form.ShowDialog();
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new RutasLista(_api))
+                {
+                    form.ShowDialog(this);
+                }
             }
-            this.Show();
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
     }
 }
