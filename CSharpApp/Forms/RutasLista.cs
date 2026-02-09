@@ -59,13 +59,23 @@ namespace Forms
         // Métodos de eventos
         private async void RutaClick(object? sender, Ruta ruta)
         {
-            using (var frm = new RutasDetalle(ruta, _api))
+            try
             {
-                var result = frm.ShowDialog();
-                if(result == DialogResult.Cancel)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new RutasDetalle(ruta, _api))
                 {
-                    await CargarRutas();
+                    form.ShowDialog(this);
                 }
+
+                await CargarRutas();
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate(); // recupera foco en caso de que no se abra el hijo
             }
         }
 
@@ -74,14 +84,25 @@ namespace Forms
         // Métodos de botones
         private async void btnAgregar_Click(object sender, EventArgs e)
         {
-            using (var form = new CrearEditarRuta(_api, null))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarRuta(_api, null))
                 {
-                    await CargarRutas();
+                    form.ShowDialog(this);
                 }
+
+                await CargarRutas();
             }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
+
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

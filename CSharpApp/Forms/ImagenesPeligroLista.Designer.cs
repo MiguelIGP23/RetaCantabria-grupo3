@@ -86,6 +86,7 @@
             Controls.Add(flpImagenes);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenesPeligroLista";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "ImagenesPeligroLista";
             Load += ImagenesPeligroLista_Load;
             flpImagenes.ResumeLayout(false);

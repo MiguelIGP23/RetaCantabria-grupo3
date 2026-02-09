@@ -56,13 +56,10 @@ namespace Forms
                 using (var form = new RutasLista(_api))
                 {
                     var result = form.ShowDialog();
-
-                    if(result == DialogResult.Cancel)
-                    {
-                        this.Show();
-                    }
-
                 }
+                this.Show();
+
+
             }
             catch (HttpRequestException ex)
             {
@@ -76,13 +73,12 @@ namespace Forms
 
         private void btn_verRutas_Click(object sender, EventArgs e)
         {
-            RutasLista form = new RutasLista(_api);
-            form.Show();
             this.Hide();
+            using (var form = new RutasLista(_api))
+            { 
+                form.ShowDialog();
+            }
+            this.Show();
         }
-
-
-        
-
     }
 }

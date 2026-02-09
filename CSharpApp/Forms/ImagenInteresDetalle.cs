@@ -68,14 +68,27 @@ namespace Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            using (var form = new CrearEditarImagenInteres(_api, _imagenInteres, _imagenInteres.RutaId, _imagenInteres.PuntosInteresId))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarImagenInteres(_api, _imagenInteres, _imagenInteres.RutaId, _imagenInteres.PuntosInteresId))
                 {
-                    _imagenInteres = form.ImagenInteres;
-                    ucImagenInteresCompleto1.SetData(_imagenInteres);
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        _imagenInteres = form.ImagenInteres;
+                        ucImagenInteresCompleto1.SetData(_imagenInteres);
+                    }
                 }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
     }

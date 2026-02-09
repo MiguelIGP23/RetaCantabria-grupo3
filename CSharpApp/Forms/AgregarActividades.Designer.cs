@@ -38,9 +38,10 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(386, 198);
+            btnCancelar.Location = new Point(441, 264);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Size = new Size(86, 31);
             btnCancelar.TabIndex = 0;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
@@ -48,9 +49,10 @@
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(278, 198);
+            btnAceptar.Location = new Point(318, 264);
+            btnAceptar.Margin = new Padding(3, 4, 3, 4);
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(75, 23);
+            btnAceptar.Size = new Size(86, 31);
             btnAceptar.TabIndex = 1;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
@@ -59,47 +61,51 @@
             // lbl_nombreActividad
             // 
             lbl_nombreActividad.AutoSize = true;
-            lbl_nombreActividad.Location = new Point(54, 36);
+            lbl_nombreActividad.Location = new Point(62, 48);
             lbl_nombreActividad.Name = "lbl_nombreActividad";
-            lbl_nombreActividad.Size = new Size(120, 15);
+            lbl_nombreActividad.Size = new Size(152, 20);
             lbl_nombreActividad.TabIndex = 2;
             lbl_nombreActividad.Text = "Nombre de Actividad";
             // 
             // lblRutaActivida
             // 
             lblRutaActivida.AutoSize = true;
-            lblRutaActivida.Location = new Point(54, 89);
+            lblRutaActivida.Location = new Point(62, 119);
             lblRutaActivida.Name = "lblRutaActivida";
-            lblRutaActivida.Size = new Size(110, 15);
+            lblRutaActivida.Size = new Size(141, 20);
             lblRutaActivida.TabIndex = 3;
             lblRutaActivida.Text = "Ruta de la actividad";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(198, 33);
+            txtNombre.Location = new Point(226, 44);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(100, 23);
+            txtNombre.Size = new Size(114, 27);
             txtNombre.TabIndex = 4;
             // 
             // txtNombreRuta
             // 
-            txtNombreRuta.Location = new Point(198, 86);
+            txtNombreRuta.Location = new Point(226, 115);
+            txtNombreRuta.Margin = new Padding(3, 4, 3, 4);
             txtNombreRuta.Name = "txtNombreRuta";
-            txtNombreRuta.Size = new Size(100, 23);
+            txtNombreRuta.Size = new Size(114, 27);
             txtNombreRuta.TabIndex = 5;
             // 
             // AgregarActividades
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(487, 240);
+            ClientSize = new Size(557, 320);
             Controls.Add(txtNombreRuta);
             Controls.Add(txtNombre);
             Controls.Add(lblRutaActivida);
             Controls.Add(lbl_nombreActividad);
             Controls.Add(btnAceptar);
             Controls.Add(btnCancelar);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AgregarActividades";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AgregarActividades";
             ResumeLayout(false);
             PerformLayout();

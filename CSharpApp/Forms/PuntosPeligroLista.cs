@@ -48,13 +48,23 @@ namespace Forms
         // Métodos de eventos
         private void PuntoPeligroClick(object? sender, PuntoPeligro puntoPeligro)
         {
-            using (var frm = new PuntoPeligroDetalle(_api, _ruta, puntoPeligro))
+            try
             {
-                var result = frm.ShowDialog();
-                if (result == DialogResult.Cancel)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new PuntoPeligroDetalle(_api, _ruta, puntoPeligro))
                 {
-                    CargarPuntosPeligro(_ruta);
+                    form.ShowDialog(this);
                 }
+
+                CargarPuntosPeligro(_ruta);
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 

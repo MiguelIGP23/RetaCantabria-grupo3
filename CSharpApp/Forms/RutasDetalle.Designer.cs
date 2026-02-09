@@ -194,6 +194,7 @@
             Controls.Add(ucRutaCompleto1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "RutasDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "RutasDetalle";
             Load += RutasDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)pbDescarga).EndInit();

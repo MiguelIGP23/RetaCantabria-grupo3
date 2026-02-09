@@ -299,6 +299,7 @@
             Controls.Add(lblId);
             Margin = new Padding(3, 4, 3, 4);
             Name = "EditarPuntoInteres";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "EditarPuntoInteres";
             Load += EditarPuntoInteres_Load;
             ((System.ComponentModel.ISupportInitialize)nudTimestamp).EndInit();

@@ -38,7 +38,7 @@
             // txt_buscar_ruta
             // 
             txt_buscar_ruta.Location = new Point(96, 52);
-            txt_buscar_ruta.Margin = new Padding(5, 5, 5, 5);
+            txt_buscar_ruta.Margin = new Padding(5);
             txt_buscar_ruta.Name = "txt_buscar_ruta";
             txt_buscar_ruta.Size = new Size(539, 27);
             txt_buscar_ruta.TabIndex = 1;
@@ -46,7 +46,7 @@
             // btn_buscar
             // 
             btn_buscar.Location = new Point(696, 52);
-            btn_buscar.Margin = new Padding(5, 5, 5, 5);
+            btn_buscar.Margin = new Padding(5);
             btn_buscar.Name = "btn_buscar";
             btn_buscar.Size = new Size(101, 35);
             btn_buscar.TabIndex = 2;
@@ -92,8 +92,9 @@
             Controls.Add(flpRutas);
             Controls.Add(btn_buscar);
             Controls.Add(txt_buscar_ruta);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "RutasLista";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Rutas";
             Load += Rutas_Load;
             ResumeLayout(false);

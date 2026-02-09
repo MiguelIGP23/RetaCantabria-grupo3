@@ -56,13 +56,23 @@ namespace Forms
         // Metodos de eventos
         private void ImagenInteresClick(object? sender, ImagenInteres imagen)
         {
-            using (var form = new ImagenInteresDetalle(_api, _ruta, _puntoInteres, imagen))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.Cancel)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new ImagenInteresDetalle(_api, _ruta, _puntoInteres, imagen))
                 {
-                    CargarImagenes(_puntoInteres);
+                    form.ShowDialog(this);
                 }
+
+                CargarImagenes(_puntoInteres);
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 
@@ -74,13 +84,23 @@ namespace Forms
             var idRuta = _puntoInteres.RutaId;
             var idPunto = _puntoInteres.Id;
 
-            using (var form = new CrearEditarImagenInteres(_api, null, idRuta, idPunto))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarImagenInteres(_api, null, idRuta, idPunto))
                 {
-                    CargarImagenes(_puntoInteres);
+                    form.ShowDialog(this);
                 }
+
+                CargarImagenes(_puntoInteres);
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 

@@ -603,6 +603,7 @@
             Controls.Add(lblNombre);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarRuta";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AgregarRuta";
             Load += CrearEditarRuta_Load;
             ((System.ComponentModel.ISupportInitialize)nudTipoTerreno).EndInit();

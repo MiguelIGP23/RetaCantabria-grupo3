@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Forms
 {
@@ -66,13 +67,23 @@ namespace Forms
         // Metodos de eventos
         private void ImagenPeligroClick(object? sender, ImagenPeligro imagen)
         {
-            using (var form = new ImagenPeligroDetalle(_api, _ruta, _puntoPeligro, imagen))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.Cancel)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new ImagenPeligroDetalle(_api, _ruta, _puntoPeligro, imagen))
                 {
-                    CargarImagenes(_puntoPeligro);
+                    form.ShowDialog(this);
                 }
+
+                CargarImagenes(_puntoPeligro);
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 
@@ -90,13 +101,23 @@ namespace Forms
             var idRuta = _puntoPeligro.RutaId;
             var idPunto = _puntoPeligro.Id;
 
-            using (var form = new CrearEditarImagenPeligro(_api, null, idRuta, idPunto))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarImagenPeligro(_api, null, idRuta, idPunto))
                 {
-                    CargarImagenes(_puntoPeligro);
+                    form.ShowDialog(this);
                 }
+
+                CargarImagenes(_puntoPeligro);
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
     }

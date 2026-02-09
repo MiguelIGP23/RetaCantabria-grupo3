@@ -48,8 +48,23 @@ namespace Forms
 
         private void btnPuntosPeligro_Click(object sender, EventArgs e)
         {
-            PuntosPeligroLista form = new PuntosPeligroLista(_api, _ruta);
-            form.Show();
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new PuntosPeligroLista(_api, _ruta))
+                {
+                    form.ShowDialog(this);
+                }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
 
 
@@ -89,22 +104,69 @@ namespace Forms
 
         private void btnPuntosInteres_Click(object sender, EventArgs e)
         {
-            PuntosInteresLista form = new PuntosInteresLista(_api, _ruta);
-            form.Show();
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new PuntosInteresLista(_api, _ruta))
+                {
+                    form.ShowDialog(this);
+                }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
 
 
 
         private void btnActividades_Click(object sender, EventArgs e)
         {
+            //try
+            //{
+            //    this.Enabled = false;
+            //    this.Opacity = 0;
 
+            //    using (var form = new ActividadLista(_api, _ruta))
+            //    {
+            //        form.ShowDialog(this);
+            //    }
+
+            //}
+            //finally
+            //{
+            //    this.Opacity = 1;
+            //    this.Enabled = true;
+            //    this.Activate();
+            //}
         }
 
 
 
         private void btnValoraciones_Click(object sender, EventArgs e)
         {
+            //try
+            //{
+            //    this.Enabled = false;
+            //    this.Opacity = 0;
 
+            //    using (var form = new ValoracionesLista(_api, _ruta))
+            //    {
+            //        form.ShowDialog(this);
+            //    }
+
+            //}
+            //finally
+            //{
+            //    this.Opacity = 1;
+            //    this.Enabled = true;
+            //    this.Activate();
+            //}
         }
 
 
@@ -135,19 +197,30 @@ namespace Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            using (var form = new CrearEditarRuta(_api, _ruta))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarRuta(_api, _ruta))
                 {
-                    _ruta = form.Ruta;
-                    ucRutaCompleto1.SetData(_ruta);
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        _ruta = form.Ruta;
+                        ucRutaCompleto1.SetData(_ruta);
+                    }
                 }
+
             }
-
-
-
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
+
 
         private async void btnValidar_Click(object sender, EventArgs e)
         {
@@ -157,9 +230,7 @@ namespace Forms
                 string msj = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Quitar validación de";
                 if (MessageBox.Show($"¿{msj} esta ruta?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    Ruta validada = _ruta;
-                    validada.EstadoRuta = ((byte)1);
-                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.IdRuta}/validar", validada);
+                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.IdRuta}/validar", _ruta);
                     if (exito != null)
                     {
                         msj = (exito.EstadoRuta == (byte)1) ? "validada" : "invalidada";
@@ -174,7 +245,7 @@ namespace Forms
             {
                 ApiReta.MostrarErrorHttp(ex);
             }
-            
+
             ucRutaCompleto1.SetData(_ruta);
         }
     }

@@ -28,160 +28,176 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_nombre = new System.Windows.Forms.Label();
-            this.lbl_apellidos = new System.Windows.Forms.Label();
-            this.lbl_email = new System.Windows.Forms.Label();
-            this.lbl_password = new System.Windows.Forms.Label();
-            this.lbl_rep_password = new System.Windows.Forms.Label();
-            this.lbl_rol = new System.Windows.Forms.Label();
-            this.txt_nombre = new System.Windows.Forms.TextBox();
-            this.txt_rep_password = new System.Windows.Forms.TextBox();
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.txt_email = new System.Windows.Forms.TextBox();
-            this.txt_apellido = new System.Windows.Forms.TextBox();
-            this.cmb_rol = new System.Windows.Forms.ComboBox();
-            this.btn_registrar = new System.Windows.Forms.Button();
-            this.btn_volver = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lbl_nombre = new Label();
+            lbl_apellidos = new Label();
+            lbl_email = new Label();
+            lbl_password = new Label();
+            lbl_rep_password = new Label();
+            lbl_rol = new Label();
+            txt_nombre = new TextBox();
+            txt_rep_password = new TextBox();
+            txt_password = new TextBox();
+            txt_email = new TextBox();
+            txt_apellido = new TextBox();
+            cmb_rol = new ComboBox();
+            btn_registrar = new Button();
+            btn_volver = new Button();
+            SuspendLayout();
             // 
             // lbl_nombre
             // 
-            this.lbl_nombre.AutoSize = true;
-            this.lbl_nombre.Location = new System.Drawing.Point(229, 60);
-            this.lbl_nombre.Name = "lbl_nombre";
-            this.lbl_nombre.Size = new System.Drawing.Size(44, 13);
-            this.lbl_nombre.TabIndex = 0;
-            this.lbl_nombre.Text = "Nombre";
+            lbl_nombre.AutoSize = true;
+            lbl_nombre.Location = new Point(305, 92);
+            lbl_nombre.Margin = new Padding(4, 0, 4, 0);
+            lbl_nombre.Name = "lbl_nombre";
+            lbl_nombre.Size = new Size(64, 20);
+            lbl_nombre.TabIndex = 0;
+            lbl_nombre.Text = "Nombre";
             // 
             // lbl_apellidos
             // 
-            this.lbl_apellidos.AutoSize = true;
-            this.lbl_apellidos.Location = new System.Drawing.Point(229, 102);
-            this.lbl_apellidos.Name = "lbl_apellidos";
-            this.lbl_apellidos.Size = new System.Drawing.Size(49, 13);
-            this.lbl_apellidos.TabIndex = 1;
-            this.lbl_apellidos.Text = "Apellidos";
+            lbl_apellidos.AutoSize = true;
+            lbl_apellidos.Location = new Point(305, 157);
+            lbl_apellidos.Margin = new Padding(4, 0, 4, 0);
+            lbl_apellidos.Name = "lbl_apellidos";
+            lbl_apellidos.Size = new Size(72, 20);
+            lbl_apellidos.TabIndex = 1;
+            lbl_apellidos.Text = "Apellidos";
             // 
             // lbl_email
             // 
-            this.lbl_email.AutoSize = true;
-            this.lbl_email.Location = new System.Drawing.Point(229, 155);
-            this.lbl_email.Name = "lbl_email";
-            this.lbl_email.Size = new System.Drawing.Size(32, 13);
-            this.lbl_email.TabIndex = 2;
-            this.lbl_email.Text = "Email";
+            lbl_email.AutoSize = true;
+            lbl_email.Location = new Point(305, 238);
+            lbl_email.Margin = new Padding(4, 0, 4, 0);
+            lbl_email.Name = "lbl_email";
+            lbl_email.Size = new Size(46, 20);
+            lbl_email.TabIndex = 2;
+            lbl_email.Text = "Email";
             // 
             // lbl_password
             // 
-            this.lbl_password.AutoSize = true;
-            this.lbl_password.Location = new System.Drawing.Point(229, 195);
-            this.lbl_password.Name = "lbl_password";
-            this.lbl_password.Size = new System.Drawing.Size(61, 13);
-            this.lbl_password.TabIndex = 3;
-            this.lbl_password.Text = "Contraseña";
+            lbl_password.AutoSize = true;
+            lbl_password.Location = new Point(305, 300);
+            lbl_password.Margin = new Padding(4, 0, 4, 0);
+            lbl_password.Name = "lbl_password";
+            lbl_password.Size = new Size(83, 20);
+            lbl_password.TabIndex = 3;
+            lbl_password.Text = "Contraseña";
             // 
             // lbl_rep_password
             // 
-            this.lbl_rep_password.AutoSize = true;
-            this.lbl_rep_password.Location = new System.Drawing.Point(229, 231);
-            this.lbl_rep_password.Name = "lbl_rep_password";
-            this.lbl_rep_password.Size = new System.Drawing.Size(107, 13);
-            this.lbl_rep_password.TabIndex = 4;
-            this.lbl_rep_password.Text = "Confirmar contraseña";
+            lbl_rep_password.AutoSize = true;
+            lbl_rep_password.Location = new Point(305, 355);
+            lbl_rep_password.Margin = new Padding(4, 0, 4, 0);
+            lbl_rep_password.Name = "lbl_rep_password";
+            lbl_rep_password.Size = new Size(151, 20);
+            lbl_rep_password.TabIndex = 4;
+            lbl_rep_password.Text = "Confirmar contraseña";
             // 
             // lbl_rol
             // 
-            this.lbl_rol.AutoSize = true;
-            this.lbl_rol.Location = new System.Drawing.Point(229, 278);
-            this.lbl_rol.Name = "lbl_rol";
-            this.lbl_rol.Size = new System.Drawing.Size(23, 13);
-            this.lbl_rol.TabIndex = 5;
-            this.lbl_rol.Text = "Rol";
+            lbl_rol.AutoSize = true;
+            lbl_rol.Location = new Point(305, 428);
+            lbl_rol.Margin = new Padding(4, 0, 4, 0);
+            lbl_rol.Name = "lbl_rol";
+            lbl_rol.Size = new Size(31, 20);
+            lbl_rol.TabIndex = 5;
+            lbl_rol.Text = "Rol";
             // 
             // txt_nombre
             // 
-            this.txt_nombre.Location = new System.Drawing.Point(428, 53);
-            this.txt_nombre.Name = "txt_nombre";
-            this.txt_nombre.Size = new System.Drawing.Size(121, 20);
-            this.txt_nombre.TabIndex = 6;
+            txt_nombre.Location = new Point(571, 82);
+            txt_nombre.Margin = new Padding(4, 5, 4, 5);
+            txt_nombre.Name = "txt_nombre";
+            txt_nombre.Size = new Size(160, 27);
+            txt_nombre.TabIndex = 6;
             // 
             // txt_rep_password
             // 
-            this.txt_rep_password.Location = new System.Drawing.Point(428, 229);
-            this.txt_rep_password.Name = "txt_rep_password";
-            this.txt_rep_password.Size = new System.Drawing.Size(121, 20);
-            this.txt_rep_password.TabIndex = 8;
+            txt_rep_password.Location = new Point(571, 352);
+            txt_rep_password.Margin = new Padding(4, 5, 4, 5);
+            txt_rep_password.Name = "txt_rep_password";
+            txt_rep_password.Size = new Size(160, 27);
+            txt_rep_password.TabIndex = 8;
             // 
             // txt_password
             // 
-            this.txt_password.Location = new System.Drawing.Point(428, 188);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(121, 20);
-            this.txt_password.TabIndex = 9;
+            txt_password.Location = new Point(571, 289);
+            txt_password.Margin = new Padding(4, 5, 4, 5);
+            txt_password.Name = "txt_password";
+            txt_password.Size = new Size(160, 27);
+            txt_password.TabIndex = 9;
             // 
             // txt_email
             // 
-            this.txt_email.Location = new System.Drawing.Point(428, 148);
-            this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(121, 20);
-            this.txt_email.TabIndex = 10;
+            txt_email.Location = new Point(571, 228);
+            txt_email.Margin = new Padding(4, 5, 4, 5);
+            txt_email.Name = "txt_email";
+            txt_email.Size = new Size(160, 27);
+            txt_email.TabIndex = 10;
             // 
             // txt_apellido
             // 
-            this.txt_apellido.Location = new System.Drawing.Point(428, 99);
-            this.txt_apellido.Name = "txt_apellido";
-            this.txt_apellido.Size = new System.Drawing.Size(121, 20);
-            this.txt_apellido.TabIndex = 11;
+            txt_apellido.Location = new Point(571, 152);
+            txt_apellido.Margin = new Padding(4, 5, 4, 5);
+            txt_apellido.Name = "txt_apellido";
+            txt_apellido.Size = new Size(160, 27);
+            txt_apellido.TabIndex = 11;
             // 
             // cmb_rol
             // 
-            this.cmb_rol.FormattingEnabled = true;
-            this.cmb_rol.Location = new System.Drawing.Point(428, 275);
-            this.cmb_rol.Name = "cmb_rol";
-            this.cmb_rol.Size = new System.Drawing.Size(121, 21);
-            this.cmb_rol.TabIndex = 12;
+            cmb_rol.FormattingEnabled = true;
+            cmb_rol.Location = new Point(571, 423);
+            cmb_rol.Margin = new Padding(4, 5, 4, 5);
+            cmb_rol.Name = "cmb_rol";
+            cmb_rol.Size = new Size(160, 28);
+            cmb_rol.TabIndex = 12;
             // 
             // btn_registrar
             // 
-            this.btn_registrar.Location = new System.Drawing.Point(232, 360);
-            this.btn_registrar.Name = "btn_registrar";
-            this.btn_registrar.Size = new System.Drawing.Size(75, 23);
-            this.btn_registrar.TabIndex = 13;
-            this.btn_registrar.Text = "Registrar";
-            this.btn_registrar.UseVisualStyleBackColor = true;
+            btn_registrar.Location = new Point(309, 554);
+            btn_registrar.Margin = new Padding(4, 5, 4, 5);
+            btn_registrar.Name = "btn_registrar";
+            btn_registrar.Size = new Size(100, 35);
+            btn_registrar.TabIndex = 13;
+            btn_registrar.Text = "Registrar";
+            btn_registrar.UseVisualStyleBackColor = true;
             // 
             // btn_volver
             // 
-            this.btn_volver.Location = new System.Drawing.Point(474, 360);
-            this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(75, 23);
-            this.btn_volver.TabIndex = 14;
-            this.btn_volver.Text = "Volver";
-            this.btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Location = new Point(632, 554);
+            btn_volver.Margin = new Padding(4, 5, 4, 5);
+            btn_volver.Name = "btn_volver";
+            btn_volver.Size = new Size(100, 35);
+            btn_volver.TabIndex = 14;
+            btn_volver.Text = "Volver";
+            btn_volver.UseVisualStyleBackColor = true;
             // 
             // Registro
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_volver);
-            this.Controls.Add(this.btn_registrar);
-            this.Controls.Add(this.cmb_rol);
-            this.Controls.Add(this.txt_apellido);
-            this.Controls.Add(this.txt_email);
-            this.Controls.Add(this.txt_password);
-            this.Controls.Add(this.txt_rep_password);
-            this.Controls.Add(this.txt_nombre);
-            this.Controls.Add(this.lbl_rol);
-            this.Controls.Add(this.lbl_rep_password);
-            this.Controls.Add(this.lbl_password);
-            this.Controls.Add(this.lbl_email);
-            this.Controls.Add(this.lbl_apellidos);
-            this.Controls.Add(this.lbl_nombre);
-            this.Name = "Registro";
-            this.Text = "Registro";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1067, 692);
+            Controls.Add(btn_volver);
+            Controls.Add(btn_registrar);
+            Controls.Add(cmb_rol);
+            Controls.Add(txt_apellido);
+            Controls.Add(txt_email);
+            Controls.Add(txt_password);
+            Controls.Add(txt_rep_password);
+            Controls.Add(txt_nombre);
+            Controls.Add(lbl_rol);
+            Controls.Add(lbl_rep_password);
+            Controls.Add(lbl_password);
+            Controls.Add(lbl_email);
+            Controls.Add(lbl_apellidos);
+            Controls.Add(lbl_nombre);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "Registro";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Registro";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

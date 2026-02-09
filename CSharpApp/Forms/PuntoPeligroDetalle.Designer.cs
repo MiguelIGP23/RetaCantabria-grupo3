@@ -100,6 +100,7 @@
             Controls.Add(ucPuntoPeligroCompleto1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "PuntoPeligroDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "PuntoPeligroDetalle";
             Load += PuntoPeligroDetalle_Load;
             ResumeLayout(false);

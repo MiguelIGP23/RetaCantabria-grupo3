@@ -50,14 +50,27 @@ namespace Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            using (var form = new CrearEditarImagenPeligro(_api, _imagenPeligro, _imagenPeligro.RutaId, _imagenPeligro.PuntosPeligroId))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarImagenPeligro(_api, _imagenPeligro, _imagenPeligro.RutaId, _imagenPeligro.PuntosPeligroId))
                 {
-                    _imagenPeligro = form.ImagenPeligro;
-                    imagenPeligroCompleto1.SetData(_imagenPeligro);
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        _imagenPeligro = form.ImagenPeligro;
+                        imagenPeligroCompleto1.SetData(_imagenPeligro);
+                    }
                 }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 
