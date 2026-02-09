@@ -48,7 +48,6 @@ namespace Forms
         {
             try
             {
-                string ruta;
 
                 List<Ruta> rutas1 = await _api.GetAllAsync<Ruta>("api/reta3/rutas");
 
