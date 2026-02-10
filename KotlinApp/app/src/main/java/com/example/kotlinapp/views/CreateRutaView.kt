@@ -227,7 +227,7 @@ fun generarRuta(
     val desnivelPositivo = altitudes.zipWithNext { a, b -> (b - a).coerceAtLeast(0.0) }.sum()
     val desnivelNegativo = altitudes.zipWithNext { a, b -> (a - b).coerceAtLeast(0.0) }.sum()
 
-    // 1️⃣ Crear ruta inicial sin GPX
+    // Crear ruta inicial sin GPX
     val ruta = Ruta(
         id = null,
         nombre = nombre,
@@ -252,7 +252,7 @@ fun generarRuta(
         temporadas = null,
         accesibilidad = null,
         rutaFamiliar = null,
-        archivoGPX = null, // 👈 todavía no
+        archivoGPX = null,
         recomendacionesEquipo = descripcion,
         zonaGeografica = null,
         mediaEstrellas = null,
