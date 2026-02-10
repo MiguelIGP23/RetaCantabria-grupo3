@@ -33,7 +33,7 @@ fun FinishRouteDialog(
     usuarioId: Int,
     currentGPX: MutableState<String?>,
     createFileLauncher: ActivityResultLauncher<String>,
-    onRouteSaved: () -> Unit = {}
+    onRouteSaved: () -> Unit = {},
 ) {
     if (!showDialog.value) return
 
@@ -112,20 +112,7 @@ fun FinishRouteDialog(
 
                     if (error) return@Button
 
-                    // ✅ Generar ruta y GPX antes de lanzar el launcher
-                    val nuevaRuta = generarRuta(
-                        nombre = rutaNombre.value,
-                        descripcion = rutaDescripcion.value,
-                        trackpoints = savedTrackpoints.toList(),
-                        waypoints = savedWaypoints.toList(),
-                        usuarioId = usuarioId
-                    ).copy(recomendacionesEquipo = rutaDescripcion.value)
 
-                    // Guardamos el GPX en el MutableState
-                    currentGPX.value = nuevaRuta.archivoGPX
-
-                    // Lanzamos el launcher para guardar el archivo
-                    createFileLauncher.launch("${nuevaRuta.nombre}.gpx")
 
                     // Cerramos diálogo pero NO borramos las listas aún,
                     // se borrarán luego de que se guarde el GPX
@@ -139,7 +126,7 @@ fun FinishRouteDialog(
                     containerColor = Color(0xFF64B5F6),
                     contentColor = Color.White
                 )
-            ) { Text("Exportar GPX") }
+            ) { Text("Publicar Ruta") }
         },
         dismissButton = {
             Button(

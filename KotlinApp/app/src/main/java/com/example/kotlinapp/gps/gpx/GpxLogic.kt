@@ -143,7 +143,7 @@ fun importarGpx(
         recomendacionesEquipo = "",
         zonaGeografica = "",
         mediaEstrellas = 0.0,
-        usuario = IdRef(1)
+        usuarioId = -1
     )
 }
 

@@ -15,6 +15,7 @@ import com.example.kotlinapp.views.DetailView
 import com.example.kotlinapp.views.LoginView
 import com.example.kotlinapp.views.TravelRutaView
 import androidx.compose.runtime.collectAsState
+import com.example.kotlinapp.views.BorradorView
 
 
 @Composable
@@ -22,8 +23,7 @@ fun NavManager(dbViewModel: DBViewModel) {
     val navController = rememberNavController()
     val rutas = dbViewModel.rutas.collectAsState().value
     NavHost(
-        navController = navController,
-        startDestination = "List"
+        navController = navController, startDestination = "List"
     ) {
         composable("Login") {
             LoginView(navController, dbViewModel)
@@ -33,30 +33,41 @@ fun NavManager(dbViewModel: DBViewModel) {
         }
         composable("List") {
             ListView(
-                navController,
-                dbViewModel
+                navController, dbViewModel
             )
         }
 
-        composable(route = "detail/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })
+        composable(
+            route = "detail/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id")
-            DetailView(navController,id,dbViewModel)
+            DetailView(navController, id, dbViewModel)
         }
 
-        composable("Create"){
-            RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
-                CreateRutaView(navController)
+        composable("Create") {
+            RequestPermission(
+                Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido"
+            ) {
+                CreateRutaView(navController, dbViewModel)
             }
 
         }
 
         composable("Travel/imported") {
             dbViewModel.rutaImportada.value?.let { ruta ->
-                RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
+                RequestPermission(
+                    Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido"
+                ) {
                     TravelRutaView(navController, ruta)
                 }
             }
+        }
+
+        composable(
+            route = "borrador/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getInt("id")
+            BorradorView(navController, id, dbViewModel)
         }
 
     }

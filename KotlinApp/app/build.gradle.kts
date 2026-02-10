@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.converter.gson)
+    implementation(libs.okhttp)
 }
 
 tasks.withType<Test> {
