@@ -1,9 +1,7 @@
 package com.example.kotlinapp.data.room.mappers
 
 import com.example.kotlinapp.data.IdRef
-import com.example.kotlinapp.data.room.entity.ImagenPeligroEntity
 import com.example.kotlinapp.data.room.entity.PuntoInteresEntity
-import com.example.kotlinapp.model.ImagenPeligro
 import com.example.kotlinapp.model.PuntoInteres
 
 fun PuntoInteres.toEntity() = PuntoInteresEntity(
@@ -16,7 +14,7 @@ fun PuntoInteres.toEntity() = PuntoInteresEntity(
     tipo = tipo,
     descripcion = descripcion,
     timestamp = timestamp,
-    rutaId = ruta.id
+    rutaId = rutaId
 )
 
 fun PuntoInteresEntity.toDomain() = PuntoInteres(
@@ -29,5 +27,5 @@ fun PuntoInteresEntity.toDomain() = PuntoInteres(
     tipo = tipo,
     descripcion = descripcion,
     timestamp = timestamp,
-    ruta = IdRef(rutaId)
+    rutaId = rutaId
 )

@@ -9,12 +9,12 @@ fun ImagenInteres.toEntity() = ImagenInteresEntity(
     idimagenesinteres = id,
     url = url,
     descripcion = descripcion,
-    puntosinteres_idPuntosinteres = puntosInteres.id
+    puntosinteres_idPuntosinteres = puntosInteresId
 )
 
 fun ImagenInteresEntity.toDomain() = ImagenInteres(
     id = idimagenesinteres,
     url = url,
     descripcion = descripcion,
-    puntosInteres = IdRef(puntosinteres_idPuntosinteres)
+    puntosInteresId = puntosinteres_idPuntosinteres
 )

@@ -1,20 +1,13 @@
 package com.example.kotlinapp.views
 
-import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -28,13 +21,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kotlinapp.gps.gpx.rememberGpxLauncher
 import com.example.kotlinapp.model.Ruta
-import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.ui.theme.fondoPrincipal
+import com.example.kotlinapp.viewmodels.DBViewModel
+import androidx.compose.runtime.collectAsState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
-    val rutaSeleccionada = getRutaById(rutas, id) ?: return
+fun DetailView(navController: NavHostController, id: Int?, dbViewModel: DBViewModel) {
+    val rutas = dbViewModel.rutas.collectAsState()
+    val rutaSeleccionada = getRutaById(rutas.value, id) ?: return
     val context = LocalContext.current
     val createFileLauncher = rememberGpxLauncher(
         context = context,
@@ -102,7 +97,7 @@ fun DetailView(navController: NavHostController, rutas: List<Ruta>, id: Int?) {
         // Contenido principal de la parcela
         ContentDetailView(
             innerPadding = innerPadding,
-            rutas = rutas,
+            rutas = rutas.value,
             id = id
         )
 

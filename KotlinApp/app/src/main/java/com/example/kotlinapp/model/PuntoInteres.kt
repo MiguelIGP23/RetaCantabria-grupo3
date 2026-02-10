@@ -1,6 +1,5 @@
 package com.example.kotlinapp.model
 
-import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.model.enums.TipoPunto
 
 data class PuntoInteres(
@@ -13,5 +12,5 @@ data class PuntoInteres(
     val tipo: TipoPunto?,
     val descripcion: String?,
     val timestamp: Int?,
-    val ruta: IdRef
+    val rutaId: Int
 )
