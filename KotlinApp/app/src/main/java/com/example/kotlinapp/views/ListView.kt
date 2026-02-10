@@ -29,6 +29,7 @@ import androidx.navigation.NavHostController
 import com.example.kotlinapp.R
 import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.gps.gpx.generateGpx
+import com.example.kotlinapp.gps.gpx.importarGpx
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Usuario
@@ -119,66 +120,23 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
     val context = LocalContext.current
 
     val gpxLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-        onResult = { uri: Uri? ->
-            uri?.let { selectedUri ->
-                // Tomar permiso persistente
-                context.contentResolver.takePersistableUriPermission(
-                    selectedUri,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION
-                )
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri ?: return@rememberLauncherForActivityResult
 
-                // Leer GPX
-                val gpxContent = context.contentResolver.openInputStream(selectedUri)
-                    ?.bufferedReader().use { it?.readText() }
+        val ruta = importarGpx(context, uri) ?: return@rememberLauncherForActivityResult
 
-                if (!gpxContent.isNullOrEmpty()) {
-                    // Crear ruta temporal
-                    val rutaImportada = Ruta(
-                        id = -1,
-                        nombre = "Ruta importada",
-                        nombreInicioruta = "Inicio GPX",
-                        nombreFinalruta = "Final GPX",
-                        latitudInicial = 0.0,
-                        latitudFinal = 0.0,
-                        longitudInicial = 0.0,
-                        longitudFinal = 0.0,
-                        distancia = 0.0,
-                        duracion = "",
-                        desnivelPositivo = 0,
-                        desnivelNegativo = 0,
-                        altitudMax = 0.0,
-                        altitudMin = 0.0,
-                        clasificacion = Clasificacion.CIRCULAR,
-                        nivelEsfuerzo = 0,
-                        nivelRiesgo = 0,
-                        estadoRuta = 1,
-                        tipoTerreno = 1,
-                        indicaciones = 1,
-                        temporadas = "",
-                        accesibilidad = 0,
-                        rutaFamiliar = 0,
-                        archivoGPX = gpxContent,
-                        recomendacionesEquipo = "",
-                        zonaGeografica = "",
-                        mediaEstrellas = 0.0,
-                        usuario = IdRef(1)
-                    )
-                    // Guardar en ViewModel
-                    vm.setRutaImportada(rutaImportada)
+        vm.setRutaImportada(ruta)
+        navController.navigate("Travel/imported")
+    }
 
-                    // Navegar a Travel
-                    navController.navigate("Travel/imported")
-                }
-            }
-        }
-    )
 
     TopAppBar(
         title = { ListaTopBarTitle() },
         actions = {
             // Botón para importar GPX
-            IconButton(onClick = { gpxLauncher.launch(arrayOf("application/gpx+xml")) }) {
+            IconButton(onClick = { gpxLauncher.launch(arrayOf("application/xml", "text/xml", "*/*"))
+            }) {
                 Icon(Icons.Default.Build, contentDescription = "Importar GPX")
             }
 
