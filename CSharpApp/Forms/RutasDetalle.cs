@@ -248,5 +248,13 @@ namespace Forms
 
             ucRutaCompleto1.SetData(_ruta);
         }
+
+        private void btnMapa_Click(object sender, EventArgs e)
+        {
+            using (var form = new Mapa(_api, _ruta))
+            {
+                var result = form.ShowDialog(this);
+            }
+        }
     }
 }

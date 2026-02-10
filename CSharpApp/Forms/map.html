@@ -1,0 +1,64 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mapa</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script>
+        const map = L.map('map').setView([43.3516815, -4.0627083], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        let poly = null;
+        let markers = [];
+
+        window.renderTrackpoints = function (points) {
+            if (!points || points.length === 0) return;
+
+            const latlngs = points.map(p => [p.lat, p.lon]);
+
+            // --- borrar línea anterior ---
+            if (poly) {
+                map.removeLayer(poly);
+                poly = null;
+            }
+
+            // --- borrar marcadores anteriores ---
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+
+            // --- dibujar línea ---
+            poly = L.polyline(latlngs).addTo(map);
+
+            // --- dibujar puntos ---
+            latlngs.forEach(ll => {
+                const m = L.circleMarker(ll, {
+                    radius: 4
+                }).addTo(map);
+                markers.push(m);
+            });
+
+            map.fitBounds(poly.getBounds());
+        };
+    </script>
+
+</body>
+</html>
