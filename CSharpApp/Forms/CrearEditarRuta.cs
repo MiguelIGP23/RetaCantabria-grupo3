@@ -96,7 +96,7 @@ namespace Forms
                 cbClasificacion.SelectedItem = ruta.Clasificacion ?? EnumClasificaciones.CIRCULAR;
                 nudTipoTerreno.Value = ruta.TipoTerreno != null ? (decimal)ruta.TipoTerreno : 1;
                 nudIndicaciones.Value = ruta.Indicaciones != null ? ruta.Indicaciones.Value : 1;
-                txtTemporada.Text = ruta.Temporadas;
+                SetChecksFromTemporadas(ruta.Temporadas);
                 chkAccesibilidad.Checked = ruta.Accesibilidad == 1;
                 chkFamiliar.Checked = ruta.RutaFamiliar == 1;
                 lblRutaGPX.Text = ruta.ArchivoGPX;
@@ -149,7 +149,7 @@ namespace Forms
             rutaNueva.Clasificacion = (EnumClasificaciones)cbClasificacion.SelectedItem;
             rutaNueva.TipoTerreno = (int)nudTipoTerreno.Value;
             rutaNueva.Indicaciones = (int)nudIndicaciones.Value;
-            rutaNueva.Temporadas = txtTemporada.Text;
+            rutaNueva.Temporadas = GetTemporadasFromChecks();
             rutaNueva.Accesibilidad = chkAccesibilidad.Checked ? 1 : 0;
             rutaNueva.RutaFamiliar = chkFamiliar.Checked ? 1 : 0;
             rutaNueva.ArchivoGPX = string.IsNullOrWhiteSpace(lblRutaGPX.Text) ? null : lblRutaGPX.Text;
@@ -269,6 +269,32 @@ namespace Forms
             }
         }
 
+        // Metodos para convertir los checkbox de temporadas en string y viceversa
+        private string? GetTemporadasFromChecks()
+        {
+            var list = new List<string>();
+
+            if (ckPrimavera.Checked) list.Add("Primavera");
+            if (ckVerano.Checked) list.Add("Verano");
+            if (ckOtono.Checked) list.Add("Otoño");
+            if (ckInvierno.Checked) list.Add("Invierno");
+            return list.Count == 0 ? null : string.Join(",", list);
+        }
+
+        private void SetChecksFromTemporadas(string? temporadas)
+        {
+            ckPrimavera.Checked = false;
+            ckVerano.Checked = false;
+            ckOtono.Checked = false;
+            ckInvierno.Checked = false;
+            if (string.IsNullOrWhiteSpace(temporadas)) return;
+
+            var t = temporadas.ToLowerInvariant();
+            ckPrimavera.Checked = t.Contains("primavera");
+            ckVerano.Checked = t.Contains("verano");
+            ckOtono.Checked = t.Contains("otoño") || t.Contains("otono");
+            ckInvierno.Checked = t.Contains("invierno");
+        }
 
     }
 }
