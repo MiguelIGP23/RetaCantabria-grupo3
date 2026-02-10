@@ -10,6 +10,9 @@ namespace Forms
         private Ruta _ruta;
         private ApiReta _api;
 
+        private string? _gpxPath;
+        private bool _rutaCreadaConGpx = false;
+
         public CrearEditarRuta(ApiReta api, Ruta ruta)
         {
             InitializeComponent();
@@ -46,35 +49,7 @@ namespace Forms
 
 
 
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-
-        private void btnGPX_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Title = "Selecciona un archivo GPX";
-                ofd.Filter = "Archivos GPX (*.gpx)|*.gpx|Todos los archivos (*.*)|*.*";
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    string rutaArchivo = ofd.FileName;
-
-                    string nombreArchivo = Path.GetFileName(ofd.FileName);
-
-
-                    lblRutaGPX.Text = rutaArchivo;
-                }
-            }
-        }
-
-
+        // Carga datos de la ruta dada como parametro en los campos
 
         public void CargarDatos(Ruta ruta)
         {
@@ -101,6 +76,17 @@ namespace Forms
             txtRecomendaciones.Text = ruta.RecomendacionesEquipo;
             txtZonaGeo.Text = ruta.ZonaGeografica;
         }
+
+
+
+        // Metodos de botones
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
 
         private async void btnAceptar_Click_1(object sender, EventArgs e)
         {
@@ -163,6 +149,69 @@ namespace Forms
             this.DialogResult = DialogResult.OK;
             this.Close();
 
+        }
+
+
+        private async void btnGPX_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Selecciona un archivo GPX";
+                ofd.Filter = "Archivos GPX (*.gpx)|*.gpx|Todos los archivos (*.*)|*.*";
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    _gpxPath = ofd.FileName;
+                    lblRutaGPX.Text = _gpxPath;
+
+                    try
+                    {
+                        // UI bloqueada mientras procesa
+                        btnGPX.Enabled = false;
+                        btnAceptar.Enabled = false;
+                        Cursor = Cursors.WaitCursor;
+
+                        // Borrador minimo de ruta
+                        var borrador = new Ruta
+                        {
+                            Nombre = "borrador",
+                            Nombre_inicioruta = "borrador",
+                            Nombre_finalruta = "borrador",
+                            UsuarioId = (int)Session.IdUsuario
+                        };
+
+                        // Llamada al endpoint mandando borrador
+                        var rutaDevuelta = await _api.CrearRutaConGpx("api/reta3/rutas/gpx", borrador, _gpxPath);
+
+                        // A partir de ahora esta ruta ya existe en BD y tiene ID
+                        _ruta = rutaDevuelta;
+                        _rutaCreadaConGpx = true;
+
+                        // Cargar datos automáticos en el formulario
+                        CargarDatos(_ruta);
+
+                        // MUY IMPORTANTE: en el label no guardes el base64, guarda la ruta local (para el usuario)
+                        lblRutaGPX.Text = _gpxPath;
+
+                        MessageBox.Show("GPX importado. Completa los campos y pulsa Aceptar.");
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        ApiReta.MostrarErrorHttp(ex);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error importando GPX: " + ex.Message);
+                    }
+                    finally
+                    {
+                        Cursor = Cursors.Default;
+                        btnGPX.Enabled = true;
+                        btnAceptar.Enabled = true;
+                    }
+                }
+            }
         }
     }
 }

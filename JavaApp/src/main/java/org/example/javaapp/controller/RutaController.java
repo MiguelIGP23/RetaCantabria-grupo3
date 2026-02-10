@@ -18,6 +18,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -106,9 +108,13 @@ public class RutaController {
 
     // Endpoint para recibir archivo gpx de ruta
 
-    @GetMapping("/{id}/gpx")
-    public void uploadGpx(@PathVariable int id, @RequestParam("file") MultipartFile file) {
-        serviceRuta.subirGpxYGenerarTrackpoints(id, file);
+    @PostMapping(value = "/gpx", consumes = "multipart/form-data")
+    public DtoRutas uploadGpx(@RequestPart DtoRutas dto,
+                              @RequestPart("file") MultipartFile file,
+                              @AuthenticationPrincipal Jwt jwt) {
+        int userId = ((Number) jwt.getClaim("userId")).intValue();
+        Ruta nueva = serviceRuta.crearConGpx(dto, file, userId);
+        return MapperRuta.toDto(nueva);
     }
 
 

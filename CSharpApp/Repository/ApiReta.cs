@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Runtime.Intrinsics.X86;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
@@ -94,7 +95,8 @@ namespace Repository
             return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
         }
 
-        //Update sin id usado para validar rutas
+
+        //Update sin id para validar rutas
         public async Task<T?> Validar<T>(string ruta, T objeto)
         {
             ApplyAuthHeader();
@@ -187,6 +189,37 @@ namespace Repository
             string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
             await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
         }
+
+
+
+        // Crea la ruta desde el gpx
+        public async Task<Ruta> CrearRutaConGpx(string endpoint, Ruta rutaBorrador, string filePath)
+        {
+
+            ApplyAuthHeader();
+
+            using var form = new MultipartFormDataContent();
+
+            // 1) Parte JSON "ruta" con content-type application/json
+            var json = JsonSerializer.Serialize(rutaBorrador, _jsonOptions);
+            var rutaJson = new StringContent(json, Encoding.UTF8, "application/json");
+            form.Add(rutaJson, "dto");
+
+            // 2) Parte fichero "file"
+            var fileBytes = await File.ReadAllBytesAsync(filePath);
+            var gpx = new ByteArrayContent(fileBytes);
+            gpx.Headers.ContentType = new MediaTypeHeaderValue("application/gpx+xml");
+            form.Add(gpx, "file", Path.GetFileName(filePath));
+
+            // 3) POST
+            var resp = await _http.PostAsync(endpoint, form);
+            var respBody = await resp.Content.ReadAsStringAsync();
+            if (!resp.IsSuccessStatusCode) throw new Exception($"HTTP {(int)resp.StatusCode} {resp.ReasonPhrase}\n{respBody}");
+
+            var respJson = await resp.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Ruta>(respJson, _jsonOptions);
+        }
+
 
 
         // Muestra mensaje de aviso en peticiones sin autorización

@@ -45,7 +45,7 @@ namespace UserControls
             lbltxtEstadoRuta.Text = (ruta.EstadoRuta == 1) ? "Aprobada" : "En espera";
             lbltxtTipoTerreno.Text = ruta.TipoTerreno.ToString();
             lbltxtIndicaciones.Text = ruta.Indicaciones.ToString();
-            lbltxtTemporadas.Text = ruta.Temporadas.ToString();
+            lbltxtTemporadas.Text = ruta.Temporadas!=null ? ruta.Temporadas.ToString() : "";
             lbltxtAccesibilidad.Text = (ruta.Accesibilidad == 1) ? "SI" : "NO";
             lbltxtRutaFamiliar.Text = (ruta.RutaFamiliar == 1) ? "SI" : "NO";
             lbltxtRecomendaciones.Text = ruta.RecomendacionesEquipo;
