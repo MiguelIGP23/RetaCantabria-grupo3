@@ -32,7 +32,7 @@ namespace Forms
                     string nombreArchivo = Path.GetFileName(ofd.FileName);
 
 
-                    tbUrl.Text = rutaArchivo;
+              
                 }
             }
         }
