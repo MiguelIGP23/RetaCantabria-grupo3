@@ -36,19 +36,18 @@
             // 
             // ucRutaCompleto1
             // 
-            ucRutaCompleto1.Location = new Point(14, 16);
-            ucRutaCompleto1.Margin = new Padding(3, 5, 3, 5);
+            ucRutaCompleto1.Location = new Point(12, 12);
+            ucRutaCompleto1.Margin = new Padding(3, 4, 3, 4);
             ucRutaCompleto1.Name = "ucRutaCompleto1";
             ucRutaCompleto1.Ruta = null;
-            ucRutaCompleto1.Size = new Size(800, 528);
+            ucRutaCompleto1.Size = new Size(700, 396);
             ucRutaCompleto1.TabIndex = 0;
             // 
             // btnPuntosPeligro
             // 
-            btnPuntosPeligro.Location = new Point(320, 552);
-            btnPuntosPeligro.Margin = new Padding(3, 4, 3, 4);
+            btnPuntosPeligro.Location = new Point(235, 415);
             btnPuntosPeligro.Name = "btnPuntosPeligro";
-            btnPuntosPeligro.Size = new Size(149, 31);
+            btnPuntosPeligro.Size = new Size(130, 23);
             btnPuntosPeligro.TabIndex = 2;
             btnPuntosPeligro.Text = "Puntos de peligro";
             btnPuntosPeligro.UseVisualStyleBackColor = true;
@@ -56,20 +55,18 @@
             // 
             // btnPuntosInteres
             // 
-            btnPuntosInteres.Location = new Point(552, 552);
-            btnPuntosInteres.Margin = new Padding(3, 4, 3, 4);
+            btnPuntosInteres.Location = new Point(405, 415);
             btnPuntosInteres.Name = "btnPuntosInteres";
-            btnPuntosInteres.Size = new Size(149, 31);
+            btnPuntosInteres.Size = new Size(130, 23);
             btnPuntosInteres.TabIndex = 3;
             btnPuntosInteres.Text = "Puntos de interés";
             btnPuntosInteres.UseVisualStyleBackColor = true;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(100, 552);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.Location = new Point(50, 414);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(149, 31);
+            btnVolver.Size = new Size(130, 23);
             btnVolver.TabIndex = 4;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
@@ -77,9 +74,9 @@
             // 
             // RutasDetalle
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(835, 625);
+            ClientSize = new Size(731, 469);
             Controls.Add(btnVolver);
             Controls.Add(btnPuntosInteres);
             Controls.Add(btnPuntosPeligro);
