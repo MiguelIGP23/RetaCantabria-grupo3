@@ -30,9 +30,10 @@ namespace Forms
         }
 
         public void CargarDatos(Actividad actividad)
-        {   
+        {
             cargarRutas();
-            if (actividad!= null) {
+            if (actividad != null)
+            {
                 txtNombre.Text = actividad.Nombre;
 
                 cmbRuta.SelectedValue = actividad.rutaId;
@@ -73,6 +74,28 @@ namespace Forms
             actividad.rutaId = cmbRuta.SelectedIndex;
         }
 
+        private async void btnBorrar_Click(object sender, EventArgs e)
+        {
 
+            try
+            {
+                var id = _actividad.IdActividad;
+                if (MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var exito = await _api.Delete($"/api/reta3/actividad", id.ToString());
+                    if (exito)
+                    {
+                        MessageBox.Show("Ruta eliminada correctamente");
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+            }
+        }
     }
+    
 }

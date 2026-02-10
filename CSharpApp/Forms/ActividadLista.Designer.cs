@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             flpActividad = new FlowLayoutPanel();
-            btnVolver = new Button();
             ucActividaLista1 = new UserControls.UCActividaLista();
+            btnVolver = new Button();
+            btnCrear = new Button();
             flpActividad.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,9 +43,17 @@
             flpActividad.Size = new Size(677, 263);
             flpActividad.TabIndex = 0;
             // 
+            // ucActividaLista1
+            // 
+            ucActividaLista1.Actividad = null;
+            ucActividaLista1.Location = new Point(3, 3);
+            ucActividaLista1.Name = "ucActividaLista1";
+            ucActividaLista1.Size = new Size(663, 100);
+            ucActividaLista1.TabIndex = 0;
+            // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(348, 371);
+            btnVolver.Location = new Point(637, 383);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(75, 23);
             btnVolver.TabIndex = 1;
@@ -52,19 +61,22 @@
             btnVolver.UseVisualStyleBackColor = true;
             btnVolver.Click += btnVolver_Click;
             // 
-            // ucActividaLista1
+            // btnCrear
             // 
-            ucActividaLista1.Actividad = null;
-            ucActividaLista1.Location = new Point(3, 3);
-            ucActividaLista1.Name = "ucActividaLista1";
-            ucActividaLista1.Size = new Size(674, 95);
-            ucActividaLista1.TabIndex = 0;
+            btnCrear.Location = new Point(122, 383);
+            btnCrear.Name = "btnCrear";
+            btnCrear.Size = new Size(75, 23);
+            btnCrear.TabIndex = 2;
+            btnCrear.Text = "Crear";
+            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.Click += btnCrear_Click;
             // 
             // ActividadLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCrear);
             Controls.Add(btnVolver);
             Controls.Add(flpActividad);
             Name = "ActividadLista";
@@ -78,5 +90,6 @@
         private FlowLayoutPanel flpActividad;
         private Button btnVolver;
         private UserControls.UCActividaLista ucActividaLista1;
+        private Button btnCrear;
     }
 }

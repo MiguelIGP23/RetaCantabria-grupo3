@@ -127,23 +127,23 @@ namespace Forms
 
         private void btnActividades_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    this.Enabled = false;
-            //    this.Opacity = 0;
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
 
-            //    using (var form = new ActividadLista(_api, _ruta))
-            //    {
-            //        form.ShowDialog(this);
-            //    }
+                using (var form = new ActividadLista(_api, _ruta))
+                {
+                    form.ShowDialog(this);
+                }
 
-            //}
-            //finally
-            //{
-            //    this.Opacity = 1;
-            //    this.Enabled = true;
-            //    this.Activate();
-            //}
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
 
 

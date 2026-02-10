@@ -7,14 +7,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
+using Repository;
 
 namespace Forms
 {
     public partial class Registro : Form
     {
-        public Registro()
+        private Usuario _usuario;
+        private ApiReta _api;
+        public Registro(ApiReta api, Usuario usuario) 
         {
-            InitializeComponent();
+           
+        }
+
+        private async void btnBorrar_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var id = _usuario.Id;
+                if (MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var exito = await _api.Delete($"/api/reta3/usuarios", id.ToString());
+                    if (exito)
+                    {
+                        MessageBox.Show("Ruta eliminada correctamente");
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+            }
         }
     }
 }
