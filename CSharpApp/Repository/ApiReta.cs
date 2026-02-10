@@ -31,9 +31,7 @@ namespace Repository
         }
 
 
-        // ---------------------------
         // Aplica header con token de autorizacion
-        // ---------------------------
         private void ApplyAuthHeader()
         {
             if (!string.IsNullOrWhiteSpace(Session.Token))
@@ -45,10 +43,7 @@ namespace Repository
 
 
 
-        // ---------------------------
         // Operaciones CRUD genericas
-        // ---------------------------
-
         public async Task<List<T>> GetAllAsync<T>(string ruta)
         {
             ApplyAuthHeader();
@@ -117,7 +112,7 @@ namespace Repository
         }
 
 
-        // Usado para la peticion de login
+        // Peticion de login
         public async Task<LoginResponse?> LoginAsync(LoginRequest req)
         {
             var response = await _http.PostAsJsonAsync("/api/reta3/auth/login", req, _jsonOptions);
@@ -137,17 +132,16 @@ namespace Repository
             var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/organizacion");
             resp.EnsureSuccessStatusCode();
 
-            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           
 
-            var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
-            string filename = cd.FileName;                                      // obtener nombre del content disposition
+            var cd = resp.Content.Headers.ContentDisposition;                  
+            string filename = cd.FileName;                                     
 
-            filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+            filename = filename?.Trim('"');                                  
 
-            if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-organizacion.txt";      // nombre por defecto en caso de error
-
-            string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
-            await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
+            if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-organizacion.txt";      
+            string rutaCompleta = Path.Combine(rutaDestino, filename);          
+            await File.WriteAllBytesAsync(rutaCompleta, bytes);                
         }
 
         public async Task DescargarFichaUsuarioAsync(int idRuta, string rutaDestino)
@@ -157,17 +151,16 @@ namespace Repository
             var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/usuario");
             resp.EnsureSuccessStatusCode();
 
-            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();          
+            var cd = resp.Content.Headers.ContentDisposition;                 
+            string filename = cd.FileName;                                     
 
-            var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
-            string filename = cd.FileName;                                      // obtener nombre del content disposition
+            filename = filename?.Trim('"');                                    
 
-            filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+            if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-usuario.txt";    
 
-            if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-usuario.txt";      // nombre por defecto en caso de error
-
-            string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
-            await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
+            string rutaCompleta = Path.Combine(rutaDestino, filename);        
+            await File.WriteAllBytesAsync(rutaCompleta, bytes);                  
         }
 
         public async Task DescargarFichaSeguridadAsync(int idRuta, string rutaDestino)
@@ -177,17 +170,17 @@ namespace Repository
             var resp = await _http.GetAsync($"/api/reta3/rutas/{idRuta}/fichas/seguridad");
             resp.EnsureSuccessStatusCode();
 
-            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();           // leer contenido del body
+            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();         
 
-            var cd = resp.Content.Headers.ContentDisposition;                   // leer content disposition del header
-            string filename = cd.FileName;                                      // obtener nombre del content disposition
+            var cd = resp.Content.Headers.ContentDisposition;                  
+            string filename = cd.FileName;                                      
 
-            filename = filename?.Trim('"');                                     //quitar comillas del nombre que viene
+            filename = filename?.Trim('"');                                     
 
-            if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-seguridad.txt";      // nombre por defecto en caso de error
+            if (string.IsNullOrWhiteSpace(filename)) filename = "ficha-seguridad.txt";      
 
-            string rutaCompleta = Path.Combine(rutaDestino, filename);          //construir ruta 
-            await File.WriteAllBytesAsync(rutaCompleta, bytes);                 //guardar archivo
+            string rutaCompleta = Path.Combine(rutaDestino, filename);        
+            await File.WriteAllBytesAsync(rutaCompleta, bytes);                
         }
 
 
@@ -195,29 +188,87 @@ namespace Repository
         // Crea la ruta desde el gpx
         public async Task<Ruta> CrearRutaConGpx(string endpoint, Ruta rutaBorrador, string filePath)
         {
-
             ApplyAuthHeader();
 
-            using var form = new MultipartFormDataContent();
+            try
+            {
+                using var form = new MultipartFormDataContent();
 
-            // 1) Parte JSON "ruta" con content-type application/json
-            var json = JsonSerializer.Serialize(rutaBorrador, _jsonOptions);
-            var rutaJson = new StringContent(json, Encoding.UTF8, "application/json");
-            form.Add(rutaJson, "dto");
+                // 1) Parte JSON "ruta"
+                var json = JsonSerializer.Serialize(rutaBorrador, _jsonOptions);
+                var rutaJson = new StringContent(json, Encoding.UTF8, "application/json");
+                form.Add(rutaJson, "dto");
 
-            // 2) Parte fichero "file"
-            var fileBytes = await File.ReadAllBytesAsync(filePath);
-            var gpx = new ByteArrayContent(fileBytes);
-            gpx.Headers.ContentType = new MediaTypeHeaderValue("application/gpx+xml");
-            form.Add(gpx, "file", Path.GetFileName(filePath));
+                // 2) Parte fichero "file"
+                var fileBytes = await File.ReadAllBytesAsync(filePath);
+                var gpx = new ByteArrayContent(fileBytes);
+                gpx.Headers.ContentType = new MediaTypeHeaderValue("application/gpx+xml");
+                form.Add(gpx, "file", Path.GetFileName(filePath));
 
-            // 3) POST
-            var resp = await _http.PostAsync(endpoint, form);
-            var respBody = await resp.Content.ReadAsStringAsync();
-            if (!resp.IsSuccessStatusCode) throw new Exception($"HTTP {(int)resp.StatusCode} {resp.ReasonPhrase}\n{respBody}");
+                // 3) POST
+                var resp = await _http.PostAsync(endpoint, form);
 
-            var respJson = await resp.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<Ruta>(respJson, _jsonOptions);
+                if (!resp.IsSuccessStatusCode)
+                {
+                    var body = await resp.Content.ReadAsStringAsync();
+                    throw new HttpRequestException(
+                        $"HTTP {(int)resp.StatusCode} {resp.ReasonPhrase}\n{body}",
+                        null,
+                        resp.StatusCode
+                    );
+                }
+
+                var respJson = await resp.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<Ruta>(respJson, _jsonOptions);
+            }
+            catch (HttpRequestException ex)
+            {
+                MostrarErrorHttp(ex);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error creando ruta con GPX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+
+
+        // Metodos para confirmar o eliminar el borrador cuando se crea una ruta
+        public async Task<bool> ConfirmarBorrador(string baseRuta, int idRuta, Ruta ruta)
+        {
+            ApplyAuthHeader();
+            var json = JsonSerializer.Serialize(ruta, _jsonOptions);
+            using var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var resp = await _http.PutAsync($"{baseRuta}/{idRuta}/confirmar", content);
+            try
+            {
+                resp.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                MostrarErrorHttp(ex);
+                return false;
+            }
+        }
+
+
+        public async Task<bool> CancelarBorrador(string baseRuta, int idRuta)
+        {
+            ApplyAuthHeader();
+            var resp = await _http.DeleteAsync($"{baseRuta}/{idRuta}/borrador");
+            try
+            {
+                resp.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                MostrarErrorHttp(ex);
+                return false;
+            }
         }
 
 

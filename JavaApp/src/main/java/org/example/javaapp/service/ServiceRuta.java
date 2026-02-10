@@ -41,6 +41,9 @@ public class ServiceRuta implements IServiceRuta {
         this.repoUsuario = repoUsuario;
     }
 
+
+    // --------- CRUD generico ----------------
+
     @Override
     public Ruta insert(Ruta ruta) {
         return repoRuta.save(ruta);
@@ -98,7 +101,7 @@ public class ServiceRuta implements IServiceRuta {
     }
 
 
-    // Parte de ruta validadas
+    // ---------- Parte de ruta validadas--------------------
 
     public List<Ruta> findValidadas() {
         return repoRuta.findByEstadoRuta((byte) 1);
@@ -112,7 +115,50 @@ public class ServiceRuta implements IServiceRuta {
         return repoRuta.save(ruta);
     }
 
-    //Crea ruta a partir de gpx y la devuelve
+
+    // ------------ Parte de confirmar y eliminar borradores de rutas ------------
+
+    @Transactional
+    public Ruta confirmarBorrador(Integer idRuta, Ruta datos) {
+        Ruta ruta = repoRuta.findById(idRuta).orElse(null);
+        if (ruta == null) return null;
+        if (ruta.getEstadoRuta() != (byte) 2) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La ruta no es borrador");
+        }
+        if (datos.getNombre() == null || datos.getNombre().isBlank()
+                || datos.getNombreInicioruta() == null || datos.getNombreInicioruta().isBlank()
+                || datos.getNombreFinalruta() == null || datos.getNombreFinalruta().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nombre/Inicio/Final obligatorios");
+        }
+        ruta.setNombre(datos.getNombre());
+        ruta.setNombreInicioruta(datos.getNombreInicioruta());
+        ruta.setNombreFinalruta(datos.getNombreFinalruta());
+        ruta.setClasificacion(datos.getClasificacion());
+        ruta.setTipoTerreno(datos.getTipoTerreno());
+        ruta.setIndicaciones(datos.getIndicaciones());
+        ruta.setTemporadas(datos.getTemporadas());
+        ruta.setAccesibilidad(datos.getAccesibilidad());
+        ruta.setRutaFamiliar(datos.getRutaFamiliar());
+        ruta.setRecomendacionesEquipo(datos.getRecomendacionesEquipo());
+        ruta.setZonaGeografica(datos.getZonaGeografica());
+        ruta.setEstadoRuta((byte) 0);
+        return repoRuta.save(ruta);
+    }
+
+
+    @Transactional
+    public void cancelarBorrador(Integer idRuta) {
+        Ruta ruta = repoRuta.findById(idRuta).orElse(null);
+        if (ruta == null) return;
+        if (ruta.getEstadoRuta() != (byte) 2) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La ruta no es un borrador");
+        }
+        repoRuta.deleteById(idRuta);    //trackpoints se eliminan por cascade
+    }
+
+
+    // ---------- Parte de crear rutas mediante gpx -----------------
+
     @Transactional
     public Ruta crearConGpx(DtoRutas dto, MultipartFile file, int userId) {
 
@@ -200,7 +246,7 @@ public class ServiceRuta implements IServiceRuta {
                     .getElevacion();
 
             // Guardar campos calculados
-            guardada.setEstadoRuta((byte) 0);
+            guardada.setEstadoRuta((byte) 2);   // poner ruta en estado borrador
             guardada.setLatitudInicial(latIn);
             guardada.setLatitudFinal(latFin);
             guardada.setLongitudInicial(lonIn);
@@ -212,7 +258,6 @@ public class ServiceRuta implements IServiceRuta {
             guardada.setAltitudMin(altMin);
             guardada.setAltitudMax(altMax);
 
-            // Devolver la ruta
             return repoRuta.save(guardada);
 
         } catch (Exception e) {

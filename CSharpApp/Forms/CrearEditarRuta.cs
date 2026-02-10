@@ -12,6 +12,7 @@ namespace Forms
 
         private string? _gpxPath;
         private bool _rutaCreadaConGpx = false;
+        private int? _idRutaBorrador;
 
         public CrearEditarRuta(ApiReta api, Ruta ruta)
         {
@@ -24,6 +25,20 @@ namespace Forms
 
         private void CrearEditarRuta_Load(object sender, EventArgs e)
         {
+            bool esAdmin = Session.Rol == EnumRoles.ADMINISTRADOR;
+            nudLatIni.Enabled = esAdmin;
+            nudLonIni.Enabled = esAdmin;
+            nudLatFin.Enabled = esAdmin;
+            nudLonFin.Enabled = esAdmin;
+
+            nudDuracion.Enabled = esAdmin;
+            nudDistancia.Enabled = esAdmin;
+
+            nudDesnivelPos.Enabled = esAdmin;
+            nudDesnivelNeg.Enabled = esAdmin;
+
+            nudAltitudMin.Enabled = esAdmin;
+            nudAltitudMax.Enabled = esAdmin;
 
             if (_ruta != null)
             {
@@ -47,42 +62,67 @@ namespace Forms
             }
         }
 
-
+        private async void CrearEditarRuta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult != DialogResult.OK && _idRutaBorrador.HasValue)
+            {
+                try
+                {
+                    await _api.CancelarBorrador("api/reta3/rutas", _idRutaBorrador.Value);
+                }
+                catch { }
+            }
+        }
 
         // Carga datos de la ruta dada como parametro en los campos
 
         public void CargarDatos(Ruta ruta)
         {
-            txtNombre.Text = ruta.Nombre;
-            txtInicio.Text = ruta.Nombre_inicioruta;
-            txtFinal.Text = ruta.Nombre_finalruta;
-            nudLatIni.Value = (decimal)ruta.LatitudInicial;
-            nudLatFin.Value = (decimal)ruta.LatitudFinal;
-            nudLonIni.Value = (decimal)ruta.LongitudInicial;
-            nudLonFin.Value = (decimal)ruta.LongitudFinal;
-            nudDistancia.Value = (decimal)ruta.Distancia;
-            nudDuracion.Value = (decimal)ruta.Duracion.TotalMinutes;
-            nudDesnivelPos.Value = ruta.DesnivelPositivo != null ? (decimal)ruta.DesnivelPositivo : 0;
-            nudDesnivelNeg.Value = ruta.DesnivelNegativo != null ? (decimal)ruta.DesnivelNegativo : 0;
-            nudAltitudMax.Value = ruta.AltitudMax != null ? (decimal)ruta.AltitudMax : 0;
-            nudAltitudMin.Value = ruta.AltitudMin != null ? (decimal)ruta.AltitudMin : 0;
-            cbClasificacion.SelectedItem = ruta.Clasificacion ?? EnumClasificaciones.CIRCULAR;
-            nudTipoTerreno.Value = ruta.TipoTerreno != null ? (decimal)ruta.TipoTerreno : 1;
-            nudIndicaciones.Value = ruta.Indicaciones != null ? ruta.Indicaciones.Value : 1;
-            txtTemporada.Text = ruta.Temporadas;
-            chkAccesibilidad.Checked = ruta.Accesibilidad == 1;
-            chkFamiliar.Checked = ruta.RutaFamiliar == 1;
-            lblRutaGPX.Text = ruta.ArchivoGPX;
-            txtRecomendaciones.Text = ruta.RecomendacionesEquipo;
-            txtZonaGeo.Text = ruta.ZonaGeografica;
+            if (_ruta != null)
+            {
+                txtNombre.Text = ruta.Nombre;
+                txtInicio.Text = ruta.Nombre_inicioruta;
+                txtFinal.Text = ruta.Nombre_finalruta;
+                nudLatIni.Value = (decimal)ruta.LatitudInicial;
+                nudLatFin.Value = (decimal)ruta.LatitudFinal;
+                nudLonIni.Value = (decimal)ruta.LongitudInicial;
+                nudLonFin.Value = (decimal)ruta.LongitudFinal;
+                nudDistancia.Value = (decimal)ruta.Distancia;
+                nudDuracion.Value = (decimal)ruta.Duracion.TotalMinutes;
+                nudDesnivelPos.Value = ruta.DesnivelPositivo != null ? (decimal)ruta.DesnivelPositivo : 0;
+                nudDesnivelNeg.Value = ruta.DesnivelNegativo != null ? (decimal)ruta.DesnivelNegativo : 0;
+                nudAltitudMax.Value = ruta.AltitudMax != null ? (decimal)ruta.AltitudMax : 0;
+                nudAltitudMin.Value = ruta.AltitudMin != null ? (decimal)ruta.AltitudMin : 0;
+                cbClasificacion.SelectedItem = ruta.Clasificacion ?? EnumClasificaciones.CIRCULAR;
+                nudTipoTerreno.Value = ruta.TipoTerreno != null ? (decimal)ruta.TipoTerreno : 1;
+                nudIndicaciones.Value = ruta.Indicaciones != null ? ruta.Indicaciones.Value : 1;
+                txtTemporada.Text = ruta.Temporadas;
+                chkAccesibilidad.Checked = ruta.Accesibilidad == 1;
+                chkFamiliar.Checked = ruta.RutaFamiliar == 1;
+                lblRutaGPX.Text = ruta.ArchivoGPX;
+                txtRecomendaciones.Text = ruta.RecomendacionesEquipo;
+                txtZonaGeo.Text = ruta.ZonaGeografica;
+            }
         }
 
 
 
         // Metodos de botones
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private async void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (_idRutaBorrador.HasValue)
+            {
+                try
+                {
+                    await _api.CancelarBorrador("api/reta3/rutas", _idRutaBorrador.Value);
+                }
+                catch (HttpRequestException ex)
+                {
+                    ApiReta.MostrarErrorHttp(ex);
+                }
+            }
+
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -90,6 +130,7 @@ namespace Forms
 
         private async void btnAceptar_Click_1(object sender, EventArgs e)
         {
+            
 
             Ruta rutaNueva = (_ruta != null) ? _ruta : new Ruta();
             rutaNueva.Nombre = txtNombre.Text;
@@ -106,7 +147,6 @@ namespace Forms
             rutaNueva.AltitudMax = (int)nudAltitudMax.Value;
             rutaNueva.AltitudMin = (int)nudAltitudMin.Value;
             rutaNueva.Clasificacion = (EnumClasificaciones)cbClasificacion.SelectedItem;
-            rutaNueva.EstadoRuta = (_ruta == null) ? 0 : _ruta.EstadoRuta;
             rutaNueva.TipoTerreno = (int)nudTipoTerreno.Value;
             rutaNueva.Indicaciones = (int)nudIndicaciones.Value;
             rutaNueva.Temporadas = txtTemporada.Text;
@@ -128,14 +168,26 @@ namespace Forms
 
             try
             {
-                if (_ruta != null)
+                if (_ruta != null && !_rutaCreadaConGpx)
                 {
                     await _api.Update<Ruta>("api/reta3/rutas", rutaNueva.IdRuta.ToString(), rutaNueva);
                     MessageBox.Show("Ruta actualizada correctamente");
                 }
                 else
-                {
-                    await _api.Create<Ruta>("api/reta3/rutas", rutaNueva);
+                {   if (_rutaCreadaConGpx == false)
+            {
+                MessageBox.Show("Es necesario importar un archivo .gpx con los trackpoints.", "GPX necesario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+                    if (!_idRutaBorrador.HasValue)
+                    {
+                        MessageBox.Show("No hay ruta borrador. Importa un GPX primero.");
+                        return;
+                    }
+                    rutaNueva.IdRuta = _idRutaBorrador.Value;
+
+                    var ok = await _api.ConfirmarBorrador("api/reta3/rutas", rutaNueva.IdRuta, rutaNueva);
+                    if (!ok) return;
                     MessageBox.Show("Ruta creada correctamente");
                 }
             }
@@ -148,7 +200,6 @@ namespace Forms
             Ruta = rutaNueva;
             this.DialogResult = DialogResult.OK;
             this.Close();
-
         }
 
 
@@ -187,31 +238,37 @@ namespace Forms
                         // A partir de ahora esta ruta ya existe en BD y tiene ID
                         _ruta = rutaDevuelta;
                         _rutaCreadaConGpx = true;
+                        _idRutaBorrador = _ruta?.IdRuta;
 
                         // Cargar datos automáticos en el formulario
                         CargarDatos(_ruta);
 
-                        // MUY IMPORTANTE: en el label no guardes el base64, guarda la ruta local (para el usuario)
-                        lblRutaGPX.Text = _gpxPath;
+                        // Dejar en blanco campos requeridos
+                        txtNombre.Text = "";
+                        txtInicio.Text = "";
+                        txtFinal.Text = "";
 
-                        MessageBox.Show("GPX importado. Completa los campos y pulsa Aceptar.");
+                        // MUY IMPORTANTE: en el label no guardar el base64, guarda la ruta local
+                        lblRutaGPX.Text = _gpxPath;
+                        if (_ruta != null)
+                        {
+                            MessageBox.Show("GPX importado. Completa los campos y pulsa Aceptar.");
+                        }
                     }
                     catch (HttpRequestException ex)
                     {
                         ApiReta.MostrarErrorHttp(ex);
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error importando GPX: " + ex.Message);
-                    }
                     finally
                     {
                         Cursor = Cursors.Default;
-                        btnGPX.Enabled = true;
+                        btnGPX.Enabled = false;
                         btnAceptar.Enabled = true;
                     }
                 }
             }
         }
+
+
     }
 }

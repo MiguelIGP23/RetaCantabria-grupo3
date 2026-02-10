@@ -34,6 +34,7 @@ namespace UserControls
             {
                 0 => Color.LightCoral,
                 1 => Color.LightGreen,
+                2 => Color.LightBlue,
             };
         }
 

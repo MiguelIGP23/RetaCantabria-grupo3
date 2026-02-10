@@ -605,6 +605,7 @@
             Name = "CrearEditarRuta";
             StartPosition = FormStartPosition.CenterParent;
             Text = "AgregarRuta";
+            FormClosing += CrearEditarRuta_FormClosing;
             Load += CrearEditarRuta_Load;
             ((System.ComponentModel.ISupportInitialize)nudTipoTerreno).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudIndicaciones).EndInit();
