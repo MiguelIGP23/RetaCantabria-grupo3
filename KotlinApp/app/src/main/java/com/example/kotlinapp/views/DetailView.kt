@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 import androidx.compose.runtime.collectAsState
+import com.example.kotlinapp.data.ServiceFactory.ruta
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,14 +48,14 @@ fun DetailView(navController: NavHostController, id: Int?, dbViewModel: DBViewMo
             ) {
                 FloatingActionButton(
                     onClick = {
-                        // Navega a la pantalla Travel y pasa la id de la ruta
-                        navController.navigate("travel/${rutaSeleccionada.id}")
+                        dbViewModel.setRutaImportada(rutaSeleccionada)
+                        navController.navigate("Travel/imported")
                     },
                     containerColor = Color(0xFF2196F3), // azul claro
                     contentColor = Color.White
                 ) {
                     Icon(
-                        Icons.Default.ArrowBack, // puedes usar otro icono, por ejemplo DirectionsWalk
+                        Icons.Default.PlayArrow,
                         contentDescription = "Ir a Travel",
                         modifier = Modifier.size(24.dp)
                     )
