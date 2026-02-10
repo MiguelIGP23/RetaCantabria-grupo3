@@ -59,7 +59,7 @@
             // txt_usuario
             // 
             txt_usuario.Location = new Point(238, 61);
-            txt_usuario.Margin = new Padding(5, 5, 5, 5);
+            txt_usuario.Margin = new Padding(5);
             txt_usuario.Name = "txt_usuario";
             txt_usuario.Size = new Size(183, 27);
             txt_usuario.TabIndex = 2;
@@ -68,7 +68,7 @@
             // txt_password
             // 
             txt_password.Location = new Point(238, 143);
-            txt_password.Margin = new Padding(5, 5, 5, 5);
+            txt_password.Margin = new Padding(5);
             txt_password.Name = "txt_password";
             txt_password.PasswordChar = '*';
             txt_password.Size = new Size(183, 27);
@@ -79,7 +79,7 @@
             // btn_login
             // 
             btn_login.Location = new Point(139, 257);
-            btn_login.Margin = new Padding(5, 5, 5, 5);
+            btn_login.Margin = new Padding(5);
             btn_login.Name = "btn_login";
             btn_login.Size = new Size(101, 35);
             btn_login.TabIndex = 4;
@@ -90,7 +90,7 @@
             // btn_verRutas
             // 
             btn_verRutas.Location = new Point(293, 257);
-            btn_verRutas.Margin = new Padding(5, 5, 5, 5);
+            btn_verRutas.Margin = new Padding(5);
             btn_verRutas.Name = "btn_verRutas";
             btn_verRutas.Size = new Size(101, 35);
             btn_verRutas.TabIndex = 5;
@@ -109,8 +109,9 @@
             Controls.Add(txt_usuario);
             Controls.Add(lbl_password);
             Controls.Add(lbl_usuario);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             ResumeLayout(false);
             PerformLayout();

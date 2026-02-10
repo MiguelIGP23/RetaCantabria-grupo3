@@ -50,13 +50,23 @@ namespace Forms
         // Métodos de eventos
         private void PuntoInteresClick(object? sender, PuntoInteres puntoInteres)
         {
-            using (var frm = new PuntoInteresDetalle(_api, _ruta, puntoInteres))
+            try
             {
-                var result = frm.ShowDialog();
-                if (result == DialogResult.Cancel)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new PuntoInteresDetalle(_api, _ruta, puntoInteres))
                 {
-                    CargarPuntosInteres(_ruta);
+                    form.ShowDialog(this);
                 }
+
+                CargarPuntosInteres(_ruta);
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 

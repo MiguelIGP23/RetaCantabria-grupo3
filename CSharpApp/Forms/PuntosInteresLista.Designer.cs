@@ -38,25 +38,26 @@
             // 
             flpListaPuntos.AutoScroll = true;
             flpListaPuntos.Controls.Add(ucImagenInteresLista1);
-            flpListaPuntos.Location = new Point(35, 32);
+            flpListaPuntos.Location = new Point(40, 43);
+            flpListaPuntos.Margin = new Padding(3, 4, 3, 4);
             flpListaPuntos.Name = "flpListaPuntos";
-            flpListaPuntos.Size = new Size(635, 243);
+            flpListaPuntos.Size = new Size(726, 324);
             flpListaPuntos.TabIndex = 0;
             // 
             // ucImagenInteresLista1
             // 
             ucImagenInteresLista1.ImagenInteres = null;
-            ucImagenInteresLista1.Location = new Point(3, 3);
+            ucImagenInteresLista1.Location = new Point(3, 5);
+            ucImagenInteresLista1.Margin = new Padding(3, 5, 3, 5);
             ucImagenInteresLista1.Name = "ucImagenInteresLista1";
-            ucImagenInteresLista1.Size = new Size(623, 75);
+            ucImagenInteresLista1.Size = new Size(712, 100);
             ucImagenInteresLista1.TabIndex = 0;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(271, 293);
-            btnVolver.Margin = new Padding(3, 2, 3, 2);
+            btnVolver.Location = new Point(310, 391);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(82, 22);
+            btnVolver.Size = new Size(94, 29);
             btnVolver.TabIndex = 2;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
@@ -64,12 +65,14 @@
             // 
             // PuntosInteresLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(btnVolver);
             Controls.Add(flpListaPuntos);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "PuntosInteresLista";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "PuntosInteresLista";
             Load += PuntosInteresLista_Load;
             flpListaPuntos.ResumeLayout(false);

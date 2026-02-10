@@ -18,7 +18,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -102,6 +105,40 @@ public class RutaController {
         return serviceRuta.findValidadas().stream().map(MapperRuta::toDto).toList();
     }
 
+
+    // Endpoints para confirmar o eliminar borradores de rutas
+    @PutMapping("/{idRuta}/confirmar")
+    public DtoRutas confirmar(@PathVariable Integer idRuta, @RequestBody DtoRutas dto) {
+        if (dto.usuarioId() == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuarioId es obligatorio");
+
+        Usuario usu = serviceUsuario.findById(dto.usuarioId());
+        if (usu == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+
+        Ruta datos = MapperRuta.toEntity(dto, usu);
+        Ruta ruta = serviceRuta.confirmarBorrador(idRuta, datos);
+        if (ruta == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ruta no encontrada");
+
+        return MapperRuta.toDto(ruta);
+    }
+
+    @DeleteMapping("/{idRuta}/borrador")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cancelar(@PathVariable Integer idRuta) {
+        serviceRuta.cancelarBorrador(idRuta);
+    }
+
+
+
+    // Endpoint para recibir archivo gpx de ruta
+
+    @PostMapping(value = "/gpx", consumes = "multipart/form-data")
+    public DtoRutas uploadGpx(@RequestPart DtoRutas dto,
+                              @RequestPart("file") MultipartFile file,
+                              @AuthenticationPrincipal Jwt jwt) {
+        int userId = ((Number) jwt.getClaim("userId")).intValue();
+        Ruta nueva = serviceRuta.crearConGpx(dto, file, userId);
+        return MapperRuta.toDto(nueva);
+    }
 
 
     //Endpoints para descarga de ficheros

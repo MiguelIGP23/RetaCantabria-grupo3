@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserControls;
 
 namespace Forms
 {
@@ -74,14 +75,27 @@ namespace Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            using (var form = new EditarPuntoPeligro(_api, _puntoPeligro))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new EditarPuntoPeligro(_api, _puntoPeligro))
                 {
-                    _puntoPeligro = form.PuntoPeligro;
-                    ucPuntoPeligroCompleto1.SetData(_puntoPeligro);
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        _puntoPeligro = form.PuntoPeligro;
+                        ucPuntoPeligroCompleto1.SetData(_puntoPeligro);
+                    }
                 }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 
@@ -89,9 +103,22 @@ namespace Forms
 
         private void btnImagenes_Click(object sender, EventArgs e)
         {
-            using (var form = new ImagenesPeligroLista(_api, _ruta, _puntoPeligro))
+            try
             {
-                form.ShowDialog();
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new ImagenesPeligroLista(_api, _ruta, _puntoPeligro))
+                {
+                    form.ShowDialog(this);
+                }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
     }

@@ -130,6 +130,7 @@
             Controls.Add(lblPuntoInteres);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarImagenInteres";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "CrearEditarImagenInteres";
             Load += CrearEditarImagenInteres_Load;
             ResumeLayout(false);

@@ -37,6 +37,7 @@
             // imagenPeligroCompleto1
             // 
             imagenPeligroCompleto1.Font = new Font("Segoe UI", 9F);
+            imagenPeligroCompleto1.ImagenPeligro = null;
             imagenPeligroCompleto1.Location = new Point(14, 16);
             imagenPeligroCompleto1.Margin = new Padding(3, 5, 3, 5);
             imagenPeligroCompleto1.Name = "imagenPeligroCompleto1";
@@ -87,6 +88,7 @@
             Controls.Add(imagenPeligroCompleto1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenPeligroDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "ImagenPeligroDetalle";
             Load += ImagenPeligroDetalle_Load;
             ResumeLayout(false);

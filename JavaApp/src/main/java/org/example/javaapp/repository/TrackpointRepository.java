@@ -15,5 +15,6 @@ public interface TrackpointRepository extends JpaRepository<Trackpoint, Trackpoi
 
     void deleteById_IdRutaAndId_Posicion(Integer idRuta, Integer posicion);
 
+
     boolean existsById_IdRutaAndId_Posicion(Integer idRuta, Integer posicion);
 }

@@ -9,10 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="map.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="map.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Dto\Dto.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\UserControls\UserControls.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
 </Project>

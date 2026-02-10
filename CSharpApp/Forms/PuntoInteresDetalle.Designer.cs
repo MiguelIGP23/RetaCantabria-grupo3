@@ -100,6 +100,7 @@
             Controls.Add(btnVolver);
             Margin = new Padding(3, 4, 3, 4);
             Name = "PuntoInteresDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "PuntosInteresDetalle";
             Load += PuntoInteresDetalle_Load;
             ResumeLayout(false);

@@ -130,6 +130,7 @@
             Controls.Add(lblPuntoPeligro);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarImagenPeligro";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "CrearEditarImagenPeligro";
             Load += CrearEditarImagenPeligro_Load;
             ResumeLayout(false);

@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class AgregarActividades
+    partial class CrearEditarActividades
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@
             lbl_nombreActividad = new Label();
             lblRutaActivida = new Label();
             txtNombre = new TextBox();
-            txtNombreRuta = new TextBox();
+            cmbRuta = new ComboBox();
             SuspendLayout();
             // 
             // btnCancelar
@@ -81,26 +81,28 @@
             txtNombre.Size = new Size(100, 23);
             txtNombre.TabIndex = 4;
             // 
-            // txtNombreRuta
+            // cmbRuta
             // 
-            txtNombreRuta.Location = new Point(198, 86);
-            txtNombreRuta.Name = "txtNombreRuta";
-            txtNombreRuta.Size = new Size(100, 23);
-            txtNombreRuta.TabIndex = 5;
+            cmbRuta.FormattingEnabled = true;
+            cmbRuta.Location = new Point(198, 89);
+            cmbRuta.Name = "cmbRuta";
+            cmbRuta.Size = new Size(106, 23);
+            cmbRuta.TabIndex = 5;
             // 
-            // AgregarActividades
+            // CrearEditarActividades
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(487, 240);
-            Controls.Add(txtNombreRuta);
+            Controls.Add(cmbRuta);
             Controls.Add(txtNombre);
             Controls.Add(lblRutaActivida);
             Controls.Add(lbl_nombreActividad);
             Controls.Add(btnAceptar);
             Controls.Add(btnCancelar);
-            Name = "AgregarActividades";
+            Name = "CrearEditarActividades";
             Text = "AgregarActividades";
+            Load += CrearEditarActividades_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -112,6 +114,6 @@
         private Label lbl_nombreActividad;
         private Label lblRutaActivida;
         private TextBox txtNombre;
-        private TextBox txtNombreRuta;
+        private ComboBox cmbRuta;
     }
 }

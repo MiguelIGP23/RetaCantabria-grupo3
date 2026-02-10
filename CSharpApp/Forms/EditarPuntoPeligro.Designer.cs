@@ -304,6 +304,7 @@
             Controls.Add(lblRuta);
             Margin = new Padding(3, 4, 3, 4);
             Name = "EditarPuntoPeligro";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "CrearPuntoPeligro";
             Load += EditarPuntoPeligro_Load;
             ((System.ComponentModel.ISupportInitialize)nudPosicion).EndInit();

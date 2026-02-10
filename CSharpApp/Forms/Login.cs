@@ -52,17 +52,26 @@ namespace Forms
                 var rol = Enum.Parse<EnumRoles>(resp.Rol, true);
                 Session.Set(resp.Token, rol, resp.Id);
 
-                this.Hide();
-                using (var form = new RutasLista(_api))
+
+                try
                 {
-                    var result = form.ShowDialog();
+                    this.Enabled = false;
+                    this.Opacity = 0;
 
-                    if(result == DialogResult.Cancel)
+                    using (var form = new RutasLista(_api))
                     {
-                        this.Show();
+                        form.ShowDialog(this);
                     }
-
                 }
+                finally
+                {
+                    Session.Logout();   // al volver al login cerramos sesion anteror
+                    this.Opacity = 1;
+                    this.Enabled = true;
+                    this.Activate();
+                }
+
+
             }
             catch (HttpRequestException ex)
             {
@@ -76,13 +85,22 @@ namespace Forms
 
         private void btn_verRutas_Click(object sender, EventArgs e)
         {
-            RutasLista form = new RutasLista(_api);
-            form.Show();
-            this.Hide();
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new RutasLista(_api))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
-
-
-        
-
     }
 }

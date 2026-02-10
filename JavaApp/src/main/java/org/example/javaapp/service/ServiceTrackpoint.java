@@ -37,6 +37,8 @@ public class ServiceTrackpoint {
         if (buscado != null) {
             buscado.setLatitud(trackpoint.getLatitud());
             buscado.setLongitud(trackpoint.getLongitud());
+            buscado.setElevacion(trackpoint.getElevacion());
+            buscado.setTime(trackpoint.getTime());
             repoTrackpoint.save(buscado);
         }
         return buscado;
@@ -92,7 +94,6 @@ public class ServiceTrackpoint {
                     "Ya existe trackpoint en ruta " + idRuta + " en posición " + posicion);
         }
 
-        // @MapsId: asignar la ruta
         trackpoint.setIdRuta(ruta);
 
         return repoTrackpoint.save(trackpoint);
@@ -105,6 +106,8 @@ public class ServiceTrackpoint {
         Trackpoint buscado = opt.get();
         buscado.setLatitud(trackpoint.getLatitud());
         buscado.setLongitud(trackpoint.getLongitud());
+        buscado.setElevacion(trackpoint.getElevacion());
+        buscado.setTime(trackpoint.getTime());
         return repoTrackpoint.save(buscado);
     }
 

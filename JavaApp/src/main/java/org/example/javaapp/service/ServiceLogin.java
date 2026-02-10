@@ -46,6 +46,7 @@ public class ServiceLogin {
                 .expiresAt(now.plusSeconds(60 * 60 * 12))     // token dura 12 horas
                 .subject(usuario.getEmail())
                 .claim("rol", usuario.getRol().name())
+                .claim("userId", usuario.getId())
                 .build();
         JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();
         return jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();

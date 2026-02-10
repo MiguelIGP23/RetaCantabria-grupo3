@@ -41,6 +41,7 @@
             cbFicha = new ComboBox();
             label1 = new Label();
             btnValidar = new Button();
+            btnMapa = new Button();
             ((System.ComponentModel.ISupportInitialize)pbDescarga).BeginInit();
             SuspendLayout();
             // 
@@ -175,11 +176,22 @@
             btnValidar.UseVisualStyleBackColor = true;
             btnValidar.Click += btnValidar_Click;
             // 
+            // btnMapa
+            // 
+            btnMapa.Location = new Point(14, 148);
+            btnMapa.Name = "btnMapa";
+            btnMapa.Size = new Size(34, 29);
+            btnMapa.TabIndex = 71;
+            btnMapa.Text = "+";
+            btnMapa.UseVisualStyleBackColor = true;
+            btnMapa.Click += btnMapa_Click;
+            // 
             // RutasDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(835, 752);
+            Controls.Add(btnMapa);
             Controls.Add(btnValidar);
             Controls.Add(pbDescarga);
             Controls.Add(cbFicha);
@@ -194,6 +206,7 @@
             Controls.Add(ucRutaCompleto1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "RutasDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "RutasDetalle";
             Load += RutasDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)pbDescarga).EndInit();
@@ -215,5 +228,6 @@
         private ComboBox cbFicha;
         private Label label1;
         private Button btnValidar;
+        private Button btnMapa;
     }
 }

@@ -51,16 +51,16 @@
             lbltxtId.AutoSize = true;
             lbltxtId.Location = new Point(114, 24);
             lbltxtId.Name = "lbltxtId";
-            lbltxtId.Size = new Size(30, 15);
+            lbltxtId.Size = new Size(31, 15);
             lbltxtId.TabIndex = 1;
             lbltxtId.Text = "txtId";
             // 
             // lbltxtNombre
             // 
             lbltxtNombre.AutoSize = true;
-            lbltxtNombre.Location = new Point(93, 59);
+            lbltxtNombre.Location = new Point(391, 24);
             lbltxtNombre.Name = "lbltxtNombre";
-            lbltxtNombre.Size = new Size(64, 15);
+            lbltxtNombre.Size = new Size(65, 15);
             lbltxtNombre.TabIndex = 3;
             lbltxtNombre.Text = "txtNombre";
             // 
@@ -68,7 +68,7 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNombre.Location = new Point(28, 59);
+            lblNombre.Location = new Point(326, 24);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(61, 15);
             lblNombre.TabIndex = 2;
@@ -79,7 +79,7 @@
             lbltxtRuta.AutoSize = true;
             lbltxtRuta.Location = new Point(246, 24);
             lbltxtRuta.Name = "lbltxtRuta";
-            lbltxtRuta.Size = new Size(44, 15);
+            lbltxtRuta.Size = new Size(45, 15);
             lbltxtRuta.TabIndex = 5;
             lbltxtRuta.Text = "txtRuta";
             // 
@@ -104,7 +104,7 @@
             Controls.Add(lbltxtId);
             Controls.Add(lblId);
             Name = "UCActividaLista";
-            Size = new Size(400, 100);
+            Size = new Size(489, 74);
             ResumeLayout(false);
             PerformLayout();
         }

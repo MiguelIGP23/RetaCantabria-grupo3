@@ -86,6 +86,7 @@
             Controls.Add(ucImagenInteresCompleto1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenInteresDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "ImagenInteresDetalle";
             Load += ImagenInteresDetalle_Load;
             ResumeLayout(false);

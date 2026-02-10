@@ -35,14 +35,27 @@ namespace Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            using (var form = new EditarPuntoInteres(_api, _puntoInteres))
+            try
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new EditarPuntoInteres(_api, _puntoInteres))
                 {
-                    _puntoInteres = form.PuntoInteres;
-                    ucPuntoDeInteresCompleto1.SetData(_puntoInteres);
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        _puntoInteres = form.PuntoInteres;
+                        ucPuntoDeInteresCompleto1.SetData(_puntoInteres);
+                    }
                 }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
 
@@ -72,9 +85,22 @@ namespace Forms
 
         private void btnImagenes_Click(object sender, EventArgs e)
         {
-            using (var form = new ImagenesInteresLista(_api, _ruta, _puntoInteres))
+            try
             {
-                form.ShowDialog();
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new ImagenesInteresLista(_api, _ruta, _puntoInteres))
+                {
+                    form.ShowDialog(this);
+                }
+
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
     }

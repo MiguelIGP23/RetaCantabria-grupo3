@@ -55,7 +55,6 @@
             lblRutaGPX = new Label();
             txtRecomendaciones = new TextBox();
             txtZonaGeo = new TextBox();
-            txtTemporada = new TextBox();
             nudTipoTerreno = new NumericUpDown();
             nudIndicaciones = new NumericUpDown();
             btnCancelar = new Button();
@@ -74,6 +73,10 @@
             nudAltitudMin = new NumericUpDown();
             nudAltitudMax = new NumericUpDown();
             nudDuracion = new NumericUpDown();
+            ckInvierno = new CheckBox();
+            ckOtono = new CheckBox();
+            ckVerano = new CheckBox();
+            ckPrimavera = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)nudTipoTerreno).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudIndicaciones).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudLatIni).BeginInit();
@@ -348,14 +351,6 @@
             txtZonaGeo.Size = new Size(180, 27);
             txtZonaGeo.TabIndex = 43;
             // 
-            // txtTemporada
-            // 
-            txtTemporada.Location = new Point(145, 472);
-            txtTemporada.Margin = new Padding(3, 4, 3, 4);
-            txtTemporada.Name = "txtTemporada";
-            txtTemporada.Size = new Size(564, 27);
-            txtTemporada.TabIndex = 44;
-            // 
             // nudTipoTerreno
             // 
             nudTipoTerreno.Location = new Point(468, 420);
@@ -550,11 +545,59 @@
             nudDuracion.TabIndex = 58;
             nudDuracion.TextAlign = HorizontalAlignment.Right;
             // 
+            // ckInvierno
+            // 
+            ckInvierno.AutoSize = true;
+            ckInvierno.Location = new Point(518, 474);
+            ckInvierno.Name = "ckInvierno";
+            ckInvierno.Size = new Size(84, 24);
+            ckInvierno.TabIndex = 69;
+            ckInvierno.Text = "Invierno";
+            ckInvierno.TextAlign = ContentAlignment.MiddleCenter;
+            ckInvierno.UseVisualStyleBackColor = true;
+            // 
+            // ckOtono
+            // 
+            ckOtono.AutoSize = true;
+            ckOtono.Location = new Point(405, 474);
+            ckOtono.Name = "ckOtono";
+            ckOtono.Size = new Size(73, 24);
+            ckOtono.TabIndex = 68;
+            ckOtono.Text = "Otoño";
+            ckOtono.TextAlign = ContentAlignment.MiddleCenter;
+            ckOtono.UseVisualStyleBackColor = true;
+            // 
+            // ckVerano
+            // 
+            ckVerano.AutoSize = true;
+            ckVerano.Location = new Point(293, 474);
+            ckVerano.Name = "ckVerano";
+            ckVerano.Size = new Size(77, 24);
+            ckVerano.TabIndex = 67;
+            ckVerano.Text = "Verano";
+            ckVerano.TextAlign = ContentAlignment.MiddleCenter;
+            ckVerano.UseVisualStyleBackColor = true;
+            // 
+            // ckPrimavera
+            // 
+            ckPrimavera.AutoSize = true;
+            ckPrimavera.Location = new Point(162, 475);
+            ckPrimavera.Name = "ckPrimavera";
+            ckPrimavera.Size = new Size(97, 24);
+            ckPrimavera.TabIndex = 66;
+            ckPrimavera.Text = "Primavera";
+            ckPrimavera.TextAlign = ContentAlignment.MiddleCenter;
+            ckPrimavera.UseVisualStyleBackColor = true;
+            // 
             // CrearEditarRuta
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(755, 737);
+            Controls.Add(ckInvierno);
+            Controls.Add(ckOtono);
+            Controls.Add(ckVerano);
+            Controls.Add(ckPrimavera);
             Controls.Add(nudAltitudMax);
             Controls.Add(nudAltitudMin);
             Controls.Add(label3);
@@ -573,7 +616,6 @@
             Controls.Add(btnCancelar);
             Controls.Add(nudIndicaciones);
             Controls.Add(nudTipoTerreno);
-            Controls.Add(txtTemporada);
             Controls.Add(txtZonaGeo);
             Controls.Add(txtRecomendaciones);
             Controls.Add(lblRutaGPX);
@@ -603,7 +645,9 @@
             Controls.Add(lblNombre);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarRuta";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AgregarRuta";
+            FormClosing += CrearEditarRuta_FormClosing;
             Load += CrearEditarRuta_Load;
             ((System.ComponentModel.ISupportInitialize)nudTipoTerreno).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudIndicaciones).EndInit();
@@ -650,7 +694,6 @@
         private Label lblRutaGPX;
         private TextBox txtRecomendaciones;
         private TextBox txtZonaGeo;
-        private TextBox txtTemporada;
         private NumericUpDown nudTipoTerreno;
         private NumericUpDown nudIndicaciones;
         private Button btnCancelar;
@@ -669,5 +712,9 @@
         private NumericUpDown nudAltitudMin;
         private NumericUpDown nudAltitudMax;
         private NumericUpDown nudDuracion;
+        private CheckBox ckInvierno;
+        private CheckBox ckOtono;
+        private CheckBox ckVerano;
+        private CheckBox ckPrimavera;
     }
 }
