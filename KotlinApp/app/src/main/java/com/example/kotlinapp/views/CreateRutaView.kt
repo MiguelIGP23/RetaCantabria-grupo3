@@ -291,6 +291,7 @@ fun createLocationCallback(
 
     var lastLat: Double? = null
     var lastLon: Double? = null
+    var lastAlt: Double? = null // Guarda última altitud conocida
     val smoothFactor = 0.2
 
     return object : LocationCallback() {
@@ -301,8 +302,13 @@ fun createLocationCallback(
 
             var lat = location.latitude
             var lon = location.longitude
-            val alt = location.altitude
 
+            // Altitud segura: si GPS tiene altitud válida, la usamos, si no usamos la última conocida o 0
+            val rawAlt = if (location.hasAltitude()) location.altitude else lastAlt ?: 0.0
+            var alt = if (lastAlt != null) lastAlt!! * (1 - smoothFactor) + rawAlt * smoothFactor else rawAlt
+            lastAlt = alt
+
+            // Suavizado de lat/lon
             val lastGeoPoint = lastLat?.let { GeoPoint(it, lastLon!!) }
             if (lastGeoPoint != null) {
                 val newGeo = GeoPoint(lat, lon)
@@ -316,6 +322,7 @@ fun createLocationCallback(
             lastLat = lat
             lastLon = lon
 
+            // Actualizar marcador y mapa
             val geoPoint = GeoPoint(lat, lon, alt)
             marker.position = geoPoint
             mapView.controller.setCenter(geoPoint)
@@ -324,20 +331,18 @@ fun createLocationCallback(
             textLat.value = "Latitud: $lat"
             textLon.value = "Longitud: $lon"
 
-
-
+            // Guardar Trackpoint automáticamente si está activado
             if (autoTrackpointEnabled.value && canSaveTrackpoint(location)) {
-                savedTrackpoints.add(
-                    Trackpoint(
-                        idRuta = -1,
-                        latitud = lat,
-                        longitud = lon,
-                        elevacion = alt,
-                        time = System.currentTimeMillis(),
-                        posicion = savedTrackpoints.size + 1
-                    )
-
+                val trackpoint = Trackpoint(
+                    idRuta = -1,
+                    latitud = lat,
+                    longitud = lon,
+                    elevacion = alt, // Altitud suavizada y segura
+                    time = System.currentTimeMillis(),
+                    posicion = savedTrackpoints.size + 1
                 )
+                savedTrackpoints.add(trackpoint)
+                Log.d("TRACKPOINT", "Guardado: ${trackpoint.elevacion}")
                 trackPolyline.addPoint(GeoPoint(lat, lon, alt))
                 val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
                 wpMarker.position = GeoPoint(lat, lon, alt)
@@ -347,6 +352,8 @@ fun createLocationCallback(
         }
     }
 }
+
+
 
 
 @Composable
