@@ -106,6 +106,11 @@ namespace Forms
         // Métodos de botones
         private async void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (Session.Rol == null)
+            {
+                MessageBox.Show("No tienes permiso para realizar esa acción", "Unauthorized", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 this.Enabled = false;
@@ -142,6 +147,7 @@ namespace Forms
                 this.Size = new Size(900, 1000);
                 flpRutas.Location = new Point(95, 430);
                 btnLogout.Location = new Point(270, 880);
+                btnCalendario.Location = new Point(375, 880);
                 btnAgregar.Location = new Point(550, 880);
 
                 ckNombre.Visible = true;
@@ -201,6 +207,7 @@ namespace Forms
                 this.Size = new Size(900, 600);
                 flpRutas.Location = new Point(95, 60);
                 btnLogout.Location = new Point(270, 490);
+                btnCalendario.Location = new Point(375, 490);
                 btnAgregar.Location = new Point(550, 490);
 
                 ckNombre.Visible = false;
@@ -337,6 +344,25 @@ namespace Forms
                 MostrarFiltros(false);
                 filtroActivo = !filtroActivo;
                 btnMostrarFiltros.Text = "Mostrar filtros";
+            }
+        }
+
+        private void btnCalendario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+                using (var form = new Calendario(_api))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
     }

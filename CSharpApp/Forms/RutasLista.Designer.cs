@@ -59,6 +59,7 @@
             btnFiltrar = new Button();
             ckTemporada = new CheckBox();
             btnMostrarFiltros = new Button();
+            btnCalendario = new Button();
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudDistanciaMax).BeginInit();
@@ -82,7 +83,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(550, 880);
+            btnAgregar.Location = new Point(600, 880);
             btnAgregar.Margin = new Padding(3, 4, 3, 4);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(86, 31);
@@ -93,7 +94,7 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(270, 880);
+            btnLogout.Location = new Point(174, 882);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(94, 29);
             btnLogout.TabIndex = 7;
@@ -393,11 +394,23 @@
             btnMostrarFiltros.UseVisualStyleBackColor = true;
             btnMostrarFiltros.Click += btnMostrarFiltros_Click;
             // 
+            // btnCalendario
+            // 
+            btnCalendario.Location = new Point(375, 880);
+            btnCalendario.Margin = new Padding(3, 4, 3, 4);
+            btnCalendario.Name = "btnCalendario";
+            btnCalendario.Size = new Size(103, 31);
+            btnCalendario.TabIndex = 42;
+            btnCalendario.Text = "Calendario";
+            btnCalendario.UseVisualStyleBackColor = true;
+            btnCalendario.Click += btnCalendario_Click;
+            // 
             // RutasLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(882, 953);
+            Controls.Add(btnCalendario);
             Controls.Add(btnMostrarFiltros);
             Controls.Add(ckTemporada);
             Controls.Add(btnFiltrar);
@@ -482,5 +495,6 @@
         private Button btnFiltrar;
         private CheckBox ckTemporada;
         private Button btnMostrarFiltros;
+        private Button btnCalendario;
     }
 }

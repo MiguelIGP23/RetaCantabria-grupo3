@@ -39,20 +39,6 @@ namespace Forms
         }
 
 
-
-        private async Task CargarMapaAsync()
-        {
-            await wbMapa.EnsureCoreWebView2Async();
-
-            var htmlPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "map.html"
-            );
-
-            wbMapa.Source = new Uri(htmlPath);
-        }
-
-
         private async Task CargarYPintarRutaAsync()
         {
 
