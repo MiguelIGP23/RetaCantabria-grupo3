@@ -31,6 +31,7 @@
             btn_Borrar = new Button();
             btn_Editar = new Button();
             btn_Volver = new Button();
+            ucValoracionCompleta1 = new UserControls.UCValoracionCompleta();
             SuspendLayout();
             // 
             // btn_Borrar
@@ -60,11 +61,20 @@
             btn_Volver.Text = "Volver";
             btn_Volver.UseVisualStyleBackColor = true;
             // 
+            // ucValoracionCompleta1
+            // 
+            ucValoracionCompleta1.Location = new Point(12, 31);
+            ucValoracionCompleta1.Name = "ucValoracionCompleta1";
+            ucValoracionCompleta1.Size = new Size(516, 205);
+            ucValoracionCompleta1.TabIndex = 3;
+            ucValoracionCompleta1.valoracion = null;
+            // 
             // ValoracionDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(556, 332);
+            Controls.Add(ucValoracionCompleta1);
             Controls.Add(btn_Volver);
             Controls.Add(btn_Editar);
             Controls.Add(btn_Borrar);
@@ -78,5 +88,6 @@
         private Button btn_Borrar;
         private Button btn_Editar;
         private Button btn_Volver;
+        private UserControls.UCValoracionCompleta ucValoracionCompleta1;
     }
 }
