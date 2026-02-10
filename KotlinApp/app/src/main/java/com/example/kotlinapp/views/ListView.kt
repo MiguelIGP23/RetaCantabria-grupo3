@@ -1,6 +1,10 @@
 package com.example.kotlinapp.views
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material3.*
@@ -24,6 +29,7 @@ import androidx.navigation.NavHostController
 import com.example.kotlinapp.R
 import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.gps.gpx.generateGpx
+import com.example.kotlinapp.gps.gpx.importarGpx
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Usuario
@@ -72,7 +78,11 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
     }
 
     // Scaffold con floatingActionButton
-    Scaffold(topBar = { ListaTopBar(context, vm) }, floatingActionButton = {
+    Scaffold(topBar = { ListaTopBar(
+        navController = navController,
+        rutas = rutas,
+        vm = vm
+    ) }, floatingActionButton = {
         FloatingActionButton(
             onClick = {
                 navController.navigate("Create")
@@ -106,24 +116,48 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
 // TopBar de la lista con logo y botón de recarga
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaTopBar(context: Context, vm: DBViewModel) {
+fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewModel) {
+    val context = LocalContext.current
+
+    val gpxLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri ?: return@rememberLauncherForActivityResult
+
+        val ruta = importarGpx(context, uri) ?: return@rememberLauncherForActivityResult
+
+        vm.setRutaImportada(ruta)
+        navController.navigate("Travel/imported")
+    }
+
+
     TopAppBar(
-        title = { ListaTopBarTitle() }, actions = {
-            IconButton(onClick = { /* api.cargarRutas() */ }) {
+        title = { ListaTopBarTitle() },
+        actions = {
+            // Botón para importar GPX
+            IconButton(onClick = { gpxLauncher.launch(arrayOf("application/xml", "text/xml", "*/*"))
+            }) {
+                Icon(Icons.Default.Build, contentDescription = "Importar GPX")
+            }
+
+            // Botón recargar
+            IconButton(onClick = { /* vm.cargarRutas() */ }) {
                 Icon(Icons.Filled.Refresh, contentDescription = "Recargar Rutas")
             }
-            IconButton(
-                onClick = { vm.logout()}) {
-                Icon(
-                    Icons.Outlined.AccountCircle,
-                    contentDescription = "Cerrar Sesion"
-                ) //Icono temporal
+
+            // Botón cerrar sesión
+            IconButton(onClick = { vm.logout() }) {
+                Icon(Icons.Outlined.AccountCircle, contentDescription = "Cerrar Sesión")
             }
-        }, colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = fondoPrincipal, titleContentColor = Color.Black
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = fondoPrincipal,
+            titleContentColor = Color.Black
         )
     )
 }
+
+
 
 // Composable de título del TopBar (logo + texto)
 @Composable

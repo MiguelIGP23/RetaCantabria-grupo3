@@ -13,11 +13,14 @@ import androidx.navigation.navArgument
 import com.example.kotlinapp.viewmodels.DBViewModel
 import com.example.kotlinapp.views.DetailView
 import com.example.kotlinapp.views.LoginView
+import com.example.kotlinapp.views.TravelRutaView
+import androidx.compose.runtime.collectAsState
 
 
 @Composable
 fun NavManager(dbViewModel: DBViewModel) {
     val navController = rememberNavController()
+    val rutas = dbViewModel.rutas.collectAsState().value
     NavHost(
         navController = navController,
         startDestination = "List"
@@ -47,5 +50,14 @@ fun NavManager(dbViewModel: DBViewModel) {
             }
 
         }
+
+        composable("Travel/imported") {
+            dbViewModel.rutaImportada.value?.let { ruta ->
+                RequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, "Permiso de ubicación requerido") {
+                    TravelRutaView(navController, ruta)
+                }
+            }
+        }
+
     }
 }

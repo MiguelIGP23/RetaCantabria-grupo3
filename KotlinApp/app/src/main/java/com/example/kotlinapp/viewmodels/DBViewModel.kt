@@ -1,12 +1,14 @@
 package com.example.kotlinapp.viewmodels
 
 
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kotlinapp.data.AppDatabase
 import com.example.kotlinapp.data.AuthRepository
 import com.example.kotlinapp.data.ServiceFactory
 import com.example.kotlinapp.data.room.repository.RutaRepository
+import com.example.kotlinapp.model.Ruta
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,6 +24,13 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
     val rol = authRepository.rol
     //Login Stuff
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Waiting)
+
+    private val _rutaImportada = mutableStateOf<Ruta?>(null)
+    val rutaImportada: State<Ruta?> get() = _rutaImportada
+
+    fun setRutaImportada(ruta: Ruta) {
+        _rutaImportada.value = ruta
+    }
 
     fun login(email: String, password: String) {
         viewModelScope.launch {

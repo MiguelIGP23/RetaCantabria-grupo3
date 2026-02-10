@@ -68,6 +68,7 @@ import org.osmdroid.config.Configuration
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polyline
 
 
 private const val MIN_DISTANCE_METERS = 15f
@@ -84,6 +85,14 @@ fun CreateRutaView(navController: NavHostController) {
     val textLon = remember { mutableStateOf("Longitud: --") }
     val isTracking = remember { mutableStateOf(false) }
 
+    val trackPolyline = remember {
+        Polyline().apply {
+            color = android.graphics.Color.RED
+            width = 6f
+        }
+    }
+
+
     // Ahora guardamos Trackpoint completo
     val savedTrackpoints = remember { mutableStateListOf<Trackpoint>() }
     val savedWaypoints = remember { mutableStateListOf<Waypoint>() }
@@ -95,7 +104,10 @@ fun CreateRutaView(navController: NavHostController) {
 
     val mapView = remember { createMapView(context) }
     val currentMarker = remember(mapView) { createCurrentLocationMarker(mapView, context) }
-    LaunchedEffect(Unit) { mapView.overlays.add(currentMarker) }
+    LaunchedEffect(Unit) {
+        mapView.overlays.add(currentMarker)
+        mapView.overlays.add(trackPolyline)
+    }
 
     var lastTrackpointLocation by remember { mutableStateOf<Location?>(null) }
     var lastTrackpointTime by remember { mutableStateOf(0L) }
@@ -121,6 +133,7 @@ fun CreateRutaView(navController: NavHostController) {
         createLocationCallback(
             mapView,
             currentMarker,
+            trackPolyline,
             isTracking,
             autoTrackpointEnabled,
             savedTrackpoints,
@@ -159,6 +172,7 @@ fun CreateRutaView(navController: NavHostController) {
             LocationControls(
                 textLat,
                 textLon,
+                trackPolyline,
                 isTracking,
                 autoTrackpointEnabled,
                 savedTrackpoints,
@@ -264,6 +278,7 @@ fun generarRuta(
 fun createLocationCallback(
     mapView: MapView,
     marker: Marker,
+    trackPolyline: Polyline,
     isTracking: MutableState<Boolean>,
     autoTrackpointEnabled: MutableState<Boolean>,
     savedTrackpoints: MutableList<Trackpoint>,
@@ -321,7 +336,9 @@ fun createLocationCallback(
                         time = System.currentTimeMillis(),
                         posicion = savedTrackpoints.size + 1
                     )
+
                 )
+                trackPolyline.addPoint(GeoPoint(lat, lon, alt))
                 val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
                 wpMarker.position = GeoPoint(lat, lon, alt)
                 mapView.overlays.add(wpMarker)
@@ -336,6 +353,7 @@ fun createLocationCallback(
 fun LocationControls(
     textLat: MutableState<String>,
     textLon: MutableState<String>,
+    trackPolyline: Polyline,
     isTracking: MutableState<Boolean>,
     autoTrackpointEnabled: MutableState<Boolean>,
     savedTrackpoints: SnapshotStateList<Trackpoint>,
@@ -437,6 +455,7 @@ fun LocationControls(
                     val marker = createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
                     marker.position = GeoPoint(lat, lon, alt)
                     mapView.overlays.add(marker)
+                    trackPolyline.addPoint(GeoPoint(lat, lon, alt))
                     mapView.invalidate()
                 },
                 enabled = isTracking.value && !autoTrackpointEnabled.value,

@@ -21,8 +21,8 @@ class PuntosInteresRepository(
         dao.insert(punto.toEntity())
     }
 
-    suspend fun syncPuntosInteres() {
-        val response = api.findAll()
+    suspend fun syncPuntosInteres(idRuta: Int) {
+        val response = api.findAll(idRuta)
         Log.d("PUNTOSINTERES", "code=${response.code()} body=${response.body()}")
         if (response.isSuccessful) {
             response.body()?.let { puntos ->

@@ -1,14 +1,18 @@
 package com.example.kotlinapp.gps.gpx
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
+import com.example.kotlinapp.model.enums.Clasificacion
 import kotlin.collections.forEach
 
 fun generateGpx(
@@ -95,4 +99,53 @@ fun rememberGpxLauncher(
         }
     }
 }
+
+fun importarGpx(
+    context: Context,
+    uri: Uri
+): Ruta? {
+    context.contentResolver.takePersistableUriPermission(
+        uri,
+        Intent.FLAG_GRANT_READ_URI_PERMISSION
+    )
+
+    val gpxContent = context.contentResolver
+        .openInputStream(uri)
+        ?.bufferedReader()
+        ?.use { it.readText() }
+        ?: return null
+
+    return Ruta(
+        id = -1,
+        nombre = "Ruta importada",
+        nombreInicioruta = "Inicio GPX",
+        nombreFinalruta = "Final GPX",
+        latitudInicial = 0.0,
+        latitudFinal = 0.0,
+        longitudInicial = 0.0,
+        longitudFinal = 0.0,
+        distancia = 0.0,
+        duracion = "",
+        desnivelPositivo = 0,
+        desnivelNegativo = 0,
+        altitudMax = 0.0,
+        altitudMin = 0.0,
+        clasificacion = Clasificacion.CIRCULAR,
+        nivelEsfuerzo = 0,
+        nivelRiesgo = 0,
+        estadoRuta = 1,
+        tipoTerreno = 1,
+        indicaciones = 1,
+        temporadas = "",
+        accesibilidad = 0,
+        rutaFamiliar = 0,
+        archivoGPX = gpxContent,
+        recomendacionesEquipo = "",
+        zonaGeografica = "",
+        mediaEstrellas = 0.0,
+        usuario = IdRef(1)
+    )
+}
+
+
 
