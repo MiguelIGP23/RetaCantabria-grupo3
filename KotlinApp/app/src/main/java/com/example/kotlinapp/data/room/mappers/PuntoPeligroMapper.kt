@@ -1,9 +1,7 @@
 package com.example.kotlinapp.data.room.mappers
 
 import com.example.kotlinapp.data.IdRef
-import com.example.kotlinapp.data.room.entity.ImagenPeligroEntity
 import com.example.kotlinapp.data.room.entity.PuntoPeligroEntity
-import com.example.kotlinapp.model.ImagenPeligro
 import com.example.kotlinapp.model.PuntoPeligro
 
 fun PuntoPeligro.toEntity() = PuntoPeligroEntity(
@@ -16,7 +14,7 @@ fun PuntoPeligro.toEntity() = PuntoPeligroEntity(
     timestamp = timestamp,
     kilometros = kilometros,
     gravedad = gravedad,
-    rutaId = ruta.id,
+    rutaId = rutaId,
 )
 
 fun PuntoPeligroEntity.toDomain() = PuntoPeligro(
@@ -29,5 +27,5 @@ fun PuntoPeligroEntity.toDomain() = PuntoPeligro(
     timestamp = timestamp,
     gravedad = gravedad,
     kilometros = kilometros,
-    ruta = IdRef(rutaId)
+    rutaId = rutaId
 )

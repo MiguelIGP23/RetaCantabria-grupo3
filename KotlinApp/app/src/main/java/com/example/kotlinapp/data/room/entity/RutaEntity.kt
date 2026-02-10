@@ -35,5 +35,5 @@ data class RutaEntity(
     val recomendacionesEquipo: String?,
     val zonaGeografica: String?,
     val mediaEstrellas: Double?,
-    val usuario: IdRef
+    val usuarioId: Int
 )

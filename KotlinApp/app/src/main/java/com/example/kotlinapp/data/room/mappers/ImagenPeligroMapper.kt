@@ -8,12 +8,12 @@ fun ImagenPeligro.toEntity() = ImagenPeligroEntity(
     idimagenespeligro = id,
     url = url,
     descripcion = descripcion,
-    puntospeligro_idPuntospeligro = puntospeligro.id
+    puntospeligro_idPuntospeligro = puntospeligroId
 )
 
 fun ImagenPeligroEntity.toDomain() = ImagenPeligro(
     id = idimagenespeligro,
     url = url,
     descripcion = descripcion,
-    puntospeligro = IdRef(puntospeligro_idPuntospeligro)
+    puntospeligroId = puntospeligro_idPuntospeligro
 )

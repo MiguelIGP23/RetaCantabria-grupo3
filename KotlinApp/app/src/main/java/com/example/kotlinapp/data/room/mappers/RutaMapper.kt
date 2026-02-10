@@ -32,7 +32,7 @@ fun Ruta.toEntity() = RutaEntity(
     recomendacionesEquipo = recomendacionesEquipo,
     zonaGeografica = zonaGeografica,
     mediaEstrellas = mediaEstrellas,
-    usuario = usuario
+    usuarioId = usuarioId
 )
 
 // Entidad -> Dominio
@@ -64,5 +64,5 @@ fun RutaEntity.toDomain() = Ruta(
     recomendacionesEquipo = recomendacionesEquipo,
     zonaGeografica = zonaGeografica,
     mediaEstrellas = mediaEstrellas,
-    usuario = usuario
+    usuarioId = usuarioId
 )

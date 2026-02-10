@@ -6,7 +6,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
@@ -25,7 +24,7 @@ fun generateGpx(
     sb.append("  <metadata>\n")
     sb.append("    <name>${ruta.nombre}</name>\n")
     sb.append("    <desc>${ruta.recomendacionesEquipo ?: "No hay recomendaciones"}</desc>\n")
-    sb.append("    <author>${ruta.usuario ?: "Desconocido"}</author>\n")
+    sb.append("    <author>${ruta.usuarioId ?: "Desconocido"}</author>\n")
     sb.append("    <time>${trackpoints.firstOrNull()?.time?.let { epochToIso(it) } ?: ""}</time>\n")
     sb.append("  </metadata>\n")
 
@@ -34,7 +33,7 @@ fun generateGpx(
     sb.append("    <trkseg>\n")
     trackpoints.forEachIndexed { index, tp ->
         sb.append("      <trkpt lat=\"${tp.latitud}\" lon=\"${tp.longitud}\">\n")
-        sb.append("        <ele>${tp.altitud}</ele>\n")
+        sb.append("        <ele>${tp.elevacion}</ele>\n")
         sb.append("        <time>${epochToIso(tp.time)}</time>\n")
         sb.append("        <name>${index + 1}</name>\n")
         sb.append("      </trkpt>\n")
