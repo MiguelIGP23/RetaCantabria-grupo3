@@ -23,11 +23,13 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 
-class DBViewModel(private val authRepository: AuthRepository, private val roomDB: AppDatabase) : ViewModel() {
+class DBViewModel(private val authRepository: AuthRepository, private val roomDB: AppDatabase) :
+    ViewModel() {
 
     //Session Stuff
     val token = authRepository.token
     val rol = authRepository.rol
+
     //Login Stuff
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Waiting)
 
@@ -111,16 +113,23 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
     private val _ruta = MutableStateFlow<Ruta?>(null)
     var ruta = _ruta.asStateFlow()
 
-    fun getRuta(id: Int){
+    fun getRuta(id: Int) {
         viewModelScope.launch {
             val response = rutaService.findById(id)
             _ruta.value = response.body()
         }
     }
 
-    fun uploadGpx(ruta: Ruta,gpx:String){
+    fun deleteRuta(id: Int) {
         viewModelScope.launch {
-            val rutaResponseBody = Gson().toJson(ruta).toRequestBody("application/json".toMediaTypeOrNull())
+            val response = rutaService.delete(id)
+        }
+    }
+
+    fun uploadGpx(ruta: Ruta, gpx: String) {
+        viewModelScope.launch {
+            val rutaResponseBody =
+                Gson().toJson(ruta).toRequestBody("application/json".toMediaTypeOrNull())
             val gpxRequestBody = gpx.toRequestBody(
                 "application/octet-stream".toMediaType()
             )
@@ -129,7 +138,7 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
                 filename = "track.gpx",
                 body = gpxRequestBody
             )
-            val response = rutaService.uploadGPX(rutaResponseBody,gpxPart)
+            val response = rutaService.uploadGPX(rutaResponseBody, gpxPart)
             _ruta.value = response.body();
         }
     }

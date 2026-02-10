@@ -42,4 +42,14 @@ interface RutaService {
         @Part("dto") rutaBase: RequestBody,
         @Part gpx: MultipartBody.Part
     ): Response<Ruta>
+
+    @PUT("rutas/{id}/confirmar")
+    suspend fun confirmarBorrador(
+
+    )
+
+    @PUT("rutas/{id}/borrador")
+    suspend fun cancelarBorrador() {
+
+    }
 }
