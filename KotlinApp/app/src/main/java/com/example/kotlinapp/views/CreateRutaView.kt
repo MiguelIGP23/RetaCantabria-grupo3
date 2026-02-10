@@ -6,7 +6,6 @@ import android.content.Context
 import android.location.Location
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,13 +21,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -45,19 +42,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavHostController
 import androidx.preference.PreferenceManager
-import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.gps.FinishRouteDialog
 import com.example.kotlinapp.gps.WaypointDialog
 import com.example.kotlinapp.gps.gpx.generateGpx
-import com.example.kotlinapp.gps.gpx.rememberGpxLauncher
 import com.example.kotlinapp.gps.map.createCurrentLocationMarker
 import com.example.kotlinapp.gps.map.createMapView
 import com.example.kotlinapp.gps.map.createTrackpointMarker
@@ -212,7 +205,7 @@ fun generarRuta(
     val latFinal = trackpointsList.last().latitud
     val lonFinal = trackpointsList.last().longitud
 
-    val altitudes = trackpointsList.mapNotNull { it.altitud }
+    val altitudes = trackpointsList.mapNotNull { it.elevacion }
     val altMax = altitudes.maxOrNull() ?: 0.0
     val altMin = altitudes.minOrNull() ?: 0.0
 
@@ -263,7 +256,7 @@ fun generarRuta(
         recomendacionesEquipo = descripcion,
         zonaGeografica = null,
         mediaEstrellas = null,
-        usuario = IdRef(usuarioId)
+        usuarioId = usuarioId
     )
 
     // Generar GPX usando la ruta creada
@@ -336,10 +329,10 @@ fun createLocationCallback(
             if (autoTrackpointEnabled.value && canSaveTrackpoint(location)) {
                 savedTrackpoints.add(
                     Trackpoint(
-                        id = trackpointIdCounter.value++,
+                        idRuta = -1,
                         latitud = lat,
                         longitud = lon,
-                        altitud = alt,
+                        elevacion = alt,
                         time = System.currentTimeMillis(),
                         posicion = savedTrackpoints.size + 1
                     )
@@ -452,10 +445,10 @@ fun LocationControls(
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
                     val alt = 0.0
                     savedTrackpoints.add(Trackpoint(
-                        id = trackpointIdCounter.value++,
+                        idRuta = -1,
                         latitud = lat,
                         longitud = lon,
-                        altitud = alt,
+                        elevacion = alt,
                         time = System.currentTimeMillis(),
                         posicion = savedTrackpoints.size + 1
                     ))

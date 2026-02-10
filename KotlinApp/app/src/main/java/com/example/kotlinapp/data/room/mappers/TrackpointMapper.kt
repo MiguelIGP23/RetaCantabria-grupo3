@@ -4,19 +4,19 @@ import com.example.kotlinapp.data.room.entity.TrackpointEntity
 import com.example.kotlinapp.model.Trackpoint
 
 fun Trackpoint.toEntity() = TrackpointEntity(
-    idRuta = id,
+    idRuta = idRuta,
     posicion = posicion,
     latitud = latitud,
     longitud = longitud,
-    altitud = altitud,
+    altitud = elevacion,
     time = time
 )
 
 fun TrackpointEntity.toDomain() = Trackpoint(
-    id = idRuta,
+    idRuta = idRuta,
     posicion = posicion,
     latitud = latitud,
     longitud = longitud,
-    altitud = altitud,
+    elevacion = altitud,
     time = time
 )

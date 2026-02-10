@@ -41,7 +41,7 @@ fun NavManager(dbViewModel: DBViewModel) {
         composable(route = "detail/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id")
-            DetailView(navController,rutas,id)
+            DetailView(navController,id,dbViewModel)
         }
 
         composable("Create"){

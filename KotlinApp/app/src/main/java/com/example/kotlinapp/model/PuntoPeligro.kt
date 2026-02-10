@@ -1,7 +1,5 @@
 package com.example.kotlinapp.model
 
-import com.example.kotlinapp.data.IdRef
-
 data class PuntoPeligro(
     val id: Int?,
     val nombre: String,
@@ -12,5 +10,5 @@ data class PuntoPeligro(
     val gravedad: Byte?,
     val descripcion: String?,
     val timestamp: Int?,
-    val ruta: IdRef
+    val rutaId: Int
 )

@@ -1,6 +1,5 @@
 package com.example.kotlinapp.model
 
-import com.example.kotlinapp.data.IdRef
 import com.example.kotlinapp.model.enums.Clasificacion
 
 data class Ruta(
@@ -31,5 +30,5 @@ data class Ruta(
     val recomendacionesEquipo: String?,
     val zonaGeografica: String?,
     val mediaEstrellas: Double?,
-    val usuario: IdRef
+    val usuarioId: Int
 )
