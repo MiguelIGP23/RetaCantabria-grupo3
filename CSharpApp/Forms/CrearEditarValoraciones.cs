@@ -9,27 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UserControls;
 
 namespace Forms
 {
-    public partial class ValoracionLista : Form
+    public partial class CrearEditarValoraciones : Form
     {
-
-        public ValoracionLista()
+        private readonly ApiReta _api;
+        private Valoracion _valoracion { get; set; }
+        public CrearEditarValoraciones(ApiReta api, Valoracion valoracion)
         {
             InitializeComponent();
+            _api = api;
+            _valoracion = valoracion;
         }
 
-        private void btn_Volver_Click(object sender, EventArgs e)
+        private void btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void ValoracionLista_Load(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

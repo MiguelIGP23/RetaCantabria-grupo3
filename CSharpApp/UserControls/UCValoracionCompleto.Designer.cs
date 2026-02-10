@@ -53,7 +53,7 @@
             // lbl_txtInteresCultural
             // 
             lbl_txtInteresCultural.AutoSize = true;
-            lbl_txtInteresCultural.Location = new Point(333, 68);
+            lbl_txtInteresCultural.Location = new Point(358, 68);
             lbl_txtInteresCultural.Name = "lbl_txtInteresCultural";
             lbl_txtInteresCultural.Size = new Size(97, 15);
             lbl_txtInteresCultural.TabIndex = 15;
@@ -62,7 +62,7 @@
             // lbl_txtFecha
             // 
             lbl_txtFecha.AutoSize = true;
-            lbl_txtFecha.Location = new Point(311, 35);
+            lbl_txtFecha.Location = new Point(358, 35);
             lbl_txtFecha.Name = "lbl_txtFecha";
             lbl_txtFecha.Size = new Size(51, 15);
             lbl_txtFecha.TabIndex = 14;
@@ -80,7 +80,7 @@
             // lbl_txtIdValora
             // 
             lbl_txtIdValora.AutoSize = true;
-            lbl_txtIdValora.Location = new Point(95, 35);
+            lbl_txtIdValora.Location = new Point(119, 35);
             lbl_txtIdValora.Name = "lbl_txtIdValora";
             lbl_txtIdValora.Size = new Size(62, 15);
             lbl_txtIdValora.TabIndex = 12;
@@ -179,7 +179,7 @@
             // lbl_txtResena
             // 
             lbl_txtResena.AutoSize = true;
-            lbl_txtResena.Location = new Point(311, 93);
+            lbl_txtResena.Location = new Point(358, 93);
             lbl_txtResena.Name = "lbl_txtResena";
             lbl_txtResena.Size = new Size(57, 15);
             lbl_txtResena.TabIndex = 23;
@@ -215,7 +215,7 @@
             // lbl_txtIdRuta
             // 
             lbl_txtIdRuta.AutoSize = true;
-            lbl_txtIdRuta.Location = new Point(314, 149);
+            lbl_txtIdRuta.Location = new Point(361, 149);
             lbl_txtIdRuta.Name = "lbl_txtIdRuta";
             lbl_txtIdRuta.Size = new Size(54, 15);
             lbl_txtIdRuta.TabIndex = 27;

@@ -42,6 +42,7 @@
             btn_volver.TabIndex = 0;
             btn_volver.Text = "Volver";
             btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += btn_volver_Click;
             // 
             // btn_borrar
             // 
@@ -51,6 +52,7 @@
             btn_borrar.TabIndex = 1;
             btn_borrar.Text = "Borrar";
             btn_borrar.UseVisualStyleBackColor = true;
+            btn_borrar.Click += btn_borrar_Click;
             // 
             // btn_editar
             // 
@@ -60,6 +62,7 @@
             btn_editar.TabIndex = 2;
             btn_editar.Text = "Editar";
             btn_editar.UseVisualStyleBackColor = true;
+            btn_editar.Click += btn_editar_Click;
             // 
             // ucValoracionCompleto1
             // 
@@ -80,6 +83,7 @@
             Controls.Add(btn_volver);
             Name = "ValoracionDetalle";
             Text = "ValoracionDetalle";
+            Load += ValoracionDetalle_Load;
             ResumeLayout(false);
         }
 

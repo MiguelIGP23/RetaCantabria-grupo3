@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             flp_valoracionLista = new FlowLayoutPanel();
-            btn_Nuevo = new Button();
-            btn_borrar = new Button();
             ucValoracionLista1 = new UserControls.UCValoracionLista();
+            btn_Volver = new Button();
             flp_valoracionLista.SuspendLayout();
             SuspendLayout();
             // 
@@ -40,26 +39,8 @@
             flp_valoracionLista.Controls.Add(ucValoracionLista1);
             flp_valoracionLista.Location = new Point(61, 28);
             flp_valoracionLista.Name = "flp_valoracionLista";
-            flp_valoracionLista.Size = new Size(460, 204);
+            flp_valoracionLista.Size = new Size(457, 204);
             flp_valoracionLista.TabIndex = 0;
-            // 
-            // btn_Nuevo
-            // 
-            btn_Nuevo.Location = new Point(321, 254);
-            btn_Nuevo.Name = "btn_Nuevo";
-            btn_Nuevo.Size = new Size(75, 23);
-            btn_Nuevo.TabIndex = 1;
-            btn_Nuevo.Text = "Nuevo";
-            btn_Nuevo.UseVisualStyleBackColor = true;
-            // 
-            // btn_borrar
-            // 
-            btn_borrar.Location = new Point(142, 254);
-            btn_borrar.Name = "btn_borrar";
-            btn_borrar.Size = new Size(75, 23);
-            btn_borrar.TabIndex = 2;
-            btn_borrar.Text = "Borrar";
-            btn_borrar.UseVisualStyleBackColor = true;
             // 
             // ucValoracionLista1
             // 
@@ -69,16 +50,26 @@
             ucValoracionLista1.TabIndex = 0;
             ucValoracionLista1.valoracion = null;
             // 
+            // btn_Volver
+            // 
+            btn_Volver.Location = new Point(230, 252);
+            btn_Volver.Name = "btn_Volver";
+            btn_Volver.Size = new Size(75, 23);
+            btn_Volver.TabIndex = 1;
+            btn_Volver.Text = "Volver";
+            btn_Volver.UseVisualStyleBackColor = true;
+            btn_Volver.Click += btn_Volver_Click;
+            // 
             // ValoracionLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(570, 309);
-            Controls.Add(btn_borrar);
-            Controls.Add(btn_Nuevo);
+            Controls.Add(btn_Volver);
             Controls.Add(flp_valoracionLista);
             Name = "ValoracionLista";
             Text = "ValoracionLista";
+            Load += ValoracionLista_Load;
             flp_valoracionLista.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -86,8 +77,7 @@
         #endregion
 
         private FlowLayoutPanel flp_valoracionLista;
-        private Button btn_Nuevo;
-        private Button btn_borrar;
+        private Button btn_Volver;
         private UserControls.UCValoracionLista ucValoracionLista1;
     }
 }
