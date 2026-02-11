@@ -48,6 +48,18 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/reta3/valoraciones/**")
                         .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
 
+
+                        // Crear valoraciones: cualquier rol autenticado
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/valoraciones/**")
+                        .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
+
+
+                        // Editar / borrar valoraciones: SOLO ADMIN
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/valoraciones/**")
+                        .hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/*/valoraciones/**")
+                        .hasRole("ADMINISTRADOR")
+
                         // ================= DISENADOR / PROFESOR =================
 
                         //rutas/gpx admin + diseñador + profesor

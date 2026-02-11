@@ -86,6 +86,7 @@
             Controls.Add(flpUsuarios);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UsuariosLista";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "UsuariosLista";
             Load += UsuariosLista_Load;
             flpUsuarios.ResumeLayout(false);
