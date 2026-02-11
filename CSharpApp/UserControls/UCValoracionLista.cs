@@ -77,5 +77,10 @@ namespace UserControls
         {
             ValoracionClick?.Invoke(this, valoracion);
         }
+
+        private void UCValoracionLista_Click_1(object sender, EventArgs e)
+        {
+            ValoracionClick?.Invoke(this, valoracion);
+        }
     }
 }

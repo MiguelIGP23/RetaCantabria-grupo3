@@ -1,4 +1,5 @@
 ﻿using Model;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,19 +20,28 @@ namespace UserControls
             InitializeComponent();
         }
 
-        public void SetData(Valoracion v)
+        public async void SetData(ApiReta api, Valoracion v)
         {
-            valoracion = v;
-            lbl_txtIdValora.Text = v.IdValora.ToString();
-            lbl_txtDificultad.Text = v.Dificultad.ToString();
-            lbl_txtFecha.Text = v.Fecha.ToString();
-            lbl_txtEstrellas.Text = v.Estrellas.ToString();
-            lbl_txtInteresCultural.Text = v.InteresCultural.ToString();
-            lbl_txtBelleza.Text = v.Belleza.ToString();
-            lbl_txtValoracionTecnica.Text = v.ValoracionTecnica;
-            lbl_txtResena.Text = v.Resena;
-            lbl_txtIdUsuario.Text = v.UsuarioId.ToString();
-            lbl_txtIdRuta.Text = v.RutaId.ToString();
+            try
+            {
+                Usuario usuario = await api.GetByIdAsync<Usuario>("/api/reta3/usuarios", v.UsuarioId.ToString());
+                Ruta ruta = await api.GetByIdAsync<Ruta>("/api/reta3/rutas", v.RutaId.ToString());
+                valoracion = v;
+                lbl_txtIdValora.Text = v.IdValora.ToString();
+                lbl_txtUsuario.Text = usuario != null ? $"{usuario.Nombre} {usuario.Apellido}" : "Usuario no encontrado";
+                lbl_txtRuta.Text = ruta != null ? $"{ruta.Nombre}" : "Ruta no encontrada";
+                lbl_txtDificultad.Text = v.Dificultad.ToString();
+                lbl_txtFecha.Text = v.Fecha.ToString();
+                lbl_txtEstrellas.Text = v.Estrellas.ToString();
+                lbl_txtInteresCultural.Text = v.InteresCultural.ToString();
+                lbl_txtBelleza.Text = v.Belleza.ToString();
+                lbl_txtValoracionTecnica.Text = v.ValoracionTecnica;
+                lbl_txtResena.Text = v.Resena;
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Forms
 
         private void ValoracionDetalle_Load(object sender, EventArgs e)
         {
-            ucValoracionCompleto1.SetData(_valoracion);
+            ucValoracionCompleto1.SetData(_api, _valoracion);
         }
 
         private async void btn_borrar_Click(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace Forms
                     var result = form.ShowDialog(this);
                     if (result ==DialogResult.OK)
                     {
-                        ucValoracionCompleto1.SetData(form.Valoracion);
+                        ucValoracionCompleto1.SetData(_api, form.Valoracion);
                     }
                 }
             }

@@ -42,7 +42,7 @@
             flp_valoracionLista.Location = new Point(70, 37);
             flp_valoracionLista.Margin = new Padding(3, 4, 3, 4);
             flp_valoracionLista.Name = "flp_valoracionLista";
-            flp_valoracionLista.Size = new Size(580, 270);
+            flp_valoracionLista.Size = new Size(468, 270);
             flp_valoracionLista.TabIndex = 0;
             // 
             // ucValoracionLista1
@@ -51,13 +51,13 @@
             ucValoracionLista1.Location = new Point(3, 5);
             ucValoracionLista1.Margin = new Padding(3, 5, 3, 5);
             ucValoracionLista1.Name = "ucValoracionLista1";
-            ucValoracionLista1.Size = new Size(511, 140);
+            ucValoracionLista1.Size = new Size(438, 140);
             ucValoracionLista1.TabIndex = 0;
             ucValoracionLista1.valoracion = null;
             // 
             // btn_Volver
             // 
-            btn_Volver.Location = new Point(186, 340);
+            btn_Volver.Location = new Point(158, 340);
             btn_Volver.Margin = new Padding(3, 4, 3, 4);
             btn_Volver.Name = "btn_Volver";
             btn_Volver.Size = new Size(86, 31);
@@ -68,7 +68,7 @@
             // 
             // btnNueva
             // 
-            btnNueva.Location = new Point(363, 340);
+            btnNueva.Location = new Point(351, 340);
             btnNueva.Margin = new Padding(3, 4, 3, 4);
             btnNueva.Name = "btnNueva";
             btnNueva.Size = new Size(86, 31);
@@ -81,7 +81,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(708, 412);
+            ClientSize = new Size(606, 400);
             Controls.Add(btnNueva);
             Controls.Add(btn_Volver);
             Controls.Add(flp_valoracionLista);
