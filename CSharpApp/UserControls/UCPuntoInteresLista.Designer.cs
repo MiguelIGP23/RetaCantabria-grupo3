@@ -39,9 +39,9 @@
             // lbltxtNombre
             // 
             lbltxtNombre.AutoSize = true;
-            lbltxtNombre.Location = new Point(422, 29);
+            lbltxtNombre.Location = new Point(369, 22);
             lbltxtNombre.Name = "lbltxtNombre";
-            lbltxtNombre.Size = new Size(81, 20);
+            lbltxtNombre.Size = new Size(65, 15);
             lbltxtNombre.TabIndex = 11;
             lbltxtNombre.Text = "txtNombre";
             lbltxtNombre.Click += lbltxtNombre_Click;
@@ -50,19 +50,19 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNombre.Location = new Point(351, 29);
+            lblNombre.Location = new Point(307, 22);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(73, 20);
+            lblNombre.Size = new Size(61, 15);
             lblNombre.TabIndex = 10;
-            lblNombre.Text = "-Nombre";
+            lblNombre.Text = "-Nombre:";
             lblNombre.Click += lblNombre_Click;
             // 
             // lbltxtTipo
             // 
             lbltxtTipo.AutoSize = true;
-            lbltxtTipo.Location = new Point(213, 29);
+            lbltxtTipo.Location = new Point(186, 22);
             lbltxtTipo.Name = "lbltxtTipo";
-            lbltxtTipo.Size = new Size(56, 20);
+            lbltxtTipo.Size = new Size(44, 15);
             lbltxtTipo.TabIndex = 9;
             lbltxtTipo.Text = "txtTipo";
             lbltxtTipo.Click += lbltxtTipo_Click;
@@ -71,9 +71,9 @@
             // 
             lblTipo.AutoSize = true;
             lblTipo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblTipo.Location = new Point(161, 29);
+            lblTipo.Location = new Point(141, 22);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(50, 20);
+            lblTipo.Size = new Size(39, 15);
             lblTipo.TabIndex = 8;
             lblTipo.Text = "-Tipo:";
             lblTipo.Click += lblTipo_Click;
@@ -81,9 +81,9 @@
             // lbltxtRuta
             // 
             lbltxtRuta.AutoSize = true;
-            lbltxtRuta.Location = new Point(91, 29);
+            lbltxtRuta.Location = new Point(80, 22);
             lbltxtRuta.Name = "lbltxtRuta";
-            lbltxtRuta.Size = new Size(56, 20);
+            lbltxtRuta.Size = new Size(45, 15);
             lbltxtRuta.TabIndex = 7;
             lbltxtRuta.Text = "txtRuta";
             lbltxtRuta.Click += lbltxtRuta_Click;
@@ -92,16 +92,16 @@
             // 
             lblRuta.AutoSize = true;
             lblRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblRuta.Location = new Point(24, 29);
+            lblRuta.Location = new Point(21, 22);
             lblRuta.Name = "lblRuta";
-            lblRuta.Size = new Size(71, 20);
+            lblRuta.Size = new Size(55, 15);
             lblRuta.TabIndex = 6;
             lblRuta.Text = "-Nº ruta:";
             lblRuta.Click += lblRuta_Click;
             // 
-            // UCPuntoDeInteresLista
+            // UCPuntoInteresLista
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lbltxtNombre);
             Controls.Add(lblNombre);
@@ -109,9 +109,8 @@
             Controls.Add(lblTipo);
             Controls.Add(lbltxtRuta);
             Controls.Add(lblRuta);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "UCPuntoDeInteresLista";
-            Size = new Size(686, 80);
+            Name = "UCPuntoInteresLista";
+            Size = new Size(600, 60);
             Click += UCPuntoDeInteresLista_Click;
             ResumeLayout(false);
             PerformLayout();

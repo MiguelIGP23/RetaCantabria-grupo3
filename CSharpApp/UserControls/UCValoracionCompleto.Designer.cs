@@ -55,7 +55,7 @@
             lbl_txtInteresCultural.AutoSize = true;
             lbl_txtInteresCultural.Location = new Point(358, 68);
             lbl_txtInteresCultural.Name = "lbl_txtInteresCultural";
-            lbl_txtInteresCultural.Size = new Size(97, 15);
+            lbl_txtInteresCultural.Size = new Size(98, 15);
             lbl_txtInteresCultural.TabIndex = 15;
             lbl_txtInteresCultural.Text = "txtInteresCultural";
             // 
@@ -64,7 +64,7 @@
             lbl_txtFecha.AutoSize = true;
             lbl_txtFecha.Location = new Point(358, 35);
             lbl_txtFecha.Name = "lbl_txtFecha";
-            lbl_txtFecha.Size = new Size(51, 15);
+            lbl_txtFecha.Size = new Size(52, 15);
             lbl_txtFecha.TabIndex = 14;
             lbl_txtFecha.Text = "txtFecha";
             // 
@@ -73,7 +73,7 @@
             lbl_txtDificultad.AutoSize = true;
             lbl_txtDificultad.Location = new Point(119, 68);
             lbl_txtDificultad.Name = "lbl_txtDificultad";
-            lbl_txtDificultad.Size = new Size(71, 15);
+            lbl_txtDificultad.Size = new Size(72, 15);
             lbl_txtDificultad.TabIndex = 13;
             lbl_txtDificultad.Text = "txtDificultad";
             // 
@@ -82,43 +82,51 @@
             lbl_txtIdValora.AutoSize = true;
             lbl_txtIdValora.Location = new Point(119, 35);
             lbl_txtIdValora.Name = "lbl_txtIdValora";
-            lbl_txtIdValora.Size = new Size(62, 15);
+            lbl_txtIdValora.Size = new Size(63, 15);
             lbl_txtIdValora.TabIndex = 12;
             lbl_txtIdValora.Text = "txtIdValora";
             // 
             // lbl_InteresC
             // 
             lbl_InteresC.AutoSize = true;
+            lbl_InteresC.BackColor = SystemColors.Control;
+            lbl_InteresC.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_InteresC.Location = new Point(236, 68);
             lbl_InteresC.Name = "lbl_InteresC";
-            lbl_InteresC.Size = new Size(93, 15);
+            lbl_InteresC.Size = new Size(100, 15);
             lbl_InteresC.TabIndex = 11;
             lbl_InteresC.Text = "-Interes cultural:";
             // 
             // lbl_dificultad
             // 
             lbl_dificultad.AutoSize = true;
+            lbl_dificultad.BackColor = SystemColors.Control;
+            lbl_dificultad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_dificultad.Location = new Point(42, 68);
             lbl_dificultad.Name = "lbl_dificultad";
-            lbl_dificultad.Size = new Size(66, 15);
+            lbl_dificultad.Size = new Size(69, 15);
             lbl_dificultad.TabIndex = 10;
             lbl_dificultad.Text = "-Dificultad:";
             // 
             // lbl_fecha
             // 
             lbl_fecha.AutoSize = true;
+            lbl_fecha.BackColor = SystemColors.Control;
+            lbl_fecha.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_fecha.Location = new Point(238, 35);
             lbl_fecha.Name = "lbl_fecha";
-            lbl_fecha.Size = new Size(46, 15);
+            lbl_fecha.Size = new Size(47, 15);
             lbl_fecha.TabIndex = 9;
             lbl_fecha.Text = "-Fecha:";
             // 
             // lbl_id
             // 
             lbl_id.AutoSize = true;
+            lbl_id.BackColor = SystemColors.Control;
+            lbl_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_id.Location = new Point(45, 35);
             lbl_id.Name = "lbl_id";
-            lbl_id.Size = new Size(25, 15);
+            lbl_id.Size = new Size(26, 15);
             lbl_id.TabIndex = 8;
             lbl_id.Text = "-Id:";
             // 
@@ -127,16 +135,18 @@
             lbl_txtBelleza.AutoSize = true;
             lbl_txtBelleza.Location = new Point(119, 93);
             lbl_txtBelleza.Name = "lbl_txtBelleza";
-            lbl_txtBelleza.Size = new Size(56, 15);
+            lbl_txtBelleza.Size = new Size(57, 15);
             lbl_txtBelleza.TabIndex = 17;
             lbl_txtBelleza.Text = "txtBelleza";
             // 
             // lbl_belleza
             // 
             lbl_belleza.AutoSize = true;
+            lbl_belleza.BackColor = SystemColors.Control;
+            lbl_belleza.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_belleza.Location = new Point(42, 93);
             lbl_belleza.Name = "lbl_belleza";
-            lbl_belleza.Size = new Size(51, 15);
+            lbl_belleza.Size = new Size(55, 15);
             lbl_belleza.TabIndex = 16;
             lbl_belleza.Text = "-Belleza:";
             // 
@@ -145,16 +155,18 @@
             lbl_txtEstrellas.AutoSize = true;
             lbl_txtEstrellas.Location = new Point(119, 119);
             lbl_txtEstrellas.Name = "lbl_txtEstrellas";
-            lbl_txtEstrellas.Size = new Size(62, 15);
+            lbl_txtEstrellas.Size = new Size(63, 15);
             lbl_txtEstrellas.TabIndex = 19;
             lbl_txtEstrellas.Text = "txtEstrellas";
             // 
             // lbl_estrellas
             // 
             lbl_estrellas.AutoSize = true;
+            lbl_estrellas.BackColor = SystemColors.Control;
+            lbl_estrellas.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_estrellas.Location = new Point(42, 119);
             lbl_estrellas.Name = "lbl_estrellas";
-            lbl_estrellas.Size = new Size(57, 15);
+            lbl_estrellas.Size = new Size(60, 15);
             lbl_estrellas.TabIndex = 18;
             lbl_estrellas.Text = "-Estrellas:";
             // 
@@ -170,9 +182,11 @@
             // lbl_valoraciontec
             // 
             lbl_valoraciontec.AutoSize = true;
+            lbl_valoraciontec.BackColor = SystemColors.Control;
+            lbl_valoraciontec.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_valoraciontec.Location = new Point(234, 119);
             lbl_valoraciontec.Name = "lbl_valoraciontec";
-            lbl_valoraciontec.Size = new Size(113, 15);
+            lbl_valoraciontec.Size = new Size(116, 15);
             lbl_valoraciontec.TabIndex = 20;
             lbl_valoraciontec.Text = "-Valoracion Tecnica:";
             // 
@@ -181,16 +195,18 @@
             lbl_txtResena.AutoSize = true;
             lbl_txtResena.Location = new Point(358, 93);
             lbl_txtResena.Name = "lbl_txtResena";
-            lbl_txtResena.Size = new Size(57, 15);
+            lbl_txtResena.Size = new Size(58, 15);
             lbl_txtResena.TabIndex = 23;
             lbl_txtResena.Text = "txtResena";
             // 
             // lbl_resena
             // 
             lbl_resena.AutoSize = true;
+            lbl_resena.BackColor = SystemColors.Control;
+            lbl_resena.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_resena.Location = new Point(234, 93);
             lbl_resena.Name = "lbl_resena";
-            lbl_resena.Size = new Size(52, 15);
+            lbl_resena.Size = new Size(55, 15);
             lbl_resena.TabIndex = 22;
             lbl_resena.Text = "-Resena:";
             // 
@@ -199,16 +215,18 @@
             lbl_txtIdUsuario.AutoSize = true;
             lbl_txtIdUsuario.Location = new Point(120, 149);
             lbl_txtIdUsuario.Name = "lbl_txtIdUsuario";
-            lbl_txtIdUsuario.Size = new Size(70, 15);
+            lbl_txtIdUsuario.Size = new Size(71, 15);
             lbl_txtIdUsuario.TabIndex = 25;
             lbl_txtIdUsuario.Text = "txtIdUsuario";
             // 
             // lbl_idUsuario
             // 
             lbl_idUsuario.AutoSize = true;
+            lbl_idUsuario.BackColor = SystemColors.Control;
+            lbl_idUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_idUsuario.Location = new Point(43, 149);
             lbl_idUsuario.Name = "lbl_idUsuario";
-            lbl_idUsuario.Size = new Size(65, 15);
+            lbl_idUsuario.Size = new Size(68, 15);
             lbl_idUsuario.TabIndex = 24;
             lbl_idUsuario.Text = "-IdUsuario:";
             // 
@@ -217,16 +235,18 @@
             lbl_txtIdRuta.AutoSize = true;
             lbl_txtIdRuta.Location = new Point(361, 149);
             lbl_txtIdRuta.Name = "lbl_txtIdRuta";
-            lbl_txtIdRuta.Size = new Size(54, 15);
+            lbl_txtIdRuta.Size = new Size(55, 15);
             lbl_txtIdRuta.TabIndex = 27;
             lbl_txtIdRuta.Text = "txtIdRuta";
             // 
             // lbl_idRuta
             // 
             lbl_idRuta.AutoSize = true;
+            lbl_idRuta.BackColor = SystemColors.Control;
+            lbl_idRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_idRuta.Location = new Point(237, 149);
             lbl_idRuta.Name = "lbl_idRuta";
-            lbl_idRuta.Size = new Size(49, 15);
+            lbl_idRuta.Size = new Size(52, 15);
             lbl_idRuta.TabIndex = 26;
             lbl_idRuta.Text = "-IdRuta:";
             // 
