@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class Calendario
+    partial class CalendarioForms
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@
             btnVolver = new Button();
             btnNueva = new Button();
             lbFecha = new Label();
+            ucDetalles = new UserControls.UCCalendarioCompleto();
             SuspendLayout();
             // 
             // mcCalendario
@@ -48,7 +49,7 @@
             flpRutas.AutoScroll = true;
             flpRutas.Location = new Point(323, 40);
             flpRutas.Name = "flpRutas";
-            flpRutas.Size = new Size(690, 338);
+            flpRutas.Size = new Size(690, 340);
             flpRutas.TabIndex = 1;
             // 
             // btnVolver
@@ -69,6 +70,7 @@
             btnNueva.TabIndex = 3;
             btnNueva.Text = "Nueva";
             btnNueva.UseVisualStyleBackColor = true;
+            btnNueva.Click += btnNueva_Click;
             // 
             // lbFecha
             // 
@@ -78,19 +80,29 @@
             lbFecha.TabIndex = 4;
             lbFecha.Text = "txtFecha";
             // 
-            // Calendario
+            // ucDetalles
+            // 
+            ucDetalles.Calendario = null;
+            ucDetalles.Location = new Point(299, 21);
+            ucDetalles.Name = "ucDetalles";
+            ucDetalles.Size = new Size(735, 370);
+            ucDetalles.TabIndex = 5;
+            // 
+            // CalendarioForms
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1069, 420);
-            Controls.Add(lbFecha);
-            Controls.Add(btnNueva);
-            Controls.Add(btnVolver);
-            Controls.Add(flpRutas);
+            ClientSize = new Size(1062, 420);
             Controls.Add(mcCalendario);
-            Name = "Calendario";
+            Controls.Add(lbFecha);
+            Controls.Add(btnVolver);
+            Controls.Add(btnNueva);
+            Controls.Add(flpRutas);
+            Controls.Add(ucDetalles);
+            Name = "CalendarioForms";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Calendario";
+            Load += CalendarioForms_Load;
             ResumeLayout(false);
         }
 
@@ -101,5 +113,6 @@
         private Button btnVolver;
         private Button btnNueva;
         private Label lbFecha;
+        private UserControls.UCCalendarioCompleto ucDetalles;
     }
 }

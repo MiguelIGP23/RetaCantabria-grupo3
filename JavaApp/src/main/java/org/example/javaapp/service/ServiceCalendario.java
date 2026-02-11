@@ -5,6 +5,7 @@ import org.example.javaapp.repository.CalendarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class ServiceCalendario implements IServiceCalendario{
 
     @Override
     public Calendario insert(Calendario calendario) {
+        calendario.setId(null);
         return calendarioRepo.save(calendario);
     }
 
@@ -59,4 +61,11 @@ public class ServiceCalendario implements IServiceCalendario{
         c.setId(id);
         return Optional.of(calendarioRepo.save(c));
     }
+
+    public List<LocalDate> diasConRutasEnMes(YearMonth mes) {
+        LocalDate inicio = mes.atDay(1);
+        LocalDate fin = mes.plusMonths(1).atDay(1);
+        return calendarioRepo.findDistinctFechasMes(inicio, fin);
+    }
+
 }

@@ -35,7 +35,7 @@ namespace Forms
                 var idPunto = puntoInteres.Id;
                 var idRuta = puntoInteres.RutaId;
 
-                List<ImagenInteres> imagenes = await _api.GetAllAsync<ImagenInteres>($"api/reta3/rutas/{idRuta}/puntosinteres/{idPunto}/imagenes");
+                List<ImagenInteres> imagenes = await _api.GetAlAsync<ImagenInteres>($"api/reta3/rutas/{idRuta}/puntosinteres/{idPunto}/imagenes");
                 flpImagenesLista.Controls.Clear();
                 foreach (ImagenInteres i in imagenes)
                 {

@@ -170,7 +170,7 @@ namespace Forms
             {
                 if (_ruta != null && !_rutaCreadaConGpx)
                 {
-                    await _api.Update<Ruta>("api/reta3/rutas", rutaNueva.IdRuta.ToString(), rutaNueva);
+                    await _api.Update<Ruta>("api/reta3/rutas", rutaNueva.Id.ToString(), rutaNueva);
                     MessageBox.Show("Ruta actualizada correctamente");
                 }
                 else
@@ -184,9 +184,9 @@ namespace Forms
                         MessageBox.Show("No hay ruta borrador. Importa un GPX primero.");
                         return;
                     }
-                    rutaNueva.IdRuta = _idRutaBorrador.Value;
+                    rutaNueva.Id = _idRutaBorrador.Value;
 
-                    var ok = await _api.ConfirmarBorrador("api/reta3/rutas", rutaNueva.IdRuta, rutaNueva);
+                    var ok = await _api.ConfirmarBorrador("api/reta3/rutas", rutaNueva.Id, rutaNueva);
                     if (!ok) return;
                     MessageBox.Show("Ruta creada correctamente");
                 }
@@ -238,7 +238,7 @@ namespace Forms
                         // A partir de ahora esta ruta ya existe en BD y tiene ID
                         _ruta = rutaDevuelta;
                         _rutaCreadaConGpx = true;
-                        _idRutaBorrador = _ruta?.IdRuta;
+                        _idRutaBorrador = _ruta?.Id;
 
                         // Cargar datos automáticos en el formulario
                         CargarDatos(_ruta);

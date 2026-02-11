@@ -7,7 +7,7 @@ namespace Model
     public class Ruta
     {
         [JsonPropertyName("id")]
-        public int IdRuta { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
@@ -97,7 +97,7 @@ namespace Model
 
         public Ruta(int idRuta, string nombre, string nombre_inicioruta, string nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, TimeSpan duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, EnumClasificaciones clasificacion, int estadoRuta, int tipoTerreno, int indicaciones, string temporadas, int accesibilidad, int rutaFamiliar, string archivoGPX, string recomendacionesEquipo, string zonaGeografica, int usuario_idUsuario)
         {
-            IdRuta = idRuta;
+            Id = idRuta;
             Nombre = nombre;
             Nombre_inicioruta = nombre_inicioruta;
             Nombre_finalruta = nombre_finalruta;

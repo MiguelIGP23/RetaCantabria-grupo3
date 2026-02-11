@@ -35,7 +35,7 @@ namespace Forms
             if (actividad!= null) {
                 txtNombre.Text = actividad.Nombre;
 
-                cmbRuta.SelectedValue = actividad.rutaId;
+                cmbRuta.SelectedValue = actividad.RutaId;
             }
 
         }
@@ -49,7 +49,7 @@ namespace Forms
             try
             {
 
-                List<Ruta> rutas1 = await _api.GetAllAsync<Ruta>("api/reta3/rutas");
+                List<Ruta> rutas1 = await _api.GetAlAsync<Ruta>("api/reta3/rutas");
 
                 foreach (var r in rutas1)
                 {
@@ -70,7 +70,7 @@ namespace Forms
         {
             Actividad actividad = new Actividad();
             actividad.Nombre = txtNombre.Text;
-            actividad.rutaId = cmbRuta.SelectedIndex;
+            actividad.RutaId = cmbRuta.SelectedIndex;
         }
 
 

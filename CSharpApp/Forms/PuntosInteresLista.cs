@@ -29,7 +29,7 @@ namespace Forms
         {
             try
             {
-                List<PuntoInteres> puntosInteres = await _api.GetAllAsync<PuntoInteres>($"api/reta3/rutas/{ruta.IdRuta}/puntosinteres");
+                List<PuntoInteres> puntosInteres = await _api.GetAlAsync<PuntoInteres>($"api/reta3/rutas/{ruta.Id}/puntosinteres");
                 flpListaPuntos.Controls.Clear();
                 foreach (PuntoInteres p in puntosInteres)
                 {

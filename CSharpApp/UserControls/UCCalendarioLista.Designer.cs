@@ -45,6 +45,7 @@
             lblFecha.Size = new Size(59, 20);
             lblFecha.TabIndex = 0;
             lblFecha.Text = "-Fecha:";
+            lblFecha.Click += lblFecha_Click;
             // 
             // lblTxtFecha
             // 
@@ -54,6 +55,7 @@
             lblTxtFecha.Size = new Size(64, 20);
             lblTxtFecha.TabIndex = 1;
             lblTxtFecha.Text = "txtFecha";
+            lblTxtFecha.Click += lblTxtFecha_Click;
             // 
             // lblTxtRuta
             // 
@@ -63,6 +65,7 @@
             lblTxtRuta.Size = new Size(50, 20);
             lblTxtRuta.TabIndex = 3;
             lblTxtRuta.Text = "label3";
+            lblTxtRuta.Click += lblTxtRuta_Click;
             // 
             // lblRuta
             // 
@@ -73,6 +76,7 @@
             lblRuta.Size = new Size(52, 20);
             lblRuta.TabIndex = 2;
             lblRuta.Text = "-Ruta:";
+            lblRuta.Click += lblRuta_Click;
             // 
             // lblTxtHora
             // 
@@ -82,6 +86,7 @@
             lblTxtHora.Size = new Size(59, 20);
             lblTxtHora.TabIndex = 5;
             lblTxtHora.Text = "txtHora";
+            lblTxtHora.Click += lblTxtHora_Click;
             // 
             // lblHora
             // 
@@ -92,6 +97,7 @@
             lblHora.Size = new Size(53, 20);
             lblHora.TabIndex = 4;
             lblHora.Text = "-Hora:";
+            lblHora.Click += lblHora_Click;
             // 
             // UCCalendarioLista
             // 
@@ -105,6 +111,7 @@
             Controls.Add(lblFecha);
             Name = "UCCalendarioLista";
             Size = new Size(680, 90);
+            Click += UCCalendarioLista_Click;
             ResumeLayout(false);
             PerformLayout();
         }

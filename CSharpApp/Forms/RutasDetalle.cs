@@ -71,7 +71,7 @@ namespace Forms
 
         private async void pbDescarga_Click(object sender, EventArgs e)
         {
-            int idRuta = _ruta.IdRuta;
+            int idRuta = _ruta.Id;
 
             string downloads = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string opcion = cbFicha.SelectedItem?.ToString();
@@ -175,7 +175,7 @@ namespace Forms
         {
             try
             {
-                var id = _ruta.IdRuta;
+                var id = _ruta.Id;
                 if (MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     var exito = await _api.Delete($"/api/reta3/rutas", id.ToString());
@@ -226,11 +226,11 @@ namespace Forms
         {
             try
             {
-                var id = _ruta.IdRuta;
+                var id = _ruta.Id;
                 string msj = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Quitar validación de";
                 if (MessageBox.Show($"¿{msj} esta ruta?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.IdRuta}/validar", _ruta);
+                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.Id}/validar", _ruta);
                     if (exito != null)
                     {
                         msj = (exito.EstadoRuta == (byte)1) ? "validada" : "invalidada";

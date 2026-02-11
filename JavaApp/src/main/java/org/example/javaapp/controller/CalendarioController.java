@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 @RestController
@@ -57,6 +58,27 @@ public class CalendarioController {
         Calendario nuevo = serviceCalen.insert(MapperCalendario.toEntity(dto, ruta, usu));
         return MapperCalendario.toDto(nuevo);
     }
+
+    @GetMapping("/calendario/rutasmes/{ym}")
+    public List<LocalDate> diasConRutasEnMes(@PathVariable String ym) {
+        return serviceCalen.diasConRutasEnMes(YearMonth.parse(ym)); // "2026-02"
+    }
+
+
+    @PutMapping("/calendario/{idCalendario}")
+    public DtoCalendario editar(@PathVariable Integer idCalendario,
+                                @RequestBody DtoCalendario dto) {
+
+        if (dto.id() == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Falta id en el body");
+        if (!idCalendario.equals(dto.id())) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id no coincide con el path");
+
+        Calendario actualizado = MapperCalendario.toEntity(dto, null, null);
+        Calendario guardado = serviceCalen.update(idCalendario, actualizado);
+
+        if (guardado == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendario no encontrado");
+        return MapperCalendario.toDto(guardado);
+    }
+
 
 
 }

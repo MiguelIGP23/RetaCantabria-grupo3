@@ -28,7 +28,7 @@ namespace UserControls
             Actividad = a;
             lbltxtNombre.Text = a.Nombre;
             lbltxtId.Text = a.IdActividad.ToString();
-            lbltxtRuta.Text = a.rutaId.ToString();
+            lbltxtRuta.Text = a.RutaId.ToString();
         }
     }
 }

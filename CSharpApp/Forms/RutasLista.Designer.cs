@@ -94,7 +94,7 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(174, 882);
+            btnLogout.Location = new Point(170, 882);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(94, 29);
             btnLogout.TabIndex = 7;
