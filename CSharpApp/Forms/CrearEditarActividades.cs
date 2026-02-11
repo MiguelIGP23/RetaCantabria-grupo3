@@ -123,10 +123,10 @@ namespace Forms
                 var rutaId = _actividad.RutaId.ToString();
                 if (MessageBox.Show("¿Seguro que quieres eliminar esta actividad?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    var exito = await _api.Delete($"/api/reta3/rutas/{rutaId}/actividad", id);
+                    var exito = await _api.Delete($"/api/reta3/rutas/{rutaId}/actividades", id);
                     if (exito)
                     {
-                        MessageBox.Show("Acrividad eliminada correctamente");
+                        MessageBox.Show("Actividad eliminada correctamente");
                         this.DialogResult = DialogResult.Cancel;
                         this.Close();
                     }
