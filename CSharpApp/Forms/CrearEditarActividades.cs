@@ -28,6 +28,7 @@ namespace Forms
             if (Session.Rol != EnumRoles.ADMINISTRADOR)
             {
                 cmbRuta.Enabled = false;
+                btnBorrar.Visible = false;
             }
 
         }

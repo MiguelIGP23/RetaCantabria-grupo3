@@ -46,18 +46,20 @@
             // 
             // btn_Aceptar
             // 
-            btn_Aceptar.Location = new Point(118, 243);
+            btn_Aceptar.Location = new Point(135, 324);
+            btn_Aceptar.Margin = new Padding(3, 4, 3, 4);
             btn_Aceptar.Name = "btn_Aceptar";
-            btn_Aceptar.Size = new Size(75, 23);
+            btn_Aceptar.Size = new Size(86, 31);
             btn_Aceptar.TabIndex = 0;
             btn_Aceptar.Text = "Aceptar";
             btn_Aceptar.UseVisualStyleBackColor = true;
             // 
             // btn_Cancelar
             // 
-            btn_Cancelar.Location = new Point(298, 243);
+            btn_Cancelar.Location = new Point(341, 324);
+            btn_Cancelar.Margin = new Padding(3, 4, 3, 4);
             btn_Cancelar.Name = "btn_Cancelar";
-            btn_Cancelar.Size = new Size(75, 23);
+            btn_Cancelar.Size = new Size(86, 31);
             btn_Cancelar.TabIndex = 1;
             btn_Cancelar.Text = "Cancelar";
             btn_Cancelar.UseVisualStyleBackColor = true;
@@ -66,90 +68,95 @@
             // lbl_dificultad
             // 
             lbl_dificultad.AutoSize = true;
-            lbl_dificultad.Location = new Point(50, 41);
+            lbl_dificultad.Location = new Point(57, 55);
             lbl_dificultad.Name = "lbl_dificultad";
-            lbl_dificultad.Size = new Size(66, 15);
+            lbl_dificultad.Size = new Size(83, 20);
             lbl_dificultad.TabIndex = 2;
             lbl_dificultad.Text = "-Dificultad:";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(118, 95);
+            dateTimePicker1.Location = new Point(135, 127);
+            dateTimePicker1.Margin = new Padding(3, 4, 3, 4);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.Size = new Size(228, 27);
             dateTimePicker1.TabIndex = 3;
             // 
             // lbl_Fecha
             // 
             lbl_Fecha.AutoSize = true;
-            lbl_Fecha.Location = new Point(50, 95);
+            lbl_Fecha.Location = new Point(57, 127);
             lbl_Fecha.Name = "lbl_Fecha";
-            lbl_Fecha.Size = new Size(46, 15);
+            lbl_Fecha.Size = new Size(56, 20);
             lbl_Fecha.TabIndex = 4;
             lbl_Fecha.Text = "-Fecha:";
             // 
             // nud_Dificultad
             // 
-            nud_Dificultad.Location = new Point(145, 39);
+            nud_Dificultad.Location = new Point(166, 52);
+            nud_Dificultad.Margin = new Padding(3, 4, 3, 4);
             nud_Dificultad.Name = "nud_Dificultad";
-            nud_Dificultad.Size = new Size(53, 23);
+            nud_Dificultad.Size = new Size(61, 27);
             nud_Dificultad.TabIndex = 5;
             // 
             // lbl_Estrellas
             // 
             lbl_Estrellas.AutoSize = true;
-            lbl_Estrellas.Location = new Point(50, 154);
+            lbl_Estrellas.Location = new Point(57, 205);
             lbl_Estrellas.Name = "lbl_Estrellas";
-            lbl_Estrellas.Size = new Size(57, 15);
+            lbl_Estrellas.Size = new Size(72, 20);
             lbl_Estrellas.TabIndex = 6;
             lbl_Estrellas.Text = "-Estrellas:";
             // 
             // nud_Estrellas
             // 
-            nud_Estrellas.Location = new Point(118, 154);
+            nud_Estrellas.Location = new Point(135, 205);
+            nud_Estrellas.Margin = new Padding(3, 4, 3, 4);
             nud_Estrellas.Name = "nud_Estrellas";
-            nud_Estrellas.Size = new Size(53, 23);
+            nud_Estrellas.Size = new Size(61, 27);
             nud_Estrellas.TabIndex = 7;
             // 
             // lbl_valoracionTec
             // 
             lbl_valoracionTec.AutoSize = true;
-            lbl_valoracionTec.Location = new Point(377, 47);
+            lbl_valoracionTec.Location = new Point(431, 63);
             lbl_valoracionTec.Name = "lbl_valoracionTec";
-            lbl_valoracionTec.Size = new Size(110, 15);
+            lbl_valoracionTec.Size = new Size(137, 20);
             lbl_valoracionTec.TabIndex = 8;
             lbl_valoracionTec.Text = "-ValoracionTecnica:";
             // 
             // lbl_Resena
             // 
             lbl_Resena.AutoSize = true;
-            lbl_Resena.Location = new Point(377, 127);
+            lbl_Resena.Location = new Point(431, 169);
             lbl_Resena.Name = "lbl_Resena";
-            lbl_Resena.Size = new Size(52, 15);
+            lbl_Resena.Size = new Size(65, 20);
             lbl_Resena.TabIndex = 10;
             lbl_Resena.Text = "-Resena:";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(360, 78);
+            txtNombre.Location = new Point(411, 104);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Multiline = true;
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(244, 40);
+            txtNombre.Size = new Size(278, 52);
             txtNombre.TabIndex = 93;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(360, 154);
+            textBox1.Location = new Point(411, 205);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(244, 40);
+            textBox1.Size = new Size(278, 52);
             textBox1.TabIndex = 94;
             // 
             // CrearEditarValoraciones
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(618, 286);
+            ClientSize = new Size(725, 381);
             Controls.Add(textBox1);
             Controls.Add(txtNombre);
             Controls.Add(lbl_Resena);
@@ -162,6 +169,7 @@
             Controls.Add(lbl_dificultad);
             Controls.Add(btn_Cancelar);
             Controls.Add(btn_Aceptar);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarValoraciones";
             Text = "CrearEditarValoraciones";
             ((System.ComponentModel.ISupportInitialize)nud_Dificultad).EndInit();

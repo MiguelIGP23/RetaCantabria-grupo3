@@ -16,6 +16,8 @@ namespace Forms
     {
         private readonly ApiReta _api;
         private Valoracion _valoracion { get; set; }
+
+
         public CrearEditarValoraciones(ApiReta api, Valoracion valoracion)
         {
             InitializeComponent();

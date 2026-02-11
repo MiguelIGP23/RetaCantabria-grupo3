@@ -16,14 +16,14 @@ namespace Forms
     public partial class ValoracionDetalle : Form
     {
         private readonly ApiReta _api;
-
-        private Ruta _ruta { get; set; }
         private Valoracion _valoracion { get; set; }
-        public ValoracionDetalle(ApiReta api, Ruta ruta, Valoracion valoracion)
+        public Valoracion Valoracion { get; private set; }
+
+
+        public ValoracionDetalle(ApiReta api, Valoracion valoracion)
         {
             InitializeComponent();
             _api = api;
-            _ruta = ruta;
             _valoracion = valoracion;
         }
 
@@ -44,7 +44,7 @@ namespace Forms
                     var exito = await _api.Delete($"/api/reta3/rutas/{idRuta}/valoraciones", idValoracion.ToString());
                     if (exito)
                     {
-                        MessageBox.Show("Valoracion eliminada :) correctamente");
+                        MessageBox.Show("Valoracion eliminada correctamente");
                         this.DialogResult = DialogResult.Cancel;
                         this.Close();
                     }
@@ -59,33 +59,28 @@ namespace Forms
 
         private void btn_volver_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btn_editar_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    this.Enabled = false;
-            //    this.Opacity = 0;
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
 
-            //    using (var form = new CrearEditarValoraciones(_api, _valoracion))
-            //    {
-            //        var result = form.ShowDialog(this);
-            //        if (result == DialogResult.OK)
-            //        {
-            //            _valoracion = form.PuntoPeligro;
-            //            ucValoracionCompleto1.SetData(_valoracion);
-            //        }
-            //    }
-
-            //}
-            //finally
-            //{
-            //    this.Opacity = 1;
-            //    this.Enabled = true;
-            //    this.Activate();
-            //}
+                using (var form = new CrearEditarValoraciones(_api, _valoracion))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate(); // recupera foco en caso de que no se abra el hijo
+            }
         }
     }
 }

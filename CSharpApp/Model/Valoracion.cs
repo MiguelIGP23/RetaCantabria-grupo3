@@ -22,10 +22,10 @@ namespace Model
         public byte Estrellas { get; set; }
 
         [JsonPropertyName("interesCultural")]
-        public bool InteresCultural { get; set; }
+        public int InteresCultural { get; set; }
 
         [JsonPropertyName("belleza")]
-        public bool Belleza { get; set; }
+        public int Belleza { get; set; }
 
         [JsonPropertyName("valoracionTecnica")]
         public string? ValoracionTecnica { get; set; }
@@ -41,7 +41,7 @@ namespace Model
 
         public Valoracion() { }
 
-        public Valoracion(int idValora, byte dificultad, DateTime fecha, byte estrellas, bool interesCultural, bool belleza, string valoracionTecnica, string resena, int usuario_idUsuario, int rutas_idRuta)
+        public Valoracion(int idValora, byte dificultad, DateTime fecha, byte estrellas, int interesCultural, int belleza, string valoracionTecnica, string resena, int usuario_idUsuario, int rutas_idRuta)
         {
             IdValora = idValora;
             Dificultad = dificultad;
