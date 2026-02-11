@@ -34,6 +34,7 @@
             lblRutaActivida = new Label();
             txtNombre = new TextBox();
             cmbRuta = new ComboBox();
+            btnBorrar = new Button();
             SuspendLayout();
             // 
             // btnCancelar
@@ -48,7 +49,7 @@
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(278, 198);
+            btnAceptar.Location = new Point(54, 198);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(75, 23);
             btnAceptar.TabIndex = 1;
@@ -89,11 +90,22 @@
             cmbRuta.Size = new Size(106, 23);
             cmbRuta.TabIndex = 5;
             // 
+            // btnBorrar
+            // 
+            btnBorrar.Location = new Point(198, 198);
+            btnBorrar.Name = "btnBorrar";
+            btnBorrar.Size = new Size(75, 23);
+            btnBorrar.TabIndex = 6;
+            btnBorrar.Text = "Borrar";
+            btnBorrar.UseVisualStyleBackColor = true;
+            btnBorrar.Click += btnBorrar_Click;
+            // 
             // CrearEditarActividades
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(487, 240);
+            Controls.Add(btnBorrar);
             Controls.Add(cmbRuta);
             Controls.Add(txtNombre);
             Controls.Add(lblRutaActivida);
@@ -115,5 +127,6 @@
         private Label lblRutaActivida;
         private TextBox txtNombre;
         private ComboBox cmbRuta;
+        private Button btnBorrar;
     }
 }

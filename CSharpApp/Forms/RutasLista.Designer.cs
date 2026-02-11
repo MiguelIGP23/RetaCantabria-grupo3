@@ -464,7 +464,6 @@
 
         #endregion
         private FlowLayoutPanel flpRutas;
-        private UserControls.UCRutaLista ucRutaLista1;
         private Button btnAgregar;
         private Button btnLogout;
         private CheckBox ckNombre;

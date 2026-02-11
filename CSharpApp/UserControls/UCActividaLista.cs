@@ -30,5 +30,27 @@ namespace UserControls
             lbltxtId.Text = a.IdActividad.ToString();
             lbltxtRuta.Text = a.RutaId.ToString();
         }
+
+        public event EventHandler<Actividad> ActividadClick;
+
+        private void lbltxtNombre_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lbltxtId_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lbltxtRuta_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void UCActividadLista_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
     }
 }

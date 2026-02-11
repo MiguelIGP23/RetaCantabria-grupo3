@@ -71,7 +71,7 @@
             lbltxtId.AutoSize = true;
             lbltxtId.Location = new Point(42, 24);
             lbltxtId.Name = "lbltxtId";
-            lbltxtId.Size = new Size(30, 15);
+            lbltxtId.Size = new Size(31, 15);
             lbltxtId.TabIndex = 10;
             lbltxtId.Text = "txtId";
             // 
@@ -80,7 +80,7 @@
             lbltxtNombre.AutoSize = true;
             lbltxtNombre.Location = new Point(150, 24);
             lbltxtNombre.Name = "lbltxtNombre";
-            lbltxtNombre.Size = new Size(64, 15);
+            lbltxtNombre.Size = new Size(65, 15);
             lbltxtNombre.TabIndex = 11;
             lbltxtNombre.Text = "txtNombre";
             // 
@@ -89,7 +89,7 @@
             lbltxtApellido.AutoSize = true;
             lbltxtApellido.Location = new Point(339, 24);
             lbltxtApellido.Name = "lbltxtApellido";
-            lbltxtApellido.Size = new Size(64, 15);
+            lbltxtApellido.Size = new Size(65, 15);
             lbltxtApellido.TabIndex = 12;
             lbltxtApellido.Text = "txtApellido";
             // 

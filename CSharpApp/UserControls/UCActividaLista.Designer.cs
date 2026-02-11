@@ -104,7 +104,8 @@
             Controls.Add(lbltxtId);
             Controls.Add(lblId);
             Name = "UCActividaLista";
-            Size = new Size(489, 74);
+            Size = new Size(622, 87);
+            Click += UCActividadLista_Click;
             ResumeLayout(false);
             PerformLayout();
         }
