@@ -370,5 +370,25 @@ namespace Forms
                 this.Activate();
             }
         }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new UsuariosLista(_api))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
+        }
     }
 }

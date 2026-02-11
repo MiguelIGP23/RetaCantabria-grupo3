@@ -67,7 +67,7 @@ namespace Forms
             try
             {
                 string ruta;
-                List<Actividad> actividades = await api.GetAllAsync<Actividad>("api/reta3/actividades");
+                List<Actividad> actividades = await api.GetAlAsync<Actividad>("api/reta3/actividades");
                 listaActividad.Clear();
                 flpActividad.Controls.Clear();
                 foreach (Actividad a in actividades)

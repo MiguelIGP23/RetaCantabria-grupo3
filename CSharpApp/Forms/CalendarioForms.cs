@@ -91,7 +91,6 @@ namespace Forms
 
 
         //abrir ventana de detalles de la ruta elegida
-
         private async void VerRuta(object? sender, Calendario e)
         {
             int idRuta = e.RutaId;

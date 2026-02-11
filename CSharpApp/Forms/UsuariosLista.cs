@@ -15,23 +15,50 @@ namespace Forms
 {
     public partial class UsuariosLista : Form
     {
-        private ApiReta api;
-        private List<Usuario> listaUsuarios = new List<Usuario>();
-        public UsuariosLista()
+        private ApiReta _api;
+
+
+        public UsuariosLista(ApiReta api)
         {
             InitializeComponent();
+            _api = api;
         }
+
+        private async void UsuariosLista_Load(object sender, EventArgs e)
+        {
+            await CargarUsuarios();
+        }
+
+
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            Registro registro = new Registro(api,null);
-            registro.ShowDialog();
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new Registro(_api, null))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
+
+
         private async void UsuClick(object? sender, Usuario usuario)
         {
             try
@@ -39,7 +66,7 @@ namespace Forms
                 this.Enabled = false;
                 this.Opacity = 0;
 
-                using (var form = new Registro(api, usuario))
+                using (var form = new Registro(_api, usuario))
                 {
                     form.ShowDialog(this);
                 }
@@ -53,13 +80,14 @@ namespace Forms
                 this.Activate(); // recupera foco en caso de que no se abra el hijo
             }
         }
+
+
         public async Task CargarUsuarios()
         {
             try
             {
                 string ruta;
-                List<Usuario> usuarios = await api.GetAllAsync<Usuario>("api/reta3/usuarios");
-                listaUsuarios.Clear();
+                List<Usuario> usuarios = await _api.GetAlAsync<Usuario>("api/reta3/usuarios");
                 flpUsuarios.Controls.Clear();
                 foreach (Usuario usu in usuarios)
                 {
@@ -67,7 +95,6 @@ namespace Forms
                     uc.SetData(usu);
                     uc.UsuarioClick += UsuClick;
                     flpUsuarios.Controls.Add(uc);
-                    listaUsuarios.Add(usu);
                 }
             }
             catch (HttpRequestException ex)
@@ -76,6 +103,6 @@ namespace Forms
             }
         }
 
-
+ 
     }
 }

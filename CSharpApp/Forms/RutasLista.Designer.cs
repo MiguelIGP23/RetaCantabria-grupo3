@@ -60,6 +60,7 @@
             ckTemporada = new CheckBox();
             btnMostrarFiltros = new Button();
             btnCalendario = new Button();
+            btnUsuarios = new Button();
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudDistanciaMax).BeginInit();
@@ -405,11 +406,22 @@
             btnCalendario.UseVisualStyleBackColor = true;
             btnCalendario.Click += btnCalendario_Click;
             // 
+            // btnUsuarios
+            // 
+            btnUsuarios.Location = new Point(645, 15);
+            btnUsuarios.Name = "btnUsuarios";
+            btnUsuarios.Size = new Size(94, 29);
+            btnUsuarios.TabIndex = 43;
+            btnUsuarios.Text = "Usuarios";
+            btnUsuarios.UseVisualStyleBackColor = true;
+            btnUsuarios.Click += btnUsuarios_Click;
+            // 
             // RutasLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(882, 953);
+            Controls.Add(btnUsuarios);
             Controls.Add(btnCalendario);
             Controls.Add(btnMostrarFiltros);
             Controls.Add(ckTemporada);
@@ -495,5 +507,6 @@
         private CheckBox ckTemporada;
         private Button btnMostrarFiltros;
         private Button btnCalendario;
+        private Button btnUsuarios;
     }
 }
