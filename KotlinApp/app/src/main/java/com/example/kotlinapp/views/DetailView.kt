@@ -62,34 +62,34 @@ fun DetailView(navController: NavHostController, id: Int?, dbViewModel: DBViewMo
                 }
 
                 // Botón Modificar
-                FloatingActionButton(
-                    onClick = {
-                        // Lógica para modificar la ruta
-                    },
-                    containerColor = Color(0xFF365DA9), // azul
-                    contentColor = Color.White
-                ) {
-                    Icon(
-                        Icons.Default.Edit,
-                        contentDescription = "Modificar Ruta",
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+//                FloatingActionButton(
+//                    onClick = {
+//                        // Lógica para modificar la ruta
+//                    },
+//                    containerColor = Color(0xFF365DA9), // azul
+//                    contentColor = Color.White
+//                ) {
+//                    Icon(
+//                        Icons.Default.Edit,
+//                        contentDescription = "Modificar Ruta",
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
 
                 // Botón Eliminar
-                FloatingActionButton(
-                    onClick = {
-                        // Lógica para eliminar la ruta
-                    },
-                    containerColor = Color(0xFFE53935), // rojo
-                    contentColor = Color.White
-                ) {
-                    Icon(
-                        Icons.Default.Delete,
-                        contentDescription = "Eliminar Ruta",
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+//                FloatingActionButton(
+//                    onClick = {
+//                        // Lógica para eliminar la ruta
+//                    },
+//                    containerColor = Color(0xFFE53935), // rojo
+//                    contentColor = Color.White
+//                ) {
+//                    Icon(
+//                        Icons.Default.Delete,
+//                        contentDescription = "Eliminar Ruta",
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
 
                 FloatingActionButton(
                     onClick = {
