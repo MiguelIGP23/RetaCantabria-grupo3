@@ -9,6 +9,6 @@ data class PuntoPeligro(
     val kilometros: Double?,
     val gravedad: Byte?,
     val descripcion: String?,
-    val timestamp: Int?,
+    val timestamp: Long,
     val rutaId: Int
 )

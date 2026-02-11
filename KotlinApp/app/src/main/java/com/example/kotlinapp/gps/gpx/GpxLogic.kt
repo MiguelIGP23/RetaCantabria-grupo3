@@ -16,6 +16,8 @@ import com.example.kotlinapp.model.enums.Clasificacion
 import java.io.StringReader
 import kotlin.collections.forEach
 import android.util.Base64
+import com.example.kotlinapp.model.PuntoInteres
+import com.example.kotlinapp.model.PuntoPeligro
 import org.osmdroid.util.GeoPoint
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
@@ -23,7 +25,8 @@ import org.xmlpull.v1.XmlPullParserFactory
 fun generateGpx(
     ruta: Ruta,
     trackpoints: List<Trackpoint>,
-    waypoints: List<Waypoint>
+    puntosInteres: List<PuntoInteres>,
+    puntosPeligro: List<PuntoPeligro>
 ): String {
     val sb = StringBuilder()
     sb.append("""<?xml version="1.0" encoding="UTF-8"?>""")
@@ -51,12 +54,25 @@ fun generateGpx(
     sb.append("  </trk>\n")
 
     // Waypoints
-    waypoints.forEach { wp ->
-        sb.append("  <wpt lat=\"${wp.lat}\" lon=\"${wp.lon}\">\n")
-        sb.append("    <ele>${wp.elevation ?: 0.0}</ele>\n")
-        sb.append("    <name>${wp.title}</name>\n")
-        sb.append("    <desc>${wp.description}</desc>\n")
-        sb.append("    <type>${wp.type}</type>\n")
+    puntosPeligro.forEach { wp ->
+        sb.append("  <wpt lat=\"${wp.latitud}\" lon=\"${wp.longitud}\">\n")
+        sb.append("    <ele>${wp.elevacion}</ele>\n")
+        sb.append("    <grv>${wp.gravedad}</grv>\n")
+        sb.append("    <name>${wp.nombre}</name>\n")
+        sb.append("    <desc>${wp.descripcion}</desc>\n")
+        sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
+        sb.append("    <type>PELIGRO</type>\n")
+        sb.append("  </wpt>\n")
+    }
+
+    puntosInteres.forEach { wp ->
+        sb.append("  <wpt lat=\"${wp.latitud}\" lon=\"${wp.longitud}\">\n")
+        sb.append("    <ele>${wp.elevacion}</ele>\n")
+        sb.append("    <car>${wp.caracteristicas}</car>\n")
+        sb.append("    <name>${wp.nombre}</name>\n")
+        sb.append("    <desc>${wp.descripcion}</desc>\n")
+        sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
+        sb.append("    <type>INTERES</type>\n")
         sb.append("  </wpt>\n")
     }
 
@@ -73,6 +89,8 @@ fun epochToIso(time: Long): String {
     sdf.timeZone = java.util.TimeZone.getTimeZone("UTC")
     return sdf.format(java.util.Date(time))
 }
+
+
 
 @Composable
 fun rememberGpxLauncher(
