@@ -16,14 +16,16 @@ namespace Forms
     public partial class ValoracionDetalle : Form
     {
         private readonly ApiReta _api;
+        private Ruta _ruta;
         private Valoracion _valoracion { get; set; }
         public Valoracion Valoracion { get; private set; }
 
 
-        public ValoracionDetalle(ApiReta api, Valoracion valoracion)
+        public ValoracionDetalle(ApiReta api, Ruta ruta, Valoracion valoracion)
         {
             InitializeComponent();
             _api = api;
+            _ruta = ruta;
             _valoracion = valoracion;
         }
 
@@ -70,16 +72,20 @@ namespace Forms
                 this.Enabled = false;
                 this.Opacity = 0;
 
-                using (var form = new CrearEditarValoraciones(_api, _valoracion))
+                using (var form = new CrearEditarValoraciones(_api, _ruta, _valoracion))
                 {
-                    form.ShowDialog(this);
+                    var result = form.ShowDialog(this);
+                    if (result ==DialogResult.OK)
+                    {
+                        ucValoracionCompleto1.SetData(form.Valoracion);
+                    }
                 }
             }
             finally
             {
                 this.Opacity = 1;
                 this.Enabled = true;
-                this.Activate(); // recupera foco en caso de que no se abra el hijo
+                this.Activate();
             }
         }
     }

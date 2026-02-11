@@ -87,6 +87,7 @@
             Controls.Add(btn_volver);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ValoracionDetalle";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "ValoracionDetalle";
             Load += ValoracionDetalle_Load;
             ResumeLayout(false);

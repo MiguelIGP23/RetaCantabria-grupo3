@@ -66,7 +66,7 @@ namespace Forms
                 this.Enabled = false;
                 this.Opacity = 0;
 
-                using (var form = new ValoracionDetalle(_api, valoracion))
+                using (var form = new ValoracionDetalle(_api, _ruta, valoracion))
                 {
                     form.ShowDialog(this);
                 }
@@ -88,7 +88,7 @@ namespace Forms
                 this.Enabled = false;
                 this.Opacity = 0;
 
-                using (var form = new CrearEditarValoraciones(_api, null))
+                using (var form = new CrearEditarValoraciones(_api, _ruta, null))
                 {
                     form.ShowDialog(this);
                 }

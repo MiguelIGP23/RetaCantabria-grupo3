@@ -42,11 +42,12 @@
             flp_valoracionLista.Location = new Point(70, 37);
             flp_valoracionLista.Margin = new Padding(3, 4, 3, 4);
             flp_valoracionLista.Name = "flp_valoracionLista";
-            flp_valoracionLista.Size = new Size(522, 272);
+            flp_valoracionLista.Size = new Size(580, 270);
             flp_valoracionLista.TabIndex = 0;
             // 
             // ucValoracionLista1
             // 
+            ucValoracionLista1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             ucValoracionLista1.Location = new Point(3, 5);
             ucValoracionLista1.Margin = new Padding(3, 5, 3, 5);
             ucValoracionLista1.Name = "ucValoracionLista1";
@@ -80,7 +81,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(651, 412);
+            ClientSize = new Size(708, 412);
             Controls.Add(btnNueva);
             Controls.Add(btn_Volver);
             Controls.Add(flp_valoracionLista);
