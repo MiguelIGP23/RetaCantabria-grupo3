@@ -84,6 +84,7 @@ fun CreateRutaView(navController: NavHostController) {
     val textLat = remember { mutableStateOf("Latitud: --") }
     val textLon = remember { mutableStateOf("Longitud: --") }
     val isTracking = remember { mutableStateOf(false) }
+    val currentAltitude = remember { mutableStateOf(0.0) }
 
     val trackPolyline = remember {
         Polyline().apply {
@@ -141,6 +142,7 @@ fun CreateRutaView(navController: NavHostController) {
             ::canSaveTrackpoint,
             textLat,
             textLon,
+            currentAltitude,
             trackpointIdCounter
         )
     }
@@ -181,6 +183,7 @@ fun CreateRutaView(navController: NavHostController) {
                 locationManager,
                 context,
                 ::canSaveTrackpoint,
+                currentAltitude,
                 trackpointIdCounter,
                 usuarioId = 1
             )
@@ -286,6 +289,7 @@ fun createLocationCallback(
     canSaveTrackpoint: (Location) -> Boolean,
     textLat: MutableState<String>,
     textLon: MutableState<String>,
+    currentAltitude: MutableState<Double>,
     trackpointIdCounter: MutableState<Int>
 ): LocationCallback {
 
@@ -299,14 +303,26 @@ fun createLocationCallback(
             if (!isTracking.value) return
             val location = locationResult.lastLocation ?: return
             if (location.accuracy > 20f) return
+            Log.d("ALTITUD_DEBUG",
+                "hasAltitude=${location.hasAltitude()} alt=${location.altitude}"
+            )
 
             var lat = location.latitude
             var lon = location.longitude
 
             // Altitud segura: si GPS tiene altitud válida, la usamos, si no usamos la última conocida o 0
-            val rawAlt = if (location.hasAltitude()) location.altitude else lastAlt ?: 0.0
-            var alt = if (lastAlt != null) lastAlt!! * (1 - smoothFactor) + rawAlt * smoothFactor else rawAlt
+            val alt = if (location.hasAltitude()) {
+                location.altitude
+            } else {
+                lastAlt ?: 0.0
+            }
+
             lastAlt = alt
+            currentAltitude.value = alt
+
+            Log.d("ALT_FINAL",
+                "location.alt=${location.altitude} | alt_guardada=$alt"
+            )
 
             // Suavizado de lat/lon
             val lastGeoPoint = lastLat?.let { GeoPoint(it, lastLon!!) }
@@ -369,6 +385,7 @@ fun LocationControls(
     locationManager: LocationManager,
     context: Context,
     canSaveTrackpoint: (Location) -> Boolean,
+    currentAltitude: MutableState<Double>,
     trackpointIdCounter: MutableState<Int>,
     usuarioId: Int
 ) {
@@ -450,7 +467,7 @@ fun LocationControls(
                 onClick = {
                     val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
                     val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
-                    val alt = 0.0
+                    val alt = currentAltitude.value
                     savedTrackpoints.add(Trackpoint(
                         idRuta = -1,
                         latitud = lat,
