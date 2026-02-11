@@ -10,7 +10,7 @@ namespace Model
     public class Actividad
     {
         [JsonPropertyName("id")]
-        public int IdActividad { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
@@ -22,7 +22,7 @@ namespace Model
 
         public Actividad(int idActividad, string nombre, int rutas_idRuta)
         {
-            IdActividad = idActividad;
+            Id = idActividad;
             Nombre = nombre;
             RutaId = rutas_idRuta;
         }

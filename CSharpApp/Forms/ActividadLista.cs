@@ -1,38 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Model;
+﻿using Model;
 using Repository;
 using UserControls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Forms
 {
     public partial class ActividadLista : Form
     {
-        private ApiReta api;
-        private Ruta ruta;
-        private List<Actividad> listaActividad = new List<Actividad>();
-
-        public ActividadLista()
-        {
-            InitializeComponent();
-        }
+        private ApiReta _api;
+        private Ruta _ruta;
 
         public ActividadLista(ApiReta api, Ruta ruta)
         {
-            this.api = api;
-            this.ruta = ruta;
+            InitializeComponent();
+
+            this._api = api;
+            this._ruta = ruta;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
         private async void ActividadClick(object? sender, Actividad actividad)
@@ -42,7 +29,7 @@ namespace Forms
                 this.Enabled = false;
                 this.Opacity = 0;
 
-                using (var form = new CrearEditarActividades(api, actividad))
+                using (var form = new CrearEditarActividades(_api, actividad))
                 {
                     form.ShowDialog(this);
                 }
@@ -57,18 +44,33 @@ namespace Forms
             }
         }
 
-        private void btnCrear_Click(object sender, EventArgs e)
+        private async void btnCrear_Click(object sender, EventArgs e)
         {
-            CrearEditarActividades crearEditarActividades = new CrearEditarActividades(api,null);
-            crearEditarActividades.ShowDialog();
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new CrearEditarActividades(_api, null))
+                {
+                    form.ShowDialog(this);
+                }
+
+                await CargarActividades();
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate(); // recupera foco en caso de que no se abra el hijo
+            }
         }
         public async Task CargarActividades()
         {
             try
             {
-                string ruta;
-                List<Actividad> actividades = await api.GetAlAsync<Actividad>("api/reta3/actividades");
-                listaActividad.Clear();
+                string idRuta = _ruta.Id.ToString();
+                List<Actividad> actividades = await _api.GetAlAsync<Actividad>($"api/reta3/rutas/{idRuta}/actividades");
                 flpActividad.Controls.Clear();
                 foreach (Actividad a in actividades)
                 {
@@ -76,13 +78,17 @@ namespace Forms
                     uc.SetData(a);
                     uc.ActividadClick += ActividadClick;
                     flpActividad.Controls.Add(uc);
-                    listaActividad.Add(a);
                 }
             }
             catch (HttpRequestException ex)
             {
                 ApiReta.MostrarErrorHttp(ex);
             }
+        }
+
+        private async void ActividadLista_Load(object sender, EventArgs e)
+        {
+            await CargarActividades();
         }
     }
 }

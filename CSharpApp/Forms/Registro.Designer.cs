@@ -107,7 +107,7 @@
             txt_nombre.Margin = new Padding(4, 5, 4, 5);
             txt_nombre.Name = "txt_nombre";
             txt_nombre.Size = new Size(285, 27);
-            txt_nombre.TabIndex = 6;
+            txt_nombre.TabIndex = 1;
             // 
             // txt_rep_password
             // 
@@ -115,7 +115,7 @@
             txt_rep_password.Margin = new Padding(4, 5, 4, 5);
             txt_rep_password.Name = "txt_rep_password";
             txt_rep_password.Size = new Size(273, 27);
-            txt_rep_password.TabIndex = 8;
+            txt_rep_password.TabIndex = 7;
             // 
             // txt_password
             // 
@@ -123,7 +123,7 @@
             txt_password.Margin = new Padding(4, 5, 4, 5);
             txt_password.Name = "txt_password";
             txt_password.Size = new Size(273, 27);
-            txt_password.TabIndex = 9;
+            txt_password.TabIndex = 6;
             // 
             // txt_email
             // 
@@ -131,7 +131,7 @@
             txt_email.Margin = new Padding(4, 5, 4, 5);
             txt_email.Name = "txt_email";
             txt_email.Size = new Size(285, 27);
-            txt_email.TabIndex = 10;
+            txt_email.TabIndex = 3;
             // 
             // txt_apellido
             // 
@@ -139,7 +139,7 @@
             txt_apellido.Margin = new Padding(4, 5, 4, 5);
             txt_apellido.Name = "txt_apellido";
             txt_apellido.Size = new Size(285, 27);
-            txt_apellido.TabIndex = 11;
+            txt_apellido.TabIndex = 2;
             // 
             // btn_guardar
             // 
@@ -147,7 +147,7 @@
             btn_guardar.Margin = new Padding(4, 5, 4, 5);
             btn_guardar.Name = "btn_guardar";
             btn_guardar.Size = new Size(100, 35);
-            btn_guardar.TabIndex = 13;
+            btn_guardar.TabIndex = 10;
             btn_guardar.Text = "Guardar";
             btn_guardar.UseVisualStyleBackColor = true;
             btn_guardar.Click += btn_guardar_Click;
@@ -158,7 +158,7 @@
             btn_volver.Margin = new Padding(4, 5, 4, 5);
             btn_volver.Name = "btn_volver";
             btn_volver.Size = new Size(100, 35);
-            btn_volver.TabIndex = 14;
+            btn_volver.TabIndex = 8;
             btn_volver.Text = "Volver";
             btn_volver.UseVisualStyleBackColor = true;
             btn_volver.Click += btn_volver_Click;
@@ -169,7 +169,7 @@
             btEliminar.Margin = new Padding(4, 5, 4, 5);
             btEliminar.Name = "btEliminar";
             btEliminar.Size = new Size(100, 35);
-            btEliminar.TabIndex = 15;
+            btEliminar.TabIndex = 9;
             btEliminar.Text = "Eliminar";
             btEliminar.UseVisualStyleBackColor = true;
             btEliminar.Click += btEliminar_Click;
@@ -181,7 +181,7 @@
             ckPassword.Location = new Point(42, 227);
             ckPassword.Name = "ckPassword";
             ckPassword.Size = new Size(184, 24);
-            ckPassword.TabIndex = 16;
+            ckPassword.TabIndex = 4;
             ckPassword.Text = "¿Cambiar contraseña?";
             ckPassword.UseVisualStyleBackColor = true;
             ckPassword.CheckedChanged += ckPassword_CheckedChanged;
@@ -193,7 +193,7 @@
             cbRol.Location = new Point(314, 223);
             cbRol.Name = "cbRol";
             cbRol.Size = new Size(180, 28);
-            cbRol.TabIndex = 17;
+            cbRol.TabIndex = 5;
             // 
             // lblRol
             // 
@@ -211,22 +211,22 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(537, 518);
-            Controls.Add(lblRol);
-            Controls.Add(cbRol);
-            Controls.Add(ckPassword);
-            Controls.Add(btEliminar);
-            Controls.Add(btn_volver);
-            Controls.Add(btn_guardar);
+            Controls.Add(txt_nombre);
             Controls.Add(txt_apellido);
             Controls.Add(txt_email);
+            Controls.Add(ckPassword);
+            Controls.Add(cbRol);
+            Controls.Add(btEliminar);
             Controls.Add(txt_password);
             Controls.Add(txt_rep_password);
-            Controls.Add(txt_nombre);
-            Controls.Add(lbl_rep_password);
-            Controls.Add(lbl_password);
-            Controls.Add(lbl_email);
-            Controls.Add(lbl_apellidos);
             Controls.Add(lbl_nombre);
+            Controls.Add(lbl_apellidos);
+            Controls.Add(lbl_email);
+            Controls.Add(lblRol);
+            Controls.Add(lbl_password);
+            Controls.Add(lbl_rep_password);
+            Controls.Add(btn_volver);
+            Controls.Add(btn_guardar);
             Margin = new Padding(4, 5, 4, 5);
             Name = "Registro";
             StartPosition = FormStartPosition.CenterParent;

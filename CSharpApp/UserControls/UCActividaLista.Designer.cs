@@ -40,62 +40,68 @@
             // 
             lblId.AutoSize = true;
             lblId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblId.Location = new Point(28, 24);
+            lblId.Location = new Point(32, 32);
             lblId.Name = "lblId";
-            lblId.Size = new Size(82, 15);
+            lblId.Size = new Size(105, 20);
             lblId.TabIndex = 0;
             lblId.Text = "-Nº actividad:";
+            lblId.Click += lblId_Click;
             // 
             // lbltxtId
             // 
             lbltxtId.AutoSize = true;
-            lbltxtId.Location = new Point(114, 24);
+            lbltxtId.Location = new Point(130, 32);
             lbltxtId.Name = "lbltxtId";
-            lbltxtId.Size = new Size(31, 15);
+            lbltxtId.Size = new Size(39, 20);
             lbltxtId.TabIndex = 1;
             lbltxtId.Text = "txtId";
+            lbltxtId.Click += lbltxtId_Click;
             // 
             // lbltxtNombre
             // 
             lbltxtNombre.AutoSize = true;
-            lbltxtNombre.Location = new Point(391, 24);
+            lbltxtNombre.Location = new Point(447, 32);
             lbltxtNombre.Name = "lbltxtNombre";
-            lbltxtNombre.Size = new Size(65, 15);
+            lbltxtNombre.Size = new Size(81, 20);
             lbltxtNombre.TabIndex = 3;
             lbltxtNombre.Text = "txtNombre";
+            lbltxtNombre.Click += lbltxtNombre_Click;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNombre.Location = new Point(326, 24);
+            lblNombre.Location = new Point(373, 32);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(61, 15);
+            lblNombre.Size = new Size(77, 20);
             lblNombre.TabIndex = 2;
             lblNombre.Text = "-Nombre:";
+            lblNombre.Click += lblNombre_Click;
             // 
             // lbltxtRuta
             // 
             lbltxtRuta.AutoSize = true;
-            lbltxtRuta.Location = new Point(246, 24);
+            lbltxtRuta.Location = new Point(281, 32);
             lbltxtRuta.Name = "lbltxtRuta";
-            lbltxtRuta.Size = new Size(45, 15);
+            lbltxtRuta.Size = new Size(56, 20);
             lbltxtRuta.TabIndex = 5;
             lbltxtRuta.Text = "txtRuta";
+            lbltxtRuta.Click += lbltxtRuta_Click;
             // 
             // lblRuta
             // 
             lblRuta.AutoSize = true;
             lblRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblRuta.Location = new Point(187, 24);
+            lblRuta.Location = new Point(214, 32);
             lblRuta.Name = "lblRuta";
-            lblRuta.Size = new Size(55, 15);
+            lblRuta.Size = new Size(71, 20);
             lblRuta.TabIndex = 4;
             lblRuta.Text = "-Nº ruta:";
+            lblRuta.Click += lblRuta_Click;
             // 
             // UCActividaLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lbltxtRuta);
             Controls.Add(lblRuta);
@@ -103,9 +109,10 @@
             Controls.Add(lblNombre);
             Controls.Add(lbltxtId);
             Controls.Add(lblId);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UCActividaLista";
-            Size = new Size(622, 87);
-            Click += UCActividadLista_Click;
+            Size = new Size(711, 93);
+            Click += UCActividaLista_Click;
             ResumeLayout(false);
             PerformLayout();
         }

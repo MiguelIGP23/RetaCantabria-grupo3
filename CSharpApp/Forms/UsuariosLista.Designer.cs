@@ -56,7 +56,7 @@
             // 
             // btnCrear
             // 
-            btnCrear.Location = new Point(200, 458);
+            btnCrear.Location = new Point(387, 449);
             btnCrear.Margin = new Padding(3, 4, 3, 4);
             btnCrear.Name = "btnCrear";
             btnCrear.Size = new Size(86, 31);
@@ -67,7 +67,7 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(395, 458);
+            btnVolver.Location = new Point(209, 449);
             btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(86, 31);

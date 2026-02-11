@@ -37,6 +37,7 @@ namespace Forms
             {
                 ckPassword.Visible = true;
                 cbRol.Visible = true;
+                lblRol.Visible = true;
                 txt_password.Enabled = false;
                 txt_rep_password.Enabled = false;
             }
