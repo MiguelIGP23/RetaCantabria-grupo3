@@ -42,7 +42,7 @@
             // 
             lbl_id.AutoSize = true;
             lbl_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lbl_id.Location = new Point(79, 47);
+            lbl_id.Location = new Point(41, 47);
             lbl_id.Name = "lbl_id";
             lbl_id.Size = new Size(26, 15);
             lbl_id.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             lbl_fecha.AutoSize = true;
             lbl_fecha.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lbl_fecha.Location = new Point(235, 47);
+            lbl_fecha.Location = new Point(281, 47);
             lbl_fecha.Name = "lbl_fecha";
             lbl_fecha.Size = new Size(47, 15);
             lbl_fecha.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             lbl_dificultad.AutoSize = true;
             lbl_dificultad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lbl_dificultad.Location = new Point(52, 80);
+            lbl_dificultad.Location = new Point(41, 80);
             lbl_dificultad.Name = "lbl_dificultad";
             lbl_dificultad.Size = new Size(69, 15);
             lbl_dificultad.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             lbl_InteresC.AutoSize = true;
             lbl_InteresC.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lbl_InteresC.Location = new Point(230, 80);
+            lbl_InteresC.Location = new Point(41, 112);
             lbl_InteresC.Name = "lbl_InteresC";
             lbl_InteresC.Size = new Size(100, 15);
             lbl_InteresC.TabIndex = 3;
@@ -81,7 +81,7 @@
             // lbl_txtIdValora
             // 
             lbl_txtIdValora.AutoSize = true;
-            lbl_txtIdValora.Location = new Point(129, 47);
+            lbl_txtIdValora.Location = new Point(149, 47);
             lbl_txtIdValora.Name = "lbl_txtIdValora";
             lbl_txtIdValora.Size = new Size(69, 15);
             lbl_txtIdValora.TabIndex = 4;
@@ -90,7 +90,7 @@
             // lbl_txtDificultad
             // 
             lbl_txtDificultad.AutoSize = true;
-            lbl_txtDificultad.Location = new Point(129, 80);
+            lbl_txtDificultad.Location = new Point(149, 80);
             lbl_txtDificultad.Name = "lbl_txtDificultad";
             lbl_txtDificultad.Size = new Size(78, 15);
             lbl_txtDificultad.TabIndex = 5;
@@ -99,7 +99,7 @@
             // lbl_txtFecha
             // 
             lbl_txtFecha.AutoSize = true;
-            lbl_txtFecha.Location = new Point(308, 47);
+            lbl_txtFecha.Location = new Point(345, 47);
             lbl_txtFecha.Name = "lbl_txtFecha";
             lbl_txtFecha.Size = new Size(56, 15);
             lbl_txtFecha.TabIndex = 6;
@@ -108,7 +108,7 @@
             // lbl_txtInteresCultural
             // 
             lbl_txtInteresCultural.AutoSize = true;
-            lbl_txtInteresCultural.Location = new Point(327, 80);
+            lbl_txtInteresCultural.Location = new Point(149, 112);
             lbl_txtInteresCultural.Name = "lbl_txtInteresCultural";
             lbl_txtInteresCultural.Size = new Size(107, 15);
             lbl_txtInteresCultural.TabIndex = 7;
@@ -128,7 +128,7 @@
             Controls.Add(lbl_id);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             Name = "UCValoracionLista";
-            Size = new Size(473, 134);
+            Size = new Size(454, 184);
             ResumeLayout(false);
             PerformLayout();
         }
