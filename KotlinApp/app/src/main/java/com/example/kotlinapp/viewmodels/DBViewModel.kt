@@ -9,6 +9,7 @@ import com.example.kotlinapp.data.AuthRepository
 import com.example.kotlinapp.data.ServiceFactory
 import com.example.kotlinapp.data.room.repository.RutaRepository
 import com.example.kotlinapp.model.Ruta
+import com.example.kotlinapp.model.enums.Clasificacion
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,7 +22,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Response
 
 class DBViewModel(private val authRepository: AuthRepository, private val roomDB: AppDatabase) :
     ViewModel() {
@@ -145,5 +145,43 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
 
     fun limpiarRuta() {
         _ruta.value = null
+    }
+
+    fun confirmarBorrador(
+        nombre: String,
+        zonaGeografica: String,
+        puntoInicial: String,
+        puntoFinal: String,
+        temporadasString: String,
+        equipo: String,
+        terreno: Int,
+        indicaciones: Int,
+        id: Int?,
+        accesibilidad: Boolean,
+        rutaFamiliar: Boolean,
+        clasificacion: Clasificacion
+    ) {
+        viewModelScope.launch {
+            val rutaModificada = ruta.value?.copy(
+                nombre = nombre,
+                nombreInicioruta = puntoInicial,
+                nombreFinalruta = puntoFinal,
+                zonaGeografica = zonaGeografica,
+                temporadas = temporadasString,
+                recomendacionesEquipo = equipo,
+                indicaciones = indicaciones.toByte(),
+                tipoTerreno = terreno.toByte(),
+                accesibilidad = if (accesibilidad) 1 else 0,
+                rutaFamiliar = if (rutaFamiliar) 1 else 0,
+                clasificacion = clasificacion
+            )
+            rutaService.confirmarBorrador(id!!, rutaModificada!!)
+        }
+    }
+
+    fun cancelarBorrador(id: Int) {
+        viewModelScope.launch {
+            rutaService.cancelarBorrador(id)
+        }
     }
 }

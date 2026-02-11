@@ -1,25 +1,17 @@
 package com.example.kotlinapp.views
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -35,9 +27,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.viewmodels.DBViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,7 +38,7 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
     val ruta = dbViewModel.ruta.collectAsState()
 
     var nombre by remember { mutableStateOf(ruta.value?.nombre ?: "") }
-    var descripcion by remember { mutableStateOf(ruta.value?.nombre ?: "") }
+    var zonaGeografica by remember { mutableStateOf("") }
     var puntoInicial by remember { mutableStateOf(ruta.value?.nombreInicioruta ?: "") }
     var puntoFinal by remember { mutableStateOf(ruta.value?.nombreFinalruta ?: "") }
     val opcionesTemporadas = listOf("Primavera", "Verano", "Otoño", "Invierno")
@@ -54,6 +46,10 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
     var equipo by remember { mutableStateOf("") }
     var terreno by remember { mutableStateOf(1f) }
     var indicaciones by remember { mutableStateOf(1f) }
+    var accesibilidad by remember { mutableStateOf(ruta.value?.accesibilidad == 1.toByte()) }
+    var rutaFamiliar by remember { mutableStateOf(ruta.value?.rutaFamiliar == 1.toByte()) }
+    var clasificacion by remember { mutableStateOf("lineal") }
+
     Scaffold(
         // TopBar con logo, título y botones
         topBar = {
@@ -62,7 +58,27 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                 actions = {
                     IconButton(
                         onClick = {
+                            val temporadasString =
+                                temporadasSeleccionadas.joinToString(separator = ",") { temp ->
+                                    temp.uppercase().replace("Ñ", "N")
+                                }
+                            val clasificacionEnum = Clasificacion.valueOf(clasificacion.uppercase())
+                            dbViewModel.confirmarBorrador(
+                                nombre,
+                                zonaGeografica,
+                                puntoInicial,
+                                puntoFinal,
+                                temporadasString,
+                                equipo,
+                                terreno.toInt(),
+                                indicaciones.toInt(),
+                                id,
+                                accesibilidad,
+                                rutaFamiliar,
+                                clasificacionEnum
 
+                            )
+                            navController.popBackStack("List", false)
                         },
                     ) {
                         Icon(
@@ -71,8 +87,8 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     }
                     IconButton(
                         onClick = {
-                            dbViewModel.deleteRuta(id!!)
-                            navController.popBackStack("list",false)
+                            dbViewModel.cancelarBorrador(id!!)
+                            navController.popBackStack("list", false)
                         },
                     ) {
                         Icon(
@@ -98,9 +114,9 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                 )
                 Spacer(Modifier.height(12.dp))
                 OutlinedTextField(
-                    value = descripcion,
-                    onValueChange = { descripcion = it },
-                    label = { Text("Descripcion de la ruta") },
+                    value = zonaGeografica,
+                    onValueChange = { zonaGeografica = it },
+                    label = { Text("Zona Geografica") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(12.dp))
@@ -160,6 +176,44 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     indicaciones = it
                 }, valueRange = 1f..5f, steps = 3)
                 Text(indicaciones.toInt().toString())
+                Spacer(Modifier.height(20.dp))
+                Text("Accesibilidad")
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = accesibilidad,
+                        onCheckedChange = { accesibilidad = it }
+                    )
+                    Text("Ruta accesible")
+                }
+
+                Spacer(Modifier.height(20.dp))
+                Text("Ruta Familiar")
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = rutaFamiliar,
+                        onCheckedChange = { rutaFamiliar = it }
+                    )
+                    Text("Apta para familias")
+                }
+
+                Spacer(Modifier.height(20.dp))
+                Text("Clasificación")
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = clasificacion == "lineal",
+                        onCheckedChange = { if (it) clasificacion = "lineal" }
+                    )
+                    Text("Lineal")
+                }
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = clasificacion == "circular",
+                        onCheckedChange = { if (it) clasificacion = "circular" }
+                    )
+                    Text("Circular")
+                }
+
             }
         }
     }
