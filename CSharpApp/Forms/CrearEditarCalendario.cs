@@ -100,7 +100,7 @@ namespace Forms
                 else
                 {
                     //editar
-                    await _api.Update<Calendario>("api/reta3/calendario", calendario.RutaId.ToString() ,calendario);
+                    await _api.Update<Calendario>("api/reta3/calendario", calendario.Id.ToString() ,calendario);
                     MessageBox.Show("Modificación correcta.");
 
                 }

@@ -37,11 +37,12 @@
             // 
             // flpUsuarios
             // 
+            flpUsuarios.AutoScroll = true;
             flpUsuarios.Controls.Add(ucUsuarioLista1);
-            flpUsuarios.Location = new Point(61, 43);
+            flpUsuarios.Location = new Point(40, 40);
             flpUsuarios.Margin = new Padding(3, 4, 3, 4);
             flpUsuarios.Name = "flpUsuarios";
-            flpUsuarios.Size = new Size(783, 388);
+            flpUsuarios.Size = new Size(681, 388);
             flpUsuarios.TabIndex = 0;
             // 
             // ucUsuarioLista1
@@ -51,11 +52,11 @@
             ucUsuarioLista1.Name = "ucUsuarioLista1";
             ucUsuarioLista1.Size = new Size(767, 84);
             ucUsuarioLista1.TabIndex = 0;
-            ucUsuarioLista1.usuario = null;
+            ucUsuarioLista1.Usuario = null;
             // 
             // btnCrear
             // 
-            btnCrear.Location = new Point(170, 517);
+            btnCrear.Location = new Point(200, 458);
             btnCrear.Margin = new Padding(3, 4, 3, 4);
             btnCrear.Name = "btnCrear";
             btnCrear.Size = new Size(86, 31);
@@ -66,7 +67,7 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(539, 517);
+            btnVolver.Location = new Point(395, 458);
             btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(86, 31);
@@ -79,7 +80,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(756, 504);
             Controls.Add(btnVolver);
             Controls.Add(btnCrear);
             Controls.Add(flpUsuarios);

@@ -21,7 +21,12 @@ namespace Forms
         {
             InitializeComponent();
             _api = api;
+
             cbClasificacion.DataSource = Enum.GetValues(typeof(EnumClasificaciones));
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnUsuarios.Visible = false;
+            }
         }
 
         private async void Rutas_Load(object sender, EventArgs e)

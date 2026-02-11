@@ -72,19 +72,16 @@ namespace Forms
         {
             try
             {
-                this.Enabled = false;
-                this.Opacity = 0;
+                this.Hide();
 
                 using (var form = new CrearEditarCalendario(_api, Seleccionado))
                 {
                     form.ShowDialog(this);
                 }
-
             }
             finally
             {
-                this.Opacity = 1;
-                this.Enabled = true;
+                this.Show();
                 this.Activate();
             }
         }
@@ -142,7 +139,9 @@ namespace Forms
         private async void mcCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
             ResaltarDiasDelMesAsync();
-
+            flpRutas.Visible=true;
+            ucDetalles.Visible=false;
+            
             DateTime dia = mcCalendario.SelectionStart.Date;
             string fecha = dia.ToString("yyyy-MM-dd");
             var calendarios = await _api.GetAlAsync<Calendario>($"/api/reta3/calendario/fecha/{fecha}");

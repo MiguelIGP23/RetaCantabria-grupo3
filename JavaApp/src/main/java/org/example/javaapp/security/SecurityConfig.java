@@ -28,6 +28,10 @@ public class SecurityConfig {
                         // ================= AUTH =================
                         .requestMatchers(HttpMethod.POST, "/api/reta3/auth/login").permitAll()
 
+                        // ================= USUARIOS =================
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/usuarios/**").hasRole("ADMINISTRADOR")
+
                         // ================= CATALOGO PUBLICO (SIN REGISTRO) =================
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas/**").permitAll()
@@ -73,6 +77,10 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/validar")
                         .hasRole("ADMINISTRADOR")
+
+                        // ================= USUARIOS =================
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/usuarios/**").hasRole("ADMINISTRADOR")
 
                         // ================= RESTO =================
                         .anyRequest().authenticated()

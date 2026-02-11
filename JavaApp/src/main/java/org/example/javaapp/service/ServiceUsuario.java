@@ -22,6 +22,8 @@ public class ServiceUsuario implements IServiceUsuario{
     @Override
     public Usuario insert(Usuario usuario) {
         Usuario nuevo= new Usuario();
+        nuevo.setNombre(usuario.getNombre());
+        nuevo.setApellido(usuario.getApellido());
         nuevo.setEmail(usuario.getEmail());
         nuevo.setRol(usuario.getRol());
         nuevo.setPassword(encoder.encode(usuario.getPassword()));  //Cifrado por BCrypt
@@ -35,8 +37,10 @@ public class ServiceUsuario implements IServiceUsuario{
             buscado.setNombre(nuevo.getNombre());
             buscado.setApellido(nuevo.getApellido());
             buscado.setEmail(nuevo.getEmail());
-            buscado.setPassword(nuevo.getPassword());
             buscado.setRol(nuevo.getRol());
+            if(nuevo.getPassword() != null && !nuevo.getPassword().isBlank()){
+                buscado.setPassword(encoder.encode(nuevo.getPassword()));
+            }
             repo.save(buscado);
         }
         return buscado;
