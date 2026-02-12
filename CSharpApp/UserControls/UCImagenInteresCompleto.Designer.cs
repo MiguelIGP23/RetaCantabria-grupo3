@@ -80,7 +80,7 @@
             pbImagen.Location = new Point(32, 193);
             pbImagen.Margin = new Padding(3, 4, 3, 4);
             pbImagen.Name = "pbImagen";
-            pbImagen.Size = new Size(325, 209);
+            pbImagen.Size = new Size(325, 216);
             pbImagen.TabIndex = 13;
             pbImagen.TabStop = false;
             // 
@@ -116,7 +116,7 @@
             Controls.Add(lblPuntoInteres);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UCImagenInteresCompleto";
-            Size = new Size(395, 443);
+            Size = new Size(395, 451);
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

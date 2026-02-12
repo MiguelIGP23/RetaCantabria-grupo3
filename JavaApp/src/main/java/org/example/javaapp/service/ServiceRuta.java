@@ -4,6 +4,7 @@ import org.example.javaapp.dto.DtoRutas;
 import org.example.javaapp.dto.MapperRuta;
 import org.example.javaapp.model.*;
 import org.example.javaapp.repository.*;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -180,6 +181,7 @@ public class ServiceRuta implements IServiceRuta {
 
             // Parsear GPX
             List<Trackpoint> puntos = parsearTrackpoints(bytes, guardada);
+            LocalTime tInicio = puntos.getFirst().getTime();
 
             if (guardada.getId() == null) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ruta sin ID tras guardar");
@@ -198,8 +200,8 @@ public class ServiceRuta implements IServiceRuta {
             repoTrack.saveAll(puntos);
             double[] acumulada = calcularDistanciaAcumulada(puntos);
 
-            List<PuntosInteres> intereses = parsearPuntosInteres(bytes, guardada);
-            List<PuntosPeligro> peligros = parsearPuntosPeligro(bytes, guardada, puntos, acumulada);
+            List<PuntosInteres> intereses = parsearPuntosInteres(bytes, guardada, tInicio);
+            List<PuntosPeligro> peligros = parsearPuntosPeligro(bytes, guardada, puntos, acumulada, tInicio);
             repoPuntoInteres.saveAll(intereses);
             repoPuntoPeligro.saveAll(peligros);
 
@@ -350,7 +352,7 @@ public class ServiceRuta implements IServiceRuta {
         return radioTierra * c;
     }
 
-    private List<PuntosInteres> parsearPuntosInteres(byte[] gpxBytes, Ruta ruta) throws Exception {
+    private List<PuntosInteres> parsearPuntosInteres(byte[] gpxBytes, Ruta ruta, LocalTime tInicio) throws Exception {
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
@@ -382,6 +384,14 @@ public class ServiceRuta implements IServiceRuta {
             String car = textOfFirst(e, "car"); // custom de tu GPX
             if (car != null && car.equalsIgnoreCase("null")) car = null;
 
+            String timeStr = textOfFirst(e, "time");
+            LocalTime tPunto = (timeStr == null || timeStr.isBlank())
+                    ? LocalTime.MIDNIGHT
+                    : java.time.OffsetDateTime.parse(timeStr.trim()).toLocalTime();
+
+            int minutos = (int) Duration.between(tInicio, tPunto).toMinutes();
+            if (minutos < 0) minutos = 0;
+
             PuntosInteres pi = new PuntosInteres();
             pi.setId(null);
             pi.setRuta(ruta);
@@ -391,6 +401,7 @@ public class ServiceRuta implements IServiceRuta {
             pi.setNombre(nombre);
             pi.setDescripcion(desc);
             pi.setCaracteristicas(car);
+            pi.setTimestamp(minutos);
 
             list.add(pi);
         }
@@ -402,7 +413,8 @@ public class ServiceRuta implements IServiceRuta {
             byte[] gpxBytes,
             Ruta ruta,
             List<Trackpoint> trackpoints,
-            double[] distanciaAcumuladaMetros
+            double[] distanciaAcumuladaMetros,
+            LocalTime tInicio
     ) throws Exception {
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -446,6 +458,15 @@ public class ServiceRuta implements IServiceRuta {
                 gravedad = g;
             }
 
+            String timeStr = textOfFirst(e, "time");
+            LocalTime tPunto = (timeStr == null || timeStr.isBlank())
+                    ? LocalTime.MIDNIGHT
+                    : java.time.OffsetDateTime.parse(timeStr.trim()).toLocalTime();
+
+            int minutos = (int) Duration.between(tInicio, tPunto).toMinutes();
+            if (minutos < 0) minutos = 0;
+
+
             int idx = indiceTrackpointMasCercano(trackpoints, lat, lon);
             double km = distanciaAcumuladaMetros[idx] / 1000.0;
 
@@ -460,6 +481,7 @@ public class ServiceRuta implements IServiceRuta {
             pp.setGravedad(gravedad);
             pp.setPosicion(posicion++);
             pp.setKilometros(km);
+            pp.setTimestamp(minutos);
             list.add(pp);
         }
         return list;

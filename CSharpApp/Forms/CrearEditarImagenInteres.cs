@@ -1,5 +1,6 @@
 ﻿using Model;
 using Repository;
+using System.Windows.Forms;
 
 namespace Forms
 {
@@ -13,6 +14,7 @@ namespace Forms
         private ImagenInteres _imagenInteres { get; set; }
         private readonly int _idRuta;
         private readonly int _idPuntoInteres;
+        private string? _archivoSeleccionado64;
 
         public CrearEditarImagenInteres(ApiReta api, ImagenInteres imagenInteres, int idRuta, int idPuntoInteres)
         {
@@ -26,29 +28,9 @@ namespace Forms
 
         private void CrearEditarImagenInteres_Load(object sender, EventArgs e)
         {
-            if (_imagenInteres != null)
-            {
-                CargarDatos(_imagenInteres);
-            }
-            else
-            {
-                lbltxtPuntoInteres.Text = "";
-                tbDescripcion.Text = "";
-                tbUrl.Text = "";
-            }
+            lbltxtPuntoInteres.Text = _idPuntoInteres.ToString();
+            tbDescripcion.Text = _imagenInteres != null ? _imagenInteres.Descripcion : "";
         }
-
-
-        // Metodo para cargar datos en el user control
-
-        public void CargarDatos(ImagenInteres imagenInteres)
-        {
-            lbltxtPuntoInteres.Text = imagenInteres.PuntosInteresId.ToString();
-            tbDescripcion.Text = imagenInteres.Descripcion;
-            tbUrl.Text = imagenInteres.Url;
-        }
-
-
 
         // Metodos de botones
 
@@ -64,14 +46,14 @@ namespace Forms
         {
             ImagenInteres nueva = (_imagenInteres != null) ? _imagenInteres : new ImagenInteres();
             nueva.Descripcion = tbDescripcion.Text;
-            nueva.Url = tbUrl.Text;
+            nueva.Url = _archivoSeleccionado64;
 
             nueva.RutaId = _idRuta;
             nueva.PuntosInteresId = _idPuntoInteres;
 
             if (string.IsNullOrWhiteSpace(nueva.Descripcion) || string.IsNullOrWhiteSpace(nueva.Url))
             {
-                MessageBox.Show("La descripción y la URL son obligatorios.");
+                MessageBox.Show("La descripción y la imágen son obligatorios.");
                 return;
             }
 
@@ -107,15 +89,19 @@ namespace Forms
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "Selecciona una imágen";
-                ofd.Filter = "Todos los archivos (*.*)|*.*";
+                ofd.Filter = "Imágenes|*.png;*.jpg;*.jpeg";
                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    string rutaArchivo = ofd.FileName;
-                    string nombreArchivo = Path.GetFileName(ofd.FileName);
-                    tbUrl.Text = rutaArchivo;
-                }
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+
+                byte[] bytes = File.ReadAllBytes(ofd.FileName);
+                _archivoSeleccionado64 = Convert.ToBase64String(bytes);
+                lblImagen.Text = "Imágen cargada!";
+                //// Previsualizar
+                //pb.Image?.Dispose();
+                //using var ms = new MemoryStream(bytes);
+                //pictureBox1.Image = Image.FromStream(ms);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
     }

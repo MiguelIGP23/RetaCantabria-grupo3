@@ -21,6 +21,8 @@ namespace Forms
         private ImagenPeligro _imagenPeligro { get; set; }
         private readonly int _idRuta;
         private readonly int _idPuntoPeligro;
+        private string? _archivoSeleccionado64;
+
 
         public CrearEditarImagenPeligro(ApiReta api, ImagenPeligro imagenPeligro, int idRuta, int idPuntoPeligro)
         {
@@ -34,49 +36,14 @@ namespace Forms
 
         private void CrearEditarImagenPeligro_Load(object sender, EventArgs e)
         {
-            if (_imagenPeligro != null)
-            {
-                CargarDatos(_imagenPeligro);
-            }
-            else
-            {
-                lbltxtPuntoPeligro.Text = "";
-                tbDescripcion.Text = "";
-                tbUrl.Text = "";
-            }
+            lbltxtPuntoPeligro.Text = _idPuntoPeligro.ToString();
+            tbDescripcion.Text = _imagenPeligro != null ? _imagenPeligro.Descripcion : "";
         }
-
-
-
-        // Metodo para cargar datos en el user control
-
-        public void CargarDatos(ImagenPeligro imagenPeligro)
-        {
-            lbltxtPuntoPeligro.Text = imagenPeligro.PuntosPeligroId.ToString();
-            tbDescripcion.Text = imagenPeligro.Descripcion;
-            tbUrl.Text = imagenPeligro.Url;
-        }
-
 
 
         // Metodos de botones
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Title = "Selecciona una imágen";
-                ofd.Filter = "Todos los archivos (*.*)|*.*";
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    string rutaArchivo = ofd.FileName;
-                    string nombreArchivo = Path.GetFileName(ofd.FileName);
-                    tbUrl.Text = rutaArchivo;
-                }
-            }
-        }
+        
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -90,7 +57,7 @@ namespace Forms
         {
             ImagenPeligro nueva = (_imagenPeligro != null) ? _imagenPeligro : new ImagenPeligro();
             nueva.Descripcion = tbDescripcion.Text;
-            nueva.Url = tbUrl.Text;
+            nueva.Url = _archivoSeleccionado64;
 
             nueva.RutaId = _idRuta;
             nueva.PuntosPeligroId = _idPuntoPeligro;
@@ -124,6 +91,27 @@ namespace Forms
             catch (HttpRequestException ex)
             {
                 ApiReta.MostrarErrorHttp(ex);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Selecciona una imágen";
+                ofd.Filter = "Imágenes|*.png;*.jpg;*.jpeg";
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+
+                byte[] bytes = File.ReadAllBytes(ofd.FileName);
+                _archivoSeleccionado64 = Convert.ToBase64String(bytes);
+                lblImagen.Text = "Imágen cargada!";
+                //// Previsualizar
+                //pb.Image?.Dispose();
+                //using var ms = new MemoryStream(bytes);
+                //pictureBox1.Image = Image.FromStream(ms);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
     }

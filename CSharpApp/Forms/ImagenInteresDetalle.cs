@@ -24,7 +24,7 @@ namespace Forms
 
         private void ImagenInteresDetalle_Load(object sender, EventArgs e)
         {
-            ucImagenInteresCompleto1.SetData(_imagenInteres);
+            ucImagenInteresCompleto1.SetData(_api, _imagenInteres);
         }
 
 
@@ -79,7 +79,7 @@ namespace Forms
                     if (result == DialogResult.OK)
                     {
                         _imagenInteres = form.ImagenInteres;
-                        ucImagenInteresCompleto1.SetData(_imagenInteres);
+                        ucImagenInteresCompleto1.SetData(_api, _imagenInteres);
                     }
                 }
 

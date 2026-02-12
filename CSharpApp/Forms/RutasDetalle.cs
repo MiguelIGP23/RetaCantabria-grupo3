@@ -147,7 +147,7 @@ namespace Forms
 
 
 
-        private void btnValoraciones_Click(object sender, EventArgs e)
+        private async void btnValoraciones_Click(object sender, EventArgs e)
         {
             try
             {
@@ -157,6 +157,9 @@ namespace Forms
                 using (var form = new ValoracionLista(_api, _ruta))
                 {
                     form.ShowDialog(this);
+                    Ruta ruta = await _api.GetByIdAsync<Ruta>("api/reta3/rutas", _ruta.Id.ToString());
+                    _ruta = ruta;
+                    ucRutaCompleto1.SetData(_ruta);
                 }
 
             }

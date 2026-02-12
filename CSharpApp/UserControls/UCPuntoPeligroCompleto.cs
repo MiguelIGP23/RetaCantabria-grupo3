@@ -19,8 +19,8 @@ namespace UserControls
             lbltxtRuta.Text = pp.RutaId.ToString();
             lbltxtPosicion.Text = pp.Posicion.ToString();
             lbltxtNombre.Text = pp.Nombre;
-            lbltxtLatitud.Text = pp.Latitud.ToString();
-            lbltxtLon.Text = pp.Longitud.ToString();
+            lbltxtLatitud.Text = pp.Latitud.ToString("F4");
+            lbltxtLon.Text = pp.Longitud.ToString("F4");
             lbltxtElevacion.Text = pp.Elevacion.ToString();
             lbltxtKilometro.Text = pp.Kilometros.ToString();
             lbltxtGravedad.Text = pp.Gravedad.ToString();
