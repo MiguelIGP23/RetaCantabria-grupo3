@@ -49,7 +49,7 @@ interface RutaService {
         @Body ruta: Ruta
     ): Response<Ruta>
 
-    @PUT("rutas/{id}/borrador")
+    @DELETE("rutas/{id}/borrador")
     suspend fun cancelarBorrador(@Path("id") id: Int)
 
 

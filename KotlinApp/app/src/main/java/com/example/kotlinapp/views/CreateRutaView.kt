@@ -631,9 +631,10 @@ fun LocationControls(
                     nombre = rutaNombreState.value,
                     descripcion = rutaDescripcionState.value,
                     trackpoints = savedTrackpoints.toList(),
-                    waypoints = savedWaypoints.toList(),
+                    puntosInteres = savedPuntosInteres,
+                    puntosPeligro = savedPuntosPeligro,
                     usuarioId = usuarioId
-                ).copy(recomendacionesEquipo = rutaDescripcionState.value)
+                )
 
                 // Guardamos el GPX en el MutableState
                 pendingGpx.value = nuevaRuta.archivoGPX

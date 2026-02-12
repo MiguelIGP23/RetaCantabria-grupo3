@@ -81,6 +81,11 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
                 401 -> LoginState.Expired //Buscamos este codigo, ver si ha caducado el token
                 else -> LoginState.Invalid
             }
+            rutaRepo.syncRutas()
+            _rutas.value = when (rol.first()) {
+                "ADMINISTRADOR" -> rutaRepo.getRutas().first()
+                else -> rutaRepo.getRutasValidas().first()
+            }
         }
     }
 
@@ -92,13 +97,15 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
     val rutaService by lazy { ServiceFactory.ruta(tokenProvider()) }
     private val rutaRepo = RutaRepository(rutaService, roomDB.rutaDao())
     private val _rutasLoaded = mutableStateOf(false)
-    val rutas = rutaRepo.getRutas()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    private val _rutas = MutableStateFlow<List<Ruta>>(emptyList())
+    val rutas = _rutas.asStateFlow()
+
 
     fun onLoginSuccess() {
         viewModelScope.launch {
             // Primero sincroniza con servidor
-            rutaRepo.syncRutas()
+
             _rutasLoaded.value = true
         }
     }

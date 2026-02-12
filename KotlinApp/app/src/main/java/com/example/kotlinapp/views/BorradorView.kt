@@ -88,7 +88,7 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     IconButton(
                         onClick = {
                             dbViewModel.cancelarBorrador(id!!)
-                            navController.popBackStack("list", false)
+                            navController.popBackStack("List", false)
                         },
                     ) {
                         Icon(

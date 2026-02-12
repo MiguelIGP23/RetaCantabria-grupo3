@@ -134,7 +134,7 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
             }
 
             // Botón recargar
-            IconButton(onClick = { vm.syncRutas() }) {
+            IconButton(onClick = { vm.checkAuth() }) {
                 Icon(Icons.Filled.Refresh, contentDescription = "Recargar Rutas")
             }
 
@@ -209,10 +209,10 @@ fun RutaList(rutas: List<Ruta>, navController: NavHostController, vm: DBViewMode
 // Composable individual de cada ruta
 @Composable
 fun RutaItem(ruta: Ruta, onClick: () -> Unit, onPlayClick: () -> Unit = {}) {
-    val color = when (ruta.clasificacion) {
-        Clasificacion.CIRCULAR -> Color(0xFFA5D6A7) // verde
-        Clasificacion.LINEAL -> Color(0xFFFFCC80)   // naranja
-        else -> Color.LightGray
+    val color = when (ruta.estadoRuta!!.toInt()) {
+        1 -> Color(0xFFA5D6A7) // verde
+        0 -> Color(0xFFFF7369)   // rojo
+        else -> Color(0xFF79BDFA)
     }
 
     Card(

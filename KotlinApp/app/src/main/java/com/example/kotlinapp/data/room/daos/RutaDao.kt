@@ -13,6 +13,9 @@ interface RutaDao {
     @Query("SELECT * FROM rutas")
     fun getAll(): Flow<List<RutaEntity>>
 
+    @Query("SELECT * FROM rutas WHERE estadoRuta = 1")
+    fun getAllValidated(): Flow<List<RutaEntity>>
+
     @Query("SELECT * FROM rutas WHERE idRuta = :id")
     suspend fun getById(id: Int): RutaEntity?
 
