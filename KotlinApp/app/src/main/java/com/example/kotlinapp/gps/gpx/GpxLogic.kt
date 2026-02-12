@@ -72,6 +72,7 @@ fun generateGpx(
         sb.append("    <name>${wp.nombre}</name>\n")
         sb.append("    <desc>${wp.descripcion}</desc>\n")
         sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
+        sb.append("    <tipo>${wp.tipo}</tipo>")
         sb.append("    <type>INTERES</type>\n")
         sb.append("  </wpt>\n")
     }
