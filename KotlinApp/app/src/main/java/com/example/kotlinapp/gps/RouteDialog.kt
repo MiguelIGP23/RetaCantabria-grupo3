@@ -73,19 +73,6 @@ fun FinishRouteDialog(
                     )
                 }
 
-                Spacer(Modifier.height(8.dp))
-
-                Text("Escribe una descripción:")
-                OutlinedTextField(
-                    value = rutaDescripcion.value,
-                    onValueChange = { rutaDescripcion.value = it },
-                    placeholder = { Text("Descripción de la ruta") },
-                    singleLine = false,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(Modifier.height(8.dp))
-
                 if (showTrackpointsError.value) {
                     Text(
                         "No se puede guardar una ruta sin trackpoints",

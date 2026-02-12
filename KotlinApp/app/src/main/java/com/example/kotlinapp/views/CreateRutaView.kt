@@ -601,6 +601,5 @@ fun LocationControls(
         val idBorrador = dbViewModel.ruta.value?.id
         if (idBorrador != null)
             navController.navigate("borrador/$idBorrador")
-        dbViewModel.limpiarRuta()
     }
 }
