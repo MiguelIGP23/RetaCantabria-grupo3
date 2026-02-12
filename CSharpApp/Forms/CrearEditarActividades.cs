@@ -35,6 +35,7 @@ namespace Forms
         private void CrearEditarActividades_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            if(Session.Rol != EnumRoles.ADMINISTRADOR) btnBorrar.Visible=false;
         }
 
         public async void CargarDatos()

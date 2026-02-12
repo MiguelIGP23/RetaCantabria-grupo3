@@ -39,10 +39,10 @@
             // 
             flp_valoracionLista.AutoScroll = true;
             flp_valoracionLista.Controls.Add(ucValoracionLista1);
-            flp_valoracionLista.Location = new Point(70, 37);
+            flp_valoracionLista.Location = new Point(39, 26);
             flp_valoracionLista.Margin = new Padding(3, 4, 3, 4);
             flp_valoracionLista.Name = "flp_valoracionLista";
-            flp_valoracionLista.Size = new Size(468, 270);
+            flp_valoracionLista.Size = new Size(468, 461);
             flp_valoracionLista.TabIndex = 0;
             // 
             // ucValoracionLista1
@@ -57,23 +57,23 @@
             // 
             // btn_Volver
             // 
-            btn_Volver.Location = new Point(158, 340);
+            btn_Volver.Location = new Point(528, 40);
             btn_Volver.Margin = new Padding(3, 4, 3, 4);
             btn_Volver.Name = "btn_Volver";
-            btn_Volver.Size = new Size(86, 31);
+            btn_Volver.Size = new Size(55, 31);
             btn_Volver.TabIndex = 1;
-            btn_Volver.Text = "Volver";
+            btn_Volver.Text = "<--";
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
             // 
             // btnNueva
             // 
-            btnNueva.Location = new Point(351, 340);
+            btnNueva.Location = new Point(528, 92);
             btnNueva.Margin = new Padding(3, 4, 3, 4);
             btnNueva.Name = "btnNueva";
-            btnNueva.Size = new Size(86, 31);
+            btnNueva.Size = new Size(55, 31);
             btnNueva.TabIndex = 2;
-            btnNueva.Text = "Nueva";
+            btnNueva.Text = "+";
             btnNueva.UseVisualStyleBackColor = true;
             btnNueva.Click += btnNueva_Click;
             // 
@@ -81,7 +81,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(606, 400);
+            ClientSize = new Size(611, 529);
             Controls.Add(btnNueva);
             Controls.Add(btn_Volver);
             Controls.Add(flp_valoracionLista);

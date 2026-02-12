@@ -33,6 +33,9 @@ namespace Forms
         {
             await CargarRutas();
             MostrarFiltros(false);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR &&
+                Session.Rol != EnumRoles.DISENADOR &&
+                Session.Rol != EnumRoles.PROFESOR) btnAgregar.Visible = false;
         }
 
 

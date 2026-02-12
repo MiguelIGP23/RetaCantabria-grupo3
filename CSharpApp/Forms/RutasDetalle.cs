@@ -1,5 +1,6 @@
 ﻿using Model;
 using Repository;
+using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using UserControls;
 
 namespace Forms
 {
-    public partial class RutasDetalle : Form
+    public partial class RutasDetalle : BaseForm
     {
         private Ruta _ruta { get; set; }
         private readonly ApiReta _api;
@@ -33,6 +34,12 @@ namespace Forms
         {
             ucRutaCompleto1.SetData(_ruta);
             btnValidar.Text = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Invalidar";
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEliminar.Visible = false;
+                btnEditar.Visible = false;
+                btnValidar.Visible = false;
+            }
         }
 
 

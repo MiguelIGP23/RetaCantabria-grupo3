@@ -1,9 +1,10 @@
 ﻿using Model;
 using Repository;
+using RetaEquipo3;
 
 namespace Forms
 {
-    public partial class ImagenInteresDetalle : Form
+    public partial class ImagenInteresDetalle : BaseForm
     {
 
         private readonly ApiReta _api;
@@ -25,6 +26,11 @@ namespace Forms
         private void ImagenInteresDetalle_Load(object sender, EventArgs e)
         {
             ucImagenInteresCompleto1.SetData(_api, _imagenInteres);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEditar.Visible = false;
+                btnEliminar.Visible = false;
+            }
         }
 
 

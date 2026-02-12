@@ -39,7 +39,7 @@
             // 
             flpImagenes.AutoScroll = true;
             flpImagenes.Controls.Add(ucImagenPeligroLista1);
-            flpImagenes.Location = new Point(57, 73);
+            flpImagenes.Location = new Point(33, 29);
             flpImagenes.Margin = new Padding(3, 4, 3, 4);
             flpImagenes.Name = "flpImagenes";
             flpImagenes.Size = new Size(800, 393);
@@ -56,7 +56,7 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(242, 501);
+            btnVolver.Location = new Point(208, 462);
             btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(86, 31);
@@ -67,7 +67,7 @@
             // 
             // btnNuevaImagen
             // 
-            btnNuevaImagen.Location = new Point(518, 501);
+            btnNuevaImagen.Location = new Point(511, 462);
             btnNuevaImagen.Margin = new Padding(3, 4, 3, 4);
             btnNuevaImagen.Name = "btnNuevaImagen";
             btnNuevaImagen.Size = new Size(128, 31);
@@ -80,7 +80,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(869, 518);
             Controls.Add(btnNuevaImagen);
             Controls.Add(btnVolver);
             Controls.Add(flpImagenes);

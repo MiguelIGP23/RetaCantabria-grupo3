@@ -79,10 +79,10 @@
             // 
             // btn_login
             // 
-            btn_login.Location = new Point(139, 257);
+            btn_login.Location = new Point(113, 215);
             btn_login.Margin = new Padding(5);
             btn_login.Name = "btn_login";
-            btn_login.Size = new Size(101, 35);
+            btn_login.Size = new Size(308, 35);
             btn_login.TabIndex = 4;
             btn_login.Text = "Login";
             btn_login.UseVisualStyleBackColor = true;
@@ -90,10 +90,10 @@
             // 
             // btn_verRutas
             // 
-            btn_verRutas.Location = new Point(293, 257);
+            btn_verRutas.Location = new Point(295, 276);
             btn_verRutas.Margin = new Padding(5);
             btn_verRutas.Name = "btn_verRutas";
-            btn_verRutas.Size = new Size(101, 35);
+            btn_verRutas.Size = new Size(126, 35);
             btn_verRutas.TabIndex = 5;
             btn_verRutas.Text = "Ver rutas";
             btn_verRutas.UseVisualStyleBackColor = true;
@@ -101,10 +101,10 @@
             // 
             // btnRegistro
             // 
-            btnRegistro.Location = new Point(37, 203);
+            btnRegistro.Location = new Point(113, 276);
             btnRegistro.Margin = new Padding(5);
             btnRegistro.Name = "btnRegistro";
-            btnRegistro.Size = new Size(101, 35);
+            btnRegistro.Size = new Size(126, 35);
             btnRegistro.TabIndex = 6;
             btnRegistro.Text = "Registro";
             btnRegistro.UseVisualStyleBackColor = true;

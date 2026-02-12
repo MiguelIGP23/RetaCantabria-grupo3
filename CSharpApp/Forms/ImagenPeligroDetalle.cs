@@ -1,5 +1,6 @@
 ﻿using Model;
 using Repository;
+using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using UserControls;
 
 namespace Forms
 {
-    public partial class ImagenPeligroDetalle : Form
+    public partial class ImagenPeligroDetalle : BaseForm
     {
 
         private readonly ApiReta _api;
@@ -34,6 +35,11 @@ namespace Forms
         private void ImagenPeligroDetalle_Load(object sender, EventArgs e)
         {
             imagenPeligroCompleto1.SetData(_imagenPeligro);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEditar.Visible = false;
+                btnEditar.Visible = false;
+            }
         }
 
 
@@ -102,6 +108,6 @@ namespace Forms
         }
 
 
-     
+
     }
 }

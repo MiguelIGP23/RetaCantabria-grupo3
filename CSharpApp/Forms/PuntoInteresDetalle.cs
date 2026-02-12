@@ -1,9 +1,10 @@
 ﻿using Model;
 using Repository;
+using RetaEquipo3;
 
 namespace Forms
 {
-    public partial class PuntoInteresDetalle : Form
+    public partial class PuntoInteresDetalle : BaseForm
     {
 
         private readonly ApiReta _api;
@@ -25,6 +26,11 @@ namespace Forms
         private void PuntoInteresDetalle_Load(object sender, EventArgs e)
         {
             ucPuntoDeInteresCompleto1.SetData(_puntoInteres);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEditar.Visible = false;
+                btnEliminar.Visible = false;
+            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

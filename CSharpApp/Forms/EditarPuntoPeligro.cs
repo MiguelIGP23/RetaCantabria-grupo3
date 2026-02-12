@@ -1,5 +1,6 @@
 ﻿using Model;
 using Repository;
+using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class EditarPuntoPeligro : Form
+    public partial class EditarPuntoPeligro : BaseForm
     {
 
         private readonly ApiReta _api;

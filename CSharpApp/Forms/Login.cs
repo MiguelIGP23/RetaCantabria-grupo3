@@ -1,6 +1,7 @@
 ﻿using Dto;
 using Model;
 using Repository;
+using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class Login : Form
+    public partial class Login : BaseForm
     {
 
         private readonly ApiReta _api;

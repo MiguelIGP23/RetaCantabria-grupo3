@@ -17,6 +17,15 @@ namespace Forms
             this._ruta = ruta;
         }
 
+        private async void ActividadLista_Load(object sender, EventArgs e)
+        {
+            await CargarActividades();
+            if (Session.Rol!=EnumRoles.ADMINISTRADOR &&
+                Session.Rol != EnumRoles.DISENADOR &&
+                Session.Rol != EnumRoles.PROFESOR) btnCrear.Visible=false;
+        }
+
+
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -86,9 +95,6 @@ namespace Forms
             }
         }
 
-        private async void ActividadLista_Load(object sender, EventArgs e)
-        {
-            await CargarActividades();
-        }
+  
     }
 }

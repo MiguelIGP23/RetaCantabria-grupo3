@@ -1,10 +1,11 @@
 ﻿using Model;
 using Repository;
+using RetaEquipo3;
 using UserControls;
 
 namespace Forms
 {
-    public partial class ImagenesInteresLista : Form
+    public partial class ImagenesInteresLista : BaseForm
     {
 
         private readonly ApiReta _api;
