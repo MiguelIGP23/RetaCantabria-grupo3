@@ -20,12 +20,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -173,12 +176,15 @@ fun CreateRutaView(navController: NavHostController, dbViewModel: DBViewModel) {
 
     // UI
     Box(modifier = Modifier.fillMaxSize()) {
-        AndroidView(
-            factory = { mapView }, modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp)
-        )
-        BackButton(navController)
+        AndroidView(factory = { mapView }, modifier = Modifier.fillMaxWidth().height(300.dp))
+        IconButton(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(16.dp)
+        ) {
+            Icon(Icons.Filled.ArrowBack, contentDescription = "Volver", tint = Color.Black)
+        }
 
         Column(modifier = Modifier.fillMaxSize()) {
             Spacer(modifier = Modifier.weight(1f))
@@ -481,7 +487,7 @@ fun LocationControls(
                 )
             ) { Text(if (isTracking.value) "Detener Tracking" else "Iniciar Tracking") }
 
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.weight(0.5f))
 
             Button(
                 onClick = {
@@ -540,7 +546,7 @@ fun LocationControls(
             Text("Auto Trackpoint")
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(10.dp))
 
         // --- Botones de Waypoint ---
         Row {

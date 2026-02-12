@@ -102,7 +102,7 @@ fun FinishRouteDialog(
 
                     if (error) return@Button
 
-                    // ✅ Generar ruta y GPX antes de lanzar el launcher
+                    // Generar ruta y GPX antes de lanzar el launcher
                     val nuevaRuta = generarRuta(
                         nombre = rutaNombre.value,
                         descripcion = rutaDescripcion.value,
