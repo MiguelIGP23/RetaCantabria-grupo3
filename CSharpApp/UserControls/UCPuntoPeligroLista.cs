@@ -41,6 +41,7 @@ namespace UserControls
                 3 => Color.Khaki,
                 4 => Color.LightSalmon,
                 5 => Color.Red,
+                _=> Color.LightGray
             };
         }
 

@@ -2,13 +2,8 @@ package org.example.javaapp.service;
 
 import org.example.javaapp.dto.DtoRutas;
 import org.example.javaapp.dto.MapperRuta;
-import org.example.javaapp.model.Ruta;
-import org.example.javaapp.model.Trackpoint;
-import org.example.javaapp.model.TrackpointId;
-import org.example.javaapp.model.Usuario;
-import org.example.javaapp.repository.RutaRepository;
-import org.example.javaapp.repository.TrackpointRepository;
-import org.example.javaapp.repository.UsuarioRepository;
+import org.example.javaapp.model.*;
+import org.example.javaapp.repository.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +29,15 @@ public class ServiceRuta implements IServiceRuta {
     private final RutaRepository repoRuta;
     private final TrackpointRepository repoTrack;
     private final UsuarioRepository repoUsuario;
+    private final PuntosInteresRepository repoPuntoInteres;
+    private final PuntosPeligroRepository repoPuntoPeligro;
 
-    public ServiceRuta(RutaRepository repoRuta, TrackpointRepository repoTrack, UsuarioRepository repoUsuario) {
+    public ServiceRuta(RutaRepository repoRuta, TrackpointRepository repoTrack, UsuarioRepository repoUsuario, PuntosInteresRepository repoPuntoInteres, PuntosPeligroRepository repoPuntoPeligro) {
         this.repoRuta = repoRuta;
         this.repoTrack = repoTrack;
         this.repoUsuario = repoUsuario;
+        this.repoPuntoInteres = repoPuntoInteres;
+        this.repoPuntoPeligro = repoPuntoPeligro;
     }
 
 
@@ -196,7 +195,14 @@ public class ServiceRuta implements IServiceRuta {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trackpoint sin ruta asignada");
                 }
             }
-            repoTrack.saveAll(puntos);      // Guardamos lista de trackpoints en la bd
+            repoTrack.saveAll(puntos);
+            double[] acumulada = calcularDistanciaAcumulada(puntos);
+
+            List<PuntosInteres> intereses = parsearPuntosInteres(bytes, guardada);
+            List<PuntosPeligro> peligros = parsearPuntosPeligro(bytes, guardada, puntos, acumulada);
+            repoPuntoInteres.saveAll(intereses);
+            repoPuntoPeligro.saveAll(peligros);
+
 
             // -- Calcular campos autogenerados de la ruta --
             double latIn = puntos.getFirst().getLatitud();
@@ -298,10 +304,8 @@ public class ServiceRuta implements IServiceRuta {
             NodeList timeNodes = e.getElementsByTagNameNS("*", "time");
             if (timeNodes.getLength() > 0) timeStr = timeNodes.item(0).getTextContent();
 
-            // parseo con defaults
             double elevacion = (eleStr == null || eleStr.isBlank()) ? 0.0 : Double.parseDouble(eleStr.trim());
 
-            // GPX viene con "aaaa-MM-ddTHH:MM:SSZ"
             LocalTime time = null;
             if (timeStr != null && !timeStr.isBlank()) {
                 time = java.time.OffsetDateTime.parse(timeStr.trim()).toLocalTime();
@@ -345,4 +349,155 @@ public class ServiceRuta implements IServiceRuta {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return radioTierra * c;
     }
+
+    private List<PuntosInteres> parsearPuntosInteres(byte[] gpxBytes, Ruta ruta) throws Exception {
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document doc = db.parse(new ByteArrayInputStream(gpxBytes));
+
+        NodeList wpts = doc.getElementsByTagNameNS("*", "wpt");
+        List<PuntosInteres> list = new ArrayList<>();
+
+        for (int i = 0; i < wpts.getLength(); i++) {
+            Element e = (Element) wpts.item(i);
+
+            String type = textOfFirst(e, "type");
+            if (type == null || !type.trim().equalsIgnoreCase("INTERES")) continue;
+
+            String latStr = e.getAttribute("lat");
+            String lonStr = e.getAttribute("lon");
+            if (latStr == null || lonStr == null || latStr.isBlank() || lonStr.isBlank()) continue;
+
+            double lat = Double.parseDouble(latStr);
+            double lon = Double.parseDouble(lonStr);
+
+            String eleStr = textOfFirst(e, "ele");
+            double elevacion = (eleStr == null || eleStr.isBlank()) ? 0.0 : Double.parseDouble(eleStr.trim());
+
+            String nombre = textOfFirst(e, "name");
+            String desc = textOfFirst(e, "desc");
+
+            String car = textOfFirst(e, "car"); // custom de tu GPX
+            if (car != null && car.equalsIgnoreCase("null")) car = null;
+
+            PuntosInteres pi = new PuntosInteres();
+            pi.setId(null);
+            pi.setRuta(ruta);
+            pi.setLatitud(lat);
+            pi.setLongitud(lon);
+            pi.setElevacion(elevacion);
+            pi.setNombre(nombre);
+            pi.setDescripcion(desc);
+            pi.setCaracteristicas(car);
+
+            list.add(pi);
+        }
+        return list;
+    }
+
+
+    private List<PuntosPeligro> parsearPuntosPeligro(
+            byte[] gpxBytes,
+            Ruta ruta,
+            List<Trackpoint> trackpoints,
+            double[] distanciaAcumuladaMetros
+    ) throws Exception {
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document doc = db.parse(new ByteArrayInputStream(gpxBytes));
+
+        NodeList wpts = doc.getElementsByTagNameNS("*", "wpt");
+        List<PuntosPeligro> list = new ArrayList<>();
+
+        int posicion = 1;
+
+        for (int i = 0; i < wpts.getLength(); i++) {
+            Element e = (Element) wpts.item(i);
+
+            String type = textOfFirst(e, "type");
+            if (type == null || !type.trim().equalsIgnoreCase("PELIGRO")) continue;
+
+            String latStr = e.getAttribute("lat");
+            String lonStr = e.getAttribute("lon");
+            if (latStr == null || lonStr == null || latStr.isBlank() || lonStr.isBlank()) continue;
+
+            double lat = Double.parseDouble(latStr);
+            double lon = Double.parseDouble(lonStr);
+
+            String eleStr = textOfFirst(e, "ele");
+            double elevacion = (eleStr == null || eleStr.isBlank()) ? 0.0 : Double.parseDouble(eleStr.trim());
+
+            String nombre = textOfFirst(e, "name");
+            String desc = textOfFirst(e, "desc");
+
+            String grv = textOfFirst(e, "grv");
+            if (grv != null && grv.equalsIgnoreCase("null")) grv = null;
+
+            Byte gravedad = null;
+            if (grv != null && !grv.isBlank()) {
+                byte g = Byte.parseByte(grv.trim());
+                if (g < 1 || g > 5) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gravedad fuera de rango (1-5): " + g);
+                }
+                gravedad = g;
+            }
+
+            int idx = indiceTrackpointMasCercano(trackpoints, lat, lon);
+            double km = distanciaAcumuladaMetros[idx] / 1000.0;
+
+            PuntosPeligro pp = new PuntosPeligro();
+            pp.setId(null);
+            pp.setRuta(ruta);
+            pp.setLatitud(lat);
+            pp.setLongitud(lon);
+            pp.setElevacion(elevacion);
+            pp.setNombre(nombre);
+            pp.setDescripcion(desc);
+            pp.setGravedad(gravedad);
+            pp.setPosicion(posicion++);
+            pp.setKilometros(km);
+            list.add(pp);
+        }
+        return list;
+    }
+
+    private static double[] calcularDistanciaAcumulada(List<Trackpoint> puntos) {
+        double[] acc = new double[puntos.size()];
+        acc[0] = 0.0;
+        for (int i = 1; i < puntos.size(); i++) {
+            Trackpoint p1 = puntos.get(i - 1);
+            Trackpoint p2 = puntos.get(i);
+            acc[i] = acc[i - 1] + distanciaCoordenadas(
+                    p1.getLatitud(), p1.getLongitud(),
+                    p2.getLatitud(), p2.getLongitud()
+            );
+        }
+        return acc;
+    }
+
+    private static int indiceTrackpointMasCercano(List<Trackpoint> tps, double lat, double lon) {
+        int best = 0;
+        double bestD = Double.MAX_VALUE;
+        for (int i = 0; i < tps.size(); i++) {
+            Trackpoint tp = tps.get(i);
+            double d = distanciaCoordenadas(lat, lon, tp.getLatitud(), tp.getLongitud());
+            if (d < bestD) {
+                bestD = d;
+                best = i;
+            }
+        }
+        return best;
+    }
+
+    private static String textOfFirst(Element parent, String localName) {
+        NodeList nodes = parent.getElementsByTagNameNS("*", localName);
+        if (nodes.getLength() == 0) return null;
+        String t = nodes.item(0).getTextContent();
+        return (t == null) ? null : t.trim();
+    }
+
 }
