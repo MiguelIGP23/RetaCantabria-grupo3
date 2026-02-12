@@ -29,6 +29,7 @@ import com.example.kotlinapp.R
 import com.example.kotlinapp.gps.gpx.importarGpx
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.enums.Clasificacion
+import com.example.kotlinapp.model.enums.Rol
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 import kotlinx.coroutines.flow.firstOrNull
@@ -68,6 +69,14 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
             rutas
         }
     }
+    val rolString by vm.rol.collectAsState(initial = null)
+
+// Convertimos a Rol? seguro
+    val rol: Rol? = try {
+        rolString?.let { Rol.valueOf(it) }
+    } catch (e: IllegalArgumentException) {
+        null
+    }
 
     // Scaffold con floatingActionButton
     Scaffold(topBar = { ListaTopBar(
@@ -75,19 +84,23 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
         rutas = rutas,
         vm = vm
     ) }, floatingActionButton = {
-        FloatingActionButton(
-            onClick = {
-                navController.navigate("Create")
-            }, containerColor = Color(0xFF4CAF50), // verde
-            contentColor = Color.White
-        ) {
-            Icon(
-                Icons.Default.AddCircle,
-                contentDescription = "Añadir Ruta",
-                modifier = Modifier.size(24.dp)
-            )
+
+        if (rol != Rol.ALUMNO) {
+            FloatingActionButton(
+                onClick = { navController.navigate("Create") },
+                containerColor = Color(0xFF4CAF50),
+                contentColor = Color.White
+            ) {
+                Icon(
+                    Icons.Default.AddCircle,
+                    contentDescription = "Añadir Ruta",
+                    modifier = Modifier.size(24.dp)
+                )
+            }
         }
-    }) { innerPadding ->
+
+    }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

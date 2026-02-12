@@ -16,28 +16,19 @@ import com.example.kotlinapp.gps.map.createMapView
 import com.example.kotlinapp.model.Ruta
 import com.google.android.gms.location.*
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.Polyline
 import android.os.Looper
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import com.example.kotlinapp.gps.gpx.parseGpxTrackpoints
 import com.example.kotlinapp.gps.gpx.parseGpxTrackpointsSafe
 import com.example.kotlinapp.gps.map.createTrackpointMarker
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserFactory
-import java.io.StringReader
 
 @Composable
 fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
     val context = LocalContext.current
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-    val isTracking = remember { mutableStateOf(true) }
     val currentPosition = remember { mutableStateOf<GeoPoint?>(null) }
 
     // MapView y marcador del usuario
@@ -48,7 +39,7 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
         mapView.overlays.add(currentMarker)
     }
 
-    // Cargar trackpoints GPX (solo marcadores, sin líneas)
+    // Cargar trackpoints GPX
     LaunchedEffect(ruta.archivoGPX) {
         ruta.archivoGPX?.let { gpx ->
             val points = parseGpxTrackpointsSafe(gpx)
@@ -64,7 +55,7 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
 
     val locationRequest = remember {
         LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000L)
-            .setMinUpdateDistanceMeters(0f) // sin filtrado de distancia
+            .setMinUpdateDistanceMeters(0f)
             .build()
     }
 
@@ -72,12 +63,11 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
         object : LocationCallback() {
             override fun onLocationResult(result: LocationResult) {
                 val loc = result.lastLocation ?: return
-                if (!isTracking.value || loc.accuracy > 30f) return
+                if (loc.accuracy > 30f) return
 
                 val point = GeoPoint(loc.latitude, loc.longitude, loc.altitude)
                 currentPosition.value = point
 
-                // Actualizar marcador y centrar mapa
                 currentMarker.position = point
                 mapView.controller.setCenter(point)
                 mapView.invalidate()
@@ -85,13 +75,14 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
         }
     }
 
-    DisposableEffect(isTracking.value) {
+    // Iniciar tracking automáticamente y parar al salir
+    DisposableEffect(Unit) {
         val hasPermission = ContextCompat.checkSelfPermission(
             context,
             android.Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
-        if (isTracking.value && hasPermission) {
+        if (hasPermission) {
             fusedLocationClient.requestLocationUpdates(
                 locationRequest,
                 locationCallback,
@@ -99,7 +90,9 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
             )
         }
 
-        onDispose { fusedLocationClient.removeLocationUpdates(locationCallback) }
+        onDispose {
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+        }
     }
 
     // UI
@@ -114,22 +107,13 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
             Icon(Icons.Filled.ArrowBack, contentDescription = "Volver", tint = Color.Black)
         }
 
-        // Controles inferiores
-        Column(
-            modifier = Modifier.align(Alignment.BottomCenter).padding(16.dp)
-        ) {
-            Button(
-                onClick = { isTracking.value = !isTracking.value },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isTracking.value) Color.Red else Color.Green
-                )
-            ) {
-                Text(if (isTracking.value) "Detener recorrido" else "Iniciar recorrido")
-            }
-
-            currentPosition.value?.let { pos ->
-                Text("Latitud: ${pos.latitude}, Longitud: ${pos.longitude}", color = Color.Black)
-            }
+        // Mostrar posición actual
+        currentPosition.value?.let { pos ->
+            Text(
+                "Latitud: ${pos.latitude}, Longitud: ${pos.longitude}",
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.BottomCenter).padding(16.dp)
+            )
         }
     }
 }
