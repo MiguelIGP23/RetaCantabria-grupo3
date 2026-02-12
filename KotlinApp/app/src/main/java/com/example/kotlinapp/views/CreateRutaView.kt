@@ -64,6 +64,7 @@ import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.model.WaypointDialogData
 import com.example.kotlinapp.model.enums.WaypointType
+import com.example.kotlinapp.viewmodels.DBViewModel
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -74,13 +75,14 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
+import androidx.compose.runtime.collectAsState
 
 
 private const val MIN_DISTANCE_METERS = 15f
 private const val MIN_TIME_MS = 5000L
 
 @Composable
-fun CreateRutaView(navController: NavHostController) {
+fun CreateRutaView(navController: NavHostController, dbViewModel: DBViewModel) {
     val autoTrackpointEnabled = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -106,8 +108,10 @@ fun CreateRutaView(navController: NavHostController) {
 
     // Configuración osmdroid
     val ctx = LocalContext.current.applicationContext
-    Configuration.getInstance().load(ctx, ctx.getSharedPreferences("osmdroid", Context.MODE_PRIVATE))
-    Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
+    Configuration.getInstance()
+        .load(ctx, ctx.getSharedPreferences("osmdroid", Context.MODE_PRIVATE))
+    Configuration.getInstance()
+        .load(context, PreferenceManager.getDefaultSharedPreferences(context))
 
     val mapView = remember { createMapView(context) }
     val currentMarker = remember(mapView) { createCurrentLocationMarker(mapView, context) }
@@ -199,6 +203,8 @@ fun CreateRutaView(navController: NavHostController) {
                 canSaveTrackpoint = ::canSaveTrackpoint,
                 currentAltitude = currentAltitude,
                 trackpointIdCounter = trackpointIdCounter,
+                dbViewModel = dbViewModel,
+                navController = navController,
                 usuarioId = -1
             )
         }
@@ -291,9 +297,6 @@ fun generarRuta(
 }
 
 
-
-
-
 fun createLocationCallback(
     mapView: MapView,
     marker: Marker,
@@ -319,7 +322,8 @@ fun createLocationCallback(
             if (!isTracking.value) return
             val location = locationResult.lastLocation ?: return
             if (location.accuracy > 20f) return
-            Log.d("ALTITUD_DEBUG",
+            Log.d(
+                "ALTITUD_DEBUG",
                 "hasAltitude=${location.hasAltitude()} alt=${location.altitude}"
             )
 
@@ -336,7 +340,8 @@ fun createLocationCallback(
             lastAlt = alt
             currentAltitude.value = alt
 
-            Log.d("ALT_FINAL",
+            Log.d(
+                "ALT_FINAL",
                 "location.alt=${location.altitude} | alt_guardada=$alt"
             )
 
@@ -376,7 +381,8 @@ fun createLocationCallback(
                 savedTrackpoints.add(trackpoint)
                 Log.d("TRACKPOINT", "Guardado: ${trackpoint.elevacion}")
                 trackPolyline.addPoint(GeoPoint(lat, lon, alt))
-                val wpMarker = createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
+                val wpMarker =
+                    createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
                 wpMarker.position = GeoPoint(lat, lon, alt)
                 mapView.overlays.add(wpMarker)
                 mapView.invalidate()
@@ -384,8 +390,6 @@ fun createLocationCallback(
         }
     }
 }
-
-
 
 
 @Composable
@@ -404,6 +408,8 @@ fun LocationControls(
     canSaveTrackpoint: (Location) -> Boolean,
     currentAltitude: MutableState<Double>,
     trackpointIdCounter: MutableState<Int>,
+    dbViewModel: DBViewModel,
+    navController: NavHostController,
     usuarioId: Int
 ) {
     var waypointDialog by remember { mutableStateOf<WaypointDialogData?>(null) }
@@ -485,18 +491,23 @@ fun LocationControls(
 
             Button(
                 onClick = {
-                    val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
-                    val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
+                    val lat =
+                        textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
+                    val lon =
+                        textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
                     val alt = currentAltitude.value
-                    savedTrackpoints.add(Trackpoint(
-                        idRuta = -1,
-                        latitud = lat,
-                        longitud = lon,
-                        elevacion = alt,
-                        time = System.currentTimeMillis(),
-                        posicion = savedTrackpoints.size + 1
-                    ))
-                    val marker = createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
+                    savedTrackpoints.add(
+                        Trackpoint(
+                            idRuta = -1,
+                            latitud = lat,
+                            longitud = lon,
+                            elevacion = alt,
+                            time = System.currentTimeMillis(),
+                            posicion = savedTrackpoints.size + 1
+                        )
+                    )
+                    val marker =
+                        createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
                     marker.position = GeoPoint(lat, lon, alt)
                     mapView.overlays.add(marker)
                     trackPolyline.addPoint(GeoPoint(lat, lon, alt))
@@ -510,7 +521,11 @@ fun LocationControls(
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.height(48.dp)
             ) {
-                Icon(Icons.Default.AddCircle, contentDescription = "Añadir Punto", modifier = Modifier.size(24.dp))
+                Icon(
+                    Icons.Default.AddCircle,
+                    contentDescription = "Añadir Punto",
+                    modifier = Modifier.size(24.dp)
+                )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text("Añadir Punto")
             }
@@ -536,10 +551,15 @@ fun LocationControls(
         // --- Botones de Waypoint ---
         Row {
             Button(
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50), contentColor = Color.White),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50),
+                    contentColor = Color.White
+                ),
                 onClick = {
-                    val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
-                    val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
+                    val lat =
+                        textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
+                    val lon =
+                        textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
                     // Abrir diálogo para PuntoInteres
                     waypointDialog = WaypointDialogData(
                         lat, lon, type = WaypointType.INTERES,
@@ -552,12 +572,22 @@ fun LocationControls(
             Spacer(Modifier.width(16.dp))
 
             Button(
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFA726), contentColor = Color.White),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFFA726),
+                    contentColor = Color.White
+                ),
                 onClick = {
-                    val lat = textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
-                    val lon = textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
+                    val lat =
+                        textLat.value.removePrefix("Latitud: ").toDoubleOrNull() ?: return@Button
+                    val lon =
+                        textLon.value.removePrefix("Longitud: ").toDoubleOrNull() ?: return@Button
                     // Abrir diálogo para PuntoPeligro
-                    waypointDialog = WaypointDialogData(lat, lon,currentAltitude.value, type = WaypointType.PELIGRO)
+                    waypointDialog = WaypointDialogData(
+                        lat,
+                        lon,
+                        currentAltitude.value,
+                        type = WaypointType.PELIGRO
+                    )
                 },
                 enabled = isTracking.value
             ) { Text("Punto Peligro") }
@@ -578,6 +608,7 @@ fun LocationControls(
                             marker.position = GeoPoint(punto.latitud, punto.longitud)
                             mapView.overlays.add(marker)
                         }
+
                         is PuntoPeligro -> {
                             savedPuntosPeligro.add(punto)
                             val marker = createTrackpointMarker(mapView, context, punto.nombre)
@@ -601,6 +632,25 @@ fun LocationControls(
             usuarioId = usuarioId,              // usa el MutableState para GPX
             createFileLauncher = createFileLauncher,
             onRouteSaved = {
+                // ✅ Generar ruta y GPX antes de lanzar el launcher
+                val nuevaRuta = generarRuta(
+                    nombre = rutaNombreState.value,
+                    descripcion = rutaDescripcionState.value,
+                    trackpoints = savedTrackpoints.toList(),
+                    puntosInteres = savedPuntosInteres,
+                    puntosPeligro = savedPuntosPeligro,
+                    usuarioId = usuarioId
+                )
+
+                // Guardamos el GPX en el MutableState
+                pendingGpx.value = nuevaRuta.archivoGPX
+                val finishedGpx: String = pendingGpx.value.toString()
+                dbViewModel.uploadGpx(nuevaRuta, finishedGpx)
+
+//                // Lanzamos el launcher para guardar el archivo
+//                createFileLauncher.launch("${nuevaRuta.nombre}.gpx")
+
+
                 finishRouteDialog.value = false
                 // opcional: aquí puedes limpiar otros estados si quieres
             },
@@ -608,5 +658,12 @@ fun LocationControls(
             savedPuntosInteres = savedPuntosInteres,
             savedPuntosPeligro = savedPuntosPeligro
         )
+    }
+    val rutaState = dbViewModel.ruta.collectAsState()
+    LaunchedEffect(rutaState.value) {
+
+        val idBorrador = dbViewModel.ruta.value?.id
+        if (idBorrador != null)
+            navController.navigate("borrador/$idBorrador")
     }
 }

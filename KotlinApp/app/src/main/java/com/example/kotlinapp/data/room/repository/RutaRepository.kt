@@ -18,6 +18,8 @@ class RutaRepository(
     fun getRutas(): Flow<List<Ruta>> = dao.getAll()
         .map { list -> list.map { it.toDomain() } }
 
+    fun getRutasValidas(): Flow<List<Ruta>> = dao.getAllValidated()
+        .map{list -> list.map { it.toDomain() }}
     suspend fun insertRuta(ruta: Ruta) {
         dao.insertOrUpdate(ruta.toEntity())
     }

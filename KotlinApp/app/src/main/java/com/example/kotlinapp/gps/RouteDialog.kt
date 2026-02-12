@@ -76,19 +76,6 @@ fun FinishRouteDialog(
                     )
                 }
 
-                Spacer(Modifier.height(8.dp))
-
-                Text("Escribe una descripción:")
-                OutlinedTextField(
-                    value = rutaDescripcion.value,
-                    onValueChange = { rutaDescripcion.value = it },
-                    placeholder = { Text("Descripción de la ruta") },
-                    singleLine = false,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(Modifier.height(8.dp))
-
                 if (showTrackpointsError.value) {
                     Text(
                         "No se puede guardar una ruta sin trackpoints",
@@ -125,11 +112,6 @@ fun FinishRouteDialog(
                         puntosPeligro = savedPuntosPeligro
                     ).copy(recomendacionesEquipo = rutaDescripcion.value)
 
-                    // Guardamos el GPX en el MutableState
-                    currentGPX.value = nuevaRuta.archivoGPX
-
-                    // Lanzamos el launcher para guardar el archivo
-                    createFileLauncher.launch("${nuevaRuta.nombre}.gpx")
 
                     // Cerramos diálogo pero NO borramos las listas aún,
                     // se borrarán luego de que se guarde el GPX
@@ -143,7 +125,7 @@ fun FinishRouteDialog(
                     containerColor = Color(0xFF64B5F6),
                     contentColor = Color.White
                 )
-            ) { Text("Exportar GPX") }
+            ) { Text("Publicar Ruta") }
         },
         dismissButton = {
             Button(

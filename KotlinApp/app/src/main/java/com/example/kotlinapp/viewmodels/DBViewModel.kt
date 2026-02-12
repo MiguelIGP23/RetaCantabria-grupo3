@@ -11,6 +11,8 @@ import com.example.kotlinapp.data.ServiceFactory
 import com.example.kotlinapp.data.room.repository.RutaRepository
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.views.RutaList
+import com.example.kotlinapp.model.enums.Clasificacion
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,12 +20,18 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class DBViewModel(private val authRepository: AuthRepository, private val roomDB: AppDatabase) : ViewModel() {
+class DBViewModel(private val authRepository: AuthRepository, private val roomDB: AppDatabase) :
+    ViewModel() {
 
     //Session Stuff
     val token = authRepository.token
     val rol = authRepository.rol
+
     //Login Stuff
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Waiting)
 
@@ -67,11 +75,16 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
 
     fun checkAuth() {
         viewModelScope.launch {
-            val response = ruta.findAll()
+            val response = rutaService.findAll()
             _loginState.value = when (response.code()) {
                 200 -> LoginState.Valid
                 401 -> LoginState.Expired //Buscamos este codigo, ver si ha caducado el token
                 else -> LoginState.Invalid
+            }
+            rutaRepo.syncRutas()
+            _rutas.value = when (rol.first()) {
+                "ADMINISTRADOR" -> rutaRepo.getRutas().first()
+                else -> rutaRepo.getRutasValidas().first()
             }
         }
     }
@@ -81,16 +94,18 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
     }
     //DB Stuff
 
-    val ruta by lazy { ServiceFactory.ruta(tokenProvider()) }
-    private val rutaRepo = RutaRepository(ruta, roomDB.rutaDao())
+    val rutaService by lazy { ServiceFactory.ruta(tokenProvider()) }
+    private val rutaRepo = RutaRepository(rutaService, roomDB.rutaDao())
     private val _rutasLoaded = mutableStateOf(false)
-    val rutas = rutaRepo.getRutas()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    private val _rutas = MutableStateFlow<List<Ruta>>(emptyList())
+    val rutas = _rutas.asStateFlow()
+
 
     fun onLoginSuccess() {
         viewModelScope.launch {
             // Primero sincroniza con servidor
-            rutaRepo.syncRutas()
+
             _rutasLoaded.value = true
         }
     }
@@ -110,6 +125,81 @@ class DBViewModel(private val authRepository: AuthRepository, private val roomDB
     fun syncRutas() {
         viewModelScope.launch {
             rutaRepo.syncRutas()
+        }
+    }
+
+    private val _ruta = MutableStateFlow<Ruta?>(null)
+    var ruta = _ruta.asStateFlow()
+
+    fun getRuta(id: Int) {
+        viewModelScope.launch {
+            val response = rutaService.findById(id)
+            _ruta.value = response.body()
+        }
+    }
+
+    fun deleteRuta(id: Int) {
+        viewModelScope.launch {
+            val response = rutaService.delete(id)
+        }
+    }
+
+    fun uploadGpx(ruta: Ruta, gpx: String) {
+        viewModelScope.launch {
+            val rutaResponseBody =
+                Gson().toJson(ruta).toRequestBody("application/json".toMediaTypeOrNull())
+            val gpxRequestBody = gpx.toRequestBody(
+                "application/octet-stream".toMediaType()
+            )
+            val gpxPart = MultipartBody.Part.createFormData(
+                name = "file",
+                filename = "track.gpx",
+                body = gpxRequestBody
+            )
+            val response = rutaService.uploadGPX(rutaResponseBody, gpxPart)
+            _ruta.value = response.body();
+        }
+    }
+
+    fun limpiarRuta() {
+        _ruta.value = null
+    }
+
+    fun confirmarBorrador(
+        nombre: String,
+        zonaGeografica: String,
+        puntoInicial: String,
+        puntoFinal: String,
+        temporadasString: String,
+        equipo: String,
+        terreno: Int,
+        indicaciones: Int,
+        id: Int?,
+        accesibilidad: Boolean,
+        rutaFamiliar: Boolean,
+        clasificacion: Clasificacion
+    ) {
+        viewModelScope.launch {
+            val rutaModificada = ruta.value?.copy(
+                nombre = nombre,
+                nombreInicioruta = puntoInicial,
+                nombreFinalruta = puntoFinal,
+                zonaGeografica = zonaGeografica,
+                temporadas = temporadasString,
+                recomendacionesEquipo = equipo,
+                indicaciones = indicaciones.toByte(),
+                tipoTerreno = terreno.toByte(),
+                accesibilidad = if (accesibilidad) 1 else 0,
+                rutaFamiliar = if (rutaFamiliar) 1 else 0,
+                clasificacion = clasificacion
+            )
+            rutaService.confirmarBorrador(id!!, rutaModificada!!)
+        }
+    }
+
+    fun cancelarBorrador(id: Int) {
+        viewModelScope.launch {
+            rutaService.cancelarBorrador(id)
         }
     }
 }
