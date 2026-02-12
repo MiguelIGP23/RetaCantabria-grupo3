@@ -30,6 +30,6 @@ data class PuntoInteresEntity(
     val caracteristicas: String?,
     val tipo: TipoPunto?,
     val descripcion: String?,
-    val timestamp: Long,
+    val timestamp: Int?,
     val rutaId: Int
 )

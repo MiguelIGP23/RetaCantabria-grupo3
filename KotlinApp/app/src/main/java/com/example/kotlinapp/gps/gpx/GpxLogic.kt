@@ -13,20 +13,12 @@ import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.model.enums.Clasificacion
-import java.io.StringReader
 import kotlin.collections.forEach
-import android.util.Base64
-import com.example.kotlinapp.model.PuntoInteres
-import com.example.kotlinapp.model.PuntoPeligro
-import org.osmdroid.util.GeoPoint
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserFactory
 
 fun generateGpx(
     ruta: Ruta,
     trackpoints: List<Trackpoint>,
-    puntosInteres: List<PuntoInteres>,
-    puntosPeligro: List<PuntoPeligro>
+    waypoints: List<Waypoint>
 ): String {
     val sb = StringBuilder()
     sb.append("""<?xml version="1.0" encoding="UTF-8"?>""")
@@ -54,27 +46,24 @@ fun generateGpx(
     sb.append("  </trk>\n")
 
     // Waypoints
-    puntosPeligro.forEach { wp ->
-        sb.append("  <wpt lat=\"${wp.latitud}\" lon=\"${wp.longitud}\">\n")
-        sb.append("    <ele>${wp.elevacion}</ele>\n")
-        sb.append("    <grv>${wp.gravedad}</grv>\n")
-        sb.append("    <name>${wp.nombre}</name>\n")
-        sb.append("    <desc>${wp.descripcion}</desc>\n")
-        sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
-        sb.append("    <type>PELIGRO</type>\n")
+    waypoints.forEach { wp ->
+        sb.append("  <wpt lat=\"${wp.lat}\" lon=\"${wp.lon}\">\n")
+        sb.append("    <ele>${wp.elevation ?: 0.0}</ele>\n")
+        sb.append("    <name>${wp.title}</name>\n")
+        sb.append("    <desc>${wp.description} (${wp.type})</desc>\n")
+        wp.photoPath?.let { sb.append("    <link href=\"$it\" />\n") }
         sb.append("  </wpt>\n")
     }
 
-    puntosInteres.forEach { wp ->
-        sb.append("  <wpt lat=\"${wp.latitud}\" lon=\"${wp.longitud}\">\n")
-        sb.append("    <ele>${wp.elevacion}</ele>\n")
-        sb.append("    <car>${wp.caracteristicas}</car>\n")
-        sb.append("    <name>${wp.nombre}</name>\n")
-        sb.append("    <desc>${wp.descripcion}</desc>\n")
-        sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
-        sb.append("    <type>INTERES</type>\n")
-        sb.append("  </wpt>\n")
-    }
+    // Extensiones
+    sb.append("  <extensions>\n")
+    sb.append("    <nivelEsfuerzo>${ruta.nivelEsfuerzo ?: 0}</nivelEsfuerzo>\n")
+    sb.append("    <nivelRiesgo>${ruta.nivelRiesgo ?: 0}</nivelRiesgo>\n")
+    sb.append("    <tipoTerreno>${ruta.tipoTerreno ?: 0}</tipoTerreno>\n")
+    sb.append("    <temporada>${ruta.temporadas ?: "No especificada"}</temporada>\n")
+    sb.append("    <accesibilidad>${ruta.accesibilidad ?: false}</accesibilidad>\n")
+    sb.append("    <rutaFamiliar>${ruta.rutaFamiliar ?: false}</rutaFamiliar>\n")
+    sb.append("  </extensions>\n")
 
     sb.append("</gpx>")
     return sb.toString()
@@ -89,8 +78,6 @@ fun epochToIso(time: Long): String {
     sdf.timeZone = java.util.TimeZone.getTimeZone("UTC")
     return sdf.format(java.util.Date(time))
 }
-
-
 
 @Composable
 fun rememberGpxLauncher(
@@ -162,84 +149,3 @@ fun importarGpx(
 
 
 
-fun parseGpxTrackpoints(gpxBase64: String): List<GeoPoint> {
-    val points = mutableListOf<GeoPoint>()
-
-    // Decodificar Base64
-    val gpxBytes = Base64.decode(gpxBase64, Base64.DEFAULT)
-    val gpxXml = String(gpxBytes, Charsets.UTF_8)
-
-    val factory = XmlPullParserFactory.newInstance()
-    val parser = factory.newPullParser()
-    parser.setInput(StringReader(gpxXml))
-
-    var event = parser.eventType
-    var lat: Double? = null
-    var lon: Double? = null
-    var ele: Double? = null
-
-    while (event != XmlPullParser.END_DOCUMENT) {
-        when (event) {
-            XmlPullParser.START_TAG -> {
-                when (parser.name) {
-                    "trkpt" -> {
-                        lat = parser.getAttributeValue(null, "lat")?.toDoubleOrNull()
-                        lon = parser.getAttributeValue(null, "lon")?.toDoubleOrNull()
-                    }
-                    "ele" -> ele = parser.nextText().toDoubleOrNull()
-                }
-            }
-            XmlPullParser.END_TAG -> {
-                if (parser.name == "trkpt" && lat != null && lon != null) {
-                    points.add(GeoPoint(lat, lon, ele ?: 0.0))
-                    lat = null; lon = null; ele = null
-                }
-            }
-        }
-        event = parser.next()
-    }
-    return points
-}
-
-
-fun parseGpxTrackpointsSafe(gpx: String): List<GeoPoint> {
-    val points = mutableListOf<GeoPoint>()
-    val gpxXml = try {
-        // Intentar decodificar Base64; si falla, usar como XML plano
-        val bytes = Base64.decode(gpx, Base64.DEFAULT)
-        String(bytes, Charsets.UTF_8)
-    } catch (_: IllegalArgumentException) {
-        gpx
-    }
-
-    val factory = XmlPullParserFactory.newInstance()
-    val parser = factory.newPullParser()
-    parser.setInput(StringReader(gpxXml))
-
-    var event = parser.eventType
-    var lat: Double? = null
-    var lon: Double? = null
-    var ele: Double? = null
-
-    while (event != XmlPullParser.END_DOCUMENT) {
-        when (event) {
-            XmlPullParser.START_TAG -> {
-                when (parser.name) {
-                    "trkpt" -> {
-                        lat = parser.getAttributeValue(null, "lat")?.toDoubleOrNull()
-                        lon = parser.getAttributeValue(null, "lon")?.toDoubleOrNull()
-                    }
-                    "ele" -> ele = parser.nextText().toDoubleOrNull()
-                }
-            }
-            XmlPullParser.END_TAG -> {
-                if (parser.name == "trkpt" && lat != null && lon != null) {
-                    points.add(GeoPoint(lat, lon, ele ?: 0.0))
-                    lat = null; lon = null; ele = null
-                }
-            }
-        }
-        event = parser.next()
-    }
-    return points
-}

@@ -1,5 +1,8 @@
 package com.example.kotlinapp.views
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -11,10 +14,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,9 +27,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kotlinapp.R
+import com.example.kotlinapp.data.IdRef
+import com.example.kotlinapp.gps.gpx.generateGpx
 import com.example.kotlinapp.gps.gpx.importarGpx
 import com.example.kotlinapp.model.Ruta
+import com.example.kotlinapp.model.Trackpoint
+import com.example.kotlinapp.model.Usuario
+import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.model.enums.Clasificacion
+import com.example.kotlinapp.model.enums.Rol
+import com.example.kotlinapp.model.enums.WaypointType
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 import kotlinx.coroutines.flow.firstOrNull
@@ -98,8 +106,7 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
             Spacer(modifier = Modifier.height(8.dp))
             RutaList(
                 rutasFiltradas,
-                navController,
-                vm
+                navController
             )
         }
     }
@@ -130,11 +137,11 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
             // Botón para importar GPX
             IconButton(onClick = { gpxLauncher.launch(arrayOf("application/xml", "text/xml", "*/*"))
             }) {
-                Icon(Icons.Default.PlayArrow, contentDescription = "Importar GPX")
+                Icon(Icons.Default.Build, contentDescription = "Importar GPX")
             }
 
             // Botón recargar
-            IconButton(onClick = { vm.syncRutas() }) {
+            IconButton(onClick = { /* vm.cargarRutas() */ }) {
                 Icon(Icons.Filled.Refresh, contentDescription = "Recargar Rutas")
             }
 
@@ -182,82 +189,42 @@ fun SearchBar(value: String, onValueChange: (String) -> Unit) {
 
 // Lista de rutas en LazyColumn
 @Composable
-fun RutaList(rutas: List<Ruta>, navController: NavHostController, vm: DBViewModel) {
+fun RutaList(rutas: List<Ruta>, navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(rutas) { ruta ->
-            RutaItem(
-                ruta = ruta,
-                onClick = {
-                    // clic en todo el item → ir al detalle
-                    navController.navigate("detail/${ruta.id}")
-                },
-                onPlayClick = {
-                    // clic en el botón de recorrer ruta → iniciar recorrido
-                    vm.setRutaImportada(ruta)
-                    navController.navigate("Travel/imported") // o lo que haga iniciar la ruta
-                }
-            )
-        }
-    }
-}
-
-
-// Composable individual de cada ruta
-@Composable
-fun RutaItem(ruta: Ruta, onClick: () -> Unit, onPlayClick: () -> Unit = {}) {
-    val color = when (ruta.clasificacion) {
-        Clasificacion.CIRCULAR -> Color(0xFFA5D6A7) // verde
-        Clasificacion.LINEAL -> Color(0xFFFFCC80)   // naranja
-        else -> Color.LightGray
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onClick() },
-        colors = CardDefaults.cardColors(containerColor = color),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Nombre de la ruta ocupa la mayor parte del Row
-            Text(
-                text = ruta.nombre,
-                color = Color.Black,
-                fontSize = 16.sp,
-                modifier = Modifier.weight(1f)
-            )
-
-            Spacer(modifier = Modifier.width(8.dp)) // separador entre texto y botón
-
-            // Botón recorrer ruta a la derecha con forma circular y fondo
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .background(color = Color.White, shape = MaterialTheme.shapes.small)
-            ) {
-                IconButton(
-                    onClick = onPlayClick,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Icon(
-                        Icons.Outlined.PlayArrow,
-                        contentDescription = "Recorrer Ruta",
-                        tint = Color.Black
-                    )
-                }
+            RutaItem(ruta) {
+                // onClick: navegar al detalle de la ruta
+                navController.navigate("detail/${ruta.id}")
             }
         }
     }
 }
 
+// Composable individual de cada ruta
+@Composable
+fun RutaItem(ruta: Ruta, onClick: () -> Unit) {
+    val color = when (ruta.clasificacion) {
+        Clasificacion.CIRCULAR -> Color(0xFFA5D6A7) // ejemplo verde
+        Clasificacion.LINEAL -> Color(0xFFFFCC80)   // ejemplo naranja
+        else -> Color.LightGray
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color)
+            .padding(16.dp)
+            .clickable { onClick() }) {
+        Text(
+            text = "Ruta: ${ruta.nombre}",
+            color = Color.Black,
+            fontSize = 16.sp
+        )
+    }
+}
 
 

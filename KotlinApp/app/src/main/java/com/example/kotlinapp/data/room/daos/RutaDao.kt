@@ -22,15 +22,6 @@ interface RutaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(rutas: RutaEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdate(rutas: RutaEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdate(rutas: List<RutaEntity>)
-
     @Query("DELETE FROM rutas WHERE idRuta = :id")
     suspend fun clear(id: Int)
-
-    @Query("DELETE FROM rutas")
-    suspend fun clearAll()
 }

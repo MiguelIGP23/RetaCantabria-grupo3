@@ -28,16 +28,13 @@ import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.LaunchedEffect
-import com.example.kotlinapp.model.PuntoInteres
-import com.example.kotlinapp.model.PuntoPeligro
-import com.example.kotlinapp.model.enums.WaypointType
 
 
 @Composable
 fun WaypointDialog(
     dialogData: WaypointDialogData,
     onDismiss: () -> Unit,
-    onSave: (Any) -> Unit
+    onSave: (Waypoint) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -140,37 +137,17 @@ fun WaypointDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    // Aquí devolvemos PuntoInteres o PuntoPeligro según el tipo
-                    val punto = if (dialogData.type == WaypointType.INTERES) {
-                        PuntoInteres(
-                            id = null,
-                            nombre = title,
-                            latitud = dialogData.lat,
-                            longitud = dialogData.lon,
-                            elevacion = dialogData.elevation ?: 0.0,
-                            caracteristicas = null,
-                            tipo = null,
-                            descripcion = description,
-                            timestamp = System.currentTimeMillis().toLong(),
-                            rutaId = -1
+                    onSave(
+                        Waypoint(
+                            lat = dialogData.lat,
+                            lon = dialogData.lon,
+                            type = dialogData.type,
+                            title = title,
+                            description = description,
+                            photoPath = photoUri,
+                            elevation = dialogData.elevation ?: 0.0
                         )
-                    } else {
-                        PuntoPeligro(
-                            id = null,
-                            nombre = title,
-                            latitud = dialogData.lat,
-                            longitud = dialogData.lon,
-                            elevacion = dialogData.elevation ?: 0.0,
-                            kilometros = null,
-                            gravedad = null,
-                            descripcion = description,
-                            timestamp = System.currentTimeMillis().toLong(),
-                            rutaId = -1
-                        )
-                    }
-
-                    onSave(punto)
-                    onDismiss()
+                    )
                 }
             ) { Text("Guardar") }
         },

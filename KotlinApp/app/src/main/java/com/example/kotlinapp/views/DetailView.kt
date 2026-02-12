@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -25,7 +24,6 @@ import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 import androidx.compose.runtime.collectAsState
-import com.example.kotlinapp.data.ServiceFactory.ruta
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,48 +46,48 @@ fun DetailView(navController: NavHostController, id: Int?, dbViewModel: DBViewMo
             ) {
                 FloatingActionButton(
                     onClick = {
-                        dbViewModel.setRutaImportada(rutaSeleccionada)
-                        navController.navigate("Travel/imported")
+                        // Navega a la pantalla Travel y pasa la id de la ruta
+                        navController.navigate("travel/${rutaSeleccionada.id}")
                     },
                     containerColor = Color(0xFF2196F3), // azul claro
                     contentColor = Color.White
                 ) {
                     Icon(
-                        Icons.Default.PlayArrow,
+                        Icons.Default.ArrowBack, // puedes usar otro icono, por ejemplo DirectionsWalk
                         contentDescription = "Ir a Travel",
                         modifier = Modifier.size(24.dp)
                     )
                 }
 
                 // Botón Modificar
-//                FloatingActionButton(
-//                    onClick = {
-//                        // Lógica para modificar la ruta
-//                    },
-//                    containerColor = Color(0xFF365DA9), // azul
-//                    contentColor = Color.White
-//                ) {
-//                    Icon(
-//                        Icons.Default.Edit,
-//                        contentDescription = "Modificar Ruta",
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                }
+                FloatingActionButton(
+                    onClick = {
+                        // Lógica para modificar la ruta
+                    },
+                    containerColor = Color(0xFF365DA9), // azul
+                    contentColor = Color.White
+                ) {
+                    Icon(
+                        Icons.Default.Edit,
+                        contentDescription = "Modificar Ruta",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
 
                 // Botón Eliminar
-//                FloatingActionButton(
-//                    onClick = {
-//                        // Lógica para eliminar la ruta
-//                    },
-//                    containerColor = Color(0xFFE53935), // rojo
-//                    contentColor = Color.White
-//                ) {
-//                    Icon(
-//                        Icons.Default.Delete,
-//                        contentDescription = "Eliminar Ruta",
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                }
+                FloatingActionButton(
+                    onClick = {
+                        // Lógica para eliminar la ruta
+                    },
+                    containerColor = Color(0xFFE53935), // rojo
+                    contentColor = Color.White
+                ) {
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = "Eliminar Ruta",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
 
                 FloatingActionButton(
                     onClick = {

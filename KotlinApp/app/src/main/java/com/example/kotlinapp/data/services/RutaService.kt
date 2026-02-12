@@ -45,12 +45,11 @@ interface RutaService {
 
     @PUT("rutas/{id}/confirmar")
     suspend fun confirmarBorrador(
-        @Path("id") id: Int,
-        @Body ruta: Ruta
-    ): Response<Ruta>
+
+    )
 
     @PUT("rutas/{id}/borrador")
-    suspend fun cancelarBorrador(@Path("id") id: Int)
+    suspend fun cancelarBorrador() {
 
-
+    }
 }

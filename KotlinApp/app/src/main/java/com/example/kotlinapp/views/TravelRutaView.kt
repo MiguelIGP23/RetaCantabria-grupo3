@@ -1,6 +1,5 @@
 package com.example.kotlinapp.views
 
-import android.R.attr.id
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -20,14 +19,8 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 import android.os.Looper
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import com.example.kotlinapp.gps.gpx.parseGpxTrackpoints
-import com.example.kotlinapp.gps.gpx.parseGpxTrackpointsSafe
-import com.example.kotlinapp.gps.map.createTrackpointMarker
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.StringReader
@@ -37,54 +30,79 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
     val context = LocalContext.current
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-    val isTracking = remember { mutableStateOf(true) }
+    // Estados de tracking y posición
+    val isTracking = remember { mutableStateOf(false) }
     val currentPosition = remember { mutableStateOf<GeoPoint?>(null) }
 
-    // MapView y marcador del usuario
+    // MapView y overlays
     val mapView = remember { createMapView(context) }
     val currentMarker = remember { createCurrentLocationMarker(mapView, context) }
+    val polyline = remember { Polyline().apply { color = android.graphics.Color.RED; width = 6f } }
+
+    val trackpoints = remember { mutableStateListOf<GeoPoint>() }
+
 
     LaunchedEffect(Unit) {
         mapView.overlays.add(currentMarker)
+        mapView.overlays.add(polyline)
     }
 
-    // Cargar trackpoints GPX (solo marcadores, sin líneas)
     LaunchedEffect(ruta.archivoGPX) {
         ruta.archivoGPX?.let { gpx ->
-            val points = parseGpxTrackpointsSafe(gpx)
-            points.forEachIndexed { index, point ->
-                val marker = createTrackpointMarker(mapView, context, "TRKPT ${index + 1}")
+            val trackpoints = parseGpxTrackpoints(gpx)
+            trackpoints.forEachIndexed { index, point ->
+                val marker = Marker(mapView)
                 marker.position = point
+                marker.title = "TRKPT ${index + 1}"
                 mapView.overlays.add(marker)
+                polyline.addPoint(point)
             }
-            if (points.isNotEmpty()) mapView.controller.setCenter(points.first())
+            if (trackpoints.isNotEmpty()) {
+                mapView.controller.setCenter(trackpoints.first())
+            }
             mapView.invalidate()
         }
     }
 
+
+
+    // FusedLocationClient
+
     val locationRequest = remember {
         LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000L)
-            .setMinUpdateDistanceMeters(0f) // sin filtrado de distancia
+            .setMinUpdateDistanceMeters(1f)
             .build()
     }
 
     val locationCallback = remember {
         object : LocationCallback() {
             override fun onLocationResult(result: LocationResult) {
+                if (!isTracking.value) return
                 val loc = result.lastLocation ?: return
-                if (!isTracking.value || loc.accuracy > 30f) return
+                if (loc.accuracy > 20f) return
 
                 val point = GeoPoint(loc.latitude, loc.longitude, loc.altitude)
                 currentPosition.value = point
-
-                // Actualizar marcador y centrar mapa
                 currentMarker.position = point
+
+// Añadir al polyline
+                polyline.addPoint(point)
+
+// Añadir marcador visual del trackpoint
+                trackpoints.add(point)
+                val marker = Marker(mapView)
+                marker.position = point
+                marker.title = "TRKPT ${trackpoints.size}"
+                mapView.overlays.add(marker)
+
                 mapView.controller.setCenter(point)
                 mapView.invalidate()
+
             }
         }
     }
 
+    // Control de tracking
     DisposableEffect(isTracking.value) {
         val hasPermission = ContextCompat.checkSelfPermission(
             context,
@@ -99,24 +117,19 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
             )
         }
 
-        onDispose { fusedLocationClient.removeLocationUpdates(locationCallback) }
+        onDispose {
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+        }
     }
 
     // UI
     Box(Modifier.fillMaxSize()) {
         AndroidView(factory = { mapView }, modifier = Modifier.fillMaxSize())
 
-        // Botón volver
-        IconButton(
-            onClick = { navController.popBackStack() },
-            modifier = Modifier.align(Alignment.TopStart).padding(16.dp)
-        ) {
-            Icon(Icons.Filled.ArrowBack, contentDescription = "Volver", tint = Color.Black)
-        }
-
-        // Controles inferiores
         Column(
-            modifier = Modifier.align(Alignment.BottomCenter).padding(16.dp)
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(16.dp)
         ) {
             Button(
                 onClick = { isTracking.value = !isTracking.value },
@@ -132,4 +145,38 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
             }
         }
     }
+}
+
+fun parseGpxTrackpoints(gpx: String): List<GeoPoint> {
+    val points = mutableListOf<GeoPoint>()
+    val factory = XmlPullParserFactory.newInstance()
+    val parser = factory.newPullParser()
+    parser.setInput(StringReader(gpx))
+
+    var event = parser.eventType
+    var lat: Double? = null
+    var lon: Double? = null
+    var ele: Double? = null
+
+    while (event != XmlPullParser.END_DOCUMENT) {
+        when (event) {
+            XmlPullParser.START_TAG -> {
+                when (parser.name) {
+                    "trkpt" -> {
+                        lat = parser.getAttributeValue(null, "lat")?.toDoubleOrNull()
+                        lon = parser.getAttributeValue(null, "lon")?.toDoubleOrNull()
+                    }
+                    "ele" -> ele = parser.nextText().toDoubleOrNull()
+                }
+            }
+            XmlPullParser.END_TAG -> {
+                if (parser.name == "trkpt" && lat != null && lon != null) {
+                    points.add(GeoPoint(lat, lon, ele ?: 0.0))
+                    lat = null; lon = null; ele = null
+                }
+            }
+        }
+        event = parser.next()
+    }
+    return points
 }
