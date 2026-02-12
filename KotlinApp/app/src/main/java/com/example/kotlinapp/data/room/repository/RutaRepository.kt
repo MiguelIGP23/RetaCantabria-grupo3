@@ -19,21 +19,22 @@ class RutaRepository(
         .map { list -> list.map { it.toDomain() } }
 
     suspend fun insertRuta(ruta: Ruta) {
-        dao.insert(ruta.toEntity())
+        dao.insertOrUpdate(ruta.toEntity())
     }
 
     //todas las rutas remotas
     suspend fun syncRutas() {
         val response = api.findAll()
-
-        Log.d("RUTAS", "code=${response.code()} body=${response.body()}")
-
         if (response.isSuccessful) {
             response.body()?.let { rutas ->
-                Log.d("RUTAS", "insertando ${rutas.size}")
-                dao.insertAll(rutas.map { it.toEntity() })
+                // Primero borrar todo
+                dao.clearAll()
+                // Luego insertar las nuevas rutas
+                dao.insertOrUpdate(rutas.map { it.toEntity() })
             }
         }
     }
+
+
 }
 

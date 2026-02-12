@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.kotlinapp.model.PuntoInteres
+import com.example.kotlinapp.model.PuntoPeligro
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.views.generarRuta
@@ -29,11 +31,12 @@ fun FinishRouteDialog(
     rutaNombre: MutableState<String>,
     rutaDescripcion: MutableState<String>,
     savedTrackpoints: SnapshotStateList<Trackpoint>,
-    savedWaypoints: SnapshotStateList<Waypoint>,
+    savedPuntosInteres: SnapshotStateList<PuntoInteres>,
+    savedPuntosPeligro: SnapshotStateList<PuntoPeligro>,
     usuarioId: Int,
     currentGPX: MutableState<String?>,
     createFileLauncher: ActivityResultLauncher<String>,
-    onRouteSaved: () -> Unit = {},
+    onRouteSaved: () -> Unit = {}
 ) {
     if (!showDialog.value) return
 
@@ -99,6 +102,15 @@ fun FinishRouteDialog(
 
                     if (error) return@Button
 
+                    // ✅ Generar ruta y GPX antes de lanzar el launcher
+                    val nuevaRuta = generarRuta(
+                        nombre = rutaNombre.value,
+                        descripcion = rutaDescripcion.value,
+                        trackpoints = savedTrackpoints.toList(),
+                        usuarioId = usuarioId,
+                        puntosInteres = savedPuntosInteres,
+                        puntosPeligro = savedPuntosPeligro
+                    ).copy(recomendacionesEquipo = rutaDescripcion.value)
 
 
                     // Cerramos diálogo pero NO borramos las listas aún,
