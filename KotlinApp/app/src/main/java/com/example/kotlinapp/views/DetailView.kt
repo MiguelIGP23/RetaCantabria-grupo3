@@ -26,6 +26,8 @@ import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 import androidx.compose.runtime.collectAsState
 import com.example.kotlinapp.data.ServiceFactory.ruta
+import android.util.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,11 +35,28 @@ fun DetailView(navController: NavHostController, id: Int?, dbViewModel: DBViewMo
     val rutas = dbViewModel.rutas.collectAsState()
     val rutaSeleccionada = getRutaById(rutas.value, id) ?: return
     val context = LocalContext.current
+
+    fun base64ToString(base64: String): String {
+        return try {
+            val decodedBytes = Base64.decode(base64, Base64.DEFAULT)
+            String(decodedBytes, Charsets.UTF_8)
+        } catch (e: Exception) {
+            ""
+        }
+    }
+
     val createFileLauncher = rememberGpxLauncher(
         context = context,
-        getGpxContent = { rutaSeleccionada.archivoGPX ?: "" },
-
+        getGpxContent = {
+            rutaSeleccionada.archivoGPX?.let { base64 ->
+                base64ToString(base64)
+            } ?: ""
+        },
     )
+
+
+
+
     Scaffold(
         // TopBar con logo, título y botones
         topBar = { DetailTopBar(navController, rutaSeleccionada) },
@@ -158,6 +177,7 @@ fun BackButton(navController: NavHostController) {
     }
 }
 
+@OptIn(ExperimentalEncodingApi::class)
 @Composable
 fun ContentDetailView(
     innerPadding: PaddingValues,
@@ -206,6 +226,9 @@ fun ContentDetailView(
             }
         }
     }
+
+
+
 }
 
 @Composable
@@ -225,3 +248,6 @@ fun InfoRow(label: String, value: String) {
         )
     }
 }
+
+
+
