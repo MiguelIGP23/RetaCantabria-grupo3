@@ -31,7 +31,7 @@ namespace UserControls
         public void SetData(PuntoPeligro pp, Ruta ruta)
         {
             PuntoPeligro = pp;
-            lbltxtRuta.Text = ruta.IdRuta.ToString();
+            lbltxtRuta.Text = ruta.Id.ToString();
             lbltxtPosicion.Text = pp.Posicion.ToString();
             lbltxtNombre.Text = pp.Nombre;
             BackColor = pp.Gravedad switch
@@ -41,6 +41,7 @@ namespace UserControls
                 3 => Color.Khaki,
                 4 => Color.LightSalmon,
                 5 => Color.Red,
+                _=> Color.LightGray
             };
         }
 

@@ -30,12 +30,12 @@
         {
             btnGuardar = new Button();
             btnCancelar = new Button();
-            tbUrl = new TextBox();
             btnBuscarImagen = new Button();
             tbDescripcion = new TextBox();
             lblDescripcion = new Label();
             lbltxtPuntoInteres = new Label();
             lblPuntoInteres = new Label();
+            lblImagen = new Label();
             SuspendLayout();
             // 
             // btnGuardar
@@ -59,14 +59,6 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
-            // 
-            // tbUrl
-            // 
-            tbUrl.Location = new Point(189, 249);
-            tbUrl.Margin = new Padding(3, 4, 3, 4);
-            tbUrl.Name = "tbUrl";
-            tbUrl.Size = new Size(247, 27);
-            tbUrl.TabIndex = 35;
             // 
             // btnBuscarImagen
             // 
@@ -115,14 +107,23 @@
             lblPuntoInteres.TabIndex = 30;
             lblPuntoInteres.Text = "-Punto interés:";
             // 
+            // lblImagen
+            // 
+            lblImagen.AutoSize = true;
+            lblImagen.Location = new Point(219, 253);
+            lblImagen.Name = "lblImagen";
+            lblImagen.Size = new Size(81, 20);
+            lblImagen.TabIndex = 38;
+            lblImagen.Text = "------------";
+            // 
             // CrearEditarImagenInteres
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(487, 404);
+            Controls.Add(lblImagen);
             Controls.Add(btnGuardar);
             Controls.Add(btnCancelar);
-            Controls.Add(tbUrl);
             Controls.Add(btnBuscarImagen);
             Controls.Add(tbDescripcion);
             Controls.Add(lblDescripcion);
@@ -141,11 +142,11 @@
 
         private Button btnGuardar;
         private Button btnCancelar;
-        private TextBox tbUrl;
         private Button btnBuscarImagen;
         private TextBox tbDescripcion;
         private Label lblDescripcion;
         private Label lbltxtPuntoInteres;
         private Label lblPuntoInteres;
+        private Label lblImagen;
     }
 }

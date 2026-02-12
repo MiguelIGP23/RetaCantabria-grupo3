@@ -16,16 +16,16 @@ namespace Model
         public byte Dificultad { get; set; }
 
         [JsonPropertyName("fecha")]
-        public DateTime Fecha { get; set; }
+        public DateOnly Fecha { get; set; }
 
         [JsonPropertyName("estrellas")]
         public byte Estrellas { get; set; }
 
         [JsonPropertyName("interesCultural")]
-        public bool InteresCultural { get; set; }
+        public byte InteresCultural { get; set; }
 
         [JsonPropertyName("belleza")]
-        public bool Belleza { get; set; }
+        public byte Belleza { get; set; }
 
         [JsonPropertyName("valoracionTecnica")]
         public string? ValoracionTecnica { get; set; }
@@ -41,14 +41,14 @@ namespace Model
 
         public Valoracion() { }
 
-        public Valoracion(int idValora, byte dificultad, DateTime fecha, byte estrellas, bool interesCultural, bool belleza, string valoracionTecnica, string resena, int usuario_idUsuario, int rutas_idRuta)
+        public Valoracion(int idValora, byte dificultad, DateOnly fecha, byte estrellas, int interesCultural, int belleza, string valoracionTecnica, string resena, int usuario_idUsuario, int rutas_idRuta)
         {
             IdValora = idValora;
             Dificultad = dificultad;
             Fecha = fecha;
             Estrellas = estrellas;
-            InteresCultural = interesCultural;
-            Belleza = belleza;
+            InteresCultural = (byte)interesCultural;
+            Belleza = (byte)belleza;
             ValoracionTecnica = valoracionTecnica;
             Resena = resena;
             UsuarioId = usuario_idUsuario;

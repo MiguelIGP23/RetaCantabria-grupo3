@@ -34,6 +34,7 @@
             txt_password = new TextBox();
             btn_login = new Button();
             btn_verRutas = new Button();
+            btnRegistro = new Button();
             SuspendLayout();
             // 
             // lbl_usuario
@@ -98,11 +99,23 @@
             btn_verRutas.UseVisualStyleBackColor = true;
             btn_verRutas.Click += btn_verRutas_Click;
             // 
+            // btnRegistro
+            // 
+            btnRegistro.Location = new Point(37, 203);
+            btnRegistro.Margin = new Padding(5);
+            btnRegistro.Name = "btnRegistro";
+            btnRegistro.Size = new Size(101, 35);
+            btnRegistro.TabIndex = 6;
+            btnRegistro.Text = "Registro";
+            btnRegistro.UseVisualStyleBackColor = true;
+            btnRegistro.Click += btnRegistro_Click;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(558, 349);
+            Controls.Add(btnRegistro);
             Controls.Add(btn_verRutas);
             Controls.Add(btn_login);
             Controls.Add(txt_password);
@@ -126,6 +139,7 @@
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Button btn_login;
         private System.Windows.Forms.Button btn_verRutas;
+        private Button btnRegistro;
     }
 }
 

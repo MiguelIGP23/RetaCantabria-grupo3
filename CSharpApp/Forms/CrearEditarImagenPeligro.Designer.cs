@@ -33,9 +33,9 @@
             lblPuntoPeligro = new Label();
             tbDescripcion = new TextBox();
             btnBuscarImagen = new Button();
-            tbUrl = new TextBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
+            lblImagen = new Label();
             SuspendLayout();
             // 
             // lblDescripcion
@@ -85,14 +85,6 @@
             btnBuscarImagen.UseVisualStyleBackColor = true;
             btnBuscarImagen.Click += button1_Click;
             // 
-            // tbUrl
-            // 
-            tbUrl.Location = new Point(200, 251);
-            tbUrl.Margin = new Padding(3, 4, 3, 4);
-            tbUrl.Name = "tbUrl";
-            tbUrl.Size = new Size(247, 27);
-            tbUrl.TabIndex = 27;
-            // 
             // btnCancelar
             // 
             btnCancelar.Location = new Point(115, 339);
@@ -115,14 +107,23 @@
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
+            // lblImagen
+            // 
+            lblImagen.AutoSize = true;
+            lblImagen.Location = new Point(212, 254);
+            lblImagen.Name = "lblImagen";
+            lblImagen.Size = new Size(81, 20);
+            lblImagen.TabIndex = 39;
+            lblImagen.Text = "------------";
+            // 
             // CrearEditarImagenPeligro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(487, 404);
+            Controls.Add(lblImagen);
             Controls.Add(btnGuardar);
             Controls.Add(btnCancelar);
-            Controls.Add(tbUrl);
             Controls.Add(btnBuscarImagen);
             Controls.Add(tbDescripcion);
             Controls.Add(lblDescripcion);
@@ -144,8 +145,8 @@
         private Label lblPuntoPeligro;
         private TextBox tbDescripcion;
         private Button btnBuscarImagen;
-        private TextBox tbUrl;
         private Button btnCancelar;
         private Button btnGuardar;
+        private Label lblImagen;
     }
 }

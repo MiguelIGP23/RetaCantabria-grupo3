@@ -28,6 +28,10 @@ public class SecurityConfig {
                         // ================= AUTH =================
                         .requestMatchers(HttpMethod.POST, "/api/reta3/auth/login").permitAll()
 
+                        // ================= USUARIOS =================
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/usuarios/**").hasRole("ADMINISTRADOR")
+
                         // ================= CATALOGO PUBLICO (SIN REGISTRO) =================
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas/**").permitAll()
@@ -43,6 +47,18 @@ public class SecurityConfig {
                         // ================= ALUMNO (REGISTRADO) =================
                         .requestMatchers(HttpMethod.POST, "/api/reta3/valoraciones/**")
                         .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
+
+
+                        // Crear valoraciones: cualquier rol autenticado
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/valoraciones/**")
+                        .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
+
+
+                        // Editar / borrar valoraciones: SOLO ADMIN
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/valoraciones/**")
+                        .hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/*/valoraciones/**")
+                        .hasRole("ADMINISTRADOR")
 
                         // ================= DISENADOR / PROFESOR =================
 
@@ -73,6 +89,10 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/validar")
                         .hasRole("ADMINISTRADOR")
+
+                        // ================= USUARIOS =================
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/usuarios/**").hasRole("ADMINISTRADOR")
 
                         // ================= RESTO =================
                         .anyRequest().authenticated()

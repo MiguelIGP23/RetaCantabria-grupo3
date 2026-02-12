@@ -25,7 +25,7 @@ namespace UserControls
         public void SetData(Ruta ruta)
         {
             Ruta = ruta;
-            lbltxtId.Text = ruta.IdRuta.ToString();
+            lbltxtId.Text = ruta.Id.ToString();
             lbltxtNombre.Text = ruta.Nombre;
             lbltxtInicioRuta.Text = ruta.Nombre_inicioruta;
             lbltxtFinRuta.Text = ruta.Nombre_finalruta;

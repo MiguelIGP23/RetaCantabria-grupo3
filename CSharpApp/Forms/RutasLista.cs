@@ -21,7 +21,12 @@ namespace Forms
         {
             InitializeComponent();
             _api = api;
+
             cbClasificacion.DataSource = Enum.GetValues(typeof(EnumClasificaciones));
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnUsuarios.Visible = false;
+            }
         }
 
         private async void Rutas_Load(object sender, EventArgs e)
@@ -45,7 +50,7 @@ namespace Forms
                 {
                     ruta = "api/reta3/rutas";
                 }
-                List<Ruta> rutas = await _api.GetAllAsync<Ruta>(ruta);
+                List<Ruta> rutas = await _api.GetAlAsync<Ruta>(ruta);
                 _rutas.Clear();
                 flpRutas.Controls.Clear();
                 foreach (Ruta r in rutas)
@@ -106,6 +111,11 @@ namespace Forms
         // Métodos de botones
         private async void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (Session.Rol == null)
+            {
+                MessageBox.Show("No tienes permiso para realizar esa acción", "Unauthorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             try
             {
                 this.Enabled = false;
@@ -141,7 +151,8 @@ namespace Forms
             {
                 this.Size = new Size(900, 1000);
                 flpRutas.Location = new Point(95, 430);
-                btnLogout.Location = new Point(270, 880);
+                btnLogout.Location = new Point(180, 880);
+                btnCalendario.Location = new Point(375, 880);
                 btnAgregar.Location = new Point(550, 880);
 
                 ckNombre.Visible = true;
@@ -200,7 +211,8 @@ namespace Forms
             {
                 this.Size = new Size(900, 600);
                 flpRutas.Location = new Point(95, 60);
-                btnLogout.Location = new Point(270, 490);
+                btnLogout.Location = new Point(180, 490);
+                btnCalendario.Location = new Point(375, 490);
                 btnAgregar.Location = new Point(550, 490);
 
                 ckNombre.Visible = false;
@@ -324,7 +336,7 @@ namespace Forms
             CargarRutasFiltradas(filtradas);
         }
 
-        private void btnMostrarFiltros_Click(object sender, EventArgs e)
+        private async void btnMostrarFiltros_Click(object sender, EventArgs e)
         {
             if (filtroActivo)
             {
@@ -337,6 +349,50 @@ namespace Forms
                 MostrarFiltros(false);
                 filtroActivo = !filtroActivo;
                 btnMostrarFiltros.Text = "Mostrar filtros";
+            }
+        }
+
+        private void btnCalendario_Click(object sender, EventArgs e)
+        {
+            if (Session.Rol == null)
+            {
+                MessageBox.Show("Debes estar registrado para ver el calendario", "Unauthorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+                using (var form = new CalendarioForms(_api))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new UsuariosLista(_api))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
             }
         }
     }

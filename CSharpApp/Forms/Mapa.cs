@@ -39,24 +39,10 @@ namespace Forms
         }
 
 
-
-        private async Task CargarMapaAsync()
-        {
-            await wbMapa.EnsureCoreWebView2Async();
-
-            var htmlPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "map.html"
-            );
-
-            wbMapa.Source = new Uri(htmlPath);
-        }
-
-
         private async Task CargarYPintarRutaAsync()
         {
 
-            var tps = await _api.GetAllAsync<DtoTrackPoint>($"api/reta3/rutas/{_ruta.IdRuta}/trackpoints");
+            var tps = await _api.GetAlAsync<DtoTrackPoint>($"api/reta3/rutas/{_ruta.Id}/trackpoints");
 
             if (tps == null || tps.Count == 0) return;
 

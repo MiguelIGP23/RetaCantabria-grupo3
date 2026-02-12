@@ -1,4 +1,5 @@
 ﻿using Model;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,8 +28,45 @@ namespace UserControls
         {
             Actividad = a;
             lbltxtNombre.Text = a.Nombre;
-            lbltxtId.Text = a.IdActividad.ToString();
-            lbltxtRuta.Text = a.rutaId.ToString();
+            lbltxtId.Text = a.Id.ToString();
+            lbltxtRuta.Text = a.RutaId.ToString();
+            BackColor = Color.LightGray;
+        }
+
+        public event EventHandler<Actividad> ActividadClick;
+        private void lblId_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lbltxtId_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lblRuta_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lbltxtRuta_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void lbltxtNombre_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
+        }
+
+        private void UCActividaLista_Click(object sender, EventArgs e)
+        {
+            ActividadClick?.Invoke(this, Actividad);
         }
     }
 }

@@ -29,7 +29,16 @@ namespace UserControls
             lbltxtPuntoPeligro.Text = imagenPeligro.PuntosPeligroId.ToString();
             lbltxtImagenId.Text = imagenPeligro.Id.ToString();
             lbltxtDescripcion.Text = imagenPeligro.Descripcion;
-            //Falta cargar la imagen en el picturebox, se necesita un metodo para convertir el byte[] a imagen
+
+            pbImagen.Image?.Dispose();
+            pbImagen.Image = null;
+            if (!string.IsNullOrWhiteSpace(imagenPeligro.Url))
+            {
+                byte[] bytes = Convert.FromBase64String(imagenPeligro.Url);
+                using var ms = new MemoryStream(bytes);
+                pbImagen.Image = Image.FromStream(ms);
+                pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
     }
 }

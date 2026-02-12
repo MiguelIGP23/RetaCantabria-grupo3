@@ -38,7 +38,6 @@ namespace Forms
 
 
         // Metodos de botones
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -71,7 +70,7 @@ namespace Forms
 
         private async void pbDescarga_Click(object sender, EventArgs e)
         {
-            int idRuta = _ruta.IdRuta;
+            int idRuta = _ruta.Id;
 
             string downloads = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string opcion = cbFicha.SelectedItem?.ToString();
@@ -127,46 +126,49 @@ namespace Forms
 
         private void btnActividades_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    this.Enabled = false;
-            //    this.Opacity = 0;
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
 
-            //    using (var form = new ActividadLista(_api, _ruta))
-            //    {
-            //        form.ShowDialog(this);
-            //    }
+                using (var form = new ActividadLista(_api, _ruta))
+                {
+                    form.ShowDialog(this);
+                }
 
-            //}
-            //finally
-            //{
-            //    this.Opacity = 1;
-            //    this.Enabled = true;
-            //    this.Activate();
-            //}
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
 
 
 
-        private void btnValoraciones_Click(object sender, EventArgs e)
+        private async void btnValoraciones_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    this.Enabled = false;
-            //    this.Opacity = 0;
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
 
-            //    using (var form = new ValoracionesLista(_api, _ruta))
-            //    {
-            //        form.ShowDialog(this);
-            //    }
+                using (var form = new ValoracionLista(_api, _ruta))
+                {
+                    form.ShowDialog(this);
+                    Ruta ruta = await _api.GetByIdAsync<Ruta>("api/reta3/rutas", _ruta.Id.ToString());
+                    _ruta = ruta;
+                    ucRutaCompleto1.SetData(_ruta);
+                }
 
-            //}
-            //finally
-            //{
-            //    this.Opacity = 1;
-            //    this.Enabled = true;
-            //    this.Activate();
-            //}
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
         }
 
 
@@ -175,7 +177,7 @@ namespace Forms
         {
             try
             {
-                var id = _ruta.IdRuta;
+                var id = _ruta.Id;
                 if (MessageBox.Show("¿Seguro que quieres eliminar esta ruta?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     var exito = await _api.Delete($"/api/reta3/rutas", id.ToString());
@@ -226,11 +228,11 @@ namespace Forms
         {
             try
             {
-                var id = _ruta.IdRuta;
+                var id = _ruta.Id;
                 string msj = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Quitar validación de";
                 if (MessageBox.Show($"¿{msj} esta ruta?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.IdRuta}/validar", _ruta);
+                    var exito = await _api.Validar($"/api/reta3/rutas/{_ruta.Id}/validar", _ruta);
                     if (exito != null)
                     {
                         msj = (exito.EstadoRuta == (byte)1) ? "validada" : "invalidada";

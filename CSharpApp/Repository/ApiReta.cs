@@ -44,7 +44,7 @@ namespace Repository
 
 
         // Operaciones CRUD genericas
-        public async Task<List<T>> GetAllAsync<T>(string ruta)
+        public async Task<List<T>> GetAlAsync<T>(string ruta)
         {
             ApplyAuthHeader();
             string path = ruta;

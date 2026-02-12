@@ -25,7 +25,7 @@ namespace UserControls
         {
             puntoInteres = p;
             lbltxtNombre.Text = p.Nombre;
-            lbltxtRuta.Text = ruta.IdRuta.ToString();
+            lbltxtRuta.Text = ruta.Id.ToString();
             lbltxtTipo.Text = p.Tipo.ToString().Replace("_", " ");
             BackColor = p.Tipo switch
             {

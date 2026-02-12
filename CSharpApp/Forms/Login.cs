@@ -102,5 +102,25 @@ namespace Forms
                 this.Activate();
             }
         }
+
+        private void btnRegistro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Enabled = false;
+                this.Opacity = 0;
+
+                using (var form = new Registro(_api, null))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+            finally
+            {
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.Activate();
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Forms
         {
             try
             {
-                List<PuntoPeligro> puntosPeligro = await _api.GetAllAsync<PuntoPeligro>($"api/reta3/rutas/{ruta.IdRuta}/puntospeligro");
+                List<PuntoPeligro> puntosPeligro = await _api.GetAlAsync<PuntoPeligro>($"api/reta3/rutas/{ruta.Id}/puntospeligro");
                 flpPuntosPeligro.Controls.Clear();
                 foreach (PuntoPeligro p in puntosPeligro)
                 {

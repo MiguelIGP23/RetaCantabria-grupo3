@@ -59,6 +59,8 @@
             btnFiltrar = new Button();
             ckTemporada = new CheckBox();
             btnMostrarFiltros = new Button();
+            btnCalendario = new Button();
+            btnUsuarios = new Button();
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudDistanciaMax).BeginInit();
@@ -82,7 +84,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(550, 880);
+            btnAgregar.Location = new Point(600, 880);
             btnAgregar.Margin = new Padding(3, 4, 3, 4);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(86, 31);
@@ -93,7 +95,7 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(270, 880);
+            btnLogout.Location = new Point(170, 882);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(94, 29);
             btnLogout.TabIndex = 7;
@@ -393,11 +395,34 @@
             btnMostrarFiltros.UseVisualStyleBackColor = true;
             btnMostrarFiltros.Click += btnMostrarFiltros_Click;
             // 
+            // btnCalendario
+            // 
+            btnCalendario.Location = new Point(375, 880);
+            btnCalendario.Margin = new Padding(3, 4, 3, 4);
+            btnCalendario.Name = "btnCalendario";
+            btnCalendario.Size = new Size(103, 31);
+            btnCalendario.TabIndex = 42;
+            btnCalendario.Text = "Calendario";
+            btnCalendario.UseVisualStyleBackColor = true;
+            btnCalendario.Click += btnCalendario_Click;
+            // 
+            // btnUsuarios
+            // 
+            btnUsuarios.Location = new Point(645, 15);
+            btnUsuarios.Name = "btnUsuarios";
+            btnUsuarios.Size = new Size(94, 29);
+            btnUsuarios.TabIndex = 43;
+            btnUsuarios.Text = "Usuarios";
+            btnUsuarios.UseVisualStyleBackColor = true;
+            btnUsuarios.Click += btnUsuarios_Click;
+            // 
             // RutasLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(882, 953);
+            Controls.Add(btnUsuarios);
+            Controls.Add(btnCalendario);
             Controls.Add(btnMostrarFiltros);
             Controls.Add(ckTemporada);
             Controls.Add(btnFiltrar);
@@ -451,7 +476,6 @@
 
         #endregion
         private FlowLayoutPanel flpRutas;
-        private UserControls.UCRutaLista ucRutaLista1;
         private Button btnAgregar;
         private Button btnLogout;
         private CheckBox ckNombre;
@@ -482,5 +506,7 @@
         private Button btnFiltrar;
         private CheckBox ckTemporada;
         private Button btnMostrarFiltros;
+        private Button btnCalendario;
+        private Button btnUsuarios;
     }
 }

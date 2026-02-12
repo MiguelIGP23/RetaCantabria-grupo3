@@ -1,4 +1,5 @@
 ﻿using Model;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,7 @@ namespace UserControls
 {
     public partial class UCImagenInteresCompleto : UserControl
     {
-
         public ImagenInteres ImagenInteres { get; private set; }
-
 
         public UCImagenInteresCompleto()
         {
@@ -23,13 +22,26 @@ namespace UserControls
         }
 
 
-        public void SetData(Model.ImagenInteres imagenInteres)
+        public void SetData(ApiReta api, ImagenInteres imagenInteres)
         {
             ImagenInteres = imagenInteres;
             lbltxtPuntoInteres.Text = imagenInteres.PuntosInteresId.ToString();
             lbltxtImagen.Text = imagenInteres.Id.ToString();
             lbltxtDescripcion.Text = imagenInteres.Descripcion;
-            //Falta cargar la imagen en el picturebox, se necesita un metodo para convertir el byte[] a imagen
+
+            pbImagen.Image?.Dispose();
+            pbImagen.Image = null;
+            if (!string.IsNullOrWhiteSpace(imagenInteres.Url))
+            {
+                byte[] bytes = Convert.FromBase64String(imagenInteres.Url);
+                using var ms = new MemoryStream(bytes);
+                pbImagen.Image = Image.FromStream(ms);
+                pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
+
+
+
+       
     }
 }
