@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.kotlinapp.model.PuntoInteres
+import com.example.kotlinapp.model.PuntoPeligro
 import com.example.kotlinapp.model.Trackpoint
 import com.example.kotlinapp.model.Waypoint
 import com.example.kotlinapp.views.generarRuta
@@ -29,11 +31,12 @@ fun FinishRouteDialog(
     rutaNombre: MutableState<String>,
     rutaDescripcion: MutableState<String>,
     savedTrackpoints: SnapshotStateList<Trackpoint>,
-    savedWaypoints: SnapshotStateList<Waypoint>,
+    savedPuntosInteres: SnapshotStateList<PuntoInteres>,
+    savedPuntosPeligro: SnapshotStateList<PuntoPeligro>,
     usuarioId: Int,
     currentGPX: MutableState<String?>,
     createFileLauncher: ActivityResultLauncher<String>,
-    onRouteSaved: () -> Unit = {},
+    onRouteSaved: () -> Unit = {}
 ) {
     if (!showDialog.value) return
 
@@ -72,19 +75,6 @@ fun FinishRouteDialog(
                         fontWeight = FontWeight.Bold
                     )
                 }
-
-                Spacer(Modifier.height(8.dp))
-
-                Text("Escribe una descripción:")
-                OutlinedTextField(
-                    value = rutaDescripcion.value,
-                    onValueChange = { rutaDescripcion.value = it },
-                    placeholder = { Text("Descripción de la ruta") },
-                    singleLine = false,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(Modifier.height(8.dp))
 
                 if (showTrackpointsError.value) {
                     Text(

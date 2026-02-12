@@ -28,7 +28,7 @@ import java.util.concurrent.Executors
         ImagenPeligroEntity::class,
         UsuarioEntity::class
     ],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
