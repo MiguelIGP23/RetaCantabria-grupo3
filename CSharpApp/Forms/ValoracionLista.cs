@@ -1,6 +1,5 @@
 ﻿using Model;
 using Repository;
-using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ using UserControls;
 
 namespace Forms
 {
-    public partial class ValoracionLista : BaseForm
+    public partial class ValoracionLista : Form
     {
         private readonly ApiReta _api;
         private Ruta _ruta;

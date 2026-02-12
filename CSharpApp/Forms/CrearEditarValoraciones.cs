@@ -1,6 +1,5 @@
 ﻿using Model;
 using Repository;
-using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class CrearEditarValoraciones : BaseForm
+    public partial class CrearEditarValoraciones : Form
     {
         private readonly ApiReta _api;
         private Valoracion _valoracion { get; set; }

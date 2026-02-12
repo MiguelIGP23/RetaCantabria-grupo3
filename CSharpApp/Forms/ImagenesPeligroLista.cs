@@ -1,6 +1,5 @@
 ﻿using Model;
 using Repository;
-using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +14,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Forms
 {
-    public partial class ImagenesPeligroLista : BaseForm
+    public partial class ImagenesPeligroLista : Form
     {
 
         private readonly ApiReta _api;

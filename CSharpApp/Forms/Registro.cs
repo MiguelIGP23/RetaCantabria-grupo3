@@ -1,6 +1,5 @@
 ﻿using Model;
 using Repository;
-using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class Registro : BaseForm
+    public partial class Registro : Form
     {
         private readonly ApiReta _api;
         private Usuario _usuario { get; set; }

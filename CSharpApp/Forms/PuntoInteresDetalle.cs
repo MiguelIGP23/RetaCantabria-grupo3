@@ -1,10 +1,9 @@
 ﻿using Model;
 using Repository;
-using RetaEquipo3;
 
 namespace Forms
 {
-    public partial class PuntoInteresDetalle : BaseForm
+    public partial class PuntoInteresDetalle : Form
     {
 
         private readonly ApiReta _api;

@@ -1,7 +1,6 @@
 ﻿using Dto;
 using Model;
 using Repository;
-using RetaEquipo3;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class Login : BaseForm
+    public partial class Login : Form
     {
 
         private readonly ApiReta _api;
@@ -22,7 +21,7 @@ namespace Forms
         public Login()
         {
             InitializeComponent();
-            _api = new ApiReta("http://localhost:8080/");
+            _api = new ApiReta("https://reta.raspiremote.org/");
         }
 
         private async void btn_login_Click(object sender, EventArgs e)
