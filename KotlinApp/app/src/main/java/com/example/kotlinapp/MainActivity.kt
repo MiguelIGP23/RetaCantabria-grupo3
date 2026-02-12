@@ -1,47 +1,49 @@
 package com.example.kotlinapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.kotlinapp.ui.theme.KotlinAppTheme
+import com.example.kotlinapp.data.AppDatabase
+import com.example.kotlinapp.data.AuthRepository
+import com.example.kotlinapp.data.ServiceFactory
+import com.example.kotlinapp.data.SessionDataStore
+import com.example.kotlinapp.data.room.repository.RutaRepository
+import com.example.kotlinapp.navigation.NavManager
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.runBlocking
+import com.example.kotlinapp.viewmodels.DBViewModel
 
 class MainActivity : ComponentActivity() {
+    private lateinit var session : SessionDataStore
+    private lateinit var dbViewModel: DBViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        session = SessionDataStore(this)
+        dbViewModel = DBViewModel(
+            AuthRepository(
+                api = ServiceFactory.auth(),
+                session = session
+            ),
+            AppDatabase.getDatabase(this)
+        )
         setContent {
-            KotlinAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Scaffold { padding ->
+                MainScreen(modifier = Modifier.padding(padding),dbViewModel)
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    KotlinAppTheme {
-        Greeting("Android")
-    }
+fun MainScreen(modifier: Modifier,dbViewModel: DBViewModel) {
+    NavManager(
+        dbViewModel = dbViewModel
+    )
 }

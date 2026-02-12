@@ -1,0 +1,119 @@
+package com.example.kotlinapp.views
+
+import android.R.attr.id
+import android.content.pm.PackageManager
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavHostController
+import com.example.kotlinapp.gps.map.createCurrentLocationMarker
+import com.example.kotlinapp.gps.map.createMapView
+import com.example.kotlinapp.model.Ruta
+import com.google.android.gms.location.*
+import org.osmdroid.util.GeoPoint
+import android.os.Looper
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import com.example.kotlinapp.gps.gpx.parseGpxTrackpointsSafe
+import com.example.kotlinapp.gps.map.createTrackpointMarker
+
+@Composable
+fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
+    val context = LocalContext.current
+    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+
+    val currentPosition = remember { mutableStateOf<GeoPoint?>(null) }
+
+    // MapView y marcador del usuario
+    val mapView = remember { createMapView(context) }
+    val currentMarker = remember { createCurrentLocationMarker(mapView, context) }
+
+    LaunchedEffect(Unit) {
+        mapView.overlays.add(currentMarker)
+    }
+
+    // Cargar trackpoints GPX
+    LaunchedEffect(ruta.archivoGPX) {
+        ruta.archivoGPX?.let { gpx ->
+            val points = parseGpxTrackpointsSafe(gpx)
+            points.forEachIndexed { index, point ->
+                val marker = createTrackpointMarker(mapView, context, "TRKPT ${index + 1}")
+                marker.position = point
+                mapView.overlays.add(marker)
+            }
+            if (points.isNotEmpty()) mapView.controller.setCenter(points.first())
+            mapView.invalidate()
+        }
+    }
+
+    val locationRequest = remember {
+        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000L)
+            .setMinUpdateDistanceMeters(0f)
+            .build()
+    }
+
+    val locationCallback = remember {
+        object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                val loc = result.lastLocation ?: return
+                if (loc.accuracy > 30f) return
+
+                val point = GeoPoint(loc.latitude, loc.longitude, loc.altitude)
+                currentPosition.value = point
+
+                currentMarker.position = point
+                mapView.controller.setCenter(point)
+                mapView.invalidate()
+            }
+        }
+    }
+
+    // Iniciar tracking automáticamente y parar al salir
+    DisposableEffect(Unit) {
+        val hasPermission = ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+        if (hasPermission) {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+        }
+
+        onDispose {
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+        }
+    }
+
+    // UI
+    Box(Modifier.fillMaxSize()) {
+        AndroidView(factory = { mapView }, modifier = Modifier.fillMaxSize())
+
+        // Botón volver
+        IconButton(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier.align(Alignment.TopStart).padding(16.dp)
+        ) {
+            Icon(Icons.Filled.ArrowBack, contentDescription = "Volver", tint = Color.Black)
+        }
+
+        // Mostrar posición actual
+        currentPosition.value?.let { pos ->
+            Text(
+                "Latitud: ${pos.latitude}, Longitud: ${pos.longitude}",
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.BottomCenter).padding(16.dp)
+            )
+        }
+    }
+}

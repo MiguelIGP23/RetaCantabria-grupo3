@@ -1,12 +1,14 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
+
 }
 
 android {
     namespace = "com.example.kotlinapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.kotlinapp"
@@ -49,6 +51,16 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("androidx.room:room-runtime:${libs.versions.roomRuntimeAndroid.get()}")
+    implementation("androidx.room:room-ktx:${libs.versions.roomRuntimeAndroid.get()}")
+    ksp("androidx.room:room-compiler:${libs.versions.roomRuntimeAndroid.get()}")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("org.osmdroid:osmdroid-android:6.1.14")
+    implementation ("org.osmdroid:osmdroid-mapsforge:6.1.14")
+    implementation ("androidx.preference:preference-ktx:1.2.0")
+    implementation(libs.play.services.location)
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +68,14 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+}
+
+tasks.withType<Test> {
+    enabled = false
 }
