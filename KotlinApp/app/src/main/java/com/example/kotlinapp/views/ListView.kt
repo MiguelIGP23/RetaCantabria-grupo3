@@ -170,7 +170,7 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
 fun ListaTopBarTitle() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Image(
-            painter = painterResource(R.drawable.currentlocation),
+            painter = painterResource(R.drawable.logo_app),
             contentDescription = "Logo",
             modifier = Modifier.size(32.dp)
         )
