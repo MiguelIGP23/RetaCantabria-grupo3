@@ -60,7 +60,7 @@ fun generateGpx(
         sb.append("    <grv>${wp.gravedad}</grv>\n")
         sb.append("    <name>${wp.nombre}</name>\n")
         sb.append("    <desc>${wp.descripcion}</desc>\n")
-        sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
+        sb.append("    <time>${epochToIso(wp.timestamp)}</time>\n")
         sb.append("    <type>PELIGRO</type>\n")
         sb.append("  </wpt>\n")
     }
@@ -71,8 +71,8 @@ fun generateGpx(
         sb.append("    <car>${wp.caracteristicas}</car>\n")
         sb.append("    <name>${wp.nombre}</name>\n")
         sb.append("    <desc>${wp.descripcion}</desc>\n")
-        sb.append("    <name>${epochToIso(wp.timestamp)}</name>\n")
-        sb.append("    <tipo>${wp.tipo}</tipo>")
+        sb.append("    <time>${epochToIso(wp.timestamp)}</time>\n")
+        sb.append("    <tipo>${wp.tipo}</tipo>\n")
         sb.append("    <type>INTERES</type>\n")
         sb.append("  </wpt>\n")
     }
