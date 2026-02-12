@@ -1,0 +1,71 @@
+GET http://localhost:8080/api/reta3/rutas
+
+###
+POST  http://localhost:8080/api/reta3/rutas
+Content-Type: application/json
+
+{
+  "accesibilidad": 1,
+  "altitudMax": 200.0,
+  "altitudMin": 150.0,
+  "archivoGPX": null,
+  "clasificacion": null,
+  "desnivelNegativo": 30,
+  "desnivelPositivo": 20,
+  "distancia": 23.0,
+  "duracion": "00:15:00",
+  "estadoRuta": 0,
+  "indicaciones": null,
+  "latitudFinal": 2.3625,
+  "latitudInicial": 0.2345,
+  "longitudFinal": 2.2345,
+  "longitudInicial": 0.2536,
+  "nombre": "Monte Ibio",
+  "nombreFinalruta": "Fuente del rio",
+  "nombreInicioruta": "Bar manolo",
+  "recomendacionesEquipo": "Bañador",
+  "rutaFamiliar": 1,
+  "temporadas": "OTONO",
+  "tipoTerreno": null,
+  "usuario": {
+    "id": 1
+  }
+}
+
+
+
+###
+PUT http://localhost:8080/api/reta3/rutas/6
+Content-Type: application/json
+
+{
+  "accesibilidad": 2,
+  "altitudMax": 250.0,
+  "altitudMin": 140.0,
+  "archivoGPX": null,
+  "clasificacion": "LINEAL",
+  "desnivelNegativo": 40,
+  "desnivelPositivo": 35,
+  "distancia": 28.5,
+  "duracion": "00:25:00",
+  "estadoRuta": 1,
+  "indicaciones": null,
+  "latitudFinal": 2.4000,
+  "latitudInicial": 0.2300,
+  "longitudFinal": 2.3000,
+  "longitudInicial": 0.2500,
+  "nombre": "Rafting extremo",
+  "nombreFinalruta": "Cascada final",
+  "nombreInicioruta": "Zona de salida",
+  "recomendacionesEquipo": "Casco y chaleco",
+  "rutaFamiliar": 0,
+  "temporadas": "VERANO",
+  "tipoTerreno": null,
+  "usuario": {
+    "id": 1
+  }
+}
+
+###
+DELETE http://localhost:8080/api/reta3/rutas/6
+
