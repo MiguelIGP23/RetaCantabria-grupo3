@@ -36,7 +36,7 @@
             // 
             // btn_volver
             // 
-            btn_volver.Location = new Point(110, 312);
+            btn_volver.Location = new Point(110, 298);
             btn_volver.Margin = new Padding(3, 4, 3, 4);
             btn_volver.Name = "btn_volver";
             btn_volver.Size = new Size(86, 31);
@@ -47,7 +47,7 @@
             // 
             // btn_borrar
             // 
-            btn_borrar.Location = new Point(265, 312);
+            btn_borrar.Location = new Point(259, 298);
             btn_borrar.Margin = new Padding(3, 4, 3, 4);
             btn_borrar.Name = "btn_borrar";
             btn_borrar.Size = new Size(86, 31);
@@ -58,7 +58,7 @@
             // 
             // btn_editar
             // 
-            btn_editar.Location = new Point(405, 312);
+            btn_editar.Location = new Point(405, 298);
             btn_editar.Margin = new Padding(3, 4, 3, 4);
             btn_editar.Name = "btn_editar";
             btn_editar.Size = new Size(86, 31);
@@ -80,7 +80,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(641, 387);
+            ClientSize = new Size(641, 354);
             Controls.Add(ucValoracionCompleto1);
             Controls.Add(btn_editar);
             Controls.Add(btn_borrar);

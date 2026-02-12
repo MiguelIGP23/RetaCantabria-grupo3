@@ -25,6 +25,11 @@ namespace Forms
         private void ImagenInteresDetalle_Load(object sender, EventArgs e)
         {
             ucImagenInteresCompleto1.SetData(_api, _imagenInteres);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEditar.Visible = false;
+                btnEliminar.Visible = false;
+            }
         }
 
 

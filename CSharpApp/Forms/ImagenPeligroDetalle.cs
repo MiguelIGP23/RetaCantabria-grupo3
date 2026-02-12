@@ -34,6 +34,11 @@ namespace Forms
         private void ImagenPeligroDetalle_Load(object sender, EventArgs e)
         {
             imagenPeligroCompleto1.SetData(_imagenPeligro);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEditar.Visible = false;
+                btnEditar.Visible = false;
+            }
         }
 
 
@@ -102,6 +107,6 @@ namespace Forms
         }
 
 
-     
+
     }
 }

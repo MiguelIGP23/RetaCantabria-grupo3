@@ -57,10 +57,10 @@
             // 
             // btnPuntosPeligro
             // 
-            btnPuntosPeligro.Location = new Point(247, 580);
+            btnPuntosPeligro.Location = new Point(61, 580);
             btnPuntosPeligro.Margin = new Padding(3, 4, 3, 4);
             btnPuntosPeligro.Name = "btnPuntosPeligro";
-            btnPuntosPeligro.Size = new Size(139, 31);
+            btnPuntosPeligro.Size = new Size(149, 31);
             btnPuntosPeligro.TabIndex = 2;
             btnPuntosPeligro.Text = "Puntos de peligro";
             btnPuntosPeligro.UseVisualStyleBackColor = true;
@@ -68,7 +68,7 @@
             // 
             // btnPuntosInteres
             // 
-            btnPuntosInteres.Location = new Point(432, 581);
+            btnPuntosInteres.Location = new Point(260, 580);
             btnPuntosInteres.Margin = new Padding(3, 4, 3, 4);
             btnPuntosInteres.Name = "btnPuntosInteres";
             btnPuntosInteres.Size = new Size(135, 31);
@@ -79,7 +79,7 @@
             // 
             // btnActividades
             // 
-            btnActividades.Location = new Point(631, 580);
+            btnActividades.Location = new Point(445, 580);
             btnActividades.Margin = new Padding(3, 4, 3, 4);
             btnActividades.Name = "btnActividades";
             btnActividades.Size = new Size(144, 31);
@@ -90,10 +90,10 @@
             // 
             // btnValoraciones
             // 
-            btnValoraciones.Location = new Point(61, 663);
+            btnValoraciones.Location = new Point(638, 580);
             btnValoraciones.Margin = new Padding(3, 4, 3, 4);
             btnValoraciones.Name = "btnValoraciones";
-            btnValoraciones.Size = new Size(138, 31);
+            btnValoraciones.Size = new Size(144, 31);
             btnValoraciones.TabIndex = 6;
             btnValoraciones.Text = "Valoraciones";
             btnValoraciones.UseVisualStyleBackColor = true;
@@ -101,10 +101,10 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(247, 663);
+            btnEliminar.Location = new Point(260, 645);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(139, 31);
+            btnEliminar.Size = new Size(135, 31);
             btnEliminar.TabIndex = 7;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
@@ -112,21 +112,21 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(61, 581);
+            btnVolver.Location = new Point(62, 645);
             btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(138, 31);
+            btnVolver.Size = new Size(148, 31);
             btnVolver.TabIndex = 4;
-            btnVolver.Text = "Volver";
+            btnVolver.Text = "<--";
             btnVolver.UseVisualStyleBackColor = true;
             btnVolver.Click += btnVolver_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(432, 664);
+            btnEditar.Location = new Point(445, 645);
             btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(135, 31);
+            btnEditar.Size = new Size(144, 31);
             btnEditar.TabIndex = 8;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             // 
             // btnValidar
             // 
-            btnValidar.Location = new Point(631, 664);
+            btnValidar.Location = new Point(638, 645);
             btnValidar.Margin = new Padding(3, 4, 3, 4);
             btnValidar.Name = "btnValidar";
             btnValidar.Size = new Size(144, 31);
@@ -190,7 +190,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(835, 752);
+            ClientSize = new Size(835, 717);
             Controls.Add(btnMapa);
             Controls.Add(btnValidar);
             Controls.Add(pbDescarga);

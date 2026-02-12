@@ -143,10 +143,10 @@
             // 
             // btn_guardar
             // 
-            btn_guardar.Location = new Point(314, 409);
+            btn_guardar.Location = new Point(353, 409);
             btn_guardar.Margin = new Padding(4, 5, 4, 5);
             btn_guardar.Name = "btn_guardar";
-            btn_guardar.Size = new Size(100, 35);
+            btn_guardar.Size = new Size(141, 35);
             btn_guardar.TabIndex = 10;
             btn_guardar.Text = "Guardar";
             btn_guardar.UseVisualStyleBackColor = true;
@@ -157,7 +157,7 @@
             btn_volver.Location = new Point(42, 409);
             btn_volver.Margin = new Padding(4, 5, 4, 5);
             btn_volver.Name = "btn_volver";
-            btn_volver.Size = new Size(100, 35);
+            btn_volver.Size = new Size(141, 35);
             btn_volver.TabIndex = 8;
             btn_volver.Text = "Volver";
             btn_volver.UseVisualStyleBackColor = true;
@@ -165,10 +165,10 @@
             // 
             // btEliminar
             // 
-            btEliminar.Location = new Point(176, 409);
+            btEliminar.Location = new Point(209, 409);
             btEliminar.Margin = new Padding(4, 5, 4, 5);
             btEliminar.Name = "btEliminar";
-            btEliminar.Size = new Size(100, 35);
+            btEliminar.Size = new Size(121, 35);
             btEliminar.TabIndex = 9;
             btEliminar.Text = "Eliminar";
             btEliminar.UseVisualStyleBackColor = true;
@@ -210,7 +210,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(537, 518);
+            ClientSize = new Size(537, 473);
             Controls.Add(txt_nombre);
             Controls.Add(txt_apellido);
             Controls.Add(txt_email);

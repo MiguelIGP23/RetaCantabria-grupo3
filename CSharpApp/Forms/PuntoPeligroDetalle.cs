@@ -36,6 +36,11 @@ namespace Forms
         private void PuntoPeligroDetalle_Load(object sender, EventArgs e)
         {
             ucPuntoPeligroCompleto1.SetData(_puntoPeligro);
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEditar.Visible = false;
+                btnEliminar.Visible = false;
+            }
         }
 
 

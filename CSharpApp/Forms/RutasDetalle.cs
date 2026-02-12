@@ -33,6 +33,12 @@ namespace Forms
         {
             ucRutaCompleto1.SetData(_ruta);
             btnValidar.Text = (_ruta.EstadoRuta == (byte)0) ? "Validar" : "Invalidar";
+            if (Session.Rol != EnumRoles.ADMINISTRADOR)
+            {
+                btnEliminar.Visible = false;
+                btnEditar.Visible = false;
+                btnValidar.Visible = false;
+            }
         }
 
 

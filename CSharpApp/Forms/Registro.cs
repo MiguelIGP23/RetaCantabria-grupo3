@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Model;
+using Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
-using Repository;
 
 namespace Forms
 {
@@ -26,6 +26,12 @@ namespace Forms
             _usuario = usuario;
             cbRol.DataSource = Enum.GetValues(typeof(EnumRoles));
 
+            
+        }
+
+        private void Registro_Load(object sender, EventArgs e)
+        {
+            CargarDatos();
             if (Session.Rol != EnumRoles.ADMINISTRADOR)
             {
                 btEliminar.Visible = false;
@@ -41,11 +47,6 @@ namespace Forms
                 txt_password.Enabled = false;
                 txt_rep_password.Enabled = false;
             }
-        }
-
-        private void Registro_Load(object sender, EventArgs e)
-        {
-            CargarDatos();
         }
 
 
