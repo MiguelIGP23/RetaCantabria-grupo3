@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/reta3/rutas")
+@RequestMapping("/api/reta3/rutas")
 public class ImagenInteresController {
 
     private final ServiceImagenInteres serviceImagen;

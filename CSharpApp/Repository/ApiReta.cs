@@ -60,11 +60,17 @@ namespace Repository
         public async Task<T?> GetByIdAsync<T>(string ruta, string idPath)
         {
             ApplyAuthHeader();
-
-            var response = await _http.GetAsync($"{ruta}/{idPath}");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
-
+            try
+            {
+                var response = await _http.GetAsync($"{ruta}/{idPath}");
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadFromJsonAsync<T>(_jsonOptions);
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
+                return default;
+            }
         }
 
 
