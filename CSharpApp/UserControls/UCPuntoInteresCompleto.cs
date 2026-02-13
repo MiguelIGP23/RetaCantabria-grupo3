@@ -34,7 +34,12 @@ namespace UserControls
             lbltxtTipo.Text = p.Tipo.ToString();
             lbltxtDescripcion.Text = p.Descripcion;
             lbltxtTimestamp.Text = p.Timestamp.ToString();
-  
+
+        }
+
+        private void lbltxtTipo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
