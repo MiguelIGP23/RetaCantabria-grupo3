@@ -96,6 +96,7 @@ fun CreateRutaView(navController: NavHostController, dbViewModel: DBViewModel) {
 
     val trackPolyline = remember {
         Polyline().apply {
+            outlinePaint.color = android.graphics.Color.BLUE
             width = 6f
         }
     }
