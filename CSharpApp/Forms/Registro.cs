@@ -32,12 +32,17 @@ namespace Forms
         private void Registro_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            if (_usuario == null)
+            {
+                btEliminar.Visible = false;
+            }
             if (Session.Rol != EnumRoles.ADMINISTRADOR)
             {
                 btEliminar.Visible = false;
                 ckPassword.Visible = false;
                 cbRol.Visible = false;
                 lblRol.Visible = false;
+                this.Size = new Size(555, 530);
             }
             else
             {

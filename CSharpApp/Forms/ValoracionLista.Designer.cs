@@ -39,10 +39,10 @@
             // 
             flp_valoracionLista.AutoScroll = true;
             flp_valoracionLista.Controls.Add(ucValoracionLista1);
-            flp_valoracionLista.Location = new Point(39, 26);
+            flp_valoracionLista.Location = new Point(28, 38);
             flp_valoracionLista.Margin = new Padding(3, 4, 3, 4);
             flp_valoracionLista.Name = "flp_valoracionLista";
-            flp_valoracionLista.Size = new Size(468, 461);
+            flp_valoracionLista.Size = new Size(472, 461);
             flp_valoracionLista.TabIndex = 0;
             // 
             // ucValoracionLista1
@@ -57,37 +57,45 @@
             // 
             // btn_Volver
             // 
-            btn_Volver.Location = new Point(528, 40);
-            btn_Volver.Margin = new Padding(3, 4, 3, 4);
+            btn_Volver.BackColor = Color.DarkSeaGreen;
+            btn_Volver.FlatAppearance.BorderSize = 0;
+            btn_Volver.FlatStyle = FlatStyle.Flat;
+            btn_Volver.Location = new Point(43, 535);
+            btn_Volver.Margin = new Padding(0);
             btn_Volver.Name = "btn_Volver";
-            btn_Volver.Size = new Size(55, 31);
+            btn_Volver.Size = new Size(220, 40);
             btn_Volver.TabIndex = 1;
             btn_Volver.Text = "<--";
-            btn_Volver.UseVisualStyleBackColor = true;
+            btn_Volver.UseVisualStyleBackColor = false;
             btn_Volver.Click += btn_Volver_Click;
             // 
             // btnNueva
             // 
-            btnNueva.Location = new Point(528, 92);
-            btnNueva.Margin = new Padding(3, 4, 3, 4);
+            btnNueva.BackColor = Color.DarkSeaGreen;
+            btnNueva.FlatAppearance.BorderSize = 0;
+            btnNueva.FlatStyle = FlatStyle.Flat;
+            btnNueva.Location = new Point(263, 535);
+            btnNueva.Margin = new Padding(0);
             btnNueva.Name = "btnNueva";
-            btnNueva.Size = new Size(55, 31);
+            btnNueva.Size = new Size(193, 40);
             btnNueva.TabIndex = 2;
             btnNueva.Text = "+";
-            btnNueva.UseVisualStyleBackColor = true;
+            btnNueva.UseVisualStyleBackColor = false;
             btnNueva.Click += btnNueva_Click;
             // 
             // ValoracionLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(611, 529);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(507, 608);
             Controls.Add(btnNueva);
             Controls.Add(btn_Volver);
             Controls.Add(flp_valoracionLista);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ValoracionLista";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ValoracionLista";
             Load += ValoracionLista_Load;
             flp_valoracionLista.ResumeLayout(false);

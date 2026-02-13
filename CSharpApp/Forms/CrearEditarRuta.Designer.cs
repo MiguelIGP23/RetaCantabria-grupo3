@@ -52,7 +52,6 @@
             btnGPX = new Button();
             lblRecomendaciones = new Label();
             label2 = new Label();
-            lblRutaGPX = new Label();
             txtRecomendaciones = new TextBox();
             txtZonaGeo = new TextBox();
             nudTipoTerreno = new NumericUpDown();
@@ -297,13 +296,16 @@
             // 
             // btnGPX
             // 
-            btnGPX.Location = new Point(40, 631);
-            btnGPX.Margin = new Padding(3, 4, 3, 4);
+            btnGPX.BackColor = Color.DarkSeaGreen;
+            btnGPX.FlatAppearance.BorderSize = 0;
+            btnGPX.FlatStyle = FlatStyle.Flat;
+            btnGPX.Location = new Point(40, 647);
+            btnGPX.Margin = new Padding(0);
             btnGPX.Name = "btnGPX";
-            btnGPX.Size = new Size(141, 31);
+            btnGPX.Size = new Size(190, 38);
             btnGPX.TabIndex = 38;
             btnGPX.Text = "Subir Archivo GPX";
-            btnGPX.UseVisualStyleBackColor = true;
+            btnGPX.UseVisualStyleBackColor = false;
             btnGPX.Click += btnGPX_Click;
             // 
             // lblRecomendaciones
@@ -326,14 +328,6 @@
             label2.Size = new Size(132, 20);
             label2.TabIndex = 40;
             label2.Text = "-Zona geográfica:";
-            // 
-            // lblRutaGPX
-            // 
-            lblRutaGPX.Location = new Point(40, 684);
-            lblRutaGPX.Name = "lblRutaGPX";
-            lblRutaGPX.Size = new Size(429, 31);
-            lblRutaGPX.TabIndex = 41;
-            lblRutaGPX.Text = "RutaEjemplo GPX";
             // 
             // txtRecomendaciones
             // 
@@ -374,24 +368,30 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(558, 684);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.BackColor = Color.DarkSeaGreen;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Location = new Point(328, 647);
+            btnCancelar.Margin = new Padding(0);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(86, 31);
+            btnCancelar.Size = new Size(190, 38);
             btnCancelar.TabIndex = 50;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(558, 631);
-            btnAceptar.Margin = new Padding(3, 4, 3, 4);
+            btnAceptar.BackColor = Color.DarkSeaGreen;
+            btnAceptar.FlatAppearance.BorderSize = 0;
+            btnAceptar.FlatStyle = FlatStyle.Flat;
+            btnAceptar.Location = new Point(518, 647);
+            btnAceptar.Margin = new Padding(0);
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(86, 31);
+            btnAceptar.Size = new Size(190, 38);
             btnAceptar.TabIndex = 51;
             btnAceptar.Text = "Aceptar";
-            btnAceptar.UseVisualStyleBackColor = true;
+            btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click_1;
             // 
             // chkAccesibilidad
@@ -593,6 +593,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(755, 737);
             Controls.Add(ckInvierno);
             Controls.Add(ckOtono);
@@ -618,7 +619,6 @@
             Controls.Add(nudTipoTerreno);
             Controls.Add(txtZonaGeo);
             Controls.Add(txtRecomendaciones);
-            Controls.Add(lblRutaGPX);
             Controls.Add(label2);
             Controls.Add(lblRecomendaciones);
             Controls.Add(btnGPX);
@@ -643,9 +643,10 @@
             Controls.Add(lblInicio);
             Controls.Add(txtNombre);
             Controls.Add(lblNombre);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarRuta";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AgregarRuta";
             FormClosing += CrearEditarRuta_FormClosing;
             Load += CrearEditarRuta_Load;
@@ -691,7 +692,6 @@
         private Button btnGPX;
         private Label lblRecomendaciones;
         private Label label2;
-        private Label lblRutaGPX;
         private TextBox txtRecomendaciones;
         private TextBox txtZonaGeo;
         private NumericUpDown nudTipoTerreno;

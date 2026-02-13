@@ -40,9 +40,9 @@
             // 
             // lbltxtDescripcion
             // 
-            lbltxtDescripcion.Location = new Point(127, 75);
+            lbltxtDescripcion.Location = new Point(139, 75);
             lbltxtDescripcion.Name = "lbltxtDescripcion";
-            lbltxtDescripcion.Size = new Size(218, 89);
+            lbltxtDescripcion.Size = new Size(218, 90);
             lbltxtDescripcion.TabIndex = 12;
             lbltxtDescripcion.Text = "txtDescripcion";
             // 
@@ -50,7 +50,7 @@
             // 
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDescripcion.Location = new Point(32, 75);
+            lblDescripcion.Location = new Point(35, 75);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(100, 20);
             lblDescripcion.TabIndex = 11;
@@ -59,7 +59,7 @@
             // lbltxtPuntoInteres
             // 
             lbltxtPuntoInteres.AutoSize = true;
-            lbltxtPuntoInteres.Location = new Point(122, 31);
+            lbltxtPuntoInteres.Location = new Point(125, 30);
             lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
             lbltxtPuntoInteres.Size = new Size(58, 20);
             lbltxtPuntoInteres.TabIndex = 10;
@@ -69,7 +69,7 @@
             // 
             lblPuntoInteres.AutoSize = true;
             lblPuntoInteres.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblPuntoInteres.Location = new Point(32, 31);
+            lblPuntoInteres.Location = new Point(35, 30);
             lblPuntoInteres.Name = "lblPuntoInteres";
             lblPuntoInteres.Size = new Size(84, 20);
             lblPuntoInteres.TabIndex = 9;
@@ -87,7 +87,7 @@
             // lbltxtImagen
             // 
             lbltxtImagen.AutoSize = true;
-            lbltxtImagen.Location = new Point(299, 31);
+            lbltxtImagen.Location = new Point(300, 30);
             lbltxtImagen.Name = "lbltxtImagen";
             lbltxtImagen.Size = new Size(58, 20);
             lbltxtImagen.TabIndex = 15;
@@ -97,7 +97,7 @@
             // 
             lblImagen.AutoSize = true;
             lblImagen.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblImagen.Location = new Point(199, 31);
+            lblImagen.Location = new Point(200, 30);
             lblImagen.Name = "lblImagen";
             lblImagen.Size = new Size(94, 20);
             lblImagen.TabIndex = 14;

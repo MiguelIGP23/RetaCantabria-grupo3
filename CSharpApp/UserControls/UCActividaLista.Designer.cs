@@ -103,6 +103,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             Controls.Add(lbltxtRuta);
             Controls.Add(lblRuta);
             Controls.Add(lbltxtNombre);

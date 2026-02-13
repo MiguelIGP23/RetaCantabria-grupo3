@@ -27,7 +27,7 @@ namespace UserControls
             ImagenPeligro = ip;
             lbltxtImagenId.Text = ip.Id.ToString();
             lbltxtDescripcion.Text = ip.Descripcion;
-            BackColor = Color.LightGray;
+            BackColor = Color.Gainsboro;
         }
 
 

@@ -42,7 +42,7 @@
             flpUsuarios.Location = new Point(40, 40);
             flpUsuarios.Margin = new Padding(3, 4, 3, 4);
             flpUsuarios.Name = "flpUsuarios";
-            flpUsuarios.Size = new Size(681, 388);
+            flpUsuarios.Size = new Size(600, 388);
             flpUsuarios.TabIndex = 0;
             // 
             // ucUsuarioLista1
@@ -56,37 +56,45 @@
             // 
             // btnCrear
             // 
-            btnCrear.Location = new Point(387, 449);
-            btnCrear.Margin = new Padding(3, 4, 3, 4);
+            btnCrear.BackColor = Color.DarkSeaGreen;
+            btnCrear.FlatAppearance.BorderSize = 0;
+            btnCrear.FlatStyle = FlatStyle.Flat;
+            btnCrear.Location = new Point(341, 449);
+            btnCrear.Margin = new Padding(0);
             btnCrear.Name = "btnCrear";
-            btnCrear.Size = new Size(86, 31);
+            btnCrear.Size = new Size(299, 40);
             btnCrear.TabIndex = 1;
             btnCrear.Text = "Crear";
-            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.UseVisualStyleBackColor = false;
             btnCrear.Click += btnCrear_Click;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(209, 449);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(40, 449);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(86, 31);
+            btnVolver.Size = new Size(301, 40);
             btnVolver.TabIndex = 2;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // UsuariosLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(756, 504);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(680, 513);
             Controls.Add(btnVolver);
             Controls.Add(btnCrear);
             Controls.Add(flpUsuarios);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "UsuariosLista";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "UsuariosLista";
             Load += UsuariosLista_Load;
             flpUsuarios.ResumeLayout(false);

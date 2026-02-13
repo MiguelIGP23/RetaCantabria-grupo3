@@ -126,6 +126,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Transparent;
             Controls.Add(lbltxtEstrellas);
             Controls.Add(lblEstrellas);
             Controls.Add(lbltxtDuracion);

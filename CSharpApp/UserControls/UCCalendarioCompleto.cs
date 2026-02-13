@@ -46,6 +46,8 @@ namespace UserControls
         public async void SetData(Calendario calendario, Usuario usuario, Ruta ruta)
         {
             Calendario = calendario;
+            if(Session.Rol!=EnumRoles.ADMINISTRADOR) btnEditar.Visible = false;
+
             lbltxtRutaId.Text = calendario.RutaId.ToString();
             lbltxtNombreRuta.Text = ruta.Nombre.ToString();
             string fecha = calendario.Fecha.ToString("dd-MM-yyyy");

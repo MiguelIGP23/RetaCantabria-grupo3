@@ -20,11 +20,12 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csfr -> csfr.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+
                         // ================= AUTH =================
                         .requestMatchers(HttpMethod.POST, "/api/reta3/auth/login").permitAll()
 
@@ -32,27 +33,35 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/reta3/usuarios").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/usuarios/**").hasRole("ADMINISTRADOR")
 
-                        // ================= CATALOGO PUBLICO (SIN REGISTRO) =================
+                        // ================= CATÁLOGO PÚBLICO (SIN REGISTRO) =================
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/validadas/**").permitAll()
 
+                        // puntos (interés y peligro) públicos
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/puntosinteres/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/puntospeligro/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/imagenesinteres/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/imagenespeligro/**").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/api/reta3/valoraciones/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/reta3/actividades/**").permitAll()
+                        // imágenes (interés y peligro) públicas (lista + detalle)
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/puntosinteres/*/imagenes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/puntospeligro/*/imagenes/**").permitAll()
+
+                        // ✅ valoraciones públicas (lista + detalle)
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/valoraciones/**").permitAll()
+
+                        // ✅ actividades públicas (lista + detalle)
+                        .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/actividades/**").permitAll()
 
                         // ================= ALUMNO (REGISTRADO) =================
-                        .requestMatchers(HttpMethod.POST, "/api/reta3/valoraciones/**")
-                        .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
+                        // Crear imágenes interés/peligro: ALUMNO y superiores
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/puntosinteres/*/imagenes")
+                        .hasAnyRole("ALUMNO", "DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/puntospeligro/*/imagenes")
+                        .hasAnyRole("ALUMNO", "DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
-                        // Crear valoraciones: cualquier rol autenticado
-                        .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/valoraciones/**")
-                        .hasAnyRole("ALUMNO","DISENADOR","PROFESOR","ADMINISTRADOR")
-
+                        // Crear valoraciones: ALUMNO y superiores
+                        .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/*/valoraciones")
+                        .hasAnyRole("ALUMNO", "DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
                         // Editar / borrar valoraciones: SOLO ADMIN
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/valoraciones/**")
@@ -60,28 +69,40 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/*/valoraciones/**")
                         .hasRole("ADMINISTRADOR")
 
-                        // ================= DISENADOR / PROFESOR =================
+                        // Editar / borrar imágenes (interés y peligro): SOLO ADMIN
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/puntosinteres/*/imagenes/**")
+                        .hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/*/puntosinteres/*/imagenes/**")
+                        .hasRole("ADMINISTRADOR")
 
-                        //rutas/gpx admin + diseñador + profesor
+                        .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/puntospeligro/*/imagenes/**")
+                        .hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/*/puntospeligro/*/imagenes/**")
+                        .hasRole("ADMINISTRADOR")
+
+                        // ================= DISENADOR / PROFESOR / ADMIN =================
+
+                        // rutas/gpx admin + diseñador + profesor
                         .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/gpx")
-                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+                        .hasAnyRole("DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
                         // Crear rutas y datos bajo /rutas/**
                         .requestMatchers(HttpMethod.POST, "/api/reta3/rutas/**")
-                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+                        .hasAnyRole("DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
                         // Descargar fichas
                         .requestMatchers(HttpMethod.GET, "/api/reta3/rutas/*/fichas/**")
-                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+                        .hasAnyRole("DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
                         // Confirmar borrador (diseñador/profesor/admin)
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/confirmar")
-                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+                        .hasAnyRole("DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
                         // Cancelar borrador (diseñador/profesor/admin)
                         .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/*/borrador")
-                        .hasAnyRole("DISENADOR","PROFESOR","ADMINISTRADOR")
+                        .hasAnyRole("DISENADOR", "PROFESOR", "ADMINISTRADOR")
 
+                        // Modificar / borrar rutas: SOLO ADMIN
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/**")
                         .hasRole("ADMINISTRADOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/reta3/rutas/**")
@@ -90,16 +111,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/reta3/rutas/*/validar")
                         .hasRole("ADMINISTRADOR")
 
-                        // ================= USUARIOS =================
-                        .requestMatchers(HttpMethod.POST, "/api/reta3/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/reta3/usuarios/**").hasRole("ADMINISTRADOR")
-
                         // ================= RESTO =================
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth -> oauth
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
                 );
+
         return http.build();
     }
 

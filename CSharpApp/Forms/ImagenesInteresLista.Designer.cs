@@ -56,37 +56,45 @@
             // 
             // btnNuevaImagen
             // 
-            btnNuevaImagen.Location = new Point(491, 470);
-            btnNuevaImagen.Margin = new Padding(3, 4, 3, 4);
+            btnNuevaImagen.BackColor = Color.DarkSeaGreen;
+            btnNuevaImagen.FlatAppearance.BorderSize = 0;
+            btnNuevaImagen.FlatStyle = FlatStyle.Flat;
+            btnNuevaImagen.Location = new Point(431, 465);
+            btnNuevaImagen.Margin = new Padding(0);
             btnNuevaImagen.Name = "btnNuevaImagen";
-            btnNuevaImagen.Size = new Size(128, 31);
+            btnNuevaImagen.Size = new Size(399, 36);
             btnNuevaImagen.TabIndex = 4;
             btnNuevaImagen.Text = "Nueva imágen";
-            btnNuevaImagen.UseVisualStyleBackColor = true;
+            btnNuevaImagen.UseVisualStyleBackColor = false;
             btnNuevaImagen.Click += btnNuevaImagen_Click;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(229, 470);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(38, 465);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(86, 31);
+            btnVolver.Size = new Size(393, 36);
             btnVolver.TabIndex = 3;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // ImagenesInteresLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(880, 530);
             Controls.Add(btnNuevaImagen);
             Controls.Add(btnVolver);
             Controls.Add(flpImagenesLista);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenesInteresLista";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ImagenesInteresLista";
             Load += ImagenesInteresLista_Load;
             flpImagenesLista.ResumeLayout(false);

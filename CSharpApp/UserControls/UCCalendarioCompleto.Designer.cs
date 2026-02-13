@@ -141,22 +141,30 @@
             // 
             // btnRuta
             // 
-            btnRuta.Location = new Point(76, 245);
+            btnRuta.BackColor = Color.DarkSeaGreen;
+            btnRuta.FlatAppearance.BorderSize = 0;
+            btnRuta.FlatStyle = FlatStyle.Flat;
+            btnRuta.Location = new Point(102, 250);
+            btnRuta.Margin = new Padding(0);
             btnRuta.Name = "btnRuta";
-            btnRuta.Size = new Size(94, 31);
+            btnRuta.Size = new Size(112, 40);
             btnRuta.TabIndex = 11;
             btnRuta.Text = "Ver ruta";
-            btnRuta.UseVisualStyleBackColor = true;
+            btnRuta.UseVisualStyleBackColor = false;
             btnRuta.Click += btnRuta_Click;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(59, 299);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(47, 250);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(55, 31);
+            btnVolver.Size = new Size(55, 40);
             btnVolver.TabIndex = 12;
             btnVolver.Text = "<--";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // lbltxtNombreRuta
@@ -180,12 +188,16 @@
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(135, 299);
+            btnEditar.BackColor = Color.DarkSeaGreen;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Location = new Point(47, 290);
+            btnEditar.Margin = new Padding(0);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(64, 31);
+            btnEditar.Size = new Size(167, 40);
             btnEditar.TabIndex = 15;
             btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // UCCalendarioCompleto

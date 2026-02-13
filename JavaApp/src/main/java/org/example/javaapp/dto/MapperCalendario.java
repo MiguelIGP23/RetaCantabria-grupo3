@@ -25,8 +25,9 @@ public final class MapperCalendario {
         c.setFecha(dto.fecha());
         c.setHoraInicio(dto.horaInicio());
         c.setInfo(dto.info());
-        c.setRuta(ruta);
-        c.setUsuario(usuario);
+        if (ruta != null) c.setRuta(ruta);
+        if (usuario != null) c.setUsuario(usuario);
+
         return c;
     }
 }

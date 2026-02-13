@@ -38,6 +38,7 @@ namespace Forms
             {
                 btnEditar.Visible = false;
                 btnEditar.Visible = false;
+                this.Size = new Size(445, 610);
             }
         }
 

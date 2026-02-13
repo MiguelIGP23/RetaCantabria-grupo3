@@ -37,119 +37,127 @@
             btnEliminar = new Button();
             btnVolver = new Button();
             btnEditar = new Button();
-            pbDescarga = new PictureBox();
             cbFicha = new ComboBox();
             label1 = new Label();
             btnValidar = new Button();
             btnMapa = new Button();
-            ((System.ComponentModel.ISupportInitialize)pbDescarga).BeginInit();
+            btnDescargar = new Button();
             SuspendLayout();
             // 
             // ucRutaCompleto1
             // 
             ucRutaCompleto1.Font = new Font("Segoe UI", 9F);
-            ucRutaCompleto1.Location = new Point(14, 16);
+            ucRutaCompleto1.Location = new Point(12, 14);
             ucRutaCompleto1.Margin = new Padding(3, 5, 3, 5);
             ucRutaCompleto1.Name = "ucRutaCompleto1";
             ucRutaCompleto1.Ruta = null;
-            ucRutaCompleto1.Size = new Size(800, 528);
+            ucRutaCompleto1.Size = new Size(802, 530);
             ucRutaCompleto1.TabIndex = 0;
             // 
             // btnPuntosPeligro
             // 
-            btnPuntosPeligro.Location = new Point(61, 580);
-            btnPuntosPeligro.Margin = new Padding(3, 4, 3, 4);
+            btnPuntosPeligro.BackColor = Color.DarkSeaGreen;
+            btnPuntosPeligro.FlatAppearance.BorderSize = 0;
+            btnPuntosPeligro.FlatStyle = FlatStyle.Flat;
+            btnPuntosPeligro.Location = new Point(39, 580);
+            btnPuntosPeligro.Margin = new Padding(0);
             btnPuntosPeligro.Name = "btnPuntosPeligro";
-            btnPuntosPeligro.Size = new Size(149, 31);
+            btnPuntosPeligro.Size = new Size(195, 40);
             btnPuntosPeligro.TabIndex = 2;
             btnPuntosPeligro.Text = "Puntos de peligro";
-            btnPuntosPeligro.UseVisualStyleBackColor = true;
+            btnPuntosPeligro.UseVisualStyleBackColor = false;
             btnPuntosPeligro.Click += btnPuntosPeligro_Click;
             // 
             // btnPuntosInteres
             // 
-            btnPuntosInteres.Location = new Point(260, 580);
-            btnPuntosInteres.Margin = new Padding(3, 4, 3, 4);
+            btnPuntosInteres.BackColor = Color.DarkSeaGreen;
+            btnPuntosInteres.FlatAppearance.BorderSize = 0;
+            btnPuntosInteres.FlatStyle = FlatStyle.Flat;
+            btnPuntosInteres.Location = new Point(234, 580);
+            btnPuntosInteres.Margin = new Padding(0);
             btnPuntosInteres.Name = "btnPuntosInteres";
-            btnPuntosInteres.Size = new Size(135, 31);
+            btnPuntosInteres.Size = new Size(184, 40);
             btnPuntosInteres.TabIndex = 3;
             btnPuntosInteres.Text = "Puntos de interés";
-            btnPuntosInteres.UseVisualStyleBackColor = true;
+            btnPuntosInteres.UseVisualStyleBackColor = false;
             btnPuntosInteres.Click += btnPuntosInteres_Click;
             // 
             // btnActividades
             // 
-            btnActividades.Location = new Point(445, 580);
-            btnActividades.Margin = new Padding(3, 4, 3, 4);
+            btnActividades.BackColor = Color.DarkSeaGreen;
+            btnActividades.FlatAppearance.BorderSize = 0;
+            btnActividades.FlatStyle = FlatStyle.Flat;
+            btnActividades.Location = new Point(418, 580);
+            btnActividades.Margin = new Padding(0);
             btnActividades.Name = "btnActividades";
-            btnActividades.Size = new Size(144, 31);
+            btnActividades.Size = new Size(183, 40);
             btnActividades.TabIndex = 5;
             btnActividades.Text = "Actividades";
-            btnActividades.UseVisualStyleBackColor = true;
+            btnActividades.UseVisualStyleBackColor = false;
             btnActividades.Click += btnActividades_Click;
             // 
             // btnValoraciones
             // 
-            btnValoraciones.Location = new Point(638, 580);
-            btnValoraciones.Margin = new Padding(3, 4, 3, 4);
+            btnValoraciones.BackColor = Color.DarkSeaGreen;
+            btnValoraciones.FlatAppearance.BorderSize = 0;
+            btnValoraciones.FlatStyle = FlatStyle.Flat;
+            btnValoraciones.Location = new Point(601, 580);
+            btnValoraciones.Margin = new Padding(0);
             btnValoraciones.Name = "btnValoraciones";
-            btnValoraciones.Size = new Size(144, 31);
+            btnValoraciones.Size = new Size(195, 40);
             btnValoraciones.TabIndex = 6;
             btnValoraciones.Text = "Valoraciones";
-            btnValoraciones.UseVisualStyleBackColor = true;
+            btnValoraciones.UseVisualStyleBackColor = false;
             btnValoraciones.Click += btnValoraciones_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(260, 645);
-            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.BackColor = Color.DarkSeaGreen;
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Location = new Point(234, 620);
+            btnEliminar.Margin = new Padding(0);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(135, 31);
+            btnEliminar.Size = new Size(184, 40);
             btnEliminar.TabIndex = 7;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(62, 645);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(39, 620);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(148, 31);
+            btnVolver.Size = new Size(195, 40);
             btnVolver.TabIndex = 4;
             btnVolver.Text = "<--";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(445, 645);
-            btnEditar.Margin = new Padding(3, 4, 3, 4);
+            btnEditar.BackColor = Color.DarkSeaGreen;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Location = new Point(418, 620);
+            btnEditar.Margin = new Padding(0);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(144, 31);
+            btnEditar.Size = new Size(183, 40);
             btnEditar.TabIndex = 8;
             btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
-            // 
-            // pbDescarga
-            // 
-            pbDescarga.Image = (Image)resources.GetObject("pbDescarga.Image");
-            pbDescarga.Location = new Point(689, 480);
-            pbDescarga.Margin = new Padding(3, 4, 3, 4);
-            pbDescarga.Name = "pbDescarga";
-            pbDescarga.Size = new Size(31, 37);
-            pbDescarga.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbDescarga.TabIndex = 69;
-            pbDescarga.TabStop = false;
-            pbDescarga.Click += pbDescarga_Click;
             // 
             // cbFicha
             // 
             cbFicha.DropDownStyle = ComboBoxStyle.DropDownList;
             cbFicha.FormattingEnabled = true;
             cbFicha.Items.AddRange(new object[] { "Organización", "Seguridad", "Usuario" });
-            cbFicha.Location = new Point(535, 487);
+            cbFicha.Location = new Point(543, 488);
             cbFicha.Margin = new Padding(3, 4, 3, 4);
             cbFicha.Name = "cbFicha";
             cbFicha.Size = new Size(138, 28);
@@ -167,33 +175,51 @@
             // 
             // btnValidar
             // 
-            btnValidar.Location = new Point(638, 645);
-            btnValidar.Margin = new Padding(3, 4, 3, 4);
+            btnValidar.BackColor = Color.DarkSeaGreen;
+            btnValidar.FlatAppearance.BorderSize = 0;
+            btnValidar.FlatStyle = FlatStyle.Flat;
+            btnValidar.Location = new Point(601, 620);
+            btnValidar.Margin = new Padding(0);
             btnValidar.Name = "btnValidar";
-            btnValidar.Size = new Size(144, 31);
+            btnValidar.Size = new Size(195, 40);
             btnValidar.TabIndex = 70;
             btnValidar.Text = "Validar/Desvalidar";
-            btnValidar.UseVisualStyleBackColor = true;
+            btnValidar.UseVisualStyleBackColor = false;
             btnValidar.Click += btnValidar_Click;
             // 
             // btnMapa
             // 
-            btnMapa.Location = new Point(14, 148);
+            btnMapa.FlatAppearance.BorderSize = 0;
+            btnMapa.FlatStyle = FlatStyle.Flat;
+            btnMapa.Image = RetaEquipo3.Properties.Resources.mapa;
+            btnMapa.Location = new Point(762, 482);
             btnMapa.Name = "btnMapa";
-            btnMapa.Size = new Size(34, 29);
+            btnMapa.Size = new Size(38, 38);
             btnMapa.TabIndex = 71;
-            btnMapa.Text = "+";
             btnMapa.UseVisualStyleBackColor = true;
             btnMapa.Click += btnMapa_Click;
+            // 
+            // btnDescargar
+            // 
+            btnDescargar.FlatAppearance.BorderSize = 0;
+            btnDescargar.FlatStyle = FlatStyle.Flat;
+            btnDescargar.Image = (Image)resources.GetObject("btnDescargar.Image");
+            btnDescargar.Location = new Point(687, 482);
+            btnDescargar.Name = "btnDescargar";
+            btnDescargar.Size = new Size(38, 38);
+            btnDescargar.TabIndex = 72;
+            btnDescargar.UseVisualStyleBackColor = true;
+            btnDescargar.Click += btnDescargar_Click;
             // 
             // RutasDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(835, 717);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(835, 697);
+            Controls.Add(btnDescargar);
             Controls.Add(btnMapa);
             Controls.Add(btnValidar);
-            Controls.Add(pbDescarga);
             Controls.Add(cbFicha);
             Controls.Add(label1);
             Controls.Add(btnEditar);
@@ -204,12 +230,12 @@
             Controls.Add(btnPuntosInteres);
             Controls.Add(btnPuntosPeligro);
             Controls.Add(ucRutaCompleto1);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "RutasDetalle";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RutasDetalle";
             Load += RutasDetalle_Load;
-            ((System.ComponentModel.ISupportInitialize)pbDescarga).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -224,10 +250,10 @@
         private Button btnEliminar;
         private Button btnVolver;
         private Button btnEditar;
-        private PictureBox pbDescarga;
         private ComboBox cbFicha;
         private Label label1;
         private Button btnValidar;
         private Button btnMapa;
+        private Button btnDescargar;
     }
 }

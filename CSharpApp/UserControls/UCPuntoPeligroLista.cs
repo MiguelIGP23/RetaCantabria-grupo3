@@ -36,12 +36,12 @@ namespace UserControls
             lbltxtNombre.Text = pp.Nombre;
             BackColor = pp.Gravedad switch
             {
-                1 => Color.Chartreuse,
-                2 => Color.YellowGreen,
-                3 => Color.Khaki,
-                4 => Color.LightSalmon,
-                5 => Color.Red,
-                _=> Color.LightGray
+                1 => ColorTranslator.FromHtml("#F3E9DD"),
+                2 => ColorTranslator.FromHtml("#E6D2BE"),
+                3 => ColorTranslator.FromHtml("#D6B59A"),
+                4 => ColorTranslator.FromHtml("#C29573"),
+                5 => ColorTranslator.FromHtml("#A6734F"),
+                _ => Color.Gainsboro
             };
         }
 

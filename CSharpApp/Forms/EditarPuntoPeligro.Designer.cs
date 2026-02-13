@@ -160,24 +160,30 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(232, 332);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.BackColor = Color.DarkSeaGreen;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Location = new Point(42, 339);
+            btnCancelar.Margin = new Padding(0);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(86, 31);
+            btnCancelar.Size = new Size(347, 41);
             btnCancelar.TabIndex = 48;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(390, 332);
-            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.BackColor = Color.DarkSeaGreen;
+            btnGuardar.FlatAppearance.BorderSize = 0;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Location = new Point(389, 339);
+            btnGuardar.Margin = new Padding(0);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(86, 31);
+            btnGuardar.Size = new Size(334, 41);
             btnGuardar.TabIndex = 49;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // tbDescripcion
@@ -279,6 +285,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(782, 416);
             Controls.Add(nudGravedad);
             Controls.Add(tbNombre);
@@ -302,9 +309,10 @@
             Controls.Add(lblNombre);
             Controls.Add(lbltxtRuta);
             Controls.Add(lblRuta);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "EditarPuntoPeligro";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CrearPuntoPeligro";
             Load += EditarPuntoPeligro_Load;
             ((System.ComponentModel.ISupportInitialize)nudPosicion).EndInit();

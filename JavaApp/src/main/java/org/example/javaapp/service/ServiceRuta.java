@@ -384,6 +384,19 @@ public class ServiceRuta implements IServiceRuta {
             String car = textOfFirst(e, "car"); // custom de tu GPX
             if (car != null && car.equalsIgnoreCase("null")) car = null;
 
+            String tipoStr = textOfFirst(e, "tipo"); // enum TipoPunto en GPX
+            TipoPunto tipo = null;
+
+            if (tipoStr != null && !tipoStr.isBlank() && !tipoStr.equalsIgnoreCase("null")) {
+                try {
+                    tipo = TipoPunto.valueOf(tipoStr.trim());
+                } catch (IllegalArgumentException ex) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                            "TipoPunto inválido en GPX: " + tipoStr);
+                }
+            }
+
+
             String timeStr = textOfFirst(e, "time");
             LocalTime tPunto = (timeStr == null || timeStr.isBlank())
                     ? LocalTime.MIDNIGHT
@@ -401,6 +414,7 @@ public class ServiceRuta implements IServiceRuta {
             pi.setNombre(nombre);
             pi.setDescripcion(desc);
             pi.setCaracteristicas(car);
+            pi.setTipo(tipo);
             pi.setTimestamp(minutos);
 
             list.add(pi);

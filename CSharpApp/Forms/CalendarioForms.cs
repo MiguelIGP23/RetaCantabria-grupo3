@@ -34,7 +34,7 @@ namespace Forms
             foreach (Calendario c in calendarios)
             {
                 UCCalendarioLista uc = new UCCalendarioLista();
-                Ruta ruta = await _api.GetByIdAsync<Ruta>("/api/reta3/rutas", c.RutaId.ToString());
+                Ruta ruta = await _api.GetByIdAsync<Ruta>("api/reta3/rutas", c.RutaId.ToString());
                 uc.SetData(c, ruta);
                 uc.CalendarClick += OpcionElegiga;
                 flpRutas.Controls.Add(uc);
@@ -51,7 +51,7 @@ namespace Forms
                 MessageBox.Show("No se encontro al usuario que creo la ruta", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Ruta ruta = await _api.GetByIdAsync<Ruta>("api/reta3/rutas", opcion.UsuarioId.ToString());
+            Ruta ruta = await _api.GetByIdAsync<Ruta>("api/reta3/rutas", opcion.RutaId.ToString());
             if (ruta == null)
             {
                 MessageBox.Show("No se encontro la ruta o no existe", "Ruta no encontrada", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -144,7 +144,7 @@ namespace Forms
             
             DateTime dia = mcCalendario.SelectionStart.Date;
             string fecha = dia.ToString("yyyy-MM-dd");
-            var calendarios = await _api.GetAlAsync<Calendario>($"/api/reta3/calendario/fecha/{fecha}");
+            var calendarios = await _api.GetAlAsync<Calendario>($"api/reta3/calendario/fecha/{fecha}");
             int numRutas = calendarios.Count;
             lbFecha.Text = $"-Día: {dia.ToString("dd-MM-yyyy")}  nº rutas: {numRutas}";
             CargarDatos(calendarios);

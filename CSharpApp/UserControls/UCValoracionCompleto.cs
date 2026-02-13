@@ -24,12 +24,12 @@ namespace UserControls
         {
             try
             {
-                Usuario usuario = await api.GetByIdAsync<Usuario>("/api/reta3/usuarios", v.UsuarioId.ToString());
-                Ruta ruta = await api.GetByIdAsync<Ruta>("/api/reta3/rutas", v.RutaId.ToString());
+                //Usuario usuario = await api.GetByIdAsync<Usuario>("/api/reta3/usuarios", v.UsuarioId.ToString());
+                //Ruta ruta = await api.GetByIdAsync<Ruta>("/api/reta3/rutas", v.RutaId.ToString());
                 valoracion = v;
                 lbl_txtIdValora.Text = v.IdValora.ToString();
-                lbl_txtUsuario.Text = usuario != null ? $"{usuario.Nombre} {usuario.Apellido}" : "Usuario no encontrado";
-                lbl_txtRuta.Text = ruta != null ? $"{ruta.Nombre}" : "Ruta no encontrada";
+                lbl_txtUsuario.Text = v.UsuarioId.ToString();
+                lbl_txtRuta.Text = v.RutaId.ToString();
                 lbl_txtDificultad.Text = v.Dificultad.ToString();
                 lbl_txtFecha.Text = v.Fecha.ToString();
                 lbl_txtEstrellas.Text = v.Estrellas.ToString();

@@ -40,35 +40,44 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(279, 333);
-            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.BackColor = Color.DarkSeaGreen;
+            btnGuardar.FlatAppearance.BorderSize = 0;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Location = new Point(230, 327);
+            btnGuardar.Margin = new Padding(0);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(86, 31);
+            btnGuardar.Size = new Size(206, 39);
             btnGuardar.TabIndex = 37;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(115, 333);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.BackColor = Color.DarkSeaGreen;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Location = new Point(33, 327);
+            btnCancelar.Margin = new Padding(0);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(86, 31);
+            btnCancelar.Size = new Size(197, 39);
             btnCancelar.TabIndex = 36;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnBuscarImagen
             // 
-            btnBuscarImagen.Location = new Point(41, 244);
-            btnBuscarImagen.Margin = new Padding(3, 4, 3, 4);
+            btnBuscarImagen.BackColor = Color.DarkSeaGreen;
+            btnBuscarImagen.FlatAppearance.BorderSize = 0;
+            btnBuscarImagen.FlatStyle = FlatStyle.Flat;
+            btnBuscarImagen.Location = new Point(33, 238);
+            btnBuscarImagen.Margin = new Padding(0);
             btnBuscarImagen.Name = "btnBuscarImagen";
             btnBuscarImagen.Size = new Size(130, 39);
             btnBuscarImagen.TabIndex = 34;
             btnBuscarImagen.Text = "Buscar imágen";
-            btnBuscarImagen.UseVisualStyleBackColor = true;
+            btnBuscarImagen.UseVisualStyleBackColor = false;
             btnBuscarImagen.Click += btnBuscarImagen_Click;
             // 
             // tbDescripcion
@@ -83,7 +92,7 @@
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(41, 100);
+            lblDescripcion.Location = new Point(33, 99);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(96, 20);
             lblDescripcion.TabIndex = 32;
@@ -92,7 +101,7 @@
             // lbltxtPuntoInteres
             // 
             lbltxtPuntoInteres.AutoSize = true;
-            lbltxtPuntoInteres.Location = new Point(151, 45);
+            lbltxtPuntoInteres.Location = new Point(143, 45);
             lbltxtPuntoInteres.Name = "lbltxtPuntoInteres";
             lbltxtPuntoInteres.Size = new Size(58, 20);
             lbltxtPuntoInteres.TabIndex = 31;
@@ -101,7 +110,7 @@
             // lblPuntoInteres
             // 
             lblPuntoInteres.AutoSize = true;
-            lblPuntoInteres.Location = new Point(41, 45);
+            lblPuntoInteres.Location = new Point(33, 45);
             lblPuntoInteres.Name = "lblPuntoInteres";
             lblPuntoInteres.Size = new Size(104, 20);
             lblPuntoInteres.TabIndex = 30;
@@ -110,7 +119,7 @@
             // lblImagen
             // 
             lblImagen.AutoSize = true;
-            lblImagen.Location = new Point(219, 253);
+            lblImagen.Location = new Point(210, 247);
             lblImagen.Name = "lblImagen";
             lblImagen.Size = new Size(81, 20);
             lblImagen.TabIndex = 38;
@@ -120,6 +129,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(487, 404);
             Controls.Add(lblImagen);
             Controls.Add(btnGuardar);
@@ -129,9 +139,10 @@
             Controls.Add(lblDescripcion);
             Controls.Add(lbltxtPuntoInteres);
             Controls.Add(lblPuntoInteres);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarImagenInteres";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CrearEditarImagenInteres";
             Load += CrearEditarImagenInteres_Load;
             ResumeLayout(false);

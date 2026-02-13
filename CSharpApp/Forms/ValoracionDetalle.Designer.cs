@@ -36,35 +36,44 @@
             // 
             // btn_volver
             // 
-            btn_volver.Location = new Point(110, 298);
-            btn_volver.Margin = new Padding(3, 4, 3, 4);
+            btn_volver.BackColor = Color.DarkSeaGreen;
+            btn_volver.FlatAppearance.BorderSize = 0;
+            btn_volver.FlatStyle = FlatStyle.Flat;
+            btn_volver.Location = new Point(39, 290);
+            btn_volver.Margin = new Padding(0);
             btn_volver.Name = "btn_volver";
-            btn_volver.Size = new Size(86, 31);
+            btn_volver.Size = new Size(269, 40);
             btn_volver.TabIndex = 0;
             btn_volver.Text = "Volver";
-            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.UseVisualStyleBackColor = false;
             btn_volver.Click += btn_volver_Click;
             // 
             // btn_borrar
             // 
-            btn_borrar.Location = new Point(259, 298);
-            btn_borrar.Margin = new Padding(3, 4, 3, 4);
+            btn_borrar.BackColor = Color.DarkSeaGreen;
+            btn_borrar.FlatAppearance.BorderSize = 0;
+            btn_borrar.FlatStyle = FlatStyle.Flat;
+            btn_borrar.Location = new Point(39, 330);
+            btn_borrar.Margin = new Padding(0);
             btn_borrar.Name = "btn_borrar";
-            btn_borrar.Size = new Size(86, 31);
+            btn_borrar.Size = new Size(541, 40);
             btn_borrar.TabIndex = 1;
-            btn_borrar.Text = "Borrar";
-            btn_borrar.UseVisualStyleBackColor = true;
+            btn_borrar.Text = "Eliminar";
+            btn_borrar.UseVisualStyleBackColor = false;
             btn_borrar.Click += btn_borrar_Click;
             // 
             // btn_editar
             // 
-            btn_editar.Location = new Point(405, 298);
-            btn_editar.Margin = new Padding(3, 4, 3, 4);
+            btn_editar.BackColor = Color.DarkSeaGreen;
+            btn_editar.FlatAppearance.BorderSize = 0;
+            btn_editar.FlatStyle = FlatStyle.Flat;
+            btn_editar.Location = new Point(308, 290);
+            btn_editar.Margin = new Padding(0);
             btn_editar.Name = "btn_editar";
-            btn_editar.Size = new Size(86, 31);
+            btn_editar.Size = new Size(272, 40);
             btn_editar.TabIndex = 2;
             btn_editar.Text = "Editar";
-            btn_editar.UseVisualStyleBackColor = true;
+            btn_editar.UseVisualStyleBackColor = false;
             btn_editar.Click += btn_editar_Click;
             // 
             // ucValoracionCompleto1
@@ -80,14 +89,16 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(641, 354);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(641, 390);
             Controls.Add(ucValoracionCompleto1);
             Controls.Add(btn_editar);
             Controls.Add(btn_borrar);
             Controls.Add(btn_volver);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ValoracionDetalle";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ValoracionDetalle";
             Load += ValoracionDetalle_Load;
             ResumeLayout(false);

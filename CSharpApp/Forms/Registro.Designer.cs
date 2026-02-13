@@ -143,35 +143,44 @@
             // 
             // btn_guardar
             // 
-            btn_guardar.Location = new Point(353, 409);
-            btn_guardar.Margin = new Padding(4, 5, 4, 5);
+            btn_guardar.BackColor = Color.DarkSeaGreen;
+            btn_guardar.FlatAppearance.BorderSize = 0;
+            btn_guardar.FlatStyle = FlatStyle.Flat;
+            btn_guardar.Location = new Point(267, 409);
+            btn_guardar.Margin = new Padding(0);
             btn_guardar.Name = "btn_guardar";
-            btn_guardar.Size = new Size(141, 35);
+            btn_guardar.Size = new Size(227, 40);
             btn_guardar.TabIndex = 10;
             btn_guardar.Text = "Guardar";
-            btn_guardar.UseVisualStyleBackColor = true;
+            btn_guardar.UseVisualStyleBackColor = false;
             btn_guardar.Click += btn_guardar_Click;
             // 
             // btn_volver
             // 
+            btn_volver.BackColor = Color.DarkSeaGreen;
+            btn_volver.FlatAppearance.BorderSize = 0;
+            btn_volver.FlatStyle = FlatStyle.Flat;
             btn_volver.Location = new Point(42, 409);
-            btn_volver.Margin = new Padding(4, 5, 4, 5);
+            btn_volver.Margin = new Padding(0);
             btn_volver.Name = "btn_volver";
-            btn_volver.Size = new Size(141, 35);
+            btn_volver.Size = new Size(227, 40);
             btn_volver.TabIndex = 8;
             btn_volver.Text = "Volver";
-            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.UseVisualStyleBackColor = false;
             btn_volver.Click += btn_volver_Click;
             // 
             // btEliminar
             // 
-            btEliminar.Location = new Point(209, 409);
-            btEliminar.Margin = new Padding(4, 5, 4, 5);
+            btEliminar.BackColor = Color.DarkSeaGreen;
+            btEliminar.FlatAppearance.BorderSize = 0;
+            btEliminar.FlatStyle = FlatStyle.Flat;
+            btEliminar.Location = new Point(42, 449);
+            btEliminar.Margin = new Padding(0);
             btEliminar.Name = "btEliminar";
-            btEliminar.Size = new Size(121, 35);
+            btEliminar.Size = new Size(452, 40);
             btEliminar.TabIndex = 9;
             btEliminar.Text = "Eliminar";
-            btEliminar.UseVisualStyleBackColor = true;
+            btEliminar.UseVisualStyleBackColor = false;
             btEliminar.Click += btEliminar_Click;
             // 
             // ckPassword
@@ -210,7 +219,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(537, 473);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(537, 523);
             Controls.Add(txt_nombre);
             Controls.Add(txt_apellido);
             Controls.Add(txt_email);
@@ -227,9 +237,10 @@
             Controls.Add(lbl_rep_password);
             Controls.Add(btn_volver);
             Controls.Add(btn_guardar);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(4, 5, 4, 5);
             Name = "Registro";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Registro";
             Load += Registro_Load;
             ResumeLayout(false);

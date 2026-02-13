@@ -27,7 +27,7 @@ namespace UserControls
             lbltxtId.Text = u.Id.ToString();
             lbltxtNombre.Text = u.Nombre;
             lbltxtApellido.Text = u.Apellido;
-            BackColor = Color.SkyBlue;
+            BackColor = Color.Gainsboro;
         }
 
 

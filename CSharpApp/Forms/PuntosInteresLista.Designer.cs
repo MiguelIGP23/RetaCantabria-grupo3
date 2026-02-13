@@ -38,7 +38,7 @@
             // 
             flpListaPuntos.AutoScroll = true;
             flpListaPuntos.Controls.Add(ucImagenInteresLista1);
-            flpListaPuntos.Location = new Point(40, 43);
+            flpListaPuntos.Location = new Point(40, 40);
             flpListaPuntos.Margin = new Padding(3, 4, 3, 4);
             flpListaPuntos.Name = "flpListaPuntos";
             flpListaPuntos.Size = new Size(726, 324);
@@ -55,24 +55,30 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(310, 391);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(65, 400);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(94, 29);
+            btnVolver.Size = new Size(690, 40);
             btnVolver.TabIndex = 2;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // PuntosInteresLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 451);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(802, 463);
             Controls.Add(btnVolver);
             Controls.Add(flpListaPuntos);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "PuntosInteresLista";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PuntosInteresLista";
             Load += PuntosInteresLista_Load;
             flpListaPuntos.ResumeLayout(false);
