@@ -30,18 +30,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.graphics.Color
 import com.example.kotlinapp.model.PuntoInteres
 import com.example.kotlinapp.model.PuntoPeligro
 import com.example.kotlinapp.model.enums.TipoPunto
 import com.example.kotlinapp.model.enums.WaypointType
+import com.example.kotlinapp.ui.theme.botonActivo
+import com.example.kotlinapp.ui.theme.botonActivoTexto
+import com.example.kotlinapp.ui.theme.botonInactivo
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,20 +83,38 @@ fun WaypointDialog(
                     value = title,
                     onValueChange = { title = it; if (titleError) titleError = false },
                     label = { Text("Título") },
-                    isError = titleError
+                    isError = titleError,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    )
                 )
-                if (titleError) Text("El título es obligatorio", color = MaterialTheme.colorScheme.error)
+                if (titleError) Text(
+                    "El título es obligatorio",
+                    color = MaterialTheme.colorScheme.error
+                )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 // Descripción
                 OutlinedTextField(
                     value = description,
-                    onValueChange = { description = it; if (descriptionError) descriptionError = false },
+                    onValueChange = {
+                        description = it; if (descriptionError) descriptionError = false
+                    },
                     label = { Text("Descripción") },
-                    isError = descriptionError
+                    isError = descriptionError,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    )
                 )
-                if (descriptionError) Text("La descripción es obligatoria", color = MaterialTheme.colorScheme.error)
+                if (descriptionError) Text(
+                    "La descripción es obligatoria",
+                    color = MaterialTheme.colorScheme.error
+                )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -107,7 +131,14 @@ fun WaypointDialog(
                             label = { Text("Tipo de Punto") },
                             isError = tipoPuntoError,
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                            modifier = Modifier.menuAnchor().clickable { expanded = true }
+                            modifier = Modifier
+                                .menuAnchor()
+                                .clickable { expanded = true },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = botonActivo,
+                                focusedLabelColor = botonActivo,
+                                cursorColor = Color.Black
+                            )
                         )
                         ExposedDropdownMenu(
                             expanded = expanded,
@@ -125,8 +156,11 @@ fun WaypointDialog(
                             }
                         }
                     }
-                    if (tipoPuntoError) Text("Debes seleccionar un tipo de punto", color = MaterialTheme.colorScheme.error)
-                }else{
+                    if (tipoPuntoError) Text(
+                        "Debes seleccionar un tipo de punto",
+                        color = MaterialTheme.colorScheme.error
+                    )
+                } else {
                     Text("Nivel de peligro: ${gravedad.toInt().toByte()}")
                     Slider(
                         value = gravedad.toFloat(), // convertir a Float para el Slider
@@ -138,10 +172,10 @@ fun WaypointDialog(
                         steps = 6,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 8.dp),
-                        colors = SliderDefaults.colors(
-                            thumbColor = if (gravedadError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-                            activeTrackColor = if (gravedadError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                            .padding(horizontal = 8.dp), colors = SliderDefaults.colors(
+                            thumbColor = botonActivo,
+                            activeTrackColor = botonActivo,
+                            inactiveTrackColor = botonInactivo
                         )
                     )
                 }
@@ -149,12 +183,21 @@ fun WaypointDialog(
         },
         confirmButton = {
             Button(
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = botonActivoTexto, containerColor = botonActivo
+                ),
                 onClick = {
                     // Validación
                     var hasError = false
-                    if (title.isBlank()) { titleError = true; hasError = true }
-                    if (description.isBlank()) { descriptionError = true; hasError = true }
-                    if (dialogData.type == WaypointType.INTERES && selectedTipoPunto == null) { tipoPuntoError = true; hasError = true }
+                    if (title.isBlank()) {
+                        titleError = true; hasError = true
+                    }
+                    if (description.isBlank()) {
+                        descriptionError = true; hasError = true
+                    }
+                    if (dialogData.type == WaypointType.INTERES && selectedTipoPunto == null) {
+                        tipoPuntoError = true; hasError = true
+                    }
 
                     if (!hasError) {
                         val punto = if (dialogData.type == WaypointType.INTERES) {
@@ -191,6 +234,12 @@ fun WaypointDialog(
                 }
             ) { Text("Guardar") }
         },
-        dismissButton = { Button(onClick = onDismiss) { Text("Cancelar") } }
+        dismissButton = {
+            Button(
+                onClick = onDismiss, colors = ButtonDefaults.textButtonColors(
+                    contentColor = botonActivoTexto, containerColor = botonActivo
+                )
+            ) { Text("Cancelar") }
+        }
     )
 }

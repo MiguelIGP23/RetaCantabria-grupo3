@@ -30,6 +30,7 @@ import com.example.kotlinapp.gps.gpx.importarGpx
 import com.example.kotlinapp.model.Ruta
 import com.example.kotlinapp.model.enums.Clasificacion
 import com.example.kotlinapp.model.enums.Rol
+import com.example.kotlinapp.ui.theme.botonActivo
 import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 import kotlinx.coroutines.flow.firstOrNull
@@ -79,11 +80,13 @@ fun ListView(navController: NavHostController, vm: DBViewModel) {
     }
 
     // Scaffold con floatingActionButton
-    Scaffold(topBar = { ListaTopBar(
-        navController = navController,
-        rutas = rutas,
-        vm = vm
-    ) }, floatingActionButton = {
+    Scaffold(topBar = {
+        ListaTopBar(
+            navController = navController,
+            rutas = rutas,
+            vm = vm
+        )
+    }, floatingActionButton = {
 
         if (rol != Rol.ALUMNO) {
             FloatingActionButton(
@@ -141,7 +144,8 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
         title = { ListaTopBarTitle() },
         actions = {
             // Botón para importar GPX
-            IconButton(onClick = { gpxLauncher.launch(arrayOf("application/xml", "text/xml", "*/*"))
+            IconButton(onClick = {
+                gpxLauncher.launch(arrayOf("application/xml", "text/xml", "*/*"))
             }) {
                 Icon(Icons.Default.PlayArrow, contentDescription = "Importar GPX")
             }
@@ -164,7 +168,6 @@ fun ListaTopBar(navController: NavHostController, rutas: List<Ruta>, vm: DBViewM
 }
 
 
-
 // Composable de título del TopBar (logo + texto)
 @Composable
 fun ListaTopBarTitle() {
@@ -175,7 +178,7 @@ fun ListaTopBarTitle() {
             modifier = Modifier.size(32.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text("Rutas")
+        Text("CorreMontes")
     }
 }
 
@@ -189,7 +192,12 @@ fun SearchBar(value: String, onValueChange: (String) -> Unit) {
         label = { Text("Buscar ruta (nombre)") },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 8.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = botonActivo,
+            focusedLabelColor = botonActivo,
+            cursorColor = Color.Black
+        ),
     )
 }
 
