@@ -30,6 +30,7 @@ public class ServiceCalendario implements IServiceCalendario{
         Calendario buscado = findById(id);
         if(buscado!=null){
             buscado.setFecha(nuevo.getFecha());
+            buscado.setHoraInicio(nuevo.getHoraInicio());
             buscado.setInfo(nuevo.getInfo());
             calendarioRepo.save(buscado);
         }

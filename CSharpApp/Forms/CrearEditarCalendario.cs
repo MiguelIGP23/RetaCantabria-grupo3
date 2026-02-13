@@ -94,7 +94,9 @@ namespace Forms
                     calendario.UsuarioId = idUSuario;
                     calendario.RutaId = idRuta;
 
-                    await _api.Create<Calendario>($"/api/reta3/calendario/{idUSuario}/{idRuta}", calendario);
+
+
+                    await _api.Create<Calendario>($"api/reta3/calendario/{idUSuario}/{idRuta}", calendario);
                     MessageBox.Show("Ruta guardada en el calendario");
                 }
                 else
