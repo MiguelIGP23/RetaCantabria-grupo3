@@ -134,7 +134,7 @@ fun WaypointDialog(
                             gravedad = it.toInt().toByte() // convertir de Float a Byte
                             if (gravedadError) gravedadError = false
                         },
-                        valueRange = 0f..5f,
+                        valueRange = 1f..5f,
                         steps = 6,
                         modifier = Modifier
                             .fillMaxWidth()

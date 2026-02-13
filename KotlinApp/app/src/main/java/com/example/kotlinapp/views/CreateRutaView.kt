@@ -76,6 +76,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 import androidx.compose.runtime.collectAsState
+import com.example.kotlinapp.model.enums.MarkerType
 
 
 private const val MIN_DISTANCE_METERS = 15f
@@ -95,7 +96,6 @@ fun CreateRutaView(navController: NavHostController, dbViewModel: DBViewModel) {
 
     val trackPolyline = remember {
         Polyline().apply {
-            color = android.graphics.Color.RED
             width = 6f
         }
     }
@@ -381,8 +381,12 @@ fun createLocationCallback(
                 savedTrackpoints.add(trackpoint)
                 Log.d("TRACKPOINT", "Guardado: ${trackpoint.elevacion}")
                 trackPolyline.addPoint(GeoPoint(lat, lon, alt))
-                val wpMarker =
-                    createTrackpointMarker(mapView, context, "TRKPT ${savedTrackpoints.size}")
+                val wpMarker = createTrackpointMarker(
+                    mapView,
+                    context,
+                    "TRKPT ${savedTrackpoints.size}",
+                    MarkerType.TRACKPOINT
+                )
                 wpMarker.position = GeoPoint(lat, lon, alt)
                 mapView.overlays.add(wpMarker)
                 mapView.invalidate()
@@ -506,10 +510,14 @@ fun LocationControls(
                             posicion = savedTrackpoints.size + 1
                         )
                     )
-                    val marker =
-                        createTrackpointMarker(mapView, context, "WP ${savedTrackpoints.size}")
-                    marker.position = GeoPoint(lat, lon, alt)
-                    mapView.overlays.add(marker)
+                    val wpMarker = createTrackpointMarker(
+                        mapView,
+                        context,
+                        "TRKPT ${savedTrackpoints.size}",
+                        MarkerType.TRACKPOINT
+                    )
+                    wpMarker.position = GeoPoint(lat, lon, alt)
+                    mapView.overlays.add(wpMarker)
                     trackPolyline.addPoint(GeoPoint(lat, lon, alt))
                     mapView.invalidate()
                 },
@@ -604,16 +612,27 @@ fun LocationControls(
                     when (punto) {
                         is PuntoInteres -> {
                             savedPuntosInteres.add(punto)
-                            val marker = createTrackpointMarker(mapView, context, punto.nombre)
-                            marker.position = GeoPoint(punto.latitud, punto.longitud)
+                            val marker = createTrackpointMarker(
+                                mapView,
+                                context,
+                                punto.nombre,
+                                MarkerType.INTERES
+                            )
+                            marker.position = GeoPoint(punto.latitud, punto.longitud, punto.elevacion ?: 0.0)
                             mapView.overlays.add(marker)
                         }
 
                         is PuntoPeligro -> {
                             savedPuntosPeligro.add(punto)
-                            val marker = createTrackpointMarker(mapView, context, punto.nombre)
-                            marker.position = GeoPoint(punto.latitud, punto.longitud)
+                            val marker = createTrackpointMarker(
+                                mapView,
+                                context,
+                                punto.nombre,
+                                MarkerType.PELIGRO
+                            )
+                            marker.position = GeoPoint(punto.latitud, punto.longitud, punto.elevacion ?: 0.0)
                             mapView.overlays.add(marker)
+
                         }
                     }
                     mapView.invalidate()

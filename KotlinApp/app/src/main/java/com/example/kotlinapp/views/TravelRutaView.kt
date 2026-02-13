@@ -1,6 +1,5 @@
 package com.example.kotlinapp.views
 
-import android.R.attr.id
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -22,7 +21,11 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.kotlinapp.gps.gpx.parseGpxTrackpointsSafe
+import com.example.kotlinapp.gps.gpx.parseGpxWaypointsToPuntos
 import com.example.kotlinapp.gps.map.createTrackpointMarker
+import com.example.kotlinapp.model.PuntoInteres
+import com.example.kotlinapp.model.PuntoPeligro
+import com.example.kotlinapp.model.enums.MarkerType
 
 @Composable
 fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
@@ -40,18 +43,56 @@ fun TravelRutaView(navController: NavHostController, ruta: Ruta) {
     }
 
     // Cargar trackpoints GPX
+    // Cargar trackpoints GPX y dibujar ruta
     LaunchedEffect(ruta.archivoGPX) {
         ruta.archivoGPX?.let { gpx ->
-            val points = parseGpxTrackpointsSafe(gpx)
-            points.forEachIndexed { index, point ->
-                val marker = createTrackpointMarker(mapView, context, "TRKPT ${index + 1}")
-                marker.position = point
+            val trackpoints = parseGpxTrackpointsSafe(gpx)
+
+            // Polyline de la ruta
+            if (trackpoints.isNotEmpty()) {
+                val polyline = org.osmdroid.views.overlay.Polyline().apply {
+                    setPoints(trackpoints)
+                    outlinePaint.color = android.graphics.Color.BLUE
+                    outlinePaint.strokeWidth = 5f
+                }
+                mapView.overlays.add(polyline)
+                mapView.controller.setCenter(trackpoints.first())
+            }
+
+            // Marcadores solo de INTERES/PELIGRO usando metodo del Gpx.kt
+            val puntos = parseGpxWaypointsToPuntos(gpx)
+            puntos.forEach { punto ->
+                val tipo = when (punto) {
+                    is PuntoInteres -> MarkerType.INTERES
+                    is PuntoPeligro -> MarkerType.PELIGRO
+                    else -> MarkerType.TRACKPOINT
+                }
+
+                val marker = createTrackpointMarker(
+                    mapView,
+                    context,
+                    when (punto) {
+                        is PuntoInteres -> "Interés: ${punto.nombre}"
+                        is PuntoPeligro -> "Peligro: ${punto.nombre}"
+                        else -> ""
+                    },
+                    tipo
+                )
+                val geo = when (punto) {
+                    is PuntoInteres -> GeoPoint(punto.latitud, punto.longitud, punto.elevacion ?: 0.0)
+                    is PuntoPeligro -> GeoPoint(punto.latitud, punto.longitud, punto.elevacion ?: 0.0)
+                    else -> null
+                }
+                geo?.let { marker.position = it }
                 mapView.overlays.add(marker)
             }
-            if (points.isNotEmpty()) mapView.controller.setCenter(points.first())
+
             mapView.invalidate()
         }
     }
+
+
+
 
     val locationRequest = remember {
         LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000L)

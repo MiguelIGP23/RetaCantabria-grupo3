@@ -244,3 +244,80 @@ fun parseGpxTrackpointsSafe(gpx: String): List<GeoPoint> {
     }
     return points
 }
+
+fun parseGpxWaypointsToPuntos(gpx: String): List<Any> {
+    val puntos = mutableListOf<Any>()
+
+    val gpxXml = try {
+        val bytes = android.util.Base64.decode(gpx, android.util.Base64.DEFAULT)
+        String(bytes, Charsets.UTF_8)
+    } catch (_: IllegalArgumentException) {
+        gpx
+    }
+
+    val factory = org.xmlpull.v1.XmlPullParserFactory.newInstance()
+    val parser = factory.newPullParser()
+    parser.setInput(StringReader(gpxXml))
+
+    var event = parser.eventType
+    var lat: Double? = null
+    var lon: Double? = null
+    var ele: Double? = null
+    var name: String? = null
+    var type: String? = null
+
+    while (event != org.xmlpull.v1.XmlPullParser.END_DOCUMENT) {
+        when (event) {
+            org.xmlpull.v1.XmlPullParser.START_TAG -> {
+                when (parser.name) {
+                    "wpt" -> {
+                        lat = parser.getAttributeValue(null, "lat")?.toDoubleOrNull()
+                        lon = parser.getAttributeValue(null, "lon")?.toDoubleOrNull()
+                    }
+                    "ele" -> ele = parser.nextText().toDoubleOrNull()
+                    "name" -> name = parser.nextText()
+                    "type" -> type = parser.nextText()
+                }
+            }
+            org.xmlpull.v1.XmlPullParser.END_TAG -> {
+                if (parser.name == "wpt" && lat != null && lon != null && name != null && type != null) {
+                    when (type.uppercase()) {
+                        "INTERES" -> puntos.add(
+                            PuntoInteres(
+                                id = null,
+                                nombre = name,
+                                latitud = lat,
+                                longitud = lon,
+                                elevacion = ele ?: 0.0,
+                                caracteristicas = null,
+                                tipo = null,
+                                descripcion = "",
+                                timestamp = System.currentTimeMillis(),
+                                rutaId = -1
+                            )
+                        )
+                        "PELIGRO" -> puntos.add(
+                            PuntoPeligro(
+                                id = null,
+                                nombre = name,
+                                latitud = lat,
+                                longitud = lon,
+                                elevacion = ele ?: 0.0,
+                                kilometros = null,
+                                gravedad = 0,
+                                descripcion = "",
+                                timestamp = System.currentTimeMillis(),
+                                rutaId = -1
+                            )
+                        )
+                    }
+                    lat = null; lon = null; ele = null; name = null; type = null
+                }
+            }
+        }
+        event = parser.next()
+    }
+
+    return puntos
+}
+
