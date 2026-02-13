@@ -79,8 +79,8 @@ import androidx.compose.runtime.collectAsState
 import com.example.kotlinapp.model.enums.MarkerType
 
 
-private const val MIN_DISTANCE_METERS = 15f
-private const val MIN_TIME_MS = 5000L
+private const val MIN_DISTANCE_METERS = 10f
+private const val MIN_TIME_MS = 3000L
 
 @Composable
 fun CreateRutaView(navController: NavHostController, dbViewModel: DBViewModel) {
