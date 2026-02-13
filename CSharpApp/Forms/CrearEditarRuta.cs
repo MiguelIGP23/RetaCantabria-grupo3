@@ -99,7 +99,6 @@ namespace Forms
                 SetChecksFromTemporadas(ruta.Temporadas);
                 chkAccesibilidad.Checked = ruta.Accesibilidad == 1;
                 chkFamiliar.Checked = ruta.RutaFamiliar == 1;
-                lblRutaGPX.Text = ruta.ArchivoGPX;
                 txtRecomendaciones.Text = ruta.RecomendacionesEquipo;
                 txtZonaGeo.Text = ruta.ZonaGeografica;
             }
@@ -152,7 +151,6 @@ namespace Forms
             rutaNueva.Temporadas = GetTemporadasFromChecks();
             rutaNueva.Accesibilidad = chkAccesibilidad.Checked ? 1 : 0;
             rutaNueva.RutaFamiliar = chkFamiliar.Checked ? 1 : 0;
-            rutaNueva.ArchivoGPX = string.IsNullOrWhiteSpace(lblRutaGPX.Text) ? null : lblRutaGPX.Text;
             rutaNueva.RecomendacionesEquipo = txtRecomendaciones.Text;
             rutaNueva.ZonaGeografica = txtZonaGeo.Text;
 
@@ -214,7 +212,6 @@ namespace Forms
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     _gpxPath = ofd.FileName;
-                    lblRutaGPX.Text = _gpxPath;
 
                     try
                     {
@@ -249,7 +246,6 @@ namespace Forms
                         txtFinal.Text = "";
 
                         // MUY IMPORTANTE: en el label no guardar el base64, guarda la ruta local
-                        lblRutaGPX.Text = _gpxPath;
                         if (_ruta != null)
                         {
                             MessageBox.Show("GPX importado. Completa los campos y pulsa Aceptar.");

@@ -25,6 +25,7 @@ namespace Forms
             _api = api;
             _actividad = actividad;
 
+            if(_actividad == null)btnBorrar.Visible = false;
             if (Session.Rol != EnumRoles.ADMINISTRADOR)
             {
                 cmbRuta.Enabled = false;

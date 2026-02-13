@@ -18,7 +18,7 @@ namespace UserControls
             ImagenInteres = i;
             lbltxtId.Text = i.Id.ToString();
             lbltxtDescripcion.Text = i.Descripcion;
-            BackColor = Color.LightGray;
+            BackColor = Color.Gainsboro;
         }
 
 

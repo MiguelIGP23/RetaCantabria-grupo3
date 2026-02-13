@@ -27,12 +27,12 @@ namespace UserControls
         {
             Ruta = r;
             lbltxtNombre.Text = r.Nombre;
-            lbltxtDistancia.Text = $"{r.Distancia} m";
+            lbltxtDistancia.Text = r.Distancia.ToString("F2")+" m";
             lbltxtDuracion.Text = r.Duracion.ToString();
             lbltxtEstrellas.Text = $"{r.MediaEstrellas} ★";
             BackColor = r.EstadoRuta switch
             {
-                0 => Color.LightCoral,
+                0 => Color.LightSalmon,
                 1 => Color.LightGreen,
                 2 => Color.LightBlue,
             };

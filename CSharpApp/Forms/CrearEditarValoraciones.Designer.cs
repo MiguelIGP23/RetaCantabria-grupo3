@@ -52,24 +52,30 @@
             // 
             // btn_Aceptar
             // 
-            btn_Aceptar.Location = new Point(525, 340);
-            btn_Aceptar.Margin = new Padding(3, 4, 3, 4);
+            btn_Aceptar.BackColor = Color.DarkSeaGreen;
+            btn_Aceptar.FlatAppearance.BorderSize = 0;
+            btn_Aceptar.FlatStyle = FlatStyle.Flat;
+            btn_Aceptar.Location = new Point(393, 331);
+            btn_Aceptar.Margin = new Padding(0);
             btn_Aceptar.Name = "btn_Aceptar";
-            btn_Aceptar.Size = new Size(86, 31);
+            btn_Aceptar.Size = new Size(385, 40);
             btn_Aceptar.TabIndex = 0;
             btn_Aceptar.Text = "Aceptar";
-            btn_Aceptar.UseVisualStyleBackColor = true;
+            btn_Aceptar.UseVisualStyleBackColor = false;
             btn_Aceptar.Click += btn_Aceptar_Click;
             // 
             // btn_Cancelar
             // 
-            btn_Cancelar.Location = new Point(339, 340);
-            btn_Cancelar.Margin = new Padding(3, 4, 3, 4);
+            btn_Cancelar.BackColor = Color.DarkSeaGreen;
+            btn_Cancelar.FlatAppearance.BorderSize = 0;
+            btn_Cancelar.FlatStyle = FlatStyle.Flat;
+            btn_Cancelar.Location = new Point(18, 331);
+            btn_Cancelar.Margin = new Padding(0);
             btn_Cancelar.Name = "btn_Cancelar";
-            btn_Cancelar.Size = new Size(86, 31);
+            btn_Cancelar.Size = new Size(375, 40);
             btn_Cancelar.TabIndex = 1;
             btn_Cancelar.Text = "Cancelar";
-            btn_Cancelar.UseVisualStyleBackColor = true;
+            btn_Cancelar.UseVisualStyleBackColor = false;
             btn_Cancelar.Click += btn_Cancelar_Click;
             // 
             // lbl_dificultad
@@ -140,7 +146,7 @@
             tbValoracionTecnica.Margin = new Padding(3, 4, 3, 4);
             tbValoracionTecnica.Multiline = true;
             tbValoracionTecnica.Name = "tbValoracionTecnica";
-            tbValoracionTecnica.Size = new Size(420, 52);
+            tbValoracionTecnica.Size = new Size(496, 52);
             tbValoracionTecnica.TabIndex = 93;
             // 
             // tbResena
@@ -149,7 +155,7 @@
             tbResena.Margin = new Padding(3, 4, 3, 4);
             tbResena.Multiline = true;
             tbResena.Name = "tbResena";
-            tbResena.Size = new Size(420, 52);
+            tbResena.Size = new Size(496, 52);
             tbResena.TabIndex = 94;
             // 
             // mCalendario
@@ -213,6 +219,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(812, 411);
             Controls.Add(nudBelleza);
             Controls.Add(label1);
@@ -230,9 +237,10 @@
             Controls.Add(lbl_dificultad);
             Controls.Add(btn_Cancelar);
             Controls.Add(btn_Aceptar);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarValoraciones";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CrearEditarValoraciones";
             Load += CrearEditarValoraciones_Load;
             ((System.ComponentModel.ISupportInitialize)nud_Dificultad).EndInit();

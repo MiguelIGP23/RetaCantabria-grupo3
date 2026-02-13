@@ -140,7 +140,7 @@
             Controls.Add(lbl_id);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             Name = "UCValoracionLista";
-            Size = new Size(414, 123);
+            Size = new Size(420, 123);
             Click += UCValoracionLista_Click_1;
             ResumeLayout(false);
             PerformLayout();

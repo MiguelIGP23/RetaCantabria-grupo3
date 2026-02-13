@@ -58,26 +58,26 @@
             // 
             // tbNombre
             // 
-            tbNombre.Location = new Point(479, 64);
+            tbNombre.Location = new Point(486, 64);
             tbNombre.Margin = new Padding(3, 4, 3, 4);
             tbNombre.Name = "tbNombre";
-            tbNombre.Size = new Size(257, 27);
+            tbNombre.Size = new Size(250, 27);
             tbNombre.TabIndex = 86;
             // 
             // nudTimestamp
             // 
-            nudTimestamp.Location = new Point(670, 145);
+            nudTimestamp.Location = new Point(681, 145);
             nudTimestamp.Margin = new Padding(3, 4, 3, 4);
             nudTimestamp.Maximum = new decimal(new int[] { 600, 0, 0, 0 });
             nudTimestamp.Name = "nudTimestamp";
-            nudTimestamp.Size = new Size(66, 27);
+            nudTimestamp.Size = new Size(55, 27);
             nudTimestamp.TabIndex = 85;
             nudTimestamp.TextAlign = HorizontalAlignment.Right;
             // 
             // nudElevacion
             // 
             nudElevacion.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            nudElevacion.Location = new Point(486, 145);
+            nudElevacion.Location = new Point(495, 145);
             nudElevacion.Margin = new Padding(3, 4, 3, 4);
             nudElevacion.Maximum = new decimal(new int[] { 3800, 0, 0, 0 });
             nudElevacion.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
@@ -90,7 +90,7 @@
             // 
             nudLongitud.DecimalPlaces = 4;
             nudLongitud.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudLongitud.Location = new Point(294, 145);
+            nudLongitud.Location = new Point(303, 146);
             nudLongitud.Margin = new Padding(3, 4, 3, 4);
             nudLongitud.Maximum = new decimal(new int[] { 180, 0, 0, 0 });
             nudLongitud.Minimum = new decimal(new int[] { 180, 0, 0, int.MinValue });
@@ -103,7 +103,7 @@
             // 
             nudLatitud.DecimalPlaces = 4;
             nudLatitud.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudLatitud.Location = new Point(112, 145);
+            nudLatitud.Location = new Point(121, 145);
             nudLatitud.Margin = new Padding(3, 4, 3, 4);
             nudLatitud.Maximum = new decimal(new int[] { 90, 0, 0, 0 });
             nudLatitud.Minimum = new decimal(new int[] { 90, 0, 0, int.MinValue });
@@ -123,93 +123,106 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(405, 427);
-            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.BackColor = Color.DarkSeaGreen;
+            btnGuardar.FlatAppearance.BorderSize = 0;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Location = new Point(393, 443);
+            btnGuardar.Margin = new Padding(0);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(86, 31);
+            btnGuardar.Size = new Size(343, 40);
             btnGuardar.TabIndex = 78;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(248, 427);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.BackColor = Color.DarkSeaGreen;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Location = new Point(46, 443);
+            btnCancelar.Margin = new Padding(0);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(86, 31);
+            btnCancelar.Size = new Size(347, 40);
             btnCancelar.TabIndex = 77;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
+            lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblDescripcion.Location = new Point(405, 221);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(96, 20);
+            lblDescripcion.Size = new Size(100, 20);
             lblDescripcion.TabIndex = 76;
             lblDescripcion.Text = "-Descripción:";
             // 
             // lblTimestamp
             // 
             lblTimestamp.AutoSize = true;
+            lblTimestamp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTimestamp.Location = new Point(577, 148);
             lblTimestamp.Name = "lblTimestamp";
-            lblTimestamp.Size = new Size(92, 20);
+            lblTimestamp.Size = new Size(98, 20);
             lblTimestamp.TabIndex = 75;
             lblTimestamp.Text = "-Timestamp:";
             // 
             // lblTipo
             // 
             lblTipo.AutoSize = true;
+            lblTipo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTipo.Location = new Point(46, 221);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(48, 20);
+            lblTipo.Size = new Size(50, 20);
             lblTipo.TabIndex = 74;
             lblTipo.Text = "-Tipo:";
             // 
             // lblElevacion
             // 
             lblElevacion.AutoSize = true;
+            lblElevacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblElevacion.Location = new Point(405, 148);
             lblElevacion.Name = "lblElevacion";
-            lblElevacion.Size = new Size(81, 20);
+            lblElevacion.Size = new Size(84, 20);
             lblElevacion.TabIndex = 72;
             lblElevacion.Text = "-Elevación:";
             // 
             // lblLongitud
             // 
             lblLongitud.AutoSize = true;
+            lblLongitud.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblLongitud.Location = new Point(215, 148);
             lblLongitud.Name = "lblLongitud";
-            lblLongitud.Size = new Size(77, 20);
+            lblLongitud.Size = new Size(82, 20);
             lblLongitud.TabIndex = 71;
             lblLongitud.Text = "-Longitud:";
             // 
             // lblLatitud
             // 
             lblLatitud.AutoSize = true;
+            lblLatitud.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblLatitud.Location = new Point(46, 148);
             lblLatitud.Name = "lblLatitud";
-            lblLatitud.Size = new Size(64, 20);
+            lblLatitud.Size = new Size(69, 20);
             lblLatitud.TabIndex = 70;
             lblLatitud.Text = "-Latitud:";
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblNombre.Location = new Point(405, 68);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(73, 20);
+            lblNombre.Size = new Size(77, 20);
             lblNombre.TabIndex = 68;
             lblNombre.Text = "-Nombre:";
             // 
             // lbltxtId
             // 
             lbltxtId.AutoSize = true;
-            lbltxtId.Location = new Point(126, 64);
+            lbltxtId.Location = new Point(136, 64);
             lbltxtId.Name = "lbltxtId";
             lbltxtId.Size = new Size(39, 20);
             lbltxtId.TabIndex = 67;
@@ -218,16 +231,17 @@
             // lblId
             // 
             lblId.AutoSize = true;
+            lblId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblId.Location = new Point(46, 64);
             lblId.Name = "lblId";
-            lblId.Size = new Size(78, 20);
+            lblId.Size = new Size(84, 20);
             lblId.TabIndex = 66;
             lblId.Text = "-Nº punto:";
             // 
             // lbltxtIdRuta
             // 
             lbltxtIdRuta.AutoSize = true;
-            lbltxtIdRuta.Location = new Point(286, 64);
+            lbltxtIdRuta.Location = new Point(294, 64);
             lbltxtIdRuta.Name = "lbltxtIdRuta";
             lbltxtIdRuta.Size = new Size(56, 20);
             lbltxtIdRuta.TabIndex = 89;
@@ -236,9 +250,10 @@
             // lblRutaId
             // 
             lblRutaId.AutoSize = true;
+            lblRutaId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblRutaId.Location = new Point(218, 64);
             lblRutaId.Name = "lblRutaId";
-            lblRutaId.Size = new Size(65, 20);
+            lblRutaId.Size = new Size(71, 20);
             lblRutaId.TabIndex = 88;
             lblRutaId.Text = "-Nº ruta:";
             // 
@@ -246,7 +261,7 @@
             // 
             cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTipo.FormattingEnabled = true;
-            cbTipo.Location = new Point(100, 218);
+            cbTipo.Location = new Point(102, 218);
             cbTipo.Margin = new Padding(3, 4, 3, 4);
             cbTipo.Name = "cbTipo";
             cbTipo.Size = new Size(224, 28);
@@ -264,9 +279,10 @@
             // lblCaracteristicas
             // 
             lblCaracteristicas.AutoSize = true;
+            lblCaracteristicas.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblCaracteristicas.Location = new Point(46, 281);
             lblCaracteristicas.Name = "lblCaracteristicas";
-            lblCaracteristicas.Size = new Size(113, 20);
+            lblCaracteristicas.Size = new Size(120, 20);
             lblCaracteristicas.TabIndex = 91;
             lblCaracteristicas.Text = "-Características:";
             // 
@@ -274,6 +290,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(791, 521);
             Controls.Add(tbCaractetisticas);
             Controls.Add(lblCaracteristicas);
@@ -297,9 +314,10 @@
             Controls.Add(lblNombre);
             Controls.Add(lbltxtId);
             Controls.Add(lblId);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "EditarPuntoInteres";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "EditarPuntoInteres";
             Load += EditarPuntoInteres_Load;
             ((System.ComponentModel.ISupportInitialize)nudTimestamp).EndInit();

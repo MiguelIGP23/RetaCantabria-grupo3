@@ -79,13 +79,15 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(890, 516);
             Controls.Add(btnCrear);
             Controls.Add(btnVolver);
             Controls.Add(flpActividad);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ActividadLista";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ActividadLista";
             Load += ActividadLista_Load;
             flpActividad.ResumeLayout(false);

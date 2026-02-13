@@ -25,24 +25,34 @@ namespace UserControls
         public void SetData(Ruta ruta)
         {
             Ruta = ruta;
+            double altMin = (double)ruta.AltitudMax;
+            double altMax = (double)ruta.AltitudMin;
+            double desNeg = (double)ruta.DesnivelNegativo;
+            double desPos = (double)ruta.DesnivelPositivo;
+
             lbltxtId.Text = ruta.Id.ToString();
             lbltxtNombre.Text = ruta.Nombre;
             lbltxtInicioRuta.Text = ruta.Nombre_inicioruta;
             lbltxtFinRuta.Text = ruta.Nombre_finalruta;
-            lbltxtLatInicial.Text = ruta.LatitudInicial.ToString();
-            lbltxtLatFinal.Text = ruta.LatitudFinal.ToString();
-            lbltxtLonInicial.Text = ruta.LongitudInicial.ToString();
-            lbltxtLonFinal.Text = ruta.LongitudFinal.ToString();
+            lbltxtLatInicial.Text = ruta.LatitudInicial.ToString("F4");
+            lbltxtLatFinal.Text = ruta.LatitudFinal.ToString("F4");
+            lbltxtLonInicial.Text = ruta.LongitudInicial.ToString("F4");
+            lbltxtLonFinal.Text = ruta.LongitudFinal.ToString("F4");
             lbltxtDistancia.Text = ruta.Distancia.ToString("F2") + " m";
             lbltxtDuracion.Text = ruta.Duracion.ToString();
-            lbltxtDesnivelPositivo.Text = ruta.DesnivelPositivo.ToString() + " m";
-            lbltxtDesnivelNegativo.Text = ruta.DesnivelNegativo.ToString() + " m";
-            lbltxtAltitudMaxima.Text = ruta.AltitudMax.ToString() + " m";
-            lbltxtAltitudMinima.Text = ruta.AltitudMin.ToString() + " m";
+            lbltxtDesnivelPositivo.Text = desPos.ToString("F2") + " m";
+            lbltxtDesnivelNegativo.Text = desNeg.ToString("F2") + " m";
+            lbltxtAltitudMaxima.Text = altMax.ToString("F2") + " m";
+            lbltxtAltitudMinima.Text = altMin.ToString("F2") + " m";
             lbltxtClasificacion.Text = ruta.Clasificacion.ToString();
             lbltxtNivelEsfuerzo.Text = ruta.NivelEsfuerzo.ToString();
             lbltxtNivelRiesgo.Text = ruta.NivelRiesgo.ToString();
-            lbltxtEstadoRuta.Text = (ruta.EstadoRuta == 1) ? "Aprobada" : "En espera";
+            lbltxtEstadoRuta.Text = ruta.EstadoRuta switch
+            {
+                1 => "Aprobada",
+                0 => "Pendiente",
+                _ => "Borrador"
+            };
             lbltxtTipoTerreno.Text = ruta.TipoTerreno.ToString();
             lbltxtIndicaciones.Text = ruta.Indicaciones.ToString();
             string temporadas = ruta.Temporadas!=null ? ruta.Temporadas.Replace(",", ", ") : "";

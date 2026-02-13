@@ -40,6 +40,7 @@ namespace Forms
             {
                 btnEditar.Visible = false;
                 btnEliminar.Visible = false;
+                this.Size = new Size(717, 390);
             }
         }
 

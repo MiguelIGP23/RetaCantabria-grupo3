@@ -32,6 +32,12 @@ namespace Forms
         private void ValoracionDetalle_Load(object sender, EventArgs e)
         {
             ucValoracionCompleto1.SetData(_api, _valoracion);
+
+            if(_valoracion == null)
+            {
+                btn_borrar.Visible = false;
+                this.Size = new Size(640, 350);
+            }
             if (Session.Rol != EnumRoles.ADMINISTRADOR)
             {
                 btn_editar.Visible = false;

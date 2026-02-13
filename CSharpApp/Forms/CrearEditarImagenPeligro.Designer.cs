@@ -76,35 +76,44 @@
             // 
             // btnBuscarImagen
             // 
+            btnBuscarImagen.BackColor = Color.DarkSeaGreen;
+            btnBuscarImagen.FlatAppearance.BorderSize = 0;
+            btnBuscarImagen.FlatStyle = FlatStyle.Flat;
             btnBuscarImagen.Location = new Point(41, 245);
             btnBuscarImagen.Margin = new Padding(3, 4, 3, 4);
             btnBuscarImagen.Name = "btnBuscarImagen";
             btnBuscarImagen.Size = new Size(130, 39);
             btnBuscarImagen.TabIndex = 26;
             btnBuscarImagen.Text = "Buscar imágen";
-            btnBuscarImagen.UseVisualStyleBackColor = true;
+            btnBuscarImagen.UseVisualStyleBackColor = false;
             btnBuscarImagen.Click += button1_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(115, 339);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.BackColor = Color.DarkSeaGreen;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Location = new Point(90, 331);
+            btnCancelar.Margin = new Padding(0);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(86, 31);
+            btnCancelar.Size = new Size(157, 40);
             btnCancelar.TabIndex = 28;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(279, 339);
-            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.BackColor = Color.DarkSeaGreen;
+            btnGuardar.FlatAppearance.BorderSize = 0;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Location = new Point(247, 331);
+            btnGuardar.Margin = new Padding(0);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(86, 31);
+            btnGuardar.Size = new Size(158, 40);
             btnGuardar.TabIndex = 29;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // lblImagen
@@ -120,6 +129,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(487, 404);
             Controls.Add(lblImagen);
             Controls.Add(btnGuardar);
@@ -129,9 +139,11 @@
             Controls.Add(lblDescripcion);
             Controls.Add(lbltxtPuntoPeligro);
             Controls.Add(lblPuntoPeligro);
+            ForeColor = SystemColors.WindowText;
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEditarImagenPeligro";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CrearEditarImagenPeligro";
             Load += CrearEditarImagenPeligro_Load;
             ResumeLayout(false);

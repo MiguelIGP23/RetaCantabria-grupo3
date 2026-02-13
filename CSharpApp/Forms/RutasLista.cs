@@ -31,8 +31,8 @@ namespace Forms
 
         private async void Rutas_Load(object sender, EventArgs e)
         {
-            await CargarRutas();
             MostrarFiltros(false);
+            await CargarRutas();
             if (Session.Rol != EnumRoles.ADMINISTRADOR &&
                 Session.Rol != EnumRoles.DISENADOR &&
                 Session.Rol != EnumRoles.PROFESOR) btnAgregar.Visible = false;
@@ -98,7 +98,7 @@ namespace Forms
                 {
                     form.ShowDialog(this);
                 }
-
+                MostrarFiltros(false);
                 await CargarRutas();
             }
             finally
@@ -128,7 +128,7 @@ namespace Forms
                 {
                     form.ShowDialog(this);
                 }
-
+                MostrarFiltros(false);
                 await CargarRutas();
             }
             finally
@@ -152,11 +152,13 @@ namespace Forms
         {
             if (mostrar)
             {
-                this.Size = new Size(900, 1000);
-                flpRutas.Location = new Point(95, 430);
-                btnLogout.Location = new Point(180, 880);
-                btnCalendario.Location = new Point(375, 880);
-                btnAgregar.Location = new Point(550, 880);
+                this.Size = new Size(870,880);
+                flpRutas.Location = new Point(35, 400);
+                btnMostrarFiltros.Location = new Point(775, 400);
+                btnLogout.Location = new Point(775, 475);
+                btnCalendario.Location = new Point(775, 550);
+                btnAgregar.Location = new Point(775, 635);
+                btnUsuarios.Location = new Point(775, 765);
 
                 ckNombre.Visible = true;
                 ckNombre.Checked = false;
@@ -212,11 +214,13 @@ namespace Forms
             }
             else
             {
-                this.Size = new Size(900, 600);
-                flpRutas.Location = new Point(95, 60);
-                btnLogout.Location = new Point(180, 490);
-                btnCalendario.Location = new Point(375, 490);
-                btnAgregar.Location = new Point(550, 490);
+                this.Size = new Size(870, 530);
+                flpRutas.Location = new Point(35, 40);
+                btnMostrarFiltros.Location = new Point(775, 40);
+                btnLogout.Location = new Point(775, 115);
+                btnCalendario.Location = new Point(775, 190);
+                btnAgregar.Location = new Point(775, 265);
+                btnUsuarios.Location = new Point(775, 395);
 
                 ckNombre.Visible = false;
                 ckNombre.Checked = false;
@@ -274,9 +278,8 @@ namespace Forms
 
 
         // Método para construir el filtro de rutas desde los componentes de la interfaz
-        private RutaFilter BuildFilterFromUI()
+        private RutaFilter ConstruirFiltro()
         {
-            // Temporadas: si no hay ninguna marcada -> null
             string? temporadas = null;
             if (ckTemporada.Checked)
             {
@@ -285,16 +288,13 @@ namespace Forms
                 if (ckVerano.Checked) temps.Add("Verano");
                 if (ckOtono.Checked) temps.Add("Otoño");
                 if (ckInvierno.Checked) temps.Add("Invierno");
-
                 temporadas = temps.Count == 0 ? null : string.Join(",", temps);
             }
 
             return new RutaFilter
             {
                 // Nombre
-                Nombre = ckNombre.Checked
-                    ? (string.IsNullOrWhiteSpace(tbNombre.Text) ? null : tbNombre.Text.Trim())
-                    : null,
+                Nombre = ckNombre.Checked ? (string.IsNullOrWhiteSpace(tbNombre.Text) ? null : tbNombre.Text.Trim()) : null,
 
                 // Puntuación
                 PuntuacionMin = ckPuntuacion.Checked ? (int)nudPuntuacionMin.Value : null,
@@ -309,8 +309,7 @@ namespace Forms
                 DuracionMax = ckDuracion.Checked ? TimeSpan.FromMinutes((double)nudDuracionMax.Value) : null,
 
                 // Clasificación (ComboBox de enum)
-                Clasificaciones = ckClasificacion.Checked
-                    ? (cbClasificacion.SelectedItem is EnumClasificaciones c ? c : (EnumClasificaciones?)null)
+                Clasificaciones = ckClasificacion.Checked ? (cbClasificacion.SelectedItem is EnumClasificaciones c ? c : null)
                     : null,
 
                 // Esfuerzo
@@ -332,30 +331,28 @@ namespace Forms
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            var filtro = BuildFilterFromUI();
+            var filtro = ConstruirFiltro();
             var pred = RutaFiltering.BuildPredicate(filtro);
 
             var filtradas = _rutas.Where(pred).ToList();
             CargarRutasFiltradas(filtradas);
         }
 
-        private async void btnMostrarFiltros_Click(object sender, EventArgs e)
+        private void btnMostrarFiltros_Click(object sender, EventArgs e)
         {
             if (filtroActivo)
             {
                 MostrarFiltros(true);
                 filtroActivo = !filtroActivo;
-                btnMostrarFiltros.Text = "Ocultar filtros";
             }
             else
             {
                 MostrarFiltros(false);
                 filtroActivo = !filtroActivo;
-                btnMostrarFiltros.Text = "Mostrar filtros";
             }
         }
 
-        private void btnCalendario_Click(object sender, EventArgs e)
+        private async void btnCalendario_Click(object sender, EventArgs e)
         {
             if (Session.Rol == null)
             {
@@ -370,6 +367,8 @@ namespace Forms
                 {
                     form.ShowDialog(this);
                 }
+                MostrarFiltros(false);
+                await CargarRutas();
             }
             finally
             {
@@ -390,6 +389,7 @@ namespace Forms
                 {
                     form.ShowDialog(this);
                 }
+                MostrarFiltros(false);
             }
             finally
             {

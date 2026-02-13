@@ -89,7 +89,7 @@
             // lbl_InteresC
             // 
             lbl_InteresC.AutoSize = true;
-            lbl_InteresC.BackColor = SystemColors.Control;
+            lbl_InteresC.BackColor = Color.FromArgb(215, 234, 193);
             lbl_InteresC.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_InteresC.Location = new Point(171, 115);
             lbl_InteresC.Name = "lbl_InteresC";
@@ -100,7 +100,7 @@
             // lbl_dificultad
             // 
             lbl_dificultad.AutoSize = true;
-            lbl_dificultad.BackColor = SystemColors.Control;
+            lbl_dificultad.BackColor = Color.FromArgb(215, 234, 193);
             lbl_dificultad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_dificultad.Location = new Point(25, 115);
             lbl_dificultad.Name = "lbl_dificultad";
@@ -111,7 +111,7 @@
             // lbl_fecha
             // 
             lbl_fecha.AutoSize = true;
-            lbl_fecha.BackColor = SystemColors.Control;
+            lbl_fecha.BackColor = Color.FromArgb(215, 234, 193);
             lbl_fecha.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_fecha.Location = new Point(422, 32);
             lbl_fecha.Name = "lbl_fecha";
@@ -122,7 +122,7 @@
             // lbl_id
             // 
             lbl_id.AutoSize = true;
-            lbl_id.BackColor = SystemColors.Control;
+            lbl_id.BackColor = Color.FromArgb(215, 234, 193);
             lbl_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_id.Location = new Point(25, 32);
             lbl_id.Name = "lbl_id";
@@ -142,7 +142,7 @@
             // lbl_belleza
             // 
             lbl_belleza.AutoSize = true;
-            lbl_belleza.BackColor = SystemColors.Control;
+            lbl_belleza.BackColor = Color.FromArgb(215, 234, 193);
             lbl_belleza.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_belleza.Location = new Point(422, 115);
             lbl_belleza.Name = "lbl_belleza";
@@ -162,7 +162,7 @@
             // lbl_estrellas
             // 
             lbl_estrellas.AutoSize = true;
-            lbl_estrellas.BackColor = SystemColors.Control;
+            lbl_estrellas.BackColor = Color.FromArgb(215, 234, 193);
             lbl_estrellas.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_estrellas.Location = new Point(422, 70);
             lbl_estrellas.Name = "lbl_estrellas";
@@ -181,7 +181,7 @@
             // lbl_valoraciontec
             // 
             lbl_valoraciontec.AutoSize = true;
-            lbl_valoraciontec.BackColor = SystemColors.Control;
+            lbl_valoraciontec.BackColor = Color.FromArgb(215, 234, 193);
             lbl_valoraciontec.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_valoraciontec.Location = new Point(322, 158);
             lbl_valoraciontec.Name = "lbl_valoraciontec";
@@ -200,7 +200,7 @@
             // lbl_resena
             // 
             lbl_resena.AutoSize = true;
-            lbl_resena.BackColor = SystemColors.Control;
+            lbl_resena.BackColor = Color.FromArgb(215, 234, 193);
             lbl_resena.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_resena.Location = new Point(25, 158);
             lbl_resena.Name = "lbl_resena";
@@ -220,7 +220,7 @@
             // lbl_idUsuario
             // 
             lbl_idUsuario.AutoSize = true;
-            lbl_idUsuario.BackColor = SystemColors.Control;
+            lbl_idUsuario.BackColor = Color.FromArgb(215, 234, 193);
             lbl_idUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_idUsuario.Location = new Point(171, 32);
             lbl_idUsuario.Name = "lbl_idUsuario";
@@ -240,7 +240,7 @@
             // lbl_Ruta
             // 
             lbl_Ruta.AutoSize = true;
-            lbl_Ruta.BackColor = SystemColors.Control;
+            lbl_Ruta.BackColor = Color.FromArgb(215, 234, 193);
             lbl_Ruta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lbl_Ruta.Location = new Point(25, 70);
             lbl_Ruta.Name = "lbl_Ruta";
@@ -252,6 +252,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             Controls.Add(lbl_txtRuta);
             Controls.Add(lbl_Ruta);
             Controls.Add(lbl_txtUsuario);

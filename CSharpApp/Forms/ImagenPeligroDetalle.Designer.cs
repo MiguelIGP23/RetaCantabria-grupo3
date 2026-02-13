@@ -38,7 +38,7 @@
             // 
             imagenPeligroCompleto1.Font = new Font("Segoe UI", 9F);
             imagenPeligroCompleto1.ImagenPeligro = null;
-            imagenPeligroCompleto1.Location = new Point(14, 16);
+            imagenPeligroCompleto1.Location = new Point(15, 15);
             imagenPeligroCompleto1.Margin = new Padding(3, 5, 3, 5);
             imagenPeligroCompleto1.Name = "imagenPeligroCompleto1";
             imagenPeligroCompleto1.Size = new Size(395, 443);
@@ -46,49 +46,60 @@
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(170, 505);
-            btnEditar.Margin = new Padding(3, 4, 3, 4);
+            btnEditar.BackColor = Color.DarkSeaGreen;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Location = new Point(52, 531);
+            btnEditar.Margin = new Padding(0);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(86, 31);
+            btnEditar.Size = new Size(165, 35);
             btnEditar.TabIndex = 1;
             btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(291, 505);
-            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.BackColor = Color.DarkSeaGreen;
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Location = new Point(217, 531);
+            btnEliminar.Margin = new Padding(0);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(86, 31);
+            btnEliminar.Size = new Size(159, 35);
             btnEliminar.TabIndex = 2;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(46, 505);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(52, 496);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(86, 31);
+            btnVolver.Size = new Size(324, 35);
             btnVolver.TabIndex = 3;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // ImagenPeligroDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(427, 571);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(427, 603);
             Controls.Add(btnVolver);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
             Controls.Add(imagenPeligroCompleto1);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenPeligroDetalle";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ImagenPeligroDetalle";
             Load += ImagenPeligroDetalle_Load;
             ResumeLayout(false);

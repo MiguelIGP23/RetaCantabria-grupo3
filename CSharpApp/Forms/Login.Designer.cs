@@ -40,81 +40,93 @@
             // lbl_usuario
             // 
             lbl_usuario.AutoSize = true;
-            lbl_usuario.Location = new Point(113, 67);
+            lbl_usuario.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lbl_usuario.Location = new Point(57, 51);
             lbl_usuario.Margin = new Padding(5, 0, 5, 0);
             lbl_usuario.Name = "lbl_usuario";
-            lbl_usuario.Size = new Size(59, 20);
+            lbl_usuario.Size = new Size(63, 20);
             lbl_usuario.TabIndex = 0;
             lbl_usuario.Text = "Usuario";
             // 
             // lbl_password
             // 
             lbl_password.AutoSize = true;
-            lbl_password.Location = new Point(113, 148);
+            lbl_password.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lbl_password.Location = new Point(57, 116);
             lbl_password.Margin = new Padding(5, 0, 5, 0);
             lbl_password.Name = "lbl_password";
-            lbl_password.Size = new Size(83, 20);
+            lbl_password.Size = new Size(88, 20);
             lbl_password.TabIndex = 1;
             lbl_password.Text = "Contraseña";
             // 
             // txt_usuario
             // 
-            txt_usuario.Location = new Point(238, 61);
+            txt_usuario.Location = new Point(182, 45);
             txt_usuario.Margin = new Padding(5);
             txt_usuario.Name = "txt_usuario";
             txt_usuario.Size = new Size(183, 27);
             txt_usuario.TabIndex = 2;
-            txt_usuario.Text = "miguel@gmail.com";
+            txt_usuario.Text = "admin@admin.com";
             // 
             // txt_password
             // 
-            txt_password.Location = new Point(238, 143);
+            txt_password.Location = new Point(182, 111);
             txt_password.Margin = new Padding(5);
             txt_password.Name = "txt_password";
             txt_password.PasswordChar = '*';
             txt_password.Size = new Size(183, 27);
             txt_password.TabIndex = 3;
-            txt_password.Text = "1234";
+            txt_password.Text = "admin";
             txt_password.UseSystemPasswordChar = true;
             // 
             // btn_login
             // 
-            btn_login.Location = new Point(113, 215);
-            btn_login.Margin = new Padding(5);
+            btn_login.BackColor = Color.DarkSeaGreen;
+            btn_login.FlatAppearance.BorderSize = 0;
+            btn_login.FlatStyle = FlatStyle.Flat;
+            btn_login.Location = new Point(57, 227);
+            btn_login.Margin = new Padding(0);
             btn_login.Name = "btn_login";
-            btn_login.Size = new Size(308, 35);
+            btn_login.Size = new Size(308, 42);
             btn_login.TabIndex = 4;
             btn_login.Text = "Login";
-            btn_login.UseVisualStyleBackColor = true;
+            btn_login.UseVisualStyleBackColor = false;
             btn_login.Click += btn_login_Click;
             // 
             // btn_verRutas
             // 
-            btn_verRutas.Location = new Point(295, 276);
-            btn_verRutas.Margin = new Padding(5);
+            btn_verRutas.BackColor = Color.DarkSeaGreen;
+            btn_verRutas.FlatAppearance.BorderSize = 0;
+            btn_verRutas.FlatStyle = FlatStyle.Flat;
+            btn_verRutas.Location = new Point(57, 269);
+            btn_verRutas.Margin = new Padding(0);
             btn_verRutas.Name = "btn_verRutas";
-            btn_verRutas.Size = new Size(126, 35);
+            btn_verRutas.Size = new Size(155, 42);
             btn_verRutas.TabIndex = 5;
             btn_verRutas.Text = "Ver rutas";
-            btn_verRutas.UseVisualStyleBackColor = true;
+            btn_verRutas.UseVisualStyleBackColor = false;
             btn_verRutas.Click += btn_verRutas_Click;
             // 
             // btnRegistro
             // 
-            btnRegistro.Location = new Point(113, 276);
-            btnRegistro.Margin = new Padding(5);
+            btnRegistro.BackColor = Color.DarkSeaGreen;
+            btnRegistro.FlatAppearance.BorderSize = 0;
+            btnRegistro.FlatStyle = FlatStyle.Flat;
+            btnRegistro.Location = new Point(212, 269);
+            btnRegistro.Margin = new Padding(0);
             btnRegistro.Name = "btnRegistro";
-            btnRegistro.Size = new Size(126, 35);
+            btnRegistro.Size = new Size(153, 42);
             btnRegistro.TabIndex = 6;
             btnRegistro.Text = "Registro";
-            btnRegistro.UseVisualStyleBackColor = true;
+            btnRegistro.UseVisualStyleBackColor = false;
             btnRegistro.Click += btnRegistro_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(558, 349);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(431, 350);
             Controls.Add(btnRegistro);
             Controls.Add(btn_verRutas);
             Controls.Add(btn_login);
@@ -122,6 +134,7 @@
             Controls.Add(txt_usuario);
             Controls.Add(lbl_password);
             Controls.Add(lbl_usuario);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(5);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;

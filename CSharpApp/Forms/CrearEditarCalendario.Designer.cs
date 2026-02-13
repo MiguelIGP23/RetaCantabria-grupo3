@@ -62,12 +62,16 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(344, 288);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(311, 281);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(105, 29);
+            btnVolver.Size = new Size(165, 40);
             btnVolver.TabIndex = 4;
             btnVolver.Text = "Cancelar";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // lblInformacion
@@ -82,12 +86,16 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(509, 287);
+            btnGuardar.BackColor = Color.DarkSeaGreen;
+            btnGuardar.FlatAppearance.BorderSize = 0;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Location = new Point(476, 281);
+            btnGuardar.Margin = new Padding(0);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(103, 29);
+            btnGuardar.Size = new Size(170, 40);
             btnGuardar.TabIndex = 7;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // label3
@@ -123,6 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(780, 360);
             Controls.Add(cbRutas);
             Controls.Add(label4);
@@ -133,8 +142,9 @@
             Controls.Add(tbInformacion);
             Controls.Add(dtpHora);
             Controls.Add(mcCalendario);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "CrearEditarCalendario";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CrearEditarCalendario";
             Load += CrearEditarCalendario_Load;
             ResumeLayout(false);

@@ -85,7 +85,7 @@
             // lbltxtDuracion
             // 
             lbltxtDuracion.AutoSize = true;
-            lbltxtDuracion.Location = new Point(695, 44);
+            lbltxtDuracion.Location = new Point(688, 36);
             lbltxtDuracion.Name = "lbltxtDuracion";
             lbltxtDuracion.Size = new Size(50, 20);
             lbltxtDuracion.TabIndex = 11;
@@ -95,7 +95,7 @@
             // 
             lblDuracion.AutoSize = true;
             lblDuracion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDuracion.Location = new Point(607, 44);
+            lblDuracion.Location = new Point(600, 36);
             lblDuracion.Name = "lblDuracion";
             lblDuracion.Size = new Size(82, 20);
             lblDuracion.TabIndex = 10;
@@ -104,7 +104,7 @@
             // lbltxtDistancia
             // 
             lbltxtDistancia.AutoSize = true;
-            lbltxtDistancia.Location = new Point(502, 44);
+            lbltxtDistancia.Location = new Point(495, 36);
             lbltxtDistancia.Name = "lbltxtDistancia";
             lbltxtDistancia.Size = new Size(47, 20);
             lbltxtDistancia.TabIndex = 9;
@@ -114,7 +114,7 @@
             // 
             lblDistancia.AutoSize = true;
             lblDistancia.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDistancia.Location = new Point(423, 44);
+            lblDistancia.Location = new Point(416, 36);
             lblDistancia.Name = "lblDistancia";
             lblDistancia.Size = new Size(83, 20);
             lblDistancia.TabIndex = 8;
@@ -123,7 +123,7 @@
             // lbltxtNombre
             // 
             lbltxtNombre.AutoSize = true;
-            lbltxtNombre.Location = new Point(239, 44);
+            lbltxtNombre.Location = new Point(232, 36);
             lbltxtNombre.Name = "lbltxtNombre";
             lbltxtNombre.Size = new Size(78, 20);
             lbltxtNombre.TabIndex = 7;
@@ -133,7 +133,7 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNombre.Location = new Point(166, 44);
+            lblNombre.Location = new Point(159, 36);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(77, 20);
             lblNombre.TabIndex = 6;
@@ -143,7 +143,7 @@
             // 
             lblId.AutoSize = true;
             lblId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblId.Location = new Point(40, 44);
+            lblId.Location = new Point(33, 36);
             lblId.Name = "lblId";
             lblId.Size = new Size(38, 20);
             lblId.TabIndex = 12;
@@ -152,7 +152,7 @@
             // lbltxtId
             // 
             lbltxtId.AutoSize = true;
-            lbltxtId.Location = new Point(80, 44);
+            lbltxtId.Location = new Point(73, 36);
             lbltxtId.Name = "lbltxtId";
             lbltxtId.Size = new Size(39, 20);
             lbltxtId.TabIndex = 13;
@@ -161,7 +161,7 @@
             // lbltxtInicioRuta
             // 
             lbltxtInicioRuta.AutoSize = true;
-            lbltxtInicioRuta.Location = new Point(131, 105);
+            lbltxtInicioRuta.Location = new Point(124, 97);
             lbltxtInicioRuta.Name = "lbltxtInicioRuta";
             lbltxtInicioRuta.Size = new Size(72, 20);
             lbltxtInicioRuta.TabIndex = 15;
@@ -171,7 +171,7 @@
             // 
             lblInicioRuta.AutoSize = true;
             lblInicioRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblInicioRuta.Location = new Point(40, 105);
+            lblInicioRuta.Location = new Point(33, 97);
             lblInicioRuta.Name = "lblInicioRuta";
             lblInicioRuta.Size = new Size(90, 20);
             lblInicioRuta.TabIndex = 14;
@@ -180,7 +180,7 @@
             // lbltxtFinRuta
             // 
             lbltxtFinRuta.AutoSize = true;
-            lbltxtFinRuta.Location = new Point(496, 105);
+            lbltxtFinRuta.Location = new Point(489, 97);
             lbltxtFinRuta.Name = "lbltxtFinRuta";
             lbltxtFinRuta.Size = new Size(75, 20);
             lbltxtFinRuta.TabIndex = 17;
@@ -190,7 +190,7 @@
             // 
             lblFinRuta.AutoSize = true;
             lblFinRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblFinRuta.Location = new Point(423, 105);
+            lblFinRuta.Location = new Point(416, 97);
             lblFinRuta.Name = "lblFinRuta";
             lblFinRuta.Size = new Size(77, 20);
             lblFinRuta.TabIndex = 16;
@@ -199,7 +199,7 @@
             // lbltxtLatInicial
             // 
             lbltxtLatInicial.AutoSize = true;
-            lbltxtLatInicial.Location = new Point(121, 164);
+            lbltxtLatInicial.Location = new Point(114, 156);
             lbltxtLatInicial.Name = "lbltxtLatInicial";
             lbltxtLatInicial.Size = new Size(62, 20);
             lbltxtLatInicial.TabIndex = 21;
@@ -209,7 +209,7 @@
             // 
             lblLatInicial.AutoSize = true;
             lblLatInicial.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblLatInicial.Location = new Point(40, 164);
+            lblLatInicial.Location = new Point(33, 156);
             lblLatInicial.Name = "lblLatInicial";
             lblLatInicial.Size = new Size(85, 20);
             lblLatInicial.TabIndex = 20;
@@ -218,7 +218,7 @@
             // lbltxtLatFinal
             // 
             lbltxtLatFinal.AutoSize = true;
-            lbltxtLatFinal.Location = new Point(295, 164);
+            lbltxtLatFinal.Location = new Point(288, 156);
             lbltxtLatFinal.Name = "lbltxtLatFinal";
             lbltxtLatFinal.Size = new Size(77, 20);
             lbltxtLatFinal.TabIndex = 23;
@@ -228,7 +228,7 @@
             // 
             lblLatFinal.AutoSize = true;
             lblLatFinal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblLatFinal.Location = new Point(223, 164);
+            lblLatFinal.Location = new Point(216, 156);
             lblLatFinal.Name = "lblLatFinal";
             lblLatFinal.Size = new Size(76, 20);
             lblLatFinal.TabIndex = 22;
@@ -237,7 +237,7 @@
             // lbltxtLonInicial
             // 
             lbltxtLonInicial.AutoSize = true;
-            lbltxtLonInicial.Location = new Point(509, 164);
+            lbltxtLonInicial.Location = new Point(502, 156);
             lbltxtLonInicial.Name = "lbltxtLonInicial";
             lbltxtLonInicial.Size = new Size(66, 20);
             lbltxtLonInicial.TabIndex = 25;
@@ -247,7 +247,7 @@
             // 
             lblLonInicial.AutoSize = true;
             lblLonInicial.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblLonInicial.Location = new Point(423, 164);
+            lblLonInicial.Location = new Point(416, 156);
             lblLonInicial.Name = "lblLonInicial";
             lblLonInicial.Size = new Size(89, 20);
             lblLonInicial.TabIndex = 24;
@@ -256,7 +256,7 @@
             // lbltxtLonFinal
             // 
             lbltxtLonFinal.AutoSize = true;
-            lbltxtLonFinal.Location = new Point(683, 164);
+            lbltxtLonFinal.Location = new Point(676, 156);
             lbltxtLonFinal.Name = "lbltxtLonFinal";
             lbltxtLonFinal.Size = new Size(81, 20);
             lbltxtLonFinal.TabIndex = 27;
@@ -266,7 +266,7 @@
             // 
             lblLonFinal.AutoSize = true;
             lblLonFinal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblLonFinal.Location = new Point(607, 164);
+            lblLonFinal.Location = new Point(600, 156);
             lblLonFinal.Name = "lblLonFinal";
             lblLonFinal.Size = new Size(80, 20);
             lblLonFinal.TabIndex = 26;
@@ -275,7 +275,7 @@
             // lbltxtDesnivelPositivo
             // 
             lbltxtDesnivelPositivo.AutoSize = true;
-            lbltxtDesnivelPositivo.Location = new Point(144, 225);
+            lbltxtDesnivelPositivo.Location = new Point(137, 217);
             lbltxtDesnivelPositivo.Name = "lbltxtDesnivelPositivo";
             lbltxtDesnivelPositivo.Size = new Size(73, 20);
             lbltxtDesnivelPositivo.TabIndex = 29;
@@ -285,7 +285,7 @@
             // 
             lblDesnivelPositivo.AutoSize = true;
             lblDesnivelPositivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDesnivelPositivo.Location = new Point(40, 225);
+            lblDesnivelPositivo.Location = new Point(33, 217);
             lblDesnivelPositivo.Name = "lblDesnivelPositivo";
             lblDesnivelPositivo.Size = new Size(107, 20);
             lblDesnivelPositivo.TabIndex = 28;
@@ -294,7 +294,7 @@
             // lbltxtDesnivelNegativo
             // 
             lbltxtDesnivelNegativo.AutoSize = true;
-            lbltxtDesnivelNegativo.Location = new Point(329, 225);
+            lbltxtDesnivelNegativo.Location = new Point(322, 217);
             lbltxtDesnivelNegativo.Name = "lbltxtDesnivelNegativo";
             lbltxtDesnivelNegativo.Size = new Size(79, 20);
             lbltxtDesnivelNegativo.TabIndex = 31;
@@ -304,7 +304,7 @@
             // 
             lblDenivelNegativo.AutoSize = true;
             lblDenivelNegativo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDenivelNegativo.Location = new Point(223, 225);
+            lblDenivelNegativo.Location = new Point(216, 217);
             lblDenivelNegativo.Name = "lblDenivelNegativo";
             lblDenivelNegativo.Size = new Size(108, 20);
             lblDenivelNegativo.TabIndex = 30;
@@ -313,7 +313,7 @@
             // lbltxtAltitudMaxima
             // 
             lbltxtAltitudMaxima.AutoSize = true;
-            lbltxtAltitudMaxima.Location = new Point(523, 225);
+            lbltxtAltitudMaxima.Location = new Point(516, 217);
             lbltxtAltitudMaxima.Name = "lbltxtAltitudMaxima";
             lbltxtAltitudMaxima.Size = new Size(73, 20);
             lbltxtAltitudMaxima.TabIndex = 33;
@@ -323,7 +323,7 @@
             // 
             lblAltitudMax.AutoSize = true;
             lblAltitudMax.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAltitudMax.Location = new Point(423, 225);
+            lblAltitudMax.Location = new Point(416, 217);
             lblAltitudMax.Name = "lblAltitudMax";
             lblAltitudMax.Size = new Size(102, 20);
             lblAltitudMax.TabIndex = 32;
@@ -332,7 +332,7 @@
             // lbltxtAltitudMinima
             // 
             lbltxtAltitudMinima.AutoSize = true;
-            lbltxtAltitudMinima.Location = new Point(699, 225);
+            lbltxtAltitudMinima.Location = new Point(692, 217);
             lbltxtAltitudMinima.Name = "lbltxtAltitudMinima";
             lbltxtAltitudMinima.Size = new Size(70, 20);
             lbltxtAltitudMinima.TabIndex = 35;
@@ -342,7 +342,7 @@
             // 
             lblAltitudMin.AutoSize = true;
             lblAltitudMin.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAltitudMin.Location = new Point(607, 225);
+            lblAltitudMin.Location = new Point(600, 217);
             lblAltitudMin.Name = "lblAltitudMin";
             lblAltitudMin.Size = new Size(99, 20);
             lblAltitudMin.TabIndex = 34;
@@ -351,7 +351,7 @@
             // lbltxtClasificacion
             // 
             lbltxtClasificacion.AutoSize = true;
-            lbltxtClasificacion.Location = new Point(141, 285);
+            lbltxtClasificacion.Location = new Point(134, 277);
             lbltxtClasificacion.Name = "lbltxtClasificacion";
             lbltxtClasificacion.Size = new Size(62, 20);
             lbltxtClasificacion.TabIndex = 37;
@@ -361,7 +361,7 @@
             // 
             lblClasificacion.AutoSize = true;
             lblClasificacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblClasificacion.Location = new Point(40, 285);
+            lblClasificacion.Location = new Point(33, 277);
             lblClasificacion.Name = "lblClasificacion";
             lblClasificacion.Size = new Size(105, 20);
             lblClasificacion.TabIndex = 36;
@@ -370,7 +370,7 @@
             // lbltxtNivelEsfuerzo
             // 
             lbltxtNivelEsfuerzo.AutoSize = true;
-            lbltxtNivelEsfuerzo.Location = new Point(350, 285);
+            lbltxtNivelEsfuerzo.Location = new Point(343, 277);
             lbltxtNivelEsfuerzo.Name = "lbltxtNivelEsfuerzo";
             lbltxtNivelEsfuerzo.Size = new Size(45, 20);
             lbltxtNivelEsfuerzo.TabIndex = 39;
@@ -380,7 +380,7 @@
             // 
             lnlNivelEsfuerzo.AutoSize = true;
             lnlNivelEsfuerzo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lnlNivelEsfuerzo.Location = new Point(225, 285);
+            lnlNivelEsfuerzo.Location = new Point(218, 277);
             lnlNivelEsfuerzo.Name = "lnlNivelEsfuerzo";
             lnlNivelEsfuerzo.Size = new Size(119, 20);
             lnlNivelEsfuerzo.TabIndex = 38;
@@ -389,7 +389,7 @@
             // lbltxtNivelRiesgo
             // 
             lbltxtNivelRiesgo.AutoSize = true;
-            lbltxtNivelRiesgo.Location = new Point(523, 285);
+            lbltxtNivelRiesgo.Location = new Point(516, 277);
             lbltxtNivelRiesgo.Name = "lbltxtNivelRiesgo";
             lbltxtNivelRiesgo.Size = new Size(71, 20);
             lbltxtNivelRiesgo.TabIndex = 41;
@@ -399,7 +399,7 @@
             // 
             lblNivelRiesgo.AutoSize = true;
             lblNivelRiesgo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblNivelRiesgo.Location = new Point(423, 285);
+            lblNivelRiesgo.Location = new Point(416, 277);
             lblNivelRiesgo.Name = "lblNivelRiesgo";
             lblNivelRiesgo.Size = new Size(102, 20);
             lblNivelRiesgo.TabIndex = 40;
@@ -408,7 +408,7 @@
             // lbltxtEstadoRuta
             // 
             lbltxtEstadoRuta.AutoSize = true;
-            lbltxtEstadoRuta.Location = new Point(701, 285);
+            lbltxtEstadoRuta.Location = new Point(694, 277);
             lbltxtEstadoRuta.Name = "lbltxtEstadoRuta";
             lbltxtEstadoRuta.Size = new Size(71, 20);
             lbltxtEstadoRuta.TabIndex = 43;
@@ -418,7 +418,7 @@
             // 
             lblEstadoRuta.AutoSize = true;
             lblEstadoRuta.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblEstadoRuta.Location = new Point(607, 285);
+            lblEstadoRuta.Location = new Point(600, 277);
             lblEstadoRuta.Name = "lblEstadoRuta";
             lblEstadoRuta.Size = new Size(99, 20);
             lblEstadoRuta.TabIndex = 42;
@@ -427,7 +427,7 @@
             // lbltxtTipoTerreno
             // 
             lbltxtTipoTerreno.AutoSize = true;
-            lbltxtTipoTerreno.Location = new Point(144, 349);
+            lbltxtTipoTerreno.Location = new Point(137, 341);
             lbltxtTipoTerreno.Name = "lbltxtTipoTerreno";
             lbltxtTipoTerreno.Size = new Size(76, 20);
             lbltxtTipoTerreno.TabIndex = 45;
@@ -437,7 +437,7 @@
             // 
             lblTipoTerreno.AutoSize = true;
             lblTipoTerreno.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblTipoTerreno.Location = new Point(40, 349);
+            lblTipoTerreno.Location = new Point(33, 341);
             lblTipoTerreno.Name = "lblTipoTerreno";
             lblTipoTerreno.Size = new Size(106, 20);
             lblTipoTerreno.TabIndex = 44;
@@ -446,7 +446,7 @@
             // lbltxtAccesibilidad
             // 
             lbltxtAccesibilidad.AutoSize = true;
-            lbltxtAccesibilidad.Location = new Point(329, 349);
+            lbltxtAccesibilidad.Location = new Point(322, 341);
             lbltxtAccesibilidad.Name = "lbltxtAccesibilidad";
             lbltxtAccesibilidad.Size = new Size(64, 20);
             lbltxtAccesibilidad.TabIndex = 47;
@@ -456,7 +456,7 @@
             // 
             lblAccesibilidad.AutoSize = true;
             lblAccesibilidad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAccesibilidad.Location = new Point(225, 349);
+            lblAccesibilidad.Location = new Point(218, 341);
             lblAccesibilidad.Name = "lblAccesibilidad";
             lblAccesibilidad.Size = new Size(110, 20);
             lblAccesibilidad.TabIndex = 46;
@@ -465,7 +465,7 @@
             // lbltxtRutaFamiliar
             // 
             lbltxtRutaFamiliar.AutoSize = true;
-            lbltxtRutaFamiliar.Location = new Point(540, 349);
+            lbltxtRutaFamiliar.Location = new Point(533, 341);
             lbltxtRutaFamiliar.Name = "lbltxtRutaFamiliar";
             lbltxtRutaFamiliar.Size = new Size(78, 20);
             lbltxtRutaFamiliar.TabIndex = 49;
@@ -475,7 +475,7 @@
             // 
             lblRutaFamiliar.AutoSize = true;
             lblRutaFamiliar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblRutaFamiliar.Location = new Point(423, 349);
+            lblRutaFamiliar.Location = new Point(416, 341);
             lblRutaFamiliar.Name = "lblRutaFamiliar";
             lblRutaFamiliar.Size = new Size(111, 20);
             lblRutaFamiliar.TabIndex = 48;
@@ -484,7 +484,7 @@
             // lbltxtRecomendaciones
             // 
             lbltxtRecomendaciones.AutoSize = true;
-            lbltxtRecomendaciones.Location = new Point(213, 472);
+            lbltxtRecomendaciones.Location = new Point(206, 464);
             lbltxtRecomendaciones.Name = "lbltxtRecomendaciones";
             lbltxtRecomendaciones.Size = new Size(147, 20);
             lbltxtRecomendaciones.TabIndex = 51;
@@ -494,7 +494,7 @@
             // 
             lblRecomendaciones.AutoSize = true;
             lblRecomendaciones.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblRecomendaciones.Location = new Point(40, 472);
+            lblRecomendaciones.Location = new Point(33, 464);
             lblRecomendaciones.Name = "lblRecomendaciones";
             lblRecomendaciones.Size = new Size(167, 20);
             lblRecomendaciones.TabIndex = 50;
@@ -502,10 +502,9 @@
             // 
             // lbltxtTemporadas
             // 
-            lbltxtTemporadas.AutoSize = true;
-            lbltxtTemporadas.Location = new Point(144, 412);
+            lbltxtTemporadas.Location = new Point(137, 404);
             lbltxtTemporadas.Name = "lbltxtTemporadas";
-            lbltxtTemporadas.Size = new Size(108, 20);
+            lbltxtTemporadas.Size = new Size(249, 49);
             lbltxtTemporadas.TabIndex = 53;
             lbltxtTemporadas.Text = "txtTemporadas";
             // 
@@ -513,7 +512,7 @@
             // 
             lblTemporadas.AutoSize = true;
             lblTemporadas.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblTemporadas.Location = new Point(40, 412);
+            lblTemporadas.Location = new Point(33, 404);
             lblTemporadas.Name = "lblTemporadas";
             lblTemporadas.Size = new Size(105, 20);
             lblTemporadas.TabIndex = 52;
@@ -522,7 +521,7 @@
             // lbltxtZonaGeografica
             // 
             lbltxtZonaGeografica.AutoSize = true;
-            lbltxtZonaGeografica.Location = new Point(478, 412);
+            lbltxtZonaGeografica.Location = new Point(471, 404);
             lbltxtZonaGeografica.Name = "lbltxtZonaGeografica";
             lbltxtZonaGeografica.Size = new Size(60, 20);
             lbltxtZonaGeografica.TabIndex = 57;
@@ -532,7 +531,7 @@
             // 
             lblZonaGeografica.AutoSize = true;
             lblZonaGeografica.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblZonaGeografica.Location = new Point(423, 412);
+            lblZonaGeografica.Location = new Point(416, 404);
             lblZonaGeografica.Name = "lblZonaGeografica";
             lblZonaGeografica.Size = new Size(54, 20);
             lblZonaGeografica.TabIndex = 56;
@@ -541,7 +540,7 @@
             // lbltxtPuntuacion
             // 
             lbltxtPuntuacion.AutoSize = true;
-            lbltxtPuntuacion.Location = new Point(701, 412);
+            lbltxtPuntuacion.Location = new Point(694, 404);
             lbltxtPuntuacion.Name = "lbltxtPuntuacion";
             lbltxtPuntuacion.Size = new Size(99, 20);
             lbltxtPuntuacion.TabIndex = 59;
@@ -551,7 +550,7 @@
             // 
             lblPuntuacion.AutoSize = true;
             lblPuntuacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblPuntuacion.Location = new Point(607, 412);
+            lblPuntuacion.Location = new Point(600, 404);
             lblPuntuacion.Name = "lblPuntuacion";
             lblPuntuacion.Size = new Size(98, 20);
             lblPuntuacion.TabIndex = 58;
@@ -560,7 +559,7 @@
             // lbltxtIndicaciones
             // 
             lbltxtIndicaciones.AutoSize = true;
-            lbltxtIndicaciones.Location = new Point(718, 349);
+            lbltxtIndicaciones.Location = new Point(711, 341);
             lbltxtIndicaciones.Name = "lbltxtIndicaciones";
             lbltxtIndicaciones.Size = new Size(77, 20);
             lbltxtIndicaciones.TabIndex = 63;
@@ -570,7 +569,7 @@
             // 
             lblIndicaciones.AutoSize = true;
             lblIndicaciones.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblIndicaciones.Location = new Point(607, 349);
+            lblIndicaciones.Location = new Point(600, 341);
             lblIndicaciones.Name = "lblIndicaciones";
             lblIndicaciones.Size = new Size(105, 20);
             lblIndicaciones.TabIndex = 62;
@@ -580,6 +579,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Transparent;
             Controls.Add(lbltxtIndicaciones);
             Controls.Add(lblIndicaciones);
             Controls.Add(lbltxtPuntuacion);

@@ -27,9 +27,9 @@ namespace UserControls
             lbltxtIdPuntoDeInteres.Text = p.Id.ToString();
             lbltxtRutasid.Text = p.RutaId.ToString();
             lbltxtNombre.Text = p.Nombre;
-            lbltxtLatitud.Text = p.Latitud.ToString();
-            lbltxtLogitud.Text = p.Longitud.ToString();
-            lbltxtElevacion.Text = p.Elevacion.ToString();
+            lbltxtLatitud.Text = p.Latitud.ToString("F4");
+            lbltxtLogitud.Text = p.Longitud.ToString("f4");
+            lbltxtElevacion.Text = p.Elevacion.ToString("F3");
             lbltxtCaracteristicas.Text = p.Caracteristicas;
             lbltxtTipo.Text = p.Tipo.ToString();
             lbltxtDescripcion.Text = p.Descripcion;

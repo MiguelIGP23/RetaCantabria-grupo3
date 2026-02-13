@@ -26,7 +26,7 @@ namespace UserControls
             lbl_txtDificultad.Text = v.Dificultad.ToString();
             lbl_txtFecha.Text = v.Fecha.ToString();
             lbl_txtInteresCultural.Text = v.InteresCultural.ToString();
-            BackColor = Color.LightGray;
+            BackColor = Color.Gainsboro;
         }
 
 

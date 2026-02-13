@@ -36,7 +36,7 @@
             // 
             // ucImagenInteresCompleto1
             // 
-            ucImagenInteresCompleto1.Location = new Point(14, 32);
+            ucImagenInteresCompleto1.Location = new Point(15, 15);
             ucImagenInteresCompleto1.Margin = new Padding(3, 5, 3, 5);
             ucImagenInteresCompleto1.Name = "ucImagenInteresCompleto1";
             ucImagenInteresCompleto1.Size = new Size(395, 443);
@@ -44,49 +44,60 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(47, 508);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(52, 496);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(86, 31);
+            btnVolver.Size = new Size(324, 35);
             btnVolver.TabIndex = 6;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(293, 508);
-            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.BackColor = Color.DarkSeaGreen;
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Location = new Point(214, 531);
+            btnEliminar.Margin = new Padding(0);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(86, 31);
+            btnEliminar.Size = new Size(162, 35);
             btnEliminar.TabIndex = 5;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(171, 508);
-            btnEditar.Margin = new Padding(3, 4, 3, 4);
+            btnEditar.BackColor = Color.DarkSeaGreen;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Location = new Point(52, 531);
+            btnEditar.Margin = new Padding(0);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(86, 31);
+            btnEditar.Size = new Size(162, 35);
             btnEditar.TabIndex = 4;
             btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // ImagenInteresDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(427, 571);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(427, 603);
             Controls.Add(btnVolver);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
             Controls.Add(ucImagenInteresCompleto1);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImagenInteresDetalle";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ImagenInteresDetalle";
             Load += ImagenInteresDetalle_Load;
             ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RutasLista));
             flpRutas = new FlowLayoutPanel();
             btnAgregar = new Button();
             btnLogout = new Button();
@@ -76,7 +77,7 @@
             // flpRutas
             // 
             flpRutas.AutoScroll = true;
-            flpRutas.Location = new Point(96, 430);
+            flpRutas.Location = new Point(35, 400);
             flpRutas.Margin = new Padding(3, 4, 3, 4);
             flpRutas.Name = "flpRutas";
             flpRutas.Size = new Size(709, 399);
@@ -84,30 +85,37 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(600, 880);
-            btnAgregar.Margin = new Padding(3, 4, 3, 4);
+            btnAgregar.BackColor = Color.DarkSeaGreen;
+            btnAgregar.FlatAppearance.BorderSize = 0;
+            btnAgregar.FlatStyle = FlatStyle.Flat;
+            btnAgregar.Image = RetaEquipo3.Properties.Resources.nuevo;
+            btnAgregar.Location = new Point(779, 630);
+            btnAgregar.Margin = new Padding(0);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(86, 31);
+            btnAgregar.Size = new Size(45, 45);
             btnAgregar.TabIndex = 6;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.UseVisualStyleBackColor = false;
             btnAgregar.Click += btnAgregar_Click;
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(170, 882);
+            btnLogout.BackColor = Color.DarkSeaGreen;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Image = (Image)resources.GetObject("btnLogout.Image");
+            btnLogout.Location = new Point(779, 475);
+            btnLogout.Margin = new Padding(0);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(94, 29);
+            btnLogout.Size = new Size(45, 45);
             btnLogout.TabIndex = 7;
-            btnLogout.Text = "Logout";
-            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
             // 
             // ckNombre
             // 
             ckNombre.AutoSize = true;
             ckNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckNombre.Location = new Point(96, 75);
+            ckNombre.Location = new Point(47, 45);
             ckNombre.Name = "ckNombre";
             ckNombre.Size = new Size(89, 24);
             ckNombre.TabIndex = 8;
@@ -117,7 +125,7 @@
             // 
             // tbNombre
             // 
-            tbNombre.Location = new Point(188, 71);
+            tbNombre.Location = new Point(139, 41);
             tbNombre.Name = "tbNombre";
             tbNombre.Size = new Size(260, 27);
             tbNombre.TabIndex = 9;
@@ -126,7 +134,7 @@
             // 
             ckPuntuacion.AutoSize = true;
             ckPuntuacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckPuntuacion.Location = new Point(472, 73);
+            ckPuntuacion.Location = new Point(423, 43);
             ckPuntuacion.Name = "ckPuntuacion";
             ckPuntuacion.Size = new Size(187, 24);
             ckPuntuacion.TabIndex = 10;
@@ -136,7 +144,7 @@
             // 
             // nudPuntuacionMin
             // 
-            nudPuntuacionMin.Location = new Point(665, 70);
+            nudPuntuacionMin.Location = new Point(616, 40);
             nudPuntuacionMin.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             nudPuntuacionMin.Name = "nudPuntuacionMin";
             nudPuntuacionMin.Size = new Size(60, 27);
@@ -145,7 +153,7 @@
             // 
             // nudPuntuacionMax
             // 
-            nudPuntuacionMax.Location = new Point(737, 70);
+            nudPuntuacionMax.Location = new Point(688, 40);
             nudPuntuacionMax.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             nudPuntuacionMax.Name = "nudPuntuacionMax";
             nudPuntuacionMax.Size = new Size(60, 27);
@@ -155,7 +163,7 @@
             // nudDistanciaMax
             // 
             nudDistanciaMax.Increment = new decimal(new int[] { 100, 0, 0, 0 });
-            nudDistanciaMax.Location = new Point(375, 136);
+            nudDistanciaMax.Location = new Point(326, 106);
             nudDistanciaMax.Maximum = new decimal(new int[] { 50000, 0, 0, 0 });
             nudDistanciaMax.Name = "nudDistanciaMax";
             nudDistanciaMax.Size = new Size(73, 27);
@@ -165,7 +173,7 @@
             // nudDistanciaMin
             // 
             nudDistanciaMin.Increment = new decimal(new int[] { 100, 0, 0, 0 });
-            nudDistanciaMin.Location = new Point(291, 136);
+            nudDistanciaMin.Location = new Point(242, 106);
             nudDistanciaMin.Maximum = new decimal(new int[] { 50000, 0, 0, 0 });
             nudDistanciaMin.Name = "nudDistanciaMin";
             nudDistanciaMin.Size = new Size(73, 27);
@@ -176,7 +184,7 @@
             // 
             ckDistancia.AutoSize = true;
             ckDistancia.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckDistancia.Location = new Point(96, 139);
+            ckDistancia.Location = new Point(47, 109);
             ckDistancia.Name = "ckDistancia";
             ckDistancia.Size = new Size(172, 24);
             ckDistancia.TabIndex = 13;
@@ -186,7 +194,7 @@
             // 
             // nudDuracionMax
             // 
-            nudDuracionMax.Location = new Point(724, 140);
+            nudDuracionMax.Location = new Point(675, 110);
             nudDuracionMax.Maximum = new decimal(new int[] { 720, 0, 0, 0 });
             nudDuracionMax.Name = "nudDuracionMax";
             nudDuracionMax.Size = new Size(73, 27);
@@ -195,7 +203,7 @@
             // 
             // nudDuracionMin
             // 
-            nudDuracionMin.Location = new Point(645, 140);
+            nudDuracionMin.Location = new Point(596, 110);
             nudDuracionMin.Maximum = new decimal(new int[] { 720, 0, 0, 0 });
             nudDuracionMin.Name = "nudDuracionMin";
             nudDuracionMin.Size = new Size(73, 27);
@@ -206,7 +214,7 @@
             // 
             ckDuracion.AutoSize = true;
             ckDuracion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckDuracion.Location = new Point(472, 140);
+            ckDuracion.Location = new Point(423, 110);
             ckDuracion.Name = "ckDuracion";
             ckDuracion.Size = new Size(171, 24);
             ckDuracion.TabIndex = 16;
@@ -217,7 +225,7 @@
             // ckPrimavera
             // 
             ckPrimavera.AutoSize = true;
-            ckPrimavera.Location = new Point(219, 346);
+            ckPrimavera.Location = new Point(170, 316);
             ckPrimavera.Name = "ckPrimavera";
             ckPrimavera.Size = new Size(97, 24);
             ckPrimavera.TabIndex = 19;
@@ -228,7 +236,7 @@
             // ckVerano
             // 
             ckVerano.AutoSize = true;
-            ckVerano.Location = new Point(322, 346);
+            ckVerano.Location = new Point(273, 316);
             ckVerano.Name = "ckVerano";
             ckVerano.Size = new Size(77, 24);
             ckVerano.TabIndex = 24;
@@ -239,7 +247,7 @@
             // ckInvierno
             // 
             ckInvierno.AutoSize = true;
-            ckInvierno.Location = new Point(485, 346);
+            ckInvierno.Location = new Point(436, 316);
             ckInvierno.Name = "ckInvierno";
             ckInvierno.Size = new Size(84, 24);
             ckInvierno.TabIndex = 26;
@@ -250,7 +258,7 @@
             // ckOtono
             // 
             ckOtono.AutoSize = true;
-            ckOtono.Location = new Point(406, 346);
+            ckOtono.Location = new Point(357, 316);
             ckOtono.Name = "ckOtono";
             ckOtono.Size = new Size(73, 24);
             ckOtono.TabIndex = 25;
@@ -262,7 +270,7 @@
             // 
             ckClasificacion.AutoSize = true;
             ckClasificacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckClasificacion.Location = new Point(96, 206);
+            ckClasificacion.Location = new Point(47, 176);
             ckClasificacion.Name = "ckClasificacion";
             ckClasificacion.Size = new Size(117, 24);
             ckClasificacion.TabIndex = 27;
@@ -274,7 +282,7 @@
             // 
             cbClasificacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cbClasificacion.FormattingEnabled = true;
-            cbClasificacion.Location = new Point(219, 204);
+            cbClasificacion.Location = new Point(170, 174);
             cbClasificacion.Name = "cbClasificacion";
             cbClasificacion.Size = new Size(151, 28);
             cbClasificacion.TabIndex = 28;
@@ -283,7 +291,7 @@
             // 
             ckAccesible.AutoSize = true;
             ckAccesible.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckAccesible.Location = new Point(472, 206);
+            ckAccesible.Location = new Point(423, 176);
             ckAccesible.Name = "ckAccesible";
             ckAccesible.Size = new Size(110, 24);
             ckAccesible.TabIndex = 29;
@@ -295,7 +303,7 @@
             // 
             ckFamiliar.AutoSize = true;
             ckFamiliar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckFamiliar.Location = new Point(645, 208);
+            ckFamiliar.Location = new Point(596, 178);
             ckFamiliar.Name = "ckFamiliar";
             ckFamiliar.Size = new Size(101, 24);
             ckFamiliar.TabIndex = 30;
@@ -307,7 +315,7 @@
             // 
             ckEsfuerzo.AutoSize = true;
             ckEsfuerzo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckEsfuerzo.Location = new Point(96, 272);
+            ckEsfuerzo.Location = new Point(47, 242);
             ckEsfuerzo.Name = "ckEsfuerzo";
             ckEsfuerzo.Size = new Size(168, 24);
             ckEsfuerzo.TabIndex = 31;
@@ -317,7 +325,7 @@
             // 
             // nudRiesgoMax
             // 
-            nudRiesgoMax.Location = new Point(724, 269);
+            nudRiesgoMax.Location = new Point(675, 239);
             nudRiesgoMax.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             nudRiesgoMax.Name = "nudRiesgoMax";
             nudRiesgoMax.Size = new Size(73, 27);
@@ -326,7 +334,7 @@
             // 
             // nudRiesgoMin
             // 
-            nudRiesgoMin.Location = new Point(633, 269);
+            nudRiesgoMin.Location = new Point(584, 239);
             nudRiesgoMin.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             nudRiesgoMin.Name = "nudRiesgoMin";
             nudRiesgoMin.Size = new Size(73, 27);
@@ -337,7 +345,7 @@
             // 
             ckRiesgo.AutoSize = true;
             ckRiesgo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckRiesgo.Location = new Point(472, 272);
+            ckRiesgo.Location = new Point(423, 242);
             ckRiesgo.Name = "ckRiesgo";
             ckRiesgo.Size = new Size(155, 24);
             ckRiesgo.TabIndex = 34;
@@ -347,7 +355,7 @@
             // 
             // nudEsfuerzoMax
             // 
-            nudEsfuerzoMax.Location = new Point(359, 271);
+            nudEsfuerzoMax.Location = new Point(310, 241);
             nudEsfuerzoMax.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             nudEsfuerzoMax.Name = "nudEsfuerzoMax";
             nudEsfuerzoMax.Size = new Size(73, 27);
@@ -356,7 +364,7 @@
             // 
             // nudEsfuerzoMin
             // 
-            nudEsfuerzoMin.Location = new Point(268, 271);
+            nudEsfuerzoMin.Location = new Point(219, 241);
             nudEsfuerzoMin.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             nudEsfuerzoMin.Name = "nudEsfuerzoMin";
             nudEsfuerzoMin.Size = new Size(73, 27);
@@ -365,19 +373,24 @@
             // 
             // btnFiltrar
             // 
-            btnFiltrar.Location = new Point(601, 343);
+            btnFiltrar.BackColor = Color.DarkSeaGreen;
+            btnFiltrar.FlatAppearance.BorderSize = 0;
+            btnFiltrar.FlatStyle = FlatStyle.Flat;
+            btnFiltrar.Font = new Font("Segoe UI", 11F);
+            btnFiltrar.Location = new Point(560, 307);
+            btnFiltrar.Margin = new Padding(0);
             btnFiltrar.Name = "btnFiltrar";
-            btnFiltrar.Size = new Size(196, 29);
+            btnFiltrar.Size = new Size(188, 40);
             btnFiltrar.TabIndex = 39;
             btnFiltrar.Text = "Filtrar";
-            btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.UseVisualStyleBackColor = false;
             btnFiltrar.Click += btnFiltrar_Click;
             // 
             // ckTemporada
             // 
             ckTemporada.AutoSize = true;
             ckTemporada.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ckTemporada.Location = new Point(96, 346);
+            ckTemporada.Location = new Point(47, 316);
             ckTemporada.Name = "ckTemporada";
             ckTemporada.Size = new Size(110, 24);
             ckTemporada.TabIndex = 40;
@@ -387,40 +400,52 @@
             // 
             // btnMostrarFiltros
             // 
-            btnMostrarFiltros.Location = new Point(96, 12);
+            btnMostrarFiltros.BackColor = Color.DarkSeaGreen;
+            btnMostrarFiltros.FlatAppearance.BorderSize = 0;
+            btnMostrarFiltros.FlatStyle = FlatStyle.Flat;
+            btnMostrarFiltros.Image = (Image)resources.GetObject("btnMostrarFiltros.Image");
+            btnMostrarFiltros.Location = new Point(775, 400);
+            btnMostrarFiltros.Margin = new Padding(0);
             btnMostrarFiltros.Name = "btnMostrarFiltros";
-            btnMostrarFiltros.Size = new Size(162, 35);
+            btnMostrarFiltros.Size = new Size(45, 45);
             btnMostrarFiltros.TabIndex = 41;
-            btnMostrarFiltros.Text = "Mostrar filtros";
-            btnMostrarFiltros.UseVisualStyleBackColor = true;
+            btnMostrarFiltros.UseVisualStyleBackColor = false;
             btnMostrarFiltros.Click += btnMostrarFiltros_Click;
             // 
             // btnCalendario
             // 
-            btnCalendario.Location = new Point(375, 880);
-            btnCalendario.Margin = new Padding(3, 4, 3, 4);
+            btnCalendario.BackColor = Color.DarkSeaGreen;
+            btnCalendario.FlatAppearance.BorderSize = 0;
+            btnCalendario.FlatStyle = FlatStyle.Flat;
+            btnCalendario.Image = RetaEquipo3.Properties.Resources.calendario;
+            btnCalendario.Location = new Point(779, 550);
+            btnCalendario.Margin = new Padding(0);
             btnCalendario.Name = "btnCalendario";
-            btnCalendario.Size = new Size(103, 31);
+            btnCalendario.Size = new Size(45, 45);
             btnCalendario.TabIndex = 42;
-            btnCalendario.Text = "Calendario";
-            btnCalendario.UseVisualStyleBackColor = true;
+            btnCalendario.UseVisualStyleBackColor = false;
             btnCalendario.Click += btnCalendario_Click;
             // 
             // btnUsuarios
             // 
-            btnUsuarios.Location = new Point(645, 15);
+            btnUsuarios.BackColor = Color.DarkSeaGreen;
+            btnUsuarios.FlatAppearance.BorderSize = 0;
+            btnUsuarios.FlatStyle = FlatStyle.Flat;
+            btnUsuarios.Image = RetaEquipo3.Properties.Resources.usuarios;
+            btnUsuarios.Location = new Point(779, 730);
+            btnUsuarios.Margin = new Padding(0);
             btnUsuarios.Name = "btnUsuarios";
-            btnUsuarios.Size = new Size(94, 29);
+            btnUsuarios.Size = new Size(45, 45);
             btnUsuarios.TabIndex = 43;
-            btnUsuarios.Text = "Usuarios";
-            btnUsuarios.UseVisualStyleBackColor = true;
+            btnUsuarios.UseVisualStyleBackColor = false;
             btnUsuarios.Click += btnUsuarios_Click;
             // 
             // RutasLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(882, 953);
+            BackColor = Color.FromArgb(215, 234, 193);
+            ClientSize = new Size(851, 833);
             Controls.Add(btnUsuarios);
             Controls.Add(btnCalendario);
             Controls.Add(btnMostrarFiltros);
@@ -454,9 +479,10 @@
             Controls.Add(btnLogout);
             Controls.Add(btnAgregar);
             Controls.Add(flpRutas);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(5);
             Name = "RutasLista";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Rutas";
             Load += Rutas_Load;
             ((System.ComponentModel.ISupportInitialize)nudPuntuacionMin).EndInit();

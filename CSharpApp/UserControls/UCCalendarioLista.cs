@@ -32,7 +32,7 @@ namespace UserControls
             lblTxtFecha.Text = calendario.Fecha.ToString();
             lblTxtHora.Text = calendario.HoraInicio.ToString();
             lblTxtRuta.Text = ruta.Nombre;
-            BackColor = Color.SkyBlue;
+            BackColor = Color.Gainsboro;
 
         }
 

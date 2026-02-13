@@ -38,6 +38,7 @@ namespace Forms
                 btnEliminar.Visible = false;
                 btnEditar.Visible = false;
                 btnValidar.Visible = false;
+                btnVolver.Size = new Size(757, 40);
             }
         }
 
@@ -74,36 +75,7 @@ namespace Forms
 
 
 
-        private async void pbDescarga_Click(object sender, EventArgs e)
-        {
-            int idRuta = _ruta.Id;
 
-            string downloads = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-            string opcion = cbFicha.SelectedItem?.ToString();
-
-            try
-            {
-                switch (opcion)
-                {
-                    case "Usuario":
-                        await _api.DescargarFichaUsuarioAsync(idRuta, downloads);
-                        break;
-
-                    case "Organización":
-                        await _api.DescargarFichaOrganizacionAsync(idRuta, downloads);
-                        break;
-
-                    case "Seguridad":
-                        await _api.DescargarFichaSeguridadAsync(idRuta, downloads);
-                        break;
-                }
-                MessageBox.Show("Ficha guardada en Descargas");
-            }
-            catch (HttpRequestException ex)
-            {
-                ApiReta.MostrarErrorHttp(ex);
-            }
-        }
 
 
 
@@ -262,6 +234,37 @@ namespace Forms
             using (var form = new Mapa(_api, _ruta))
             {
                 var result = form.ShowDialog(this);
+            }
+        }
+
+        private async void btnDescargar_Click(object sender, EventArgs e)
+        {
+            int idRuta = _ruta.Id;
+
+            string downloads = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            string opcion = cbFicha.SelectedItem?.ToString();
+
+            try
+            {
+                switch (opcion)
+                {
+                    case "Usuario":
+                        await _api.DescargarFichaUsuarioAsync(idRuta, downloads);
+                        break;
+
+                    case "Organización":
+                        await _api.DescargarFichaOrganizacionAsync(idRuta, downloads);
+                        break;
+
+                    case "Seguridad":
+                        await _api.DescargarFichaSeguridadAsync(idRuta, downloads);
+                        break;
+                }
+                MessageBox.Show("Ficha guardada en Descargas");
+            }
+            catch (HttpRequestException ex)
+            {
+                ApiReta.MostrarErrorHttp(ex);
             }
         }
     }

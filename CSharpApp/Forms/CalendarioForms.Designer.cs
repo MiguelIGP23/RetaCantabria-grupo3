@@ -38,6 +38,7 @@
             // 
             // mcCalendario
             // 
+            mcCalendario.BackColor = Color.DarkSeaGreen;
             mcCalendario.Location = new Point(44, 40);
             mcCalendario.MaxSelectionCount = 1;
             mcCalendario.Name = "mcCalendario";
@@ -54,22 +55,30 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(44, 349);
+            btnVolver.BackColor = Color.DarkSeaGreen;
+            btnVolver.FlatAppearance.BorderSize = 0;
+            btnVolver.FlatStyle = FlatStyle.Flat;
+            btnVolver.Location = new Point(44, 343);
+            btnVolver.Margin = new Padding(0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(94, 29);
+            btnVolver.Size = new Size(112, 35);
             btnVolver.TabIndex = 2;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // btnNueva
             // 
-            btnNueva.Location = new Point(170, 349);
+            btnNueva.BackColor = Color.DarkSeaGreen;
+            btnNueva.FlatAppearance.BorderSize = 0;
+            btnNueva.FlatStyle = FlatStyle.Flat;
+            btnNueva.Location = new Point(156, 343);
+            btnNueva.Margin = new Padding(0);
             btnNueva.Name = "btnNueva";
-            btnNueva.Size = new Size(94, 29);
+            btnNueva.Size = new Size(108, 35);
             btnNueva.TabIndex = 3;
             btnNueva.Text = "Nueva";
-            btnNueva.UseVisualStyleBackColor = true;
+            btnNueva.UseVisualStyleBackColor = false;
             btnNueva.Click += btnNueva_Click;
             // 
             // lbFecha
@@ -92,6 +101,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(215, 234, 193);
             ClientSize = new Size(1062, 420);
             Controls.Add(mcCalendario);
             Controls.Add(lbFecha);
@@ -99,8 +109,9 @@
             Controls.Add(btnNueva);
             Controls.Add(flpRutas);
             Controls.Add(ucDetalles);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "CalendarioForms";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Calendario";
             Load += CalendarioForms_Load;
             ResumeLayout(false);
