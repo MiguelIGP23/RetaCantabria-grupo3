@@ -11,14 +11,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxColors
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,9 +32,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.kotlinapp.model.enums.Clasificacion
+import com.example.kotlinapp.ui.theme.botonActivo
+import com.example.kotlinapp.ui.theme.botonInactivo
+import com.example.kotlinapp.ui.theme.fondoPrincipal
 import com.example.kotlinapp.viewmodels.DBViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,7 +63,11 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
         // TopBar con logo, título y botones
         topBar = {
             TopAppBar(
-                title = { Text("${ruta.value?.nombre}") },
+                title = { Text(nombre) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = fondoPrincipal,
+                    titleContentColor = Color.Black
+                ),
                 actions = {
                     IconButton(
                         onClick = {
@@ -78,6 +91,7 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                                 clasificacionEnum
 
                             )
+                            dbViewModel.limpiarRuta()
                             navController.popBackStack("List", false)
                         },
                     ) {
@@ -88,6 +102,7 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     IconButton(
                         onClick = {
                             dbViewModel.cancelarBorrador(id!!)
+                            dbViewModel.limpiarRuta()
                             navController.popBackStack("List", false)
                         },
                     ) {
@@ -110,28 +125,52 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     value = nombre,
                     onValueChange = { nombre = it },
                     label = { Text("Nombre de la ruta") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    ),
                 )
                 Spacer(Modifier.height(12.dp))
                 OutlinedTextField(
                     value = zonaGeografica,
                     onValueChange = { zonaGeografica = it },
                     label = { Text("Zona Geografica") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    ),
                 )
                 Spacer(Modifier.height(12.dp))
                 OutlinedTextField(
                     value =
-                        puntoInicial, onValueChange = {
+                        puntoInicial,
+                    onValueChange = {
                         puntoInicial = it
-                    }, label = { Text("Punto inicial") }, modifier = Modifier.fillMaxWidth()
+                    },
+                    label = { Text("Punto inicial") }, modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    ),
                 )
                 Spacer(Modifier.height(12.dp))
                 OutlinedTextField(
                     value =
-                        puntoFinal, onValueChange = {
+                        puntoFinal,
+                    onValueChange = {
                         puntoFinal = it
-                    }, label = { Text("Punto final") }, modifier = Modifier.fillMaxWidth()
+                    },
+                    label = { Text("Punto final") }, modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    ),
                 )
                 Spacer(Modifier.height(20.dp))
                 Text("Temporadas recomendadas")
@@ -141,6 +180,11 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     ) {
                         Checkbox(
                             checked = temporadasSeleccionadas.contains(temporada),
+                            colors = CheckboxDefaults.colors(
+                                checkedColor = botonActivo,
+                                checkmarkColor = Color.White
+                            ),
+
                             onCheckedChange = {
                                 temporadasSeleccionadas =
                                     if (temporadasSeleccionadas.contains(temporada)) temporadasSeleccionadas - temporada else temporadasSeleccionadas + temporada
@@ -156,7 +200,12 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     },
                     label = { Text("Recomendaciones de equipo") },
                     modifier = Modifier.fillMaxWidth(),
-                    maxLines = 4
+                    maxLines = 4,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = botonActivo,
+                        focusedLabelColor = botonActivo,
+                        cursorColor = Color.Black
+                    ),
                 )
                 Spacer(Modifier.height(20.dp))
                 Text("Terreno (1 - 5)")
@@ -164,7 +213,11 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                     value =
                         terreno, onValueChange = {
                         terreno = it
-                    }, valueRange = 1f..5f, steps = 3
+                    }, colors = SliderDefaults.colors(
+                        thumbColor = botonActivo,
+                        activeTrackColor = botonActivo,
+                        inactiveTrackColor = botonInactivo
+                    ), valueRange = 1f..5f, steps = 3
                 )
                 Text(
                     terreno.toInt()
@@ -172,15 +225,25 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                 )
                 Spacer(Modifier.height(20.dp))
                 Text("Indicaciones (1 - 5)")
-                Slider(value = indicaciones, onValueChange = {
-                    indicaciones = it
-                }, valueRange = 1f..5f, steps = 3)
+                Slider(
+                    value = indicaciones, colors = SliderDefaults.colors(
+                        thumbColor = botonActivo,
+                        activeTrackColor = botonActivo,
+                        inactiveTrackColor = botonInactivo
+                    ),
+                    onValueChange = {
+                        indicaciones = it
+                    }, valueRange = 1f..5f, steps = 3
+                )
                 Text(indicaciones.toInt().toString())
                 Spacer(Modifier.height(20.dp))
                 Text("Accesibilidad")
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(
-                        checked = accesibilidad,
+                        checked = accesibilidad, colors = CheckboxDefaults.colors(
+                            checkedColor = botonActivo,
+                            checkmarkColor = Color.White
+                        ),
                         onCheckedChange = { accesibilidad = it }
                     )
                     Text("Ruta accesible")
@@ -190,7 +253,10 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                 Text("Ruta Familiar")
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(
-                        checked = rutaFamiliar,
+                        checked = rutaFamiliar, colors = CheckboxDefaults.colors(
+                            checkedColor = botonActivo,
+                            checkmarkColor = Color.White
+                        ),
                         onCheckedChange = { rutaFamiliar = it }
                     )
                     Text("Apta para familias")
@@ -200,7 +266,10 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
                 Text("Clasificación")
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(
-                        checked = clasificacion == "lineal",
+                        checked = clasificacion == "lineal", colors = CheckboxDefaults.colors(
+                            checkedColor = botonActivo,
+                            checkmarkColor = Color.White
+                        ),
                         onCheckedChange = { if (it) clasificacion = "lineal" }
                     )
                     Text("Lineal")
@@ -208,7 +277,10 @@ fun BorradorView(navController: NavHostController, id: Int?, dbViewModel: DBView
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(
-                        checked = clasificacion == "circular",
+                        checked = clasificacion == "circular", colors = CheckboxDefaults.colors(
+                            checkedColor = botonActivo,
+                            checkmarkColor = Color.White
+                        ),
                         onCheckedChange = { if (it) clasificacion = "circular" }
                     )
                     Text("Circular")
